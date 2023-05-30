@@ -1,0 +1,394 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create</title>
+
+</head>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"/>
+<!-- MDB -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+      rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+<link rel="stylesheet" href="/css/list.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/footer.css">
+<body>
+<!-- Dashboard -->
+
+<div class="d-flex flex-column flex-lg-row h-lg-full  ">
+    <div class=" col-lg-2" style="position: fixed ;z-index: 5;margin-top: 15%">
+        <nav class="  navbar-vertical h-lg-screen  px-0 py-lg-2 navbar-light   border-bottom-lg-0 border-end-lg" style="background-color: white"
+             id="navbarVertical">
+            <div class="container-fluid"  >
+                <a class="navbar-brand nav-item nav-link py-lg-2 mb-lg-5 px-lg-6 me-0" href="#"><h2
+                        style="margin-top: -100%">Coffee Shop</h2></a>
+                <div class=" navbar-collapse " id="sidebarCollapse" style="margin-left: 10%;margin-top: -80%">
+                    <!-- Navigation -->
+                    <ul class="navbar-nav" style="margin-top: -40%">
+                        <li class="nav-item"><a class="nav-link" href="#"><h4> Dashboard</h4></a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"> <i class="bi bi-bar-chart"></i> Product </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#"> <i class="bi bi-bookmarks"></i> Staff </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#"> <i class="bi bi-people"></i> Order </a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"> <i class="bi bi-people"></i> Customer </a>
+                        </li>
+                    </ul> <!-- Divider -->
+                    <hr class="navbar-divider my-5 opacity-20"><!-- Navigation -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="#"> <i class="bi bi-person-square"></i> Account
+                        </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#"> <i class="bi bi-box-arrow-left"></i> Logout
+                        </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class=" col-lg-10" style="margin-left: 16.3%">
+        <div class="h-screen flex-grow-1 overflow-y-lg-auto"  >
+            <nav class="navbar   " style="position: sticky;top:0;left: 0;right: 0;z-index: 4;margin-left: 1%;background-color: white " >
+                <div class="container-fluid" >
+                    <div style="display: flex; margin: 8px;position: relative">
+                        <div>
+<!--                            nút thêm mới-->
+                            <a>
+                                <button class="btn btn btn-success text-capitalize" data-bs-toggle="modal"
+                                        href="#exampleModalToggle" role="button" style="border: 1px solid #dddddd;">
+                                    Add New
+                                </button>
+                            </a>
+                        </div>
+<!--                        search-->
+                    </div>
+                    <form class="d-flex" th:action="@{detail}" method="get" th:object="${productModel}">
+                        <form method="get" class="d-flex" th:action="@{search}" th:object="${blogModelList}">
+                            <input style="width: 15vw" class="form-control me-2" type="search" name="titles"
+                                   placeholder="Search by Title" aria-label="Search">
+                            <button class="btn btn btn-primary text-capitalize" type="submit">Search</button>
+                        </form>
+                    </form>
+                </div>
+            </nav>
+            </header>
+            <main class="py-6 bg-surface-secondary" style="background-color: white;">
+                <div class="container-fluid">
+                    <div class="row g-6 mb-6">
+<!--                        hiển thị tổng số sản phẩm hiện có-->
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0" style="margin-top: 10%">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col"><span
+                                                class="h6 font-semibold text-muted text-sm d-block mb-2">Gross Product</span>
+                                            <p class="h3 font-bold mb-0" th:text="${productCoffeeModelList}"></p></div>
+                                        <div class="col-auto">
+                                            <div class="">
+                                                <i class="fa-brands fa-product-hunt"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm"><span
+                                            class="badge badge-pill text-success me-2">
+                                       </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!--                        hiển thị tổng số  tiền của sản phẩm hiện có-->
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0" style="margin-top: 10%">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col"><span
+                                                class="h6 font-semibold text-muted text-sm d-block mb-2">Total amount</span>
+                                            <p class="h3 font-bold mb-0" th:text="${price}"></p></div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape ">
+                                                <i
+                                                        class="fa-solid fa-dollar-sign"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm"><span
+                                            class="badge badge-pill text-success me-2">
+                                       </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow border-0 mb-7">
+<!--                        Tên sản phẩm-->
+                        <div class="card-header"><h5 style="text-align: center;font-size: 180%" class="mb-0">
+                            Product</h5>
+                        </div>
+                        <div class="table-responsive">
+<!--                            table-->
+                            <table class="table table-hover " style="border: 1px solid #CCCCCC">
+                                <tr>
+                                    <td style="font-size: 20px;color: black">Id</td>
+                                    <td style="font-size: 20px;width: 20%;color: black">Tên Sản Phẩm</td>
+                                    <td style="font-size: 20px;width: 20%;color: black">Giá Tiền (VND)</td>
+                                    <td style="font-size: 20px;width: 20%;color: black">Hình Ảnh</td>
+                                    <td colspan="" style="font-size: 20px;width: 20%;color: black">Loại Sản phẩm</td>
+                                    <td colspan="3" style="font-size: 20px;width: 20%;color: black">Chức năng</td>
+
+                                </tr>
+                                <tr th:each="productCoffeeModel : ${productCoffeeModelPage}">
+                                    <th th:text="${productCoffeeModel.id}"></th>
+                                    <th th:text="${productCoffeeModel.nameProduct}"></th>
+                                    <th th:text="${productCoffeeModel.prices}"></th>
+                                    <th><img style="height: 15%;width: 15%" th:src="${productCoffeeModel.images}"></th>
+                                    <th th:text="${productCoffeeModel.typeProductCoffeeModel.typeName}"></th>
+                                    <th>
+                                        <!--                                    <a th:href="@{/update/{id}(id=${productCoffeeModelPage.id})}">-->
+                                        <button class="btn btn-warning text-capitalize">Update</button>
+                                        <!--                                    </a>-->
+                                    </th>
+                                    <th>
+
+                                        <button class="btn btn-primary text-capitalize" data-bs-toggle="modal"
+                                                href="#myModal" role="button">View
+                                            <!--                                            th:attr="onclick=|detail('${productCoffeeModelPage.id}','${productCoffeeModelPage.nameProduct}')|">Detail-->
+                                        </button>
+
+                                    </th>
+                                    <th>
+                                        <button class=" btn-del btn btn-danger text-capitalize">Delete
+                                            <!--                                            th:attr="onclick=|deletes('${productCoffeeModel.id}','${productCoffeeModelPage.nameProduct}')|">Delete-->
+                                        </button>
+
+                                    </th>
+                                    <!--                <a th:href="@{/detail/{id}(id=${blogModelList.id})}">-->
+                                    <!--                                                </a>-->
+
+                                </tr>
+                            </table>
+                        </div>
+                        <!--                    phân trang-->
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end ">
+                                <li class="page-item " style="border: 1px solid #CCCCCC">
+                                    <a class="page-link" th:href="@{'/'(page=${productCoffeeModelPage.number -1})}"
+                                       th:if="${productCoffeeModelPage.hasPrevious()}">Previous</a>
+                                </li>
+                                <!--                        <li style="border: 1px solid #CCCCCC" class="page-item active" ><a class="page-link active" th:text="${pageNo}" th:href="@{/(page=${pageNo})}"></a></li>-->
+                                <li style="border: 1px solid #CCCCCC" class="page-item active"><a class="page-link"
+                                                                                                  th:text="${productCoffeeModelPage.number +1}"></a>
+                                </li>
+                                <li style="border: 1px solid #CCCCCC" class="page-item">
+                                    <a class="page-link" th:href="@{'/'(page=${productCoffeeModelPage.number +1})}"
+                                       th:if="${productCoffeeModelPage.hasNext()}">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+
+</script>
+<script th:inline="javascript">
+<!-- xoa snar phẩm của sweetlAert2-->
+    function deletes(id, nameProduct) {
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to remove the date name " + " " + nameProduct + " " + "?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+
+        })
+            .then((result) => {
+                if (result) {
+                    window.location = '/delete/' + id
+                } else {
+                    swal("Thank you for not deleting")
+                }
+            });
+    }
+    async function detail(id, nameProduct) {
+        Swal.fire({
+            text: 'Would you like to see the details of this title: ' + nameProduct + "",
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonColor: '#CCCCCC',
+            confirmButtonColor: '#3366FF',
+            confirmButtonText: 'May I try it out ?'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    window.location.href = '/detail/' + id
+                )
+            }
+        })
+    }
+
+</script>
+<!-- MDB -->
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/yourcode.js"></script>
+<script src="jquery-3.4.1.min.js"></script>
+<script src="sweetalert2.all.min.js"></script>
+<!-- sweetAlert2-->
+<script th:inline="javascript">
+
+    <!--   hiển thị thêm mới-->
+    function create() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Successfully',
+            text: 'Successfully added new!',
+            confirmButtonText: 'Oke',
+            timer: 2000,
+        });
+    }
+    function create1() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Failure',
+            text: 'Add new failure!',
+            confirmButtonText: 'Oke',
+            timer: 2000,
+        });
+    }
+
+    // hiển thị xoá
+    function deleteProduct() {
+        swal({
+            title: "Delete Successfully!",
+            icon: "success",
+            button: "Oke",
+            timer: 2000,
+        });
+    }
+
+    // hiển thị update
+    function update2() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Successfully',
+            text: 'Successful editing!',
+            confirmButtonText: 'Oke',
+            timer: 2000,
+        });
+    }
+
+    function update1() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Failure',
+            text: 'Edit failed!',
+            confirmButtonText: 'Oke',
+            timer: 2000,
+        });
+    }
+</script>
+<script th:inline="javascript">
+    let createCategory = /*[[${mess}]]*/ true;
+    let deleteCategory =/*[[${check}]]*/ true;
+    let update =/*[[${flag}]]*/ true;
+    // thêm mới sản phẩm
+    if (createCategory != null) {
+        if (createCategory) {
+            create();
+        } else {
+            create1();
+        }
+    }
+    // xoá sản phẩm
+    if (deleteCategory) {
+        deleteProduct();
+    }
+    // update sản phẩm
+    if (update != null) {
+        if (update) {
+            update2();
+        } else {
+            update1();
+        }
+    }
+
+</script>
+<!--thêm mới sản phẩm-->
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+     tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel" style="text-align: center">Thêm Mới Sản Phẩm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/Product?action=create" method="post" class="text_left">
+                    <div class="form-outline mb-4">
+                        <input name="name" type="text" id="form6Example3" class="form-control"
+                               style="border: 1px solid#cccccc" required/>
+                        <label class="form-label" for="form6Example3">Tên Sản Phẩm</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input name="price" type="number" id="form6Example4" class="form-control"
+                               style="border: 1px solid#cccccc" required/>
+                        <label class="form-label" for="form6Example4">Giá Sản Phẩm</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input name="" type="file" id="imageFile" onchange="chooseFile(this)"
+                               class="form-control" style="border: 1px solid#cccccc" required accept="image/gif,image/jpeg,image/png"/>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <select name="typeProduct" class="form-select form-control" aria-label="Default select example"
+                                style="border: 1px solid#cccccc"
+                                required>
+                            <option selected>Coffee</option>
+                            <option value="${type.typeId}">${type.typeName}</option>
+                        </select>
+                    </div>
+                    <div class="form-outline mb-4" style="border: 1px solid#cccccc">
+                        <textarea name="description" class="form-control" id="form6Example7" rows="4"></textarea>
+                        <label class="form-label" for="form6Example7">Mô Toả Sản Phẩm</label>
+                    </div>
+                    <div style="margin-left: 40%" > <img style="width: 30%;height: 30%" id="image" src="" alt=""></div>
+                    <br>
+                    <button type="button" class="btn btn-dark btn-block mb-4 " data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Create
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--uploadFile-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+    function chooseFile(fileInput){
+        if (fileInput.files && fileInput.files[0]){
+            let  reader=new FileReader();
+            reader.onload=function (e) {
+                $('#image').attr('src',e.target.result);
+            }
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+</script>
+
+</body>
+</html>
+
