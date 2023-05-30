@@ -16,10 +16,11 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
       rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-<link rel="stylesheet" href="/css/list.css">
+<link rel="stylesheet" href="/list.css">
+<link rel="stylesheet" href="/view.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet" href="/footer.css">
 <body>
 <!-- Dashboard -->
 
@@ -28,23 +29,23 @@
         <nav class="  navbar-vertical h-lg-screen  px-0 py-lg-2 navbar-light   border-bottom-lg-0 border-end-lg" style="background-color: white"
              id="navbarVertical">
             <div class="container-fluid"  >
-                <a class="navbar-brand nav-item nav-link py-lg-2 mb-lg-5 px-lg-6 me-0" href="#"><h2
-                        style="margin-top: -100%">Coffee Shop</h2></a>
-<!--                                 User menu (mobile)-->
-<!--                                <div class="navbar-user d-lg-none"> &lt;!&ndash; Dropdown &ndash;&gt;-->
-<!--                                    <div class="dropdown"> &lt;!&ndash; Toggle &ndash;&gt; <a href="#" id="sidebarAvatar" role="button"-->
-<!--                                                                              data-bs-toggle="dropdown" aria-haspopup="true"-->
-<!--                                                                              aria-expanded="false">-->
-<!--                                        <div class="avatar-parent-child"> <span-->
-<!--                                                class="avatar-child avatar-badge bg-success"></span></div>-->
-<!--                                    </a> &lt;!&ndash; Menu &ndash;&gt;-->
-<!--                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar"><a href="#"-->
-<!--                                                                                                                        class="dropdown-item">Profile</a>-->
-<!--                                            <a href="#" class="dropdown-item">Settings</a> <a href="#" class="dropdown-item">Billing</a>-->
-<!--                                            <hr class="dropdown-divider">-->
-<!--                                            <a href="#" class="dropdown-item">Logout</a></div>-->
-<!--                                    </div>-->
-<!--                                </div> &lt;!&ndash; Collapse &ndash;&gt;-->
+                <a class="navbar-brand nav-item nav-link py-lg-2 mb-lg-5 px-lg-6 me-0" href="#"><h3
+                        style=" margin-top: -100%">Coffee Shop</h3></a>
+                <!--                                 User menu (mobile)-->
+                <!--                                <div class="navbar-user d-lg-none"> &lt;!&ndash; Dropdown &ndash;&gt;-->
+                <!--                                    <div class="dropdown"> &lt;!&ndash; Toggle &ndash;&gt; <a href="#" id="sidebarAvatar" role="button"-->
+                <!--                                                                              data-bs-toggle="dropdown" aria-haspopup="true"-->
+                <!--                                                                              aria-expanded="false">-->
+                <!--                                        <div class="avatar-parent-child"> <span-->
+                <!--                                                class="avatar-child avatar-badge bg-success"></span></div>-->
+                <!--                                    </a> &lt;!&ndash; Menu &ndash;&gt;-->
+                <!--                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar"><a href="#"-->
+                <!--                                                                                                                        class="dropdown-item">Profile</a>-->
+                <!--                                            <a href="#" class="dropdown-item">Settings</a> <a href="#" class="dropdown-item">Billing</a>-->
+                <!--                                            <hr class="dropdown-divider">-->
+                <!--                                            <a href="#" class="dropdown-item">Logout</a></div>-->
+                <!--                                    </div>-->
+                <!--                                </div> &lt;!&ndash; Collapse &ndash;&gt;-->
                 <div class=" navbar-collapse " id="sidebarCollapse" style="margin-left: 10%;margin-top: -80%">
                     <!-- Navigation -->
                     <ul class="navbar-nav" style="margin-top: -40%">
@@ -76,17 +77,17 @@
                 <div class="container-fluid" >
                     <div style="display: flex; margin: 8px;position: relative">
                         <div>
-                            <a>
-                                <button class="btn btn btn-success text-capitalize" data-bs-toggle="modal"
-                                        href="#exampleModalToggle" role="button" style="border: 1px solid #dddddd;">
-                                    Add New
+                            <a th:href="@{/create}">
+                                <button  class="btn btn-success text-capitalize"  style="border: 1px solid #dddddd;">
+                                    Add New Product
                                 </button>
                             </a>
+
                         </div>
 
                     </div>
-                    <form class="d-flex" th:action="@{detail}" method="get" th:object="${productModel}">
-                        <form method="get" class="d-flex" th:action="@{search}" th:object="${blogModelList}">
+                    <form class="d-flex"  method="get">
+                        <form method="get" class="d-flex">
                             <input style="width: 15vw" class="form-control me-2" type="search" name="titles"
                                    placeholder="Search by Title" aria-label="Search">
                             <button class="btn btn btn-primary text-capitalize" type="submit">Search</button>
@@ -104,7 +105,7 @@
                                     <div class="row">
                                         <div class="col"><span
                                                 class="h6 font-semibold text-muted text-sm d-block mb-2">Gross Product</span>
-                                            <p class="h3 font-bold mb-0" th:text="${productCoffeeModelList}"></p></div>
+                                            <p class="h3 font-bold mb-0" ></p></div>
                                         <div class="col-auto">
                                             <div class="">
                                                 <i class="fa-brands fa-product-hunt"></i></div>
@@ -123,7 +124,7 @@
                                     <div class="row">
                                         <div class="col"><span
                                                 class="h6 font-semibold text-muted text-sm d-block mb-2">Total amount</span>
-                                            <p class="h3 font-bold mb-0" th:text="${price}"></p></div>
+                                            <p class="h3 font-bold mb-0"></p></div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape ">
                                                 <i
@@ -145,27 +146,31 @@
                         <div class="table-responsive">
                             <table class="table table-hover " style="border: 1px solid #CCCCCC">
                                 <tr>
-                                    <td style="font-size: 20px;color: black">Id</td>
-                                    <td style="font-size: 20px;width: 20%;color: black">Tên Sản Phẩm</td>
+                                    <td style="font-size: 20px;width: 5%;color: black">Id</td>
+                                    <td style="font-size: 20px;width: 25%;color: black">Tên Sản Phẩm</td>
                                     <td style="font-size: 20px;width: 20%;color: black">Giá Tiền (VND)</td>
-                                    <td style="font-size: 20px;width: 20%;color: black">Hình Ảnh</td>
+                                    <td style="font-size: 20px;width: 10%;color: black">Size</td>
+                                    <td style="font-size: 20px;width: 15%;color: black">Hình Ảnh</td>
                                     <td colspan="" style="font-size: 20px;width: 20%;color: black">Loại Sản phẩm</td>
-                                    <td colspan="3" style="font-size: 20px;width: 20%;color: black">Chức năng</td>
+                                    <td colspan="3" style="font-size: 20px;width: 5%;color: black">Chức năng</td>
 
                                 </tr>
-                                <tr th:each="productCoffeeModel : ${productCoffeeModelPage}">
-                                    <th th:text="${productCoffeeModel.id}"></th>
-                                    <th th:text="${productCoffeeModel.nameProduct}"></th>
-                                    <th th:text="${productCoffeeModel.prices}"></th>
-                                    <th><img style="height: 15%;width: 15%" th:src="${productCoffeeModel.images}"></th>
-                                    <th th:text="${productCoffeeModel.typeProductCoffeeModel.typeName}"></th>
+                                <tr th:each="product : ${productPage}">
+                                    <th th:text="${product.id}"></th>
+                                    <th th:text="${product.name}"></th>
+                                    <th th:text="${product.price}"></th>
+                                    <th th:text="${product.sizeProduct.size}"></th>
+                                    <th><img style="height: 20%;width: 20%" th:src="${product.image}"></th>
+                                    <th th:text="${product.typeProduct.typeName}"></th>
                                     <th>
                                         <!--                                    <a th:href="@{/update/{id}(id=${productCoffeeModelPage.id})}">-->
                                         <button class="btn btn-warning text-capitalize">Update</button>
                                         <!--                                    </a>-->
                                     </th>
                                     <th>
-                                        <button class="btn btn-primary text-capitalize">View
+
+                                        <button class="btn btn-primary text-capitalize" data-bs-toggle="modal"
+                                                href="#myModal" role="button">View
                                             <!--                                            th:attr="onclick=|detail('${productCoffeeModelPage.id}','${productCoffeeModelPage.nameProduct}')|">Detail-->
                                         </button>
 
@@ -186,19 +191,20 @@
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-end ">
                                 <li class="page-item " style="border: 1px solid #CCCCCC">
-                                    <a class="page-link" th:href="@{'/'(page=${productCoffeeModelPage.number -1})}"
-                                       th:if="${productCoffeeModelPage.hasPrevious()}">Previous</a>
+                                    <a class="page-link" th:href="@{'/'(page=${productPage.number -1})}"
+                                       th:if="${productPage.hasPrevious()}">Previous</a>
                                 </li>
                                 <!--                        <li style="border: 1px solid #CCCCCC" class="page-item active" ><a class="page-link active" th:text="${pageNo}" th:href="@{/(page=${pageNo})}"></a></li>-->
-                                <li style="border: 1px solid #CCCCCC" class="page-item active"><a class="page-link"
-                                                                                                  th:text="${productCoffeeModelPage.number +1}"></a>
+                                <li style="border: 1px solid #CCCCCC;;" class="page-item active"><a class="page-link"
+                                                                                                  th:text="${productPage.number +1}"></a>
                                 </li>
                                 <li style="border: 1px solid #CCCCCC" class="page-item">
-                                    <a class="page-link" th:href="@{'/'(page=${productCoffeeModelPage.number +1})}"
-                                       th:if="${productCoffeeModelPage.hasNext()}">Next</a>
+                                    <a class="page-link" th:href="@{'/'(page=${productPage.number +1})}"
+                                       th:if="${productPage.hasNext()}">Next</a>
                                 </li>
                             </ul>
                         </nav>
+
                     </div>
                 </div>
             </main>
@@ -283,7 +289,7 @@
     }
 
     // xoá
-    function deletesProduct() {
+    function deleteProduct() {
         swal({
             title: "Delete Successfully!",
             icon: "success",
@@ -314,24 +320,24 @@
     }
 </script>
 <script th:inline="javascript">
-    let createProduct =/*[[${check}]]*/ true;
-    let deleteProduct =/*[[${check}]]*/ true;
-    let updateProduct =/*[[${flag}]]*/ true;
+    let createCategory = /*[[${mess}]]*/ true;
+    let deleteCategory =/*[[${check}]]*/ true;
+    let update =/*[[${flag}]]*/ true;
     // thêm mới
-    if (createProduct != null) {
-        if (createProduct) {
+    if (createCategory != null) {
+        if (createCategory) {
             create();
         } else {
             create1();
         }
     }
     // xoá
-    if (deleteProduct) {
-        deletesProduct();
+    if (deleteCategory) {
+        deleteProduct();
     }
     // update
-    if (updateProduct != null) {
-        if (updateProduct) {
+    if (update != null) {
+        if (update) {
             update2();
         } else {
             update1();
@@ -340,74 +346,16 @@
 
 </script>
 
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-     tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalToggleLabel" style="text-align: center">Thêm Mới Sản Phẩm</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="/Product?action=create" method="post" class="text_left">
-                    <div class="form-outline mb-4">
-                        <input name="name" type="text" id="form6Example3" class="form-control"
-                               style="border: 1px solid#cccccc" required/>
-                        <label class="form-label" for="form6Example3">Tên Sản Phẩm</label>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <input name="price" type="number" id="form6Example4" class="form-control"
-                               style="border: 1px solid#cccccc" required/>
-                        <label class="form-label" for="form6Example4">Giá Sản Phẩm</label>
-                    </div>
-                    <!--                    <fieldset class="form-group">-->
-                    <!--                        <label>Ảnh :</label>-->
-                    <!--                        <div>-->
-                    <!--                            <input class="form-control" name="productImage" type="text" id="imageUrlInput"-->
-                    <!--                                   placeholder="Nhập URL hình ảnh"  required>-->
-                    <!--                        </div>-->
-                    <!--                        <div id="imageContainer"></div>-->
-                    <!--                    </fieldset>-->
-                    <div class="form-outline mb-4">
-                        <input name="productImage" type="text" id="imageUrlInput" oninput="showImage()"
-                               class="form-control" style="border: 1px solid#cccccc" required/>
-                        <label class="form-label" for="imageUrlInput">Hình Ảnh URL </label>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <select name="typeProduct" class="form-select form-control" aria-label="Default select example"
-                                style="border: 1px solid#cccccc"
-                                required>
-                            <option selected>Coffee</option>
-                            <option value="${type.typeId}">${type.typeName}</option>
-                        </select>
-                    </div>
-                    <div class="form-outline mb-4" style="border: 1px solid#cccccc">
-                        <textarea name="description" class="form-control" id="form6Example7" rows="4"></textarea>
-                        <label class="form-label" for="form6Example7">Mô Toả Sản Phẩm</label>
-                    </div>
-                    <div style="margin-left: 40%" id="imageContainer"></div>
-                    <br>
-                    <button type="button" class="btn btn-dark btn-block mb-4 " data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">Create
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
 <script>
-    function showImage() {
-        var imageUrl = document.getElementById("imageUrlInput").value;
-        var imageContainer = document.getElementById("imageContainer");
-        var imgElement = document.createElement("img");
-        imgElement.src = imageUrl;
-        imgElement.alt = "Hình ảnh";
-        imgElement.style.width = "100px";
-        imgElement.style.height = "100px";
-        imageContainer.innerHTML = "";
-        imageContainer.appendChild(imgElement);
-    }
+
 </script>
+<!-- Button to Open the Modal -->
+
+
+<!-- The Modal -->
 
 </body>
 </html>
