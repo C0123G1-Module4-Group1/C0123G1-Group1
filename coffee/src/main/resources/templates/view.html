@@ -29,11 +29,11 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6" th:object="${product}">
                         <div class="images p-3">
                             <div class="text-center p-4">
-                                <h2>PHINDI CHOCO</h2>
-                                 <img style="border: 1px solid slategray" id="main-image" src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__PHINDI_CHOCO.jpg" width="250"/>
+                                <h2 th:text="${product.name}"></h2>
+                                 <img style="border: 1px solid slategray" id="main-image" th:src="${product.image}" width="250"/>
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="mt-4 mb-3">
 
-                                <p class="">PhinDi Choco - Cà phê Phin thế hệ mới với chất Phin êm hơn, kết hợp cùng Choco ngọt tan mang đến hương vị mới lạ, không thể hấp dẫn hơn!</p>
+                                <p class=""th:text="${product.describes}"></p>
                                 <div class="btn-group" role="" aria-label="Basic radio toggle button ">
                                     <span style="margin-top: 2.5%">Size:&ensp;</span>
                                     <div>
@@ -63,7 +63,7 @@
 
 
                                 </div>
-                                <div class="price d-flex flex-row align-items-center" style="margin-top: -7%"><span><span class="act-price">  <span>Giá:&ensp; </span></span>&ensp; đ</span>
+                                <div class="price d-flex flex-row align-items-center" style="margin-top: -7%"><span>Giá:&ensp; <span class="act-price">  <span th:text="${product.price}">00</span></span>&ensp;đ</span>
                                     <div class="ml-2"><small class="dis-price"></small></div>
                                     <div class="cart mt-4 align-items-center"style="margin-top: 10%">
                                         <a class="btn btn-outline-success" style=" margin-top: 50%; ;">Đặt

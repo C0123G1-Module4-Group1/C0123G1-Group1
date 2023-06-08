@@ -21,7 +21,8 @@ dependencies {
 //sweetalert
 //     https://mvnrepository.com/artifact/org.webjars.bower/sweetalert
     'org.webjars.bower:sweetalert:jar:2.1.1'
-
+//    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.7.1'
 
 }
 

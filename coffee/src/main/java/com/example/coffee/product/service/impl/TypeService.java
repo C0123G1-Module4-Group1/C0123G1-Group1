@@ -1,5 +1,6 @@
 package com.example.coffee.product.service.impl;
 
+import com.example.coffee.product.model.Product;
 import com.example.coffee.product.model.TypeProduct;
 import com.example.coffee.product.repository.ITypeRepository;
 import com.example.coffee.product.service.ITypeService;
@@ -18,4 +19,11 @@ public class TypeService implements ITypeService {
     public Page<TypeProduct> findAll(Integer page) {
         return iTypeRepository.findAll(PageRequest.of(page,10));
     }
+
+    @Override
+    public List<Product> typeProductBy(Integer id) {
+        return iTypeRepository.typeProductBy(id);
+    }
+
+
 }

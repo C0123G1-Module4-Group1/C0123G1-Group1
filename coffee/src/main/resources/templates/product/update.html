@@ -1,0 +1,346 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:sweetalert2="http://www.thymeleaf.org/extras/sweet-alert2">
+<head>
+  <title>Thêm mới sản phẩm</title>
+<!--  <link rel="stylesheet" href="bootstrap520/css/bootstrap.min.css"/>-->
+<!--  <link rel="stylesheet" href="datatables/css/dataTables.bootstrap5.min.css"/>-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Font Awesome -->
+  <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet"
+  />
+  <!-- Google Fonts -->
+  <link
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet"
+  />
+  <!-- MDB -->
+  <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+          rel="stylesheet"
+  />
+
+  <!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        rel="stylesheet"/>
+  <script src="//code.jquery.com/jquery-2.1.1.js"></script>
+
+  <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+<div class="page-content page-container" id="page-content">
+  <div class="padding">
+    <div class="row container d-flex justify-content-center">
+      <div class="col-lg-5 grid-margin stretch-card">
+        <!--form mask starts-->
+        <div class="card" style="margin-left: 30%;margin-top: 20%">
+          <div class="card-body">
+            <h4 class="card-title">Thêm Mới Bài Hát</h4>
+            <form class="forms-sample"
+                  th:object="${productDTO}"  enctype="multipart/form-data" th:action="@{/editProduct}" method="post" >
+              <!--                            enctype="multipart/form-data"-->
+              <div class="form-group row">
+                <div class="form-group ">
+<!--                  <label>Tên sản phẩm</label>-->
+                  <input hidden type="text" class="form-control" th:field="*{id}">
+                  <!--                  <p style="color: red" th:if="${#fields.hasErrors('nameSong')}"-->
+                  <!--                     th:errors="*{nameSong}"></p>-->
+                </div>
+                <div class="form-group ">
+                  <label>Tên sản phẩm</label>
+                  <input type="text" class="form-control" th:field="*{name}">
+                  <!--                  <p style="color: red" th:if="${#fields.hasErrors('nameSong')}"-->
+                  <!--                     th:errors="*{nameSong}"></p>-->
+                </div>
+                <div class="form-group ">
+                  <label>Giá tiền</label>
+                  <input type="number" class="form-control" th:field="*{price}">
+                  <!--                  <p style="color: red" th:if="${#fields.hasErrors('artistName')}"-->
+                  <!--                     th:errors="*{artistName}"></p>-->
+                </div>
+
+                <div class="form-outline ">
+                  <label>Loại sản phẩm</label>
+                  <select style="border: 1px solid #CCCCCC" class="form-control" th:field="*{typeProduct}">
+                    <option th:each="typePage :${typePage}"
+                            th:text="${typePage.typeName}"
+                            th:value="${typePage.id}">
+                    </option>
+                  </select>
+                </div>
+                  <div class="form-group">
+                      <label for="thumbnailURL">ThumbnailURL:</label>
+                      <input type="hidden" id="thumbnailURL" th:field="*{image}" />
+                      <input id="btnThumbnailURL" type="file" class="form-control"/>
+                      <progress id="uploader" value="0" max="100">0%</progress>
+                  </div>
+
+                                                <div class="form-group">
+                                                    <input hidden id="nfo" type="text" class="form-control" th:field="*{currency}">
+                                                </div>
+                <div class="form-group">
+                  <label>Mô toả</label>
+                  <textarea  type="text" class="form-control" th:field="*{describes}"></textarea>
+                </div>
+                <div style="margin-left: 30%;padding: 2%"> <img style=" border-style: none;width:40%; "   id="image"  ></div>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-dark btn-block mb-4">Chỉnh sửa sản phẩm</button>
+            </form>
+
+          </div>
+        </div>
+        <!--form mask ends-->
+      </div>
+
+    </div>
+  </div>
+  <!--form mask ends-->
+</div>
+
+
+<!-- Jumbotron -->
+</section>
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script>
+    // function chooseFile(fileInput){
+    //     if (fileInput.files && fileInput.files[0]){
+    //     let  reader=new FileReader();
+    //     reader.onload=function (e) {
+    //         $('#image').attr('src',e.target.result);
+    // }
+    //     reader.readAsDataURL(fileInput.files[0]);
+    // }
+    //
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyC4aFqn1iFEK1CBnKxuPNDE_1AUnZtToZU",
+        authDomain: "group1-379a8.firebaseapp.com",
+        projectId: "group1-379a8",
+        storageBucket: "group1-379a8.appspot.com",
+        messagingSenderId: "369039862755",
+        appId: "1:369039862755:web:c8761f39faeb0a6ad2ced6",
+        measurementId: "G-3LL4BVYJ6P"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // const analytics = getAnalytics(app);
+    let uploader = document.getElementById('uploader');
+    let fileButton = document.getElementById('btnThumbnailURL');
+    fileButton.addEventListener('change', function (e) {
+        let file = e.target.files[0];
+        let storageRef = firebase.storage().ref('img/' + file.name);
+        let task = storageRef.put(file);
+        task.on('state_changed', function progress(snapshot) {
+            let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            uploader.value = percentage;
+
+        });
+
+        task
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then(url => {
+                document.getElementById('thumbnailURL').setAttribute("value", url);
+            })
+    });
+</script>
+
+
+
+
+<!--<script type="text/javascript">-->
+<!--    // consts-->
+<!--    const btnInfo = document.getElementById('btnInfo');-->
+<!--    const btnSuccess = document.getElementById('btnSuccess');-->
+<!--    const btnError = document.getElementById('btnError');-->
+<!--    const btnWarning = document.getElementById('btnWarning');-->
+
+<!--    // Event Listeners-->
+<!--    btnInfo.addEventListener('click', displayInfoToaster);-->
+<!--    btnSuccess.addEventListener('click', displaySuccessToaster);-->
+<!--    btnError.addEventListener('click', displayErrorToaster);-->
+<!--    btnWarning.addEventListener('click', displayWarningToaster);-->
+
+<!--    // functions-->
+<!--    function displayInfoToaster() {-->
+<!--        toastr.options.timeOut = 1500; // 1.5s-->
+<!--        toastr.info('info messages');-->
+<!--    }-->
+
+<!--    function displaySuccessToaster() {-->
+<!--        toastr.options.timeOut = 1500; // 1.5s-->
+<!--        toastr.success('Success messages');-->
+<!--    }-->
+
+<!--    function displayErrorToaster() {-->
+<!--        toastr.options.timeOut = 1500; // 1.5s-->
+<!--        toastr.error('errors messages');-->
+<!--        toastr.innerHTML='  <p style="color: red" th:if="${#fields.hasErrors(\'musicType\')}"\n' +-->
+<!--            '                     th:errors="*{musicType}"></p>';-->
+<!--    }-->
+
+<!--    function displayWarningToaster() {-->
+<!--        toastr.options.timeOut = 1500; // 1.5s-->
+<!--        toastr.warning('warning messages');-->
+
+<!--    }-->
+<!--</script>-->
+
+
+<script th:inline="javascript">
+
+  function deletes(id, titles) {
+    swal({
+      title: "Are you sure?",
+      text: "Do you want to remove the date name " + " " + titles + " " + "?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+
+    })
+            .then((result) => {
+              if (result) {
+                window.location = '/delete/' + id
+              } else {
+                swal("Thank you for not deleting")
+              }
+            });
+  }
+
+  async function detail(id, titles) {
+    Swal.fire({
+      text: 'Would you like to see the details of this title: ' + titles + "",
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonColor: '#CCCCCC',
+      confirmButtonColor: '#3366FF',
+      confirmButtonText: 'May I try it out ?'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+                window.location.href = '/detail/' + id
+        )
+      }
+    })
+  }
+
+</script>
+
+<script th:inline="javascript">
+
+  <!--    thêm mới-->
+  function createBlog() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Successfully',
+      text: 'Successfully added new!',
+      confirmButtonText: 'Oke',
+      timer: 2000,
+    });
+  }
+
+
+  function createBlog1() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Failure',
+      text: 'Add new failure!',
+      confirmButtonText: 'Oke',
+      timer: 2000,
+    });
+  }
+
+  // xoá
+  function deleteCategory1() {
+    swal({
+      title: "Delete Successfully!",
+      icon: "success",
+      button: "Oke",
+      timer: 2000,
+    });
+  }
+
+  // chỉnh sửa
+  function updateCategory() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Successfully',
+      text: 'Successful editing!',
+      confirmButtonText: 'Oke',
+      timer: 2000,
+    });
+  }
+
+  function updateCategory1() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Failure',
+      text: 'Edit failed!',
+      confirmButtonText: 'Oke',
+      timer: 2000,
+    });
+  }
+</script>
+<script th:inline="javascript">
+  let createCategory = /*[[${mess}]]*/ true;
+  let deleteCategory =/*[[${check}]]*/ true;
+  let update =/*[[${flag}]]*/ true;
+  // thêm mới
+  if (createCategory != null) {
+    if (createCategory) {
+      createBlog();
+    } else {
+      createBlog1();
+    }
+  }
+  // xoá
+  if (deleteCategory) {
+    deleteCategory1();
+  }
+  // update
+  if (update != null) {
+    if (update) {
+      updateCategory();
+    } else {
+      updateCategory1();
+    }
+  }
+
+</script>
+<!-- Section: Design Block -->
+<!-- Section: Design Block -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+<!--<button id="btnInfo">Info</button>-->
+<!--<button id="btnSuccess">Success</button>-->
+<!--<button id="btnError">Error</button>-->
+<!--<button id="btnWarning">Warning</button>-->
+
+<!-- jquery -->
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<!-- toastr -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+<!-- MDB -->
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/yourcode.js"></script>
+<script src="jquery-3.4.1.min.js"></script>
+<script src="sweetalert2.all.min.js"></script>
+</body>
+</html>
+
+
+
+
