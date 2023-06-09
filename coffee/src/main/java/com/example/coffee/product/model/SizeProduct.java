@@ -5,19 +5,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name = "size_product")
+@Entity(name = "size")
 public class SizeProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Integer id;
     private String size;
+    private Float rate;
 
     public SizeProduct() {
     }
 
-    public SizeProduct(Integer id, String size) {
+    public SizeProduct(Integer id, String size, Float rate) {
         this.id = id;
         this.size = size;
+        this.rate = rate;
+    }
+
+    public Float getRate() {
+        return rate;
+    }
+
+    public void setRate(Float rate) {
+        this.rate = rate;
     }
 
     public Integer getId() {

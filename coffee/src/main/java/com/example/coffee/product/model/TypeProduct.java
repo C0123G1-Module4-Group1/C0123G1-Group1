@@ -2,12 +2,12 @@ package com.example.coffee.product.model;
 
 import javax.persistence.*;
 
-@Entity(name = "loai_san_pham")
+@Entity(name = "type_product")
 public class TypeProduct {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
-        @Column(name = "ten_loai_san_pham", columnDefinition = "VARCHAR(50)", nullable = false)
+        @Column(name = "type_name", columnDefinition = "VARCHAR(50)", nullable = false)
         private String typeName;
 
         public TypeProduct() {

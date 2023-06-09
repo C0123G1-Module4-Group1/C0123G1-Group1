@@ -9,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-@Controller
+//@Controller
 public class Home {
-    @Autowired
+//    @Autowired
     private IProductService iProductService;
     @GetMapping("/homeProduct")
     public String ProductPage(Model model) {

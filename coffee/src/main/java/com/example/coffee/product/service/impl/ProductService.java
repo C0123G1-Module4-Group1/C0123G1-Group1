@@ -18,7 +18,7 @@ public class ProductService implements IProductService {
     private IProductRepository iProductRepository;
     @Override
     public Page<Product> findAll(Integer page) {
-        return iProductRepository.findAll(PageRequest.of(page, Integer.parseInt("5"), Sort.by("id").descending()));
+        return iProductRepository.findAll(PageRequest.of(page, Integer.parseInt("4"), Sort.by("id").descending()));
     }
 
     @Override

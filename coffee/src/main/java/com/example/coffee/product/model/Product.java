@@ -1,38 +1,40 @@
 package com.example.coffee.product.model;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "san_pham")
+@Entity(name = "product")
+@EntityListeners(AuditingEntityListener.class)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Integer id;
-    @Column(name = "ten_san_pham",columnDefinition = "VARCHAR(50)",nullable = false)
+    @Column(name = "name_product",columnDefinition = "VARCHAR(50)",nullable = false)
      private  String name;
-    @Column(name = "image",columnDefinition = "TEXT")
+    @Column(name = "img",columnDefinition = "TEXT")
      private String image;
-    @Column(name = "mo_ta",columnDefinition = "TEXT")
-
+    @Column(name = "description",columnDefinition = "TEXT")
     private  String describes;
-    @Column(name = "gia",columnDefinition = "FLOAT")
+    @Column(name = "price",columnDefinition = "FLOAT")
     private Float price;
-    @Column(name = "tien_te",columnDefinition = "VARCHAR(10)")
+    @Column(name = "currency_unit",columnDefinition = "VARCHAR(10)")
 
     private String currency;
-    @Column(name = "status_delete",columnDefinition = "BIT")
+    @Column(name = "status_delete",columnDefinition = "BIT DEFAULT 0")
     private boolean status;
 
-    @UpdateTimestamp
+    @CreationTimestamp
     @Column(name = "create_time", updatable = false, columnDefinition = "DATETIME", nullable = false)
      private LocalDateTime createTime;
     @UpdateTimestamp
     @Column(name = "update_time", updatable = false, columnDefinition = "DATETIME")
      private  LocalDateTime updateTime;
     @ManyToOne
-    @JoinColumn(name = "id_loai_san_pham" ,referencedColumnName = "id")
+    @JoinColumn(name = "id_type_product" ,referencedColumnName = "id")
      private TypeProduct typeProduct;
     @ManyToOne
     @JoinColumn(name = "id_size" ,referencedColumnName = "id")

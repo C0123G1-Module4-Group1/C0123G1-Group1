@@ -36,26 +36,30 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
-@Controller
+//@Controller
 public class ProductController {
-    @Autowired
+//    @Autowired
     private IProductService iProductService;
-    @Autowired
+//    @Autowired
     private ITypeService iTypeService;
-    @Autowired
+//    @Autowired
     private ISizeService iSizeService;
 
-    @Autowired
+//    @Autowired
     private EmailService emailService;
     private static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
 //    @Value("${upload.path}")
     private String fileUpload;
+//    @GetMapping("/")
+//    public String order(){
+//        return "redirect:/orderController/list";
+//    }
 
     @GetMapping("/")
     public String ShowListProduct(@RequestParam(value = "page", defaultValue = "0") Integer page, Model model) {
         Page<Product> productPage = iProductService.findAll(page);
         model.addAttribute("productPage", productPage);
-        return "orders";
+        return "/orders";
     }
 
     @PostMapping("/homeMail")
@@ -69,7 +73,7 @@ public class ProductController {
         model.addAttribute("productDto", new ProductDTO());
         model.addAttribute("typePage", iTypeService.findAll(page));
         model.addAttribute("sizePage", iSizeService.findAll(page));
-        return "product/create";
+        return "/product/create";
     }
 
 //    @PostMapping("/createProduct")
