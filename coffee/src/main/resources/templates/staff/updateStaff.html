@@ -4,112 +4,114 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <body>
 <div class="container" style="margin-top: 100px">
-  <h2 style="text-align: center">Update Employee</h2>
+    <h2 style="text-align: center">Update Employee</h2>
 
-  <div id="form" class="form">
-    <form action="#" th:action="@{/staff/update}" th:object="${staff}"
-          method="POST" novalidate="novalidate">
-      <div class="input-group input-group-sm mb-3" hidden>
-        <div class="input-group-prepend">
-          <span class="input-group-text">Id</span>
-        </div>
-        <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{id}"/>
-      </div>
-      <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Name</span>
-        </div>
-        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{name}"/>
-        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+    <div id="form" class="form">
+        <form action="#" th:action="@{/staff/update}" th:object="${staff}"
+              method="POST" novalidate="novalidate">
+            <div class="input-group input-group-sm mb-3" hidden>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Id</span>
+                </div>
+                <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{id}"/>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Name</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{name}"/>
+                <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 
-      </div>
-      <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Address</span>
-        </div>
-        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{address}"/>
-        <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Address</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{address}"/>
+                <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
 
-      </div>
-      <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Phone Number</span>
-        </div>
-        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{phoneNumber}"/>
-        <p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Phone Number</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{phoneNumber}"/>
+                <p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
 
-      </div>
-      <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Email</span>
-        </div>
-        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{email}"/>
-        <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Email</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{email}"/>
+                <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 
-      </div>
-      <div class="input-group input-group-sm mb-3" hidden>
-        <div class="input-group-prepend">
-          <span class="input-group-text">Tài khoản</span>
-        </div>
-        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{userDto.account}"/>
-      </div>
-      <div class="input-group input-group-sm mb-3" hidden>
-        <div class="input-group-prepend">
-          <span class="input-group-text">Mật khẩu</span>
-        </div>
-        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{userDto.password}"/>
-      </div>
-      <div class="input-group input-group-sm mb-3" hidden>
-        <div class="input-group-prepend">
-          <span class="input-group-text">Id user</span>
-        </div>
-        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{userDto}"/>
-      </div>
-      <div class="input-group input-group-sm mb-3" hidden>
-        <div class="input-group-prepend">
-          <span class="input-group-text">Id user</span>
-        </div>
-        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{userDto.role}"/>
-      </div>
-      <div class="input-group input-group-sm mb-3" hidden>
-        <div class="input-group-prepend">
-          <span class="input-group-text">Ngày tạo</span>
-        </div>
-        <input type="datetime-local" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{createAt}"/>
-      </div>
-      <div class="input-group input-group-sm mb-3" hidden>
-        <div class="input-group-prepend">
-          <span class="input-group-text">Ngày sửa</span>
-        </div>
-        <input type="datetime-local" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{updateAt}"/>
-      </div>
-      <div class="input-group input-group-sm mb-3" hidden>
-        <div class="input-group-prepend">
-          <span class="input-group-text">status</span>
-        </div>
-        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{deleteStatus}"/>
-      </div>
-      <button type="submit" class="btn btn-outline-primary" style="margin-left: 600px">Save</button>
-    </form>
-    <p>
-      <a th:href="@{/staff}">
-        <button class="btn btn-outline-dark" style="margin-left: 600px;margin-top: 30px">Back
-        </button>
-      </a>
-    </p>
-  </div>
+            </div>
+            <div class="input-group input-group-sm mb-3" hidden>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Tài khoản</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{userDto.account}"/>
+            </div>
+            <div class="input-group input-group-sm mb-3" hidden>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Mật khẩu</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{userDto.password}"/>
+            </div>
+            <div class="input-group input-group-sm mb-3" hidden>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Id user</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{userDto}"/>
+            </div>
+            <div class="input-group input-group-sm mb-3" hidden>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Id user</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{userDto.role}"/>
+            </div>
+            <div class="input-group input-group-sm mb-3" hidden>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Ngày tạo</span>
+                </div>
+                <input type="datetime-local" class="form-control" aria-label="Small"
+                       aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{createAt}"/>
+            </div>
+            <div class="input-group input-group-sm mb-3" hidden>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Ngày sửa</span>
+                </div>
+                <input type="datetime-local" class="form-control" aria-label="Small"
+                       aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{updateAt}"/>
+            </div>
+            <div class="input-group input-group-sm mb-3" hidden>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">status</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{deleteStatus}"/>
+            </div>
+            <button type="submit" class="btn btn-outline-primary" style="margin-left: 600px">Save</button>
+        </form>
+        <p>
+            <a th:href="@{/staff}">
+                <button class="btn btn-outline-dark" style="margin-left: 600px;margin-top: 30px">Back
+                </button>
+            </a>
+        </p>
+    </div>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

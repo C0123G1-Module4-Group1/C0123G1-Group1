@@ -25,6 +25,7 @@ public class UserController {
         model.addAttribute("title", "Logout");
         return "login/login";
     }
+
     @GetMapping(value = "/403")
     public String accessDenied(Model model, Principal principal) {
         if (principal != null) {

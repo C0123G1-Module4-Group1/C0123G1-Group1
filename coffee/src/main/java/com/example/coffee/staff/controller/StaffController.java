@@ -25,79 +25,92 @@ import javax.xml.soap.MimeHeaders;
 public class StaffController {
     @Autowired
     private IStaffService iStaffService;
+
     @GetMapping("")
-    public String getAll(Model model, @RequestParam(value = "page", defaultValue = "0") int page, HttpServletResponse httpServletResponse){
-        Page<Staff> staffList=iStaffService.findAll(page);
-        model.addAttribute("staffList",staffList);
+    public String getAll(Model model, @RequestParam(value = "page", defaultValue = "0") int page, HttpServletResponse httpServletResponse) {
+        Page<Staff> staffList = iStaffService.findAll(page);
+        model.addAttribute("staffList", staffList);
         httpServletResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         return "staff/staffList";
     }
+
     @GetMapping("/createStaff")
-    public String createStaff(Model model){
-        model.addAttribute("staff",new StaffDto());
+    public String createStaff(Model model) {
+        model.addAttribute("staff", new StaffDto());
         return "staff/createStaff";
     }
+
     @PostMapping()
-    public String save(@Validated @ModelAttribute("staff") StaffDto staffDto, BindingResult bindingResult, RedirectAttributes redirectAttributes){
-        if (bindingResult.hasErrors()){
+    public String save(@Validated @ModelAttribute("staff") StaffDto staffDto, BindingResult bindingResult, RedirectAttributes redirectAttributes,Model model) {
+        if (bindingResult.hasErrors()) {
             return "staff/createStaff";
         }
-        Staff staff=new Staff();
-        User user=new User();
-        BeanUtils.copyProperties(staffDto,staff);
-        BeanUtils.copyProperties(staffDto.getUserDto(),user);
+        Staff staff = new Staff();
+        User user = new User();
+        BeanUtils.copyProperties(staffDto, staff);
+        BeanUtils.copyProperties(staffDto.getUserDto(), user);
         staff.setUser(user);
-        iStaffService.saveNew(staff);
-        redirectAttributes.addFlashAttribute("mess",true);
+        boolean check=true;
+        check= iStaffService.saveNew(staff);
+        if (!check){
+            model.addAttribute("result","Email hoặc số điện thoại hoặc account bị trùng lặp!!!!");
+            return "staff/createStaff";
+        }
+        redirectAttributes.addFlashAttribute("mess", true);
         return "redirect:/staff";
     }
+
     @GetMapping("/update/{id}")
-    public String update(@PathVariable("id")Integer id,Model model){
-        Staff staff=iStaffService.findById(id);
-        StaffDto staffDto=new StaffDto();
-        UserDto userDto=new UserDto();
-        BeanUtils.copyProperties(staff.getUser(),userDto);
+    public String update(@PathVariable("id") Integer id, Model model) {
+        Staff staff = iStaffService.findById(id);
+        StaffDto staffDto = new StaffDto();
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(staff.getUser(), userDto);
         userDto.setRole(staff.getUser().getRole());
         staffDto.setUserDto(userDto);
-        BeanUtils.copyProperties(staff,staffDto);
-        model.addAttribute("staff",staffDto);
+        BeanUtils.copyProperties(staff, staffDto);
+        model.addAttribute("staff", staffDto);
         return "staff/updateStaff";
     }
+
     @PostMapping("/update")
-    public String saveStaffUpdate(@Validated @ModelAttribute("staff") StaffDto staffDto,BindingResult bindingResult, RedirectAttributes redirectAttributes){
-        if (bindingResult.hasErrors()){
+    public String saveStaffUpdate(@Validated @ModelAttribute("staff") StaffDto staffDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
             return "staff/updateStaff";
         }
-        Staff staff=new Staff();
-        User user=new User();
-        BeanUtils.copyProperties(staffDto,staff);
-        BeanUtils.copyProperties(staffDto.getUserDto(),user);
+        Staff staff = new Staff();
+        User user = new User();
+        BeanUtils.copyProperties(staffDto, staff);
+        BeanUtils.copyProperties(staffDto.getUserDto(), user);
         staff.setUser(user);
         iStaffService.save(staff);
-        redirectAttributes.addFlashAttribute("flag",true);
+        redirectAttributes.addFlashAttribute("flag", true);
         return "redirect:/staff";
     }
+
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id")Integer id,RedirectAttributes attributes){
-        Staff staff=iStaffService.findById(id);
+    public String delete(@PathVariable("id") Integer id, RedirectAttributes attributes) {
+        Staff staff = iStaffService.findById(id);
         staff.setDeleteStatus(true);
         staff.getUser().setDeleteStatus(true);
         iStaffService.save(staff);
-        attributes.addFlashAttribute("check",true);
+        attributes.addFlashAttribute("check", true);
         return "redirect:/staff";
     }
+
     @GetMapping("/view/{id}")
-    public String view(@PathVariable("id")Integer id,Model model){
-        Staff staff=iStaffService.findById(id);
-        model.addAttribute("staff",staff);
+    public String view(@PathVariable("id") Integer id, Model model) {
+        Staff staff = iStaffService.findById(id);
+        model.addAttribute("staff", staff);
         return "staff/view";
     }
+
     @PostMapping("/search")
-    public String search(@RequestParam("name")String name,@RequestParam(value = "page", defaultValue = "0") int page,Model model){
-        Pageable pageable= PageRequest.of(page,7);
-        Page<Staff> staffList=iStaffService.findAllByName(name,pageable);
-        model.addAttribute("staffList",staffList);
-        model.addAttribute("name",name);
+    public String search(@RequestParam("name") String name, @RequestParam(value = "page", defaultValue = "0") int page, Model model) {
+        Pageable pageable = PageRequest.of(page, 7);
+        Page<Staff> staffList = iStaffService.findAllByName(name, pageable);
+        model.addAttribute("staffList", staffList);
+        model.addAttribute("name", name);
         return "staff/staffList";
     }
 

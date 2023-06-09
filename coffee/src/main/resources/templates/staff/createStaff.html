@@ -45,13 +45,14 @@
                 <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 
             </div>
-            <div class="input-group input-group-sm mb-3" >
+            <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" >Account</span>
+                    <span class="input-group-text">Account</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{userDto.account}" required/>
-                <p style="color: red" th:if="${#fields.hasErrors('userDto.account')}" th:errors="*{userDto.account}"></p>
+                <p style="color: red" th:if="${#fields.hasErrors('userDto.account')}"
+                   th:errors="*{userDto.account}"></p>
 
             </div>
             <div class="input-group input-group-sm mb-3">
@@ -60,8 +61,11 @@
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{userDto.password}"/>
-                <p style="color: red" th:if="${#fields.hasErrors('userDto.password')}" th:errors="*{userDto.password}"></p>
+                <p style="color: red" th:if="${#fields.hasErrors('userDto.password')}"
+                   th:errors="*{userDto.password}"></p>
             </div>
+            <span th:text="${result}" style="color: red"></span>
+            <br>
 
             <button type="submit" class="btn btn-outline-primary" style="margin-left: 600px">Save</button>
         </form>
