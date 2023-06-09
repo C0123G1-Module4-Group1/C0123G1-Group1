@@ -6,6 +6,7 @@ import com.example.coffee.product.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
@@ -13,11 +14,28 @@ import java.util.List;
 public class Home {
 //    @Autowired
     private IProductService iProductService;
+    @GetMapping("/")
+    public  String HomeProduct(){
+        return "index";
+    }
+    @GetMapping("/contact")
+    public  String Contact(){
+        return "contact";
+    }
+    @GetMapping("/viewProduct")
+    public  String ViewProduct(){
+        return "view";
+    }
+    @GetMapping("/shopping")
+    public  String shoppingCard(){
+        return "shoppingCard";
+    }
     @GetMapping("/homeProduct")
     public String ProductPage(Model model) {
         List<Product> productList = iProductService.getAll();
         model.addAttribute("productList", productList);
         model.addAttribute("email",new Email());
-        return "product/home";
+        return "product/homeProduct";
     }
+
 }

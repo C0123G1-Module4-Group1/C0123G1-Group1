@@ -1,0 +1,291 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Trang Chủ</title>
+
+</head>
+<!--<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">-->
+
+<!-- Vendor CSS Files -->
+<link href="/static/assetshome/vendor/aos/aos.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="/static/assetshome/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ======= Header ======= -->
+<div style="margin-top: -70%" th:replace="~{header-footer/headers::headerHome}"></div>
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-right">
+                    <div class="content">
+                        <h3>Bí quyết để có một lý trà ngon</h3>
+                        <img src="https://gongcha.com.vn/wp-content/uploads/2017/12/ly-tra.png" width="100">
+
+                        <div class="text-center">
+                            <a th:href="@{homeProduct}" class="more-btn">Xem ngay <i class="bx bx-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 d-flex align-items-stretch">
+                    <div class="icon-boxes d-flex flex-column justify-content-center">
+                        <div class="row">
+                            <div class="col-xl-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                                <div class="icon-box mt-4 mt-xl-0">
+                                    <i class="bx bx-receipt"></i>
+                                    <h4>Trà nguyên chất</h4>
+                                    <p>Dòng trà nguyên chất của chúng tôi được nhập khẩu trực tiếp từ Đài Loan đậm đà và nguyên bản được sử dụng trong vòng 4 giờ sau khi nấu đảm bảo hương vị và chất lượng hoàn hảo!</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+                                <div class="icon-box mt-4 mt-xl-0">
+                                    <i class="bx bx-cube-alt"></i>
+                                    <h4>Thức uống đá xay</h4>
+                                    <p>Mát lạnh và ngọt ngào, các loại đá xay mà chúng tôi tạo ra mang đến một trải nghiệm về đá xay mới tại Coffee chúng tôi.</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+                                <div class="icon-box mt-4 mt-xl-0">
+                                    <i class="bx bx-images"></i>
+                                    <h4>Trà sữa</h4>
+                                    <p>Một trong những dòng thức uống nổi bật với nhiều lựa chọn độc đáo. Đặc biệt với Trà sữa trân châu đường đen, Trà sữa pudding đậu đỏ với topping đa dạng mang đậm bản sắc Đài Loan.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End .content-->
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+        <div class="container">
+
+            <div class="text-center" data-aos="zoom-in">
+                <h3>Trà Sữa</h3>
+                <p> Cuối tuần uống ly trà chanh tám chuyện cuộc đời. Xua đi bao khó khăn, mệt mỏi của cuộc sống</p>
+                <a class="cta-btn" href="#">Mua Ngay</a>
+            </div>
+
+        </div>
+    </section><!-- End Cta Section -->
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+
+            <div class="section-title" data-aos="fade-left">
+                <h2>Các loại đồ uống của quán</h2>
+                <p>Các loại đồ uống đa dạng giúp cho mỗi con người có nhiều lựa chọn khác nhau.</p>
+            </div>
+
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <ul id="portfolio-flters">
+                        <li data-filter=".filter-cafe" >Cafe</li>
+                        <li data-filter=".filter-app">Trà sữa</li>
+                        <li data-filter=".filter-card">Trà</li>
+                        <li data-filter=".filter-web">Đá xay</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-4 col-md-6 portfolio-item filter-cafe">
+                    <div class="portfolio-wrap">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__PHINDI_CHOCO.jpg" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-cafe">
+                    <div class="portfolio-wrap">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__PHINDI_CHOCO.jpg" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-cafe">
+                    <div class="portfolio-wrap">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__PHINDI_CHOCO.jpg" class="img-fluid" alt="">
+                    </div>
+                </div>
+<!--                    trà sữa-->
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="https://gongcha.com.vn/wp-content/uploads/2023/02/Tra-Sua-Dau-Cookie-1.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="https://gongcha.com.vn/wp-content/uploads/2023/02/Tra-Sua-Dau-Cookie-1.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="https://gongcha.com.vn/wp-content/uploads/2023/02/Tra-Sua-Dau-Cookie-1.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+              <!--trà-->
+                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="portfolio-wrap">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__TRA_SEN_VANG_CU_NANG.jpg" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="portfolio-wrap">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__TRA_SEN_VANG_CU_NANG.jpg" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="portfolio-wrap">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__TRA_SEN_VANG_CU_NANG.jpg" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+<!--                đá xay-->
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__FREEZE_TRA_XANH.jpg" class="img-fluid" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__FREEZE_TRA_XANH.jpg" class="img-fluid" alt="">
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__FREEZE_TRA_XANH.jpg" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Portfolio Section -->
+
+
+
+<!--     ======= Team Section =======-->
+    <section id="team" class="team">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="section-title" data-aos="fade-right">
+                        <h2>Coffee</h2>
+                        <p>Bạn hãy tận hưởng những hương vị mới .Cùng tận tưởng những đồ uống  thật nào !</p>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                                <div class="pic"><img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__TRA_TACH_VAI.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="member-info">
+                                    <h4>TRÀ THẠCH VẢI</h4>
+                                        <div class=" apointment d-flex " style="margin-top: 1.5%">
+                                            <a class="btn btn-outline-success " style="font-size: 60%;border-radius: 30px;margin-left: 17%">Đặt
+                                                Ngay</a>
+                                            <a class="btn btn-outline-success " style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
+                                                Hàng</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-6 mt-4 mt-lg-0">
+                            <div class="member" data-aos="zoom-in" data-aos-delay="200">
+                                <div class="pic"><img src="https://www.highlandscoffee.com.vn/vnt_upload/product/04_2023/HLC_New_logo_5.1_Products__PHIN_DEN_DA.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="member-info">
+                                    <h4>PHIN ĐEN ĐÁ</h4>
+                                    <div class=" apointment d-flex " style="margin-top: 1.5%">
+                                        <a class="btn btn-outline-success " style="font-size: 60%;border-radius: 30px;margin-left: 17%">Đặt
+                                            Ngay</a>
+                                        <a class="btn btn-outline-success " style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
+                                            Hàng</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 mt-4">
+                            <div class="member" data-aos="zoom-in" data-aos-delay="300">
+                                <div class="pic"><img src="https://tocotocotea.com/wp-content/uploads/2023/01/Tra-sua-pho-mai-tuoi.png" class="img-fluid" alt="">
+                                </div>
+                                <div class="member-info">
+                                    <h4>TRÀ SỮA PHÔ MAI TƯƠI</h4>
+                                    <div class=" apointment d-flex " style="margin-top: 1.5%">
+                                        <a class="btn btn-outline-success " style="font-size: 60%;border-radius: 30px;margin-left: 17%">Đặt
+                                            Ngay</a>
+                                        <a class="btn btn-outline-success " style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
+                                            Hàng</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 mt-4">
+                            <div class="member" data-aos="zoom-in" data-aos-delay="400">
+                                <div class="pic"><img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__FREEZE_TRA_XANH.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="member-info">
+                                    <h4>FREEZE TRÀ XANH</h4>
+                                    <div class=" apointment d-flex " style="margin-top: 1.5%">
+                                        <a class="btn btn-outline-success " style="font-size: 60%;border-radius: 30px;margin-left: 17%">Đặt
+                                            Ngay</a>
+                                        <a class="btn btn-outline-success " style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
+                                            Hàng</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Team Section -->
+
+
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<div style="margin-top: -70%" th:replace="~{header-footer/footer::footerHome}"></div>
+<!-- Vendor JS Files -->
+<script src="/static/assetshome/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/static/assetshome/vendor/aos/aos.js"></script>
+<script src="/static/assetshome/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/assetshome/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/static/assetshome/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/static/assetshome/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/static/assetshome/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/static/assetshome/js/main.js"></script>
+</body>
+
+</html>

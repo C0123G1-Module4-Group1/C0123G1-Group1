@@ -15,9 +15,9 @@ public class Coupons {
     private Integer id;
     @Column(name = "code_coupons")
     private String codeCoupons;
-    @Column(columnDefinition = "FLOAT DEFAULT 1")
+    @Column(columnDefinition = "FLOAT DEFAULT 1.0")
     private Float value;
-    @Column(columnDefinition = "FLOAT DEFAULT 1")
+    @Column(name = "proviso",columnDefinition = "FLOAT DEFAULT 1.0")
     private Float proviso;
     @Column(name = "begin_time",nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
     private LocalDateTime beginTime;
