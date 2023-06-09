@@ -181,7 +181,7 @@
   <circle cx="3.5" cy="10.5" r=".5"/>
 </svg>
 						         </span>
-                            <span class="nav-link-text">Customer List</span>
+                            <span class="nav-link-text">Coupons List</span>
                         </a><!--//nav-link-->
                     </li><!--//nav-item-->
                     <li class="nav-item has-submenu">
@@ -409,12 +409,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="flex-sm-fill text-sm-center" th:each="customer : ${customerPage}">
-                                        <td th:text="${customer.id}"></td>
-                                        <td th:text="${customer.name}"></td>
-                                        <td th:text="${customer.phoneNumber}"></td>
-                                        <td th:text="${customer.email}"></td>
-                                        <td th:text="${customer.adress}"></td>
+                                    <tr class="flex-sm-fill text-sm-center" th:each="coupons : ${couponsPage}">
+                                        <td th:text="${coupons.id}"></td>
+                                        <td th:text="${coupons.codeCoupons}"></td>
+                                        <td th:text="${coupons.value}"></td>
+                                        <td th:text="${coupons.proviso}"></td>
+                                        <td th:text="${coupons.beginTime}"></td>
+                                        <td th:text="${coupons.endTime}"></td>
                                         <td>
                                             <a th:href="@{/customer/update/{id}(id=${customer.id})}">
                                                 <button type="button" class="btn btn-warning" fdprocessedid="xlhea">
