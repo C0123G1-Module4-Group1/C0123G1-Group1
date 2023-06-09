@@ -29,7 +29,7 @@ public class Customer {
     @Column(name = "update_time", columnDefinition = "TIMESTAMP DEFAULT now()")
     @UpdateTimestamp
     private LocalDateTime updateTime;
-    @Column(name = "status_delete")
+    @Column(name = "delete_status")
     private boolean deleteStatus;
 
     public Customer() {

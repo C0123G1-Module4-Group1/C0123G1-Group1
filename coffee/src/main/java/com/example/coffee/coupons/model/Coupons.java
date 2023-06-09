@@ -2,52 +2,35 @@ package com.example.coffee.coupons.model;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.DateTimeException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "coupons")
+@EntityListeners(AuditingEntityListener.class)
 public class Coupons {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "code_coupons",nullable = false)
+    @Column(name = "code_coupons")
     private String codeCoupons;
-    @Column(name = "value", columnDefinition = "FLOAT DEFAULT 1")
     private Float value;
-    @Column(name = "proviso", columnDefinition = "FLOAT DEFAULT 100")
-    private Float proviso;
-    @CreationTimestamp
-    @Column(name = "begin_time", nullable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
+    private String proviso;
+    @Column(name = "begin_time",nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
     private LocalDateTime beginTime;
-    @CreationTimestamp
-    @Column(name = "end_time", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
+    @Column(name = "end_time")
     private LocalDateTime endTime;
     @CreationTimestamp
     @Column(name = "create_time", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
     private LocalDateTime createTime;
-
     @Column(name = "update_time", columnDefinition = "TIMESTAMP DEFAULT now()")
     @UpdateTimestamp
     private LocalDateTime updateTime;
-    @Column(name = "status_delete")
+    @Column(name = "delete_status")
     private boolean deleteStatus;
 
     public Coupons() {
-    }
-
-    public Coupons(Integer id, String codeCoupons, Float value, Float proviso, LocalDateTime beginTime, LocalDateTime endTime, LocalDateTime createTime, LocalDateTime updateTime, boolean deleteStatus) {
-        this.id = id;
-        this.codeCoupons = codeCoupons;
-        this.value = value;
-        this.proviso = proviso;
-        this.beginTime = beginTime;
-        this.endTime = endTime;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-        this.deleteStatus = deleteStatus;
     }
 
     public Integer getId() {
@@ -74,11 +57,11 @@ public class Coupons {
         this.value = value;
     }
 
-    public Float getProviso() {
+    public String getProviso() {
         return proviso;
     }
 
-    public void setProviso(Float proviso) {
+    public void setProviso(String proviso) {
         this.proviso = proviso;
     }
 
