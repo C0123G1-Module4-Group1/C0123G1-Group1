@@ -5,10 +5,7 @@ import com.example.coffee.product.repository.IProductRepository;
 
 import com.example.coffee.product.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,5 +47,10 @@ public class ProductService implements IProductService {
     @Override
     public Page<Product> searchProduct( String name, Pageable pageable) {
         return iProductRepository.findAllByStatusIsFalse(name,pageable);
+    }
+
+    @Override
+    public List<Product> findAllBySearchProduct(String name) {
+        return iProductRepository.findAllByProduct(name);
     }
 }

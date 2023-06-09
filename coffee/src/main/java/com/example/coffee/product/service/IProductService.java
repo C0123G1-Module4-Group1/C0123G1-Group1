@@ -4,6 +4,7 @@ package com.example.coffee.product.service;
 import com.example.coffee.product.model.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -19,5 +20,6 @@ public interface IProductService {
 
     boolean delete(Integer id);
     Page<Product>searchProduct(String name, Pageable pageable);
+    List<Product> findAllBySearchProduct( String name);
 
 }

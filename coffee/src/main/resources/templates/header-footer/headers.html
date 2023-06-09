@@ -29,23 +29,23 @@
         <div class="container">
             <div class="header-container d-flex align-items-center justify-content-between" style="height: 62px;">
                 <div class="logo">
-                    <h1 class="text-light"><a href="../index.html"><span>Coffee</span></a></h1>
+                    <h1 class="text-light"><a th:href="@{/homeClient/}"><span>Coffee</span></a></h1>
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto active" th:href="@{/}">Trang chủ</a></li>
-                        <li><a class="nav-link scrollto" th:href="@{/homeProduct}">Sản phẩm</a></li>
-                        <li><a class="nav-link scrollto " th:href="@{/contact}">Liên hệ</a></li>
+                        <li><a class="nav-link scrollto active" th:href="@{/homeClient/}">Trang chủ</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{/homeClient/homeProduct}">Sản phẩm</a></li>
+                        <li><a class="nav-link scrollto " th:href="@{/homeClient/contact}">Liên hệ</a></li>
                         <li style="margin-top: 2%;">
-                            <form action="" method="post" class="" href="#contact"
+                            <form th:action="@{/homeClient/searchProduct}" method="post" class=""
                                   style="margin-left: -4%;display: flex   ">
-                                <input type="text"  name="message" placeholder="&ensp;&ensp;Search"
+                                <input type="text" name="name" th:value="${name}" placeholder="&ensp;&ensp;Tìm kiếm theo tên "
                                        style="margin-left: 10%;border-radius: 30px ;border-color: #f2f2f2">
-                                <a class=" getstarted scrollto" href="#" style="border-radius: 30px">Search</a>
+                                <button type="submit" class=" getstarted scrollto"  style="border-radius: 30px;margin-left:5px;border: none">Search</button>
                             </form>
                         </li>
-                        <li><a class="getstarted scrollto" th:href="@{shopping}" style="margin-left: 7%">Giỏ hàng</a></li>
+                        <li><a class="getstarted scrollto" th:href="@{/homeClient/shopping}" style="margin-left: 6%">Giỏ hàng</a></li>
 
                     </ul>
                     <!--                    <i class="bi bi-list mobile-nav-toggle"></i>-->
@@ -62,7 +62,7 @@
             <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
                 <h1>Một ly cà phê ngon là phải vừa ngọt vừa đắng.</h1>
                 <h2>Cà phê là thức uống quen thuộc mỗi buổi sáng giúp tôi có thể cảm nhận được cả thế giới chuyển động trong cơ thể.</h2>
-                <a th:href="@{homeProduct}" class="btn-get-started scrollto">Mua ngay</a>
+                <a th:href="@{/homeClient/homeProduct}" class="btn-get-started scrollto">Mua ngay</a>
             </div>
         </section><!-- End Hero -->
 
@@ -70,19 +70,19 @@
             <div class="container text-center justify-content-center">
                 <div class="row text-center justify-content-center">
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="100">
-                        <a th:href="@{/typeProduct/{id}(id=1)}"  class="btn-get-started scrollto">Coffee</a>
+                        <a th:href="@{/typeProduct/typeProduct/{id}(id=1)}"  class="btn-get-started scrollto">Coffee</a>
                     </div>
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="200">
-                        <a th:href="@{/typeProduct/{id}(id=2)}"  class="btn-get-started scrollto">Trà sữa</a>
+                        <a th:href="@{/typeProduct/typeProduct/{id}(id=2)}"  class="btn-get-started scrollto">Trà sữa</a>
                     </div>
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="300">
-                        <a th:href="@{/typeProduct/{id}(id=3)}"  class="btn-get-started scrollto">Trà nguyên chất</a>
+                        <a th:href="@{/typeProduct/typeProduct/{id}(id=3)}"  class="btn-get-started scrollto">Trà nguyên chất</a>
                     </div>
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="400">
-                        <a th:href="@{/typeProduct/{id}(id=4)}"  class="btn-get-started scrollto">Đá xay</a>
+                        <a th:href="@{/typeProduct/typeProduct/{id}(id=4)}"  class="btn-get-started scrollto">Đá xay</a>
                     </div>
                 </div>
             </div>

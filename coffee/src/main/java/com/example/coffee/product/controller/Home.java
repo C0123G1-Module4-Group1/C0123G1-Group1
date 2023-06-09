@@ -5,15 +5,18 @@ import com.example.coffee.product.model.Product;
 import com.example.coffee.product.service.impl.EmailService;
 import com.example.coffee.product.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 @Controller
+@RequestMapping("/homeClient")
 public class Home {
     @Autowired
     private IProductService iProductService;
@@ -48,7 +51,7 @@ public class Home {
     @PostMapping("/homeMail")
     public String sendMail(@ModelAttribute("email") Email email) {
         emailService.sendEmail(email);
-        return "redirect:/";
+        return "redirect:/homeClient/";
     }
 //    xem chi tiết 1 sản phẩm  ở giao diện
     @GetMapping("/viewProductType/{id}")
@@ -57,5 +60,14 @@ public class Home {
        model.addAttribute("product",product);
        return "view";
     }
+    //    tìm kiếm sản phẩm
+    @PostMapping("/searchProduct")
+    public String search(@RequestParam("name") String name,  Model model) {
+        List<Product> productList = iProductService.findAllBySearchProduct(name);
+        model.addAttribute("productList", productList);
+        model.addAttribute("name",name);
+        return "product/homeProduct";
+    }
+
 
 }

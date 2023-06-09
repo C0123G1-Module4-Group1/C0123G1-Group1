@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
-//@RequestMapping("productCoffee")
+@RequestMapping("/productCoffee")
 public class ProductController {
     @Autowired
     private IProductService iProductService;
@@ -53,7 +53,6 @@ public class ProductController {
     private String create(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
         model.addAttribute("productDto", new ProductDTO());
         model.addAttribute("typePage", iTypeService.findAll(page));
-
         return "product/create";
     }
 
@@ -77,7 +76,7 @@ public class ProductController {
         BeanUtils.copyProperties(productDTO, product);
         boolean check = iProductService.save(product);
         attributes.addFlashAttribute("mess", check);
-        return ("redirect:/listProduct");
+        return ("redirect:/productCoffee/listProduct");
     }
 
     //xoá sản phẩm
@@ -85,7 +84,7 @@ public class ProductController {
     public String deleteProduct(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         boolean check = iProductService.delete(id);
         redirectAttributes.addFlashAttribute("check", check);
-        return "redirect:/listProduct";
+        return "redirect:/productCoffee/listProduct";
 
     }
 
@@ -107,7 +106,7 @@ public class ProductController {
         BeanUtils.copyProperties(productDTO, product);
         boolean check = iProductService.save(product);
         attributes.addFlashAttribute("flag", check);
-        return "redirect:/listProduct";
+        return "redirect:/productCoffee/listProduct";
 
     }
 
