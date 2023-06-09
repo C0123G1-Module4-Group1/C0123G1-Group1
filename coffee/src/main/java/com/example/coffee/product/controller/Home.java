@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 @Controller
-@RequestMapping("/homeClient")
+    @RequestMapping("/homeClient")
 public class Home {
     @Autowired
     private IProductService iProductService;

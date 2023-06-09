@@ -21,8 +21,25 @@ public class TypeService implements ITypeService {
     }
 
     @Override
-    public List<Product> typeProductBy(Integer id) {
-        return iTypeRepository.typeProductBy(id);
+    public List<Product> findAllByStatusIsFalse(Integer id) {
+        return iTypeRepository.findAllByStatusIsFalse(id);
+    }
+
+    @Override
+    public boolean save(TypeProduct typeProduct) {
+        iTypeRepository.save(typeProduct);
+        return true;
+    }
+
+    @Override
+    public boolean delete(Integer id) {
+        iTypeRepository.delete(findById(id));
+        return true;
+    }
+
+    @Override
+    public TypeProduct findById(Integer id) {
+        return iTypeRepository.findById(id).get();
     }
 
 

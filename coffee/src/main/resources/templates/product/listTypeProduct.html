@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Product List</title>
+    <title>Type Product</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -40,7 +40,7 @@
 
             <div class="row g-3 mb-4 align-items-center justify-content-between">
                 <div class="col-auto">
-                    <h1 class="app-page-title mb-0">Product</h1>
+                    <h1 class="app-page-title mb-0"> Type Product</h1>
                 </div>
                 <div class="col-auto">
                     <div class="page-utilities">
@@ -60,17 +60,7 @@
 
                             </div><!--//col-->
                             <div class="col-auto">
-
-                                <select class="form-select w-auto">
-                                    <option selected value="option-1">All</option>
-                                    <option value="option-2">This week</option>
-                                    <option value="option-3">This month</option>
-                                    <option value="option-4">Last 3 months</option>
-
-                                </select>
-                            </div>
-                            <div class="col-auto">
-                                <a th:href="@{/productCoffee/create}">
+                                <a th:href="@{/typeProduct/createType}">
                                     <button type="button" class="btn btn-info" fdprocessedid="tkcp7c">Add product
                                     </button>
                                 </a>
@@ -89,41 +79,31 @@
                                 <table class="table app-table-hover mb-0 text-left">
                                     <thead>
                                     <tr>
-                                        <td style="font-size: 16px;width: 5%;color: black">Id</td>
-                                        <td style="font-size: 16px;width: 25%;color: black">Name Product</td>
-                                        <td style="font-size: 16px;width: 25%;color: black">Price (VND)</td>
-                                        <td style="font-size: 16px;width: 15%;color: black">Image</td>
-                                        <td colspan="" style="font-size: 20px;width: 25%;color: black">Type Product
-                                        </td>
+                                        <td style="font-size: 16px;width: 10%;color: black">Id</td>
+                                        <td style="font-size: 16px;width: 30%;color: black">Type Product</td>
+                                        <td style="font-size: 16px;width: 30%;color: black">Create Time</td>
+                                        <td style="font-size: 16px;width: 30%;color: black">Update Time</td>
                                         <td colspan="3" style="font-size: 20px;color: black;text-align: center">Function</td>
 
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="product : ${productPage}">
+                                    <tr th:each="product : ${typeProductList}">
                                         <th th:text="${product.id}"></th>
-                                        <th th:text="${product.name}"></th>
-                                        <th th:text="${product.price}"></th>
-                                        <th><img style="height: 25%;width: 25%" th:src="${product.image}"></th>
-                                        <th th:text="${product.typeProduct.typeName}"></th>
+                                        <th th:text="${product.typeName}"></th>
+                                        <th th:text="${product.createTime}"></th>
+                                        <th th:text="${product.updateTime}"></th>
                                         <th>
-                                            <a th:href="@{/productCoffee/update/{id}(id=${product.id})}">
-                                                <button type="button" class="btn btn-warning" fdprocessedid="xlhea">
+                                            <a th:href="@{/typeProduct/updateType/{id}(id=${product.id})}">
+                                                <button type="button" class="btn btn-warning" >
                                                     Update
                                                 </button>
                                             </a>
                                         </th>
-                                        <th>
-                                            <a th:href="@{/productCoffee/viewProduct/{id}(id=${product.id})}">
-                                                <button type="button" class="btn btn-primary text-capitalize"
-                                                        fdprocessedid="q2sbyt">View
-                                                </button>
-                                            </a>
 
-                                        </th>
                                         <th>
                                             <button type="button" class=" btn-del btn btn-danger" fdprocessedid="tkcp7c"
-                                                    th:attr="onclick=|deletes('${product.id}','${product.name}')|">
+                                                    th:attr="onclick=|deletes('${product.id}','${product.typeName}')|">
                                                 Delete
                                             </button>
 
@@ -144,23 +124,23 @@
         </div><!--//container-fluid-->
     </div><!--//app-content-->
 
-    <nav aria-label="Page navigation example">
+<!--    <nav aria-label="Page navigation example">-->
 
-        <ul class="pagination justify-content-center ">
-            <li class="page-item ">
-                <a class="page-link" th:href="@{'/productCoffee/listProduct'(page=${productPage.number -1})}"
-                   th:if="${productPage.hasPrevious()}">Previous</a>
-            </li>
-            <!--                        <li style="border: 1px solid #CCCCCC" class="page-item active" ><a class="page-link active" th:text="${pageNo}" th:href="@{/(page=${pageNo})}"></a></li>-->
-            <li class="page-item    "><a class="page-link"
-                                         th:text="${productPage.number +1}"></a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" th:href="@{'/productCoffee/listProduct'(page=${productPage.number +1})}"
-                   th:if="${productPage.hasNext()}">Next</a>
-            </li>
-        </ul>
-    </nav>
+<!--        <ul class="pagination justify-content-center ">-->
+<!--            <li class="page-item ">-->
+<!--                <a class="page-link" th:href="@{'/productCoffee/listProduct'(page=${productPage.number -1})}"-->
+<!--                   th:if="${productPage.hasPrevious()}">Previous</a>-->
+<!--            </li>-->
+<!--            &lt;!&ndash;                        <li style="border: 1px solid #CCCCCC" class="page-item active" ><a class="page-link active" th:text="${pageNo}" th:href="@{/(page=${pageNo})}"></a></li>&ndash;&gt;-->
+<!--            <li class="page-item    "><a class="page-link"-->
+<!--                                         th:text="${productPage.number +1}"></a>-->
+<!--            </li>-->
+<!--            <li class="page-item">-->
+<!--                <a class="page-link" th:href="@{'/productCoffee/listProduct'(page=${productPage.number +1})}"-->
+<!--                   th:if="${productPage.hasNext()}">Next</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
 </div>
 
 
@@ -176,7 +156,7 @@
         })
             .then((result) => {
                 if (result) {
-                    window.location = '/productCoffee/delete/' + id
+                    window.location = '/typeProduct/delete/' + id
                 } else {
                     swal("Thank you for not deleting")
                 }

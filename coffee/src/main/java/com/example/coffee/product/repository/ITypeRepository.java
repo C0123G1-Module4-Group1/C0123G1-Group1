@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface ITypeRepository extends JpaRepository<TypeProduct, Integer> {
-    @Query(value = " FROM product AS p  WHERE p.typeProduct.id = :id")
-    List<Product> typeProductBy(@Param("id")Integer id);
+    @Query(value = " FROM product AS p  WHERE p.typeProduct.id = :id and p.status=false")
+    List<Product> findAllByStatusIsFalse(@Param("id")Integer id);
 
 }

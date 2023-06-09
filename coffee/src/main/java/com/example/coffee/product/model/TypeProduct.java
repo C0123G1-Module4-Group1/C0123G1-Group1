@@ -1,8 +1,14 @@
 package com.example.coffee.product.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity(name = "type_product")
+@EntityListeners(AuditingEntityListener.class)
 public class TypeProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,14 +17,38 @@ public class TypeProduct {
     private String typeName;
     @Column(name = "status_delete", columnDefinition = "BIT")
     private boolean status;
+    @CreationTimestamp
+    @Column(name = "create_time", updatable = false, columnDefinition = "DATETIME")
+    private LocalDateTime createTime;
+    @UpdateTimestamp
+    @Column(name = "update_time", updatable = false, columnDefinition = "DATETIME")
+    private  LocalDateTime updateTime;
 
     public TypeProduct() {
     }
 
-    public TypeProduct(Integer id, String typeName, boolean status) {
+    public TypeProduct(Integer id, String typeName, boolean status, LocalDateTime createTime, LocalDateTime updateTime) {
         this.id = id;
         this.typeName = typeName;
         this.status = status;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
     }
 
     public boolean isStatus() {

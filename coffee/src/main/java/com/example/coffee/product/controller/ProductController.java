@@ -45,7 +45,7 @@ public class ProductController {
         model.addAttribute("productPage", productPage);
 //        xoá cache
         httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-        return "product/adminProduct";
+        return "product/listAdminProduct";
     }
 
     //tạo ms sản phẩm
@@ -53,7 +53,7 @@ public class ProductController {
     private String create(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
         model.addAttribute("productDto", new ProductDTO());
         model.addAttribute("typePage", iTypeService.findAll(page));
-        return "product/create";
+        return "product/createProduct";
     }
 
     //    @PostMapping("/createProduct")
@@ -76,7 +76,7 @@ public class ProductController {
         BeanUtils.copyProperties(productDTO, product);
         boolean check = iProductService.save(product);
         attributes.addFlashAttribute("mess", check);
-        return ("redirect:/productCoffee/listProduct");
+        return ("redirect:/productCoffee/create");
     }
 
     //xoá sản phẩm
@@ -96,7 +96,7 @@ public class ProductController {
         BeanUtils.copyProperties(product, productDTO);
         model.addAttribute("productDTO", productDTO);
         model.addAttribute("typePage", iTypeService.findAll(page));
-        return "product/update";
+        return "product/updateProduct";
     }
 
     //    chỉnh sửa sản phẩm
@@ -127,7 +127,7 @@ public class ProductController {
         Page<Product> productPage = iProductService.searchProduct(name, pageable);
         model.addAttribute("productPage", productPage);
         model.addAttribute("name",name);
-        return "product/adminProduct";
+        return "product/listAdminProduct";
     }
 
 

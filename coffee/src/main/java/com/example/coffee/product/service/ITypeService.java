@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface ITypeService {
     Page<TypeProduct> findAll(Integer page);
-    List<Product> typeProductBy(Integer id);
+    List<Product> findAllByStatusIsFalse(Integer id);
+    boolean save (TypeProduct typeProduct);
+    boolean delete (Integer id);
+    TypeProduct findById(Integer id);
 
 
 }
