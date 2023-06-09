@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest().authenticated()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/staff")
+                .antMatchers("/", "/staff/*")
                 .access("hasAnyRole( 'ADMIN','EMPLOYEE')").and().exceptionHandling().accessDeniedPage("/403")
                 .and().formLogin()//
                 // Submit URL của trang login

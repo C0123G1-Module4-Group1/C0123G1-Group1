@@ -52,4 +52,10 @@ public class StaffService implements IStaffService {
     public Staff findById(Integer id) {
         return iStaffRepository.findById(id).get();
     }
+
+    @Override
+    public Page<Staff> findAllByName(String name,Pageable page) {
+        Page<Staff> staffList=iStaffRepository.findByNameStaff(name,page);
+        return staffList;
+    }
 }
