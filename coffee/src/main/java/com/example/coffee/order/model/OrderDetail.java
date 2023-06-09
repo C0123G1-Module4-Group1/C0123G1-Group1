@@ -3,7 +3,7 @@ package com.example.coffee.order.model;
 import com.example.coffee.product.model.Product;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,6 +19,9 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "id_product",referencedColumnName = "id")
     private Product product;
+    @OneToOne
+    @JoinColumn(name = "id_size" ,referencedColumnName = "id")
+    private SizeProduct sizeProduct;
     @Column(name = "price_product", columnDefinition = "FLOAT")
     private Float priceProduct;
     @Column(name = "quantity", columnDefinition = "INT")
@@ -34,14 +37,23 @@ public class OrderDetail {
     public OrderDetail() {
     }
 
-    public OrderDetail(Integer id, Order order, Product product, Float priceProduct, Integer quantity, LocalDateTime createTime, LocalDateTime updateTime) {
+    public OrderDetail(Integer id, Order order, Product product, SizeProduct sizeProduct, Float priceProduct, Integer quantity, LocalDateTime createTime, LocalDateTime updateTime) {
         this.id = id;
         this.order = order;
         this.product = product;
+        this.sizeProduct = sizeProduct;
         this.priceProduct = priceProduct;
         this.quantity = quantity;
         this.createTime = createTime;
         this.updateTime = updateTime;
+    }
+
+    public SizeProduct getSizeProduct() {
+        return sizeProduct;
+    }
+
+    public void setSizeProduct(SizeProduct sizeProduct) {
+        this.sizeProduct = sizeProduct;
     }
 
     public Integer getId() {

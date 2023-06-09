@@ -1,7 +1,7 @@
 package com.example.coffee.product.dto;
 
 
-import com.example.coffee.product.model.SizeProduct;
+import com.example.coffee.order.model.SizeProduct;
 import com.example.coffee.product.model.TypeProduct;
 import org.springframework.web.multipart.MultipartFile;
 

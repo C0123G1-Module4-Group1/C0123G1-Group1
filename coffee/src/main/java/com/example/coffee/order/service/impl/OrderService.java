@@ -3,6 +3,7 @@ package com.example.coffee.order.service.impl;
 import com.example.coffee.order.model.Order;
 import com.example.coffee.order.repository.IOrderRepository;
 import com.example.coffee.order.service.IOrderService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,5 +38,16 @@ public class OrderService implements IOrderService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public Order findById(Integer id) {
+        return orderRepository.findById(id).get();
+    }
+
+    @Override
+    public void addOrder() {
+        Order order = new Order();
+        this.orderRepository.save(order);
     }
 }

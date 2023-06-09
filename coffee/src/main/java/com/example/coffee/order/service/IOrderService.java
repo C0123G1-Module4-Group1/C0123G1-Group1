@@ -10,4 +10,8 @@ public interface IOrderService {
     Page<Order> findAll(Integer page);
 
     boolean deleteOrder(Integer deleteId);
+
+    Order findById(Integer id);
+
+    void addOrder();
 }

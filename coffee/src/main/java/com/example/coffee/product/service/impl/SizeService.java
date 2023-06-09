@@ -1,14 +1,12 @@
 package com.example.coffee.product.service.impl;
 
-import com.example.coffee.product.model.SizeProduct;
+import com.example.coffee.order.model.SizeProduct;
 import com.example.coffee.product.repository.ISizeRepository;
 import com.example.coffee.product.service.ISizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class SizeService implements ISizeService {

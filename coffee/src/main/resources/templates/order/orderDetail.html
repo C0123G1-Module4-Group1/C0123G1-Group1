@@ -6,7 +6,7 @@
 
     <!-- Meta -->
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/static/assets/css/portal.css">
+
     <link rel="stylesheet" type="text/css"
           href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
 
@@ -29,6 +29,7 @@
           rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="../../static/assets/css/portal.css">
 </head>
 
 <body class="app">
@@ -369,24 +370,44 @@
 
 
             <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-                <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab"
-                   href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>
-                <a class="flex-sm-fill text-sm-center nav-link" id="orders-paid-tab" data-bs-toggle="tab"
-                   href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Paid</a>
-                <a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab"
-                   href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">Pending</a>
-                <a class="flex-sm-fill text-sm-center nav-link" id="orders-cancelled-tab" data-bs-toggle="tab"
-                   href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"
-                   aria-selected="false">Cancelled</a>
-                <a class="flex-sm-fill text-sm-center nav-link" data-bs-toggle="tab"
-                   href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"
-                   aria-selected="false">Cancelled</a>
-                <a class="flex-sm-fill text-sm-center nav-link" data-bs-toggle="tab"
-                   href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"
-                   aria-selected="false">Cancelled</a>
+                <!--                <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab"-->
+                <!--                   href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>-->
+                <!--                <a class="flex-sm-fill text-sm-center nav-link" id="orders-paid-tab" data-bs-toggle="tab"-->
+                <!--                   href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Paid</a>-->
+                <!--                <a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab"-->
+                <!--                   href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">Pending</a>-->
+                <!--                <a class="flex-sm-fill text-sm-center nav-link" id="orders-cancelled-tab" data-bs-toggle="tab"-->
+                <!--                   href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"-->
+                <!--                   aria-selected="false">Cancelled</a>-->
+                <!--                <a class="flex-sm-fill text-sm-center nav-link" data-bs-toggle="tab"-->
+                <!--                   href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"-->
+                <!--                   aria-selected="false">Cancelled</a>-->
+                <!--                <a class="flex-sm-fill text-sm-center nav-link" data-bs-toggle="tab"-->
+                <!--                   href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"-->
+                <!--                   aria-selected="false">Cancelled</a>-->
+                <table class="table app-table-hover mb-0 text-left">
+                    <thead>
+                    <tr>
+                        <td style="font-size: 16px;width: 5%;color: black">ID</td>
+                        <td style="font-size: 16px;width: 20%;color: black">Name Employee</td>
+                        <td style="font-size: 16px;width: 20%;color: black">Name Customer</td>
+                        <td style="font-size: 16px;width: 10%;color: black">Coupons(%)</td>
+                        <td style="font-size: 16px;width: 15%;color: black">Status Order</td>
+                        <td style="font-size: 16px;width: 15%;color: black">Status Order</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:object="${orderDetail}">
+                        <th th:text="${orderDetail.id}"></th>
+                        <th th:text="${orderDetail.staff.name}"></th>
+                        <th th:text="${orderDetail.customer.name}"></th>
+                        <th th:text="${(orderDetail.coupons.value * 100) % 100}"></th>
+                        <th th:text="${orderDetail.status.status}"></th>
+                        <th th:text="${orderDetail.status.status}"></th>
+                    </tr>
+                    </tbody>
+                </table>
             </nav>
-
-
             <div class="tab-content" id="orders-table-tab-content">
                 <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                     <div class="app-card app-card-orders-table shadow-sm mb-5">
@@ -396,50 +417,31 @@
                                     <thead>
                                     <tr>
                                         <td style="font-size: 16px;width: 5%;color: black">ID</td>
-                                        <td style="font-size: 16px;width: 20%;color: black">Name Employee</td>
-                                        <td style="font-size: 16px;width: 20%;color: black">Name Customer</td>
-                                        <td style="font-size: 16px;width: 10%;color: black">Coupons(%)</td>
-                                        <td style="font-size: 16px;width: 15%;color: black">Status Order</td>
-                                        <td style="font-size: 16px;width: 15%;color: black">Status Order</td>
-                                        <td colspan="3" style="font-size: 20px;color: black">Action</td>
+                                        <td style="font-size: 16px;width: 8%;color: black">ID Product</td>
+                                        <td style="font-size: 16px;width: 15%;color: black">Name Product</td>
+                                        <td style="font-size: 16px;width: 7%;color: black">Price</td>
+                                        <td style="font-size: 16px;width: 7%;color: black">Quantity</td>
+                                        <td style="font-size: 16px;width: 15%;color: black">Create Time</td>
+                                        <td style="font-size: 16px;width: 15%;color: black">Total Price</td>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="page : ${orderPage}">
-                                        <th th:text="${page.id}"></th>
-                                        <th th:text="${page.staff.name}"></th>
-                                        <th th:text="${page.customer.name}"></th>
-                                        <th th:text="${(page.coupons.value * 100) % 100}"></th>
-                                        <th th:text="${page.status.status}"></th>
-                                        <th th:text="${page.status.status}"></th>
-                                        <th>
-                                            <!--                                    <a th:href="@{/update/{id}(id=${productCoffeeModelPage.id})}">-->
-                                            <button type="button" class="btn btn-warning" fdprocessedid="xlhea">Update
-                                            </button>
-                                            <!--                                    </a>-->
-                                        </th>
-                                        <th>
-                                            <button type="button" class="btn btn-primary text-capitalize"
-                                                    data-bs-toggle="modal" fdprocessedid="q2sbyt">View
-                                                <!--                                            th:attr="onclick=|detail('${productCoffeeModelPage.id}','${productCoffeeModelPage.nameProduct}')|">Detail-->
-                                            </button>
-                                        </th>
-                                        <th>
-                                            <!--                                            <a href="">-->
-                                            <!--                                                <button type="button" class="btn btn-danger" fdprocessedid="tkcp7c"-->
-                                            <!--                                                        data-bs-toggle="modal" data-bs-target="#deleteModal"-->
-                                            <!--                                                        th:attr="onclick=|infoDelete(${page.id})|">-->
-                                            <!--                                                    Delete-->
-                                            <!--                                                </button>-->
-                                            <!--                                                th:attr="onclick=|delete('${productCoffeeModel.id}','${productCoffeeModelPage.nameProduct}')|"-->
-                                            <!--                                            </a>-->
-                                            <button type="button" class=" btn-del btn btn-danger" fdprocessedid="tkcp7c"
-                                                    th:attr="onclick=|deletes('${page.id}')|">Delete
-                                            </button>
-                                        </th>
+                                    <tr th:each="list : ${orderDetailPage}">
+                                        <th th:text="${list.id}"></th>
+                                        <th th:text="${list.product.id}"></th>
+                                        <th th:text="${list.product.name}"></th>
+                                        <th th:text="${list.priceProduct}"></th>
+                                        <th th:text="${list.quantity}"></th>
+                                        <th th:text="${list.createTime}"></th>
+                                        <th th:text="${list.quantity * list.priceProduct}"></th>
                                     </tr>
                                     </tbody>
                                 </table>
+                                <div style="text-align: right;margin-right: 10%;color: black;font-size: 18px">
+                                    <span >Total Price = </span>
+                                    <span th:text="${totalPrice}"></span>
+                                    <span>.000đ</span>
+                                </div>
                             </div><!--//table-responsive-->
                         </div><!--//app-card-body-->
                     </div><!--//app-card-->
@@ -451,16 +453,16 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center ">
             <li class="page-item ">
-                <a class="page-link" th:href="@{'/'(page=${orderPage.number -1})}"
-                   th:if="${orderPage.hasPrevious()}">Previous</a>
+                <a class="page-link" th:href="@{'/detail/' + ${orderDetail.id}(page=${orderDetailPage.number -1})}"
+                   th:if="${orderDetailPage.hasPrevious()}">Previous</a>
             </li>
             <!--                        <li style="border: 1px solid #CCCCCC" class="page-item active" ><a class="page-link active" th:text="${pageNo}" th:href="@{/(page=${pageNo})}"></a></li>-->
-            <li class="page-item    "><a class="page-link"
-                                         th:text="${orderPage.number +1}"></a>
+            <li class="page-item"><a class="page-link"
+                                     th:text="${orderDetailPage.number +1}"></a>
             </li>
             <li class="page-item">
-                <a class="page-link" th:href="@{'/'(page=${orderPage.number +1})}"
-                   th:if="${orderPage.hasNext()}">Next</a>
+                <a class="page-link" th:href="@{'/detail/' + ${orderDetail.id}(page=${orderDetailPage.number +1})}"
+                   th:if="${orderDetailPage.hasNext()}">Next</a>
             </li>
         </ul>
     </nav>
@@ -468,35 +470,35 @@
 </div><!--//app-wrapper-->
 
 <!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Order</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <!--            <form th:action="@{/orderController/delete}" method="post">-->
-            <form th:action="@{/delete}" method="get">
-                <div class="modal-body">
-                    <input hidden id="deleteId" name="deleteId">
-                    <span>
-                        Delete Order Number
-                    </span>
-                    <span id="deleteId1" style=" color: red">
-                    </span>
-                    <span>
-                         ?
-                    </span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                    <button type="submit" class="btn btn-primary">YES</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<!--<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"-->
+<!--     aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Delete Order</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;            <form th:action="@{/orderController/delete}" method="post">&ndash;&gt;-->
+<!--            <form th:action="@{/delete}" method="get">-->
+<!--                <div class="modal-body">-->
+<!--                    <input hidden id="deleteId" name="deleteId">-->
+<!--                    <span>-->
+<!--                        Delete Order Number-->
+<!--                    </span>-->
+<!--                    <span id="deleteId1" style=" color: red">-->
+<!--                    </span>-->
+<!--                    <span>-->
+<!--                         ?-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>-->
+<!--                    <button type="submit" class="btn btn-primary">YES</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <script th:inline="javascript">
 
@@ -570,6 +572,7 @@
             timer: 2000,
         });
     }
+
     function deleteCategory2() {
         swal({
             title: "Delete Fail!",
@@ -614,9 +617,9 @@
     }
     // xoá
     if (deleteCategory != null) {
-        if(deleteCategory){
+        if (deleteCategory) {
             deleteCategory1();
-        }else {
+        } else {
             deleteCategory2();
         }
 

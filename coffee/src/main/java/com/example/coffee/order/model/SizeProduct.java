@@ -1,4 +1,4 @@
-package com.example.coffee.product.model;
+package com.example.coffee.order.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
