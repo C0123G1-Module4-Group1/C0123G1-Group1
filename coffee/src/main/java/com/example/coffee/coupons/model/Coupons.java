@@ -15,8 +15,10 @@ public class Coupons {
     private Integer id;
     @Column(name = "code_coupons")
     private String codeCoupons;
+    @Column(columnDefinition = "FLOAT DEFAULT 1")
     private Float value;
-    private String proviso;
+    @Column(columnDefinition = "FLOAT DEFAULT 1")
+    private Float proviso;
     @Column(name = "begin_time",nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
     private LocalDateTime beginTime;
     @Column(name = "end_time")
@@ -57,11 +59,11 @@ public class Coupons {
         this.value = value;
     }
 
-    public String getProviso() {
+    public Float getProviso() {
         return proviso;
     }
 
-    public void setProviso(String proviso) {
+    public void setProviso(Float proviso) {
         this.proviso = proviso;
     }
 
