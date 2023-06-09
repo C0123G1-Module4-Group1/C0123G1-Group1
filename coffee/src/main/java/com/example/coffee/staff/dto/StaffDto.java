@@ -1,5 +1,6 @@
 package com.example.coffee.staff.dto;
 
+import com.example.coffee.user.dto.UserDto;
 import com.example.coffee.user.model.User;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -22,7 +23,7 @@ public class StaffDto implements Validator {
     @Email(message = "Phải đúng định dangj Email(*@gmail.com)")
     @NotBlank(message = "Email không được để trống.")
     private String email;
-    private User user;
+    private UserDto userDto;
     private Boolean deleteStatus;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
@@ -36,6 +37,26 @@ public class StaffDto implements Validator {
         this.address = address;
         this.createAt = createAt;
         this.updateAt = updateAt;
+    }
+
+    public StaffDto(Integer id, String name, String address, String phoneNumber, String email, UserDto userDto, Boolean deleteStatus, LocalDateTime createAt, LocalDateTime updateAt) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.userDto = userDto;
+        this.deleteStatus = deleteStatus;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+    }
+
+    public UserDto getUserDto() {
+        return userDto;
+    }
+
+    public void setUserDto(UserDto userDto) {
+        this.userDto = userDto;
     }
 
     public Boolean getDeleteStatus() {
@@ -86,13 +107,6 @@ public class StaffDto implements Validator {
         this.email = email;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public LocalDateTime getCreateAt() {
         return createAt;

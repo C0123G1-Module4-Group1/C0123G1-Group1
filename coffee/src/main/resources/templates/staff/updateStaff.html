@@ -18,24 +18,30 @@
       </div>
       <div class="input-group input-group-sm mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text">Tên</span>
+          <span class="input-group-text">Name</span>
         </div>
         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                th:field="*{name}"/>
+        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+
       </div>
       <div class="input-group input-group-sm mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text">Địa chỉ</span>
+          <span class="input-group-text">Address</span>
         </div>
         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                th:field="*{address}"/>
+        <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+
       </div>
       <div class="input-group input-group-sm mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text">Số điện thoại</span>
+          <span class="input-group-text">Phone Number</span>
         </div>
         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                th:field="*{phoneNumber}"/>
+        <p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
+
       </div>
       <div class="input-group input-group-sm mb-3">
         <div class="input-group-prepend">
@@ -43,34 +49,36 @@
         </div>
         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                th:field="*{email}"/>
+        <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
       </div>
-      <div class="input-group input-group-sm mb-3">
+      <div class="input-group input-group-sm mb-3" hidden>
         <div class="input-group-prepend">
           <span class="input-group-text">Tài khoản</span>
         </div>
         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{user.account}"/>
+               th:field="*{userDto.account}"/>
       </div>
       <div class="input-group input-group-sm mb-3" hidden>
         <div class="input-group-prepend">
           <span class="input-group-text">Mật khẩu</span>
         </div>
         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{user.password}"/>
+               th:field="*{userDto.password}"/>
       </div>
       <div class="input-group input-group-sm mb-3" hidden>
         <div class="input-group-prepend">
           <span class="input-group-text">Id user</span>
         </div>
         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{user}"/>
+               th:field="*{userDto}"/>
       </div>
       <div class="input-group input-group-sm mb-3" hidden>
         <div class="input-group-prepend">
           <span class="input-group-text">Id user</span>
         </div>
         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-               th:field="*{user.role}"/>
+               th:field="*{userDto.role}"/>
       </div>
       <div class="input-group input-group-sm mb-3" hidden>
         <div class="input-group-prepend">
