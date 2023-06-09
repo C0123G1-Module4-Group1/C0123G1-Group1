@@ -1,117 +1,205 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <title>Trang Chủ</title>
-
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
-<!--<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">-->
-
-<!-- Vendor CSS Files -->
-<link href="/static/assetshome/vendor/aos/aos.css" rel="stylesheet">
-<link href="/static/assetshome/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/static/assetshome/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="/static/assetshome/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-<link href="/static/assetshome/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-<link href="/static/assetshome/vendor/remixicon/remixicon.css" rel="stylesheet">
-<link href="/static/assetshome/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-<!-- Template Main CSS File -->
-<link href="/static/assetshome/css/style.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      rel="stylesheet"/>
-</head>
-
-
 <body>
+<div th:fragment="header">
+<!--    &lt;!&ndash; Navbar &ndash;&gt;-->
+<!--    <nav class="navbar navbar-expand-lg navbar-light bg-white">-->
+<!--        &lt;!&ndash; Container wrapper &ndash;&gt;-->
+<!--        <div class="container-fluid" style="margin-right: 1%">-->
+<!--            &lt;!&ndash; Toggle button &ndash;&gt;-->
+<!--            <button-->
+<!--                    class="navbar-toggler"-->
+<!--                    type="button"-->
+<!--                    data-mdb-toggle="collapse"-->
+<!--                    data-mdb-target="#navbarSupportedContent"-->
+<!--                    aria-controls="navbarSupportedContent"-->
+<!--                    aria-expanded="false"-->
+<!--                    aria-label="Toggle navigation"-->
+<!--            >-->
+<!--                <i class="fas fa-bars"></i>-->
+<!--            </button>-->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
-<div th:fragment="headerHome">
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-center">
-        <div class="container">
-            <div class="header-container d-flex align-items-center justify-content-between">
-                <div class="logo">
-                    <h1 class="text-light"><a href="index.html"><span>Coffee</span></a></h1>
-                </div>
+<!--            &lt;!&ndash; Collapsible wrapper &ndash;&gt;-->
+<!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--                &lt;!&ndash; Navbar brand &ndash;&gt;-->
+<!--                <a class="navbar-brand mt-2 mt-lg-0" href="#">-->
+<!--                    <img-->
+<!--                            src="https://1.bp.blogspot.com/-n_qrjKHlmSE/VMIpx10k3aI/AAAAAAAALK0/_HZidjaaj8c/s1600/coffee.png"-->
+<!--                            height="50"-->
+<!--                            alt="MDB Logo"-->
+<!--                            loading="lazy"-->
+<!--                    />-->
+<!--                </a>-->
+<!--                &lt;!&ndash; Left links &ndash;&gt;-->
+<!--                <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="#">Dashboard</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="#">Team</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="#">Projects</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                &lt;!&ndash; Left links &ndash;&gt;-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Collapsible wrapper &ndash;&gt;-->
 
-                <nav id="navbar" class="navbar">
-                    <ul >
-                        <li><a class="nav-link scrollto active" href="#hero">Trang Chủ</a></li>
-                        <li><a class="nav-link scrollto" href="#about">Sản phẩm</a></li>
-                        <li><a class="nav-link scrollto" href="#services">Khuyến Mãi</a></li>
-                        <li><a  class="nav-link scrollto " href="#portfolio">Liên Hệ</a></li>
-                        <li style="margin-top: 2%;">
-                            <form th:action="@{/homeMail}" method="post" class="nav-link scrollto" href="#contact"
-                                  style="margin-left: 1%;display: flex   ">
-                                    <input type="text" id="message" name="message" placeholder="nội dung góp ý">
-                                    <a  class=" getstarted scrollto" href="#about" style= "border-radius: 30px">Search</a>
+<!--            &lt;!&ndash; Right elements &ndash;&gt;-->
+<!--            <div class="d-flex align-items-center">-->
+<!--                &lt;!&ndash; Icon &ndash;&gt;-->
+<!--                <a class="link-secondary me-3" href="#">-->
+<!--                    <i class="fas fa-shopping-cart"></i>-->
+<!--                </a>-->
 
-                            </form>
-                        </li>
-<!--                        <li><a class="getstarted scrollto" href="#about" style="margin-left: 1%">Giỏ hàng</a></li>-->
-                        <li><a class="" href="#about" style="margin-left: 1%"><i class="fa-solid fa-cart-shopping"></i></a></li>
-                    </ul>
-                    <i class="bi bi-list mobile-nav-toggle"></i>
-                </nav><!-- .navbar -->
+<!--                &lt;!&ndash; Notifications &ndash;&gt;-->
+<!--                <div class="dropdown">-->
+<!--                    <a-->
+<!--                            class="link-secondary me-3 dropdown-toggle hidden-arrow"-->
+<!--                            href="#"-->
+<!--                            id="navbarDropdownMenuLink"-->
+<!--                            role="button"-->
+<!--                            data-mdb-toggle="dropdown"-->
+<!--                            aria-expanded="false"-->
+<!--                    >-->
+<!--                        <i class="fas fa-bell"></i>-->
+<!--                        <span class="badge rounded-pill badge-notification bg-danger">1</span>-->
+<!--                    </a>-->
+<!--                    <ul-->
+<!--                            class="dropdown-menu dropdown-menu-end"-->
+<!--                            aria-labelledby="navbarDropdownMenuLink"-->
+<!--                    >-->
+<!--                        <li>-->
+<!--                            <a class="dropdown-item" href="#">Some news</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a class="dropdown-item" href="#">Another news</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; Avatar &ndash;&gt;-->
+<!--                <div th:if="${#authentication.getName()}!=anonymousUser">-->
 
-            </div><!-- End Header Container -->
-        </div>
-    </header><!-- End Header -->
+<!--                    <div class="dropdown">-->
+<!--                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"-->
+<!--                                data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                            <b th:text="${#authentication.getName()}"></b>-->
+<!--                        </button>-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">-->
+<!--                            <li>-->
+<!--                                <button class="dropdown-item" type="button">Setting</button>-->
+<!--                            </li>-->
+<!--                            <li><a th:href="@{/logout}" class="btn">-->
+<!--                                <button class="dropdown-item" type="button">Logout</button>-->
+<!--                            </a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div th:if="${#authentication.getName()}==anonymousUser">-->
+<!--                    <a th:href="@{/login}" class="btn btn-outline-primary">Login</a>-->
+<!--                </div>-->
 
-    <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex align-items-center">
-        <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
-            <h1>Your New Online Presence with Bethany</h1>
-            <h2>We are team of talented designers making websites with Bootstrap</h2>
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
-        </div>
-    </section><!-- End Hero -->
+<!--            </div>-->
+<!--            &lt;!&ndash; Right elements &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Container wrapper &ndash;&gt;-->
+<!--    </nav>-->
+<!--    &lt;!&ndash; Navbar &ndash;&gt;-->
+    <div class="app-header-content">
+        <div class="row justify-content-between align-items-center">
 
-    <section id="clients" class="clients">
-        <div class="container">
+            <div class="col-auto">
+                <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                         role="img"><title>Menu</title>
+                        <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
+                              stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>
+                    </svg>
+                </a>
+            </div><!--//col-->
+            <div class="search-mobile-trigger d-sm-none col">
+                <i class="search-mobile-trigger-icon fas fa-search"></i>
+            </div><!--//col-->
+            <!--                    <div class="app-search-box col">-->
+            <!--                        <form class="app-search-form">-->
+            <!--                            <input type="text" placeholder="Search..." name="search" class="form-control search-input">-->
+            <!--                            <button type="submit" class="btn search-btn btn-primary" value="Search"><i-->
+            <!--                                    class="fas fa-search"></i></button>-->
+            <!--                        </form>-->
+            <!--                    </div>&lt;!&ndash;//app-search-box&ndash;&gt;-->
 
-            <div class="row">
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="/static/assetshome/img/clients/client-1.png" class="img-fluid" alt="">
-                </div>
+            <div class="app-utilities col-auto">
+<!--                <div class="app-utility-item app-notifications-dropdown dropdown">-->
+<!--                    <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle"-->
+<!--                       data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"-->
+<!--                       title="Notifications">-->
+<!--                        &lt;!&ndash;//Bootstrap Icons: https://icons.getbootstrap.com/ &ndash;&gt;-->
+<!--                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell icon"-->
+<!--                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">-->
+<!--                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>-->
+<!--                            <path fill-rule="evenodd"-->
+<!--                                  d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>-->
+<!--                        </svg>-->
+<!--                        <span class="icon-badge"></span>-->
+<!--                    </a>&lt;!&ndash;//dropdown-toggle&ndash;&gt;-->
 
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="/static/assetshome/img/clients/client-2.png" class="img-fluid" alt="">
-                </div>
+<!--                    <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">-->
+<!--                        <div class="dropdown-menu-header p-3">-->
+<!--                            <h5 class="dropdown-menu-title mb-0">Notifications</h5>-->
+<!--                        </div>-->
+<!--                        <div class="dropdown-menu-footer p-2 text-center">-->
+<!--                            <a href="notifications.html">View all</a>-->
+<!--                        </div>-->
 
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="300">
-                    <img src="/static/assetshome/img/clients/client-3.png" class="img-fluid" alt="">
-                </div>
+<!--                    </div>&lt;!&ndash;//dropdown-menu&ndash;&gt;-->
+<!--                </div>&lt;!&ndash;//app-utility-item&ndash;&gt;-->
+<!--                <div class="app-utility-item">-->
+<!--                    <a href="settings.html" title="Settings">-->
+<!--                        &lt;!&ndash;//Bootstrap Icons: https://icons.getbootstrap.com/ &ndash;&gt;-->
+<!--                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear icon"-->
+<!--                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">-->
+<!--                            <path fill-rule="evenodd"-->
+<!--                                  d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 0 1 4.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 0 1-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 0 1 1.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 0 1 2.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 0 1 2.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 0 1 1.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 0 1-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 0 1 8.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 0 0 1.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 0 0 .52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 0 0-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 0 0-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 0 0-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 0 0-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 0 0 .52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 0 0 1.255-.52l.094-.319z"/>-->
+<!--                            <path fill-rule="evenodd"-->
+<!--                                  d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z"/>-->
+<!--                        </svg>-->
+<!--                    </a>-->
+<!--                </div>&lt;!&ndash;//app-utility-item&ndash;&gt;-->
+                <div class="app-utility-item app-user-dropdown dropdown">
+                    <div th:if="${#authentication.getName()}!=anonymousUser">
 
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="400">
-                    <img src="/static/assetshome/img/clients/client-4.png" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="500">
-                    <img src="/static/assetshome/img/clients/client-5.png" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="600">
-                    <img src="/static/assetshome/img/clients/client-6.png" class="img-fluid" alt="">
-                </div>
-
-            </div>
-
-        </div>
-    </section><!-- End Clients Section -->
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <b th:text="${#authentication.getName()}"></b>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li>
+                                    <button class="dropdown-item" type="button">Setting</button>
+                                </li>
+                                <li><a th:href="@{/logout}" class="btn">
+                                    <button class="dropdown-item" type="button">Logout</button>
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div th:if="${#authentication.getName()}==anonymousUser">
+                        <a th:href="@{/login}" class="btn btn-outline-primary">Login</a>
+                    </div>
+                </div><!--//app-user-dropdown-->
+            </div><!--//app-utilities-->
+        </div><!--//row-->
+    </div><!--//app-header-content-->
 </div>
-<!-- Vendor JS Files -->
-<script src="/static/assetshome/vendor/purecounter/purecounter_vanilla.js"></script>
-<script src="/static/assetshome/vendor/aos/aos.js"></script>
-<script src="/static/assetshome/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/static/assetshome/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="/static/assetshome/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="/static/assetshome/vendor/swiper/swiper-bundle.min.js"></script>
-<script src="/static/assetshome/vendor/php-email-form/validate.js"></script>
-
-<!-- Template Main JS File -->
-<script src="/static/assetshome/js/main.js"></script>
-
 </body>
 </html>

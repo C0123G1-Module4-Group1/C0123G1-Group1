@@ -1,5 +1,6 @@
 package com.example.coffee.staff.model;
 
+import com.example.coffee.user.model.User;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -18,9 +19,12 @@ public class Staff {
     private String phoneNumber;
     @Column(name = "email")
     private String email;
+
     @OneToOne
     @JoinColumn(name = "account")
     private User user;
+    @Column(name = "delete_status")
+    private Boolean deleteStatus;
     @UpdateTimestamp
     @Column(name = "create_time")
     private LocalDateTime createAt;
@@ -37,6 +41,14 @@ public class Staff {
         this.address = address;
         this.createAt = createAt;
         this.updateAt = updateAt;
+    }
+
+    public Boolean getDeleteStatus() {
+        return deleteStatus;
+    }
+
+    public void setDeleteStatus(Boolean deleteStatus) {
+        this.deleteStatus = deleteStatus;
     }
 
     public Integer getId() {
