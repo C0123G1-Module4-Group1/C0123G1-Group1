@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,8 +25,8 @@ public class StaffService implements IStaffService {
     private IRoleRepository iRoleRepository;
     @Autowired
     private IUserRepository iUserRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
     @Override
     public Page<Staff> findAll(int page) {
         return iStaffRepository.findAllByDeleteStatusIsFalse(PageRequest.of(page,7));
@@ -34,18 +34,18 @@ public class StaffService implements IStaffService {
 
     @Override
     public void saveNew(Staff staff) {
-        try {
-            Role role=iRoleRepository.getReferenceById(2);
-            User user=staff.getUser();
-            user.setRole(role);
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setDeleteStatus(false);
-            iUserRepository.save(user);
-            iStaffRepository.save(staff);
-        }catch (Exception e){
-
-        }
-
+//        try {
+//            Role role=iRoleRepository.getReferenceById(2);
+//            User user=staff.getUser();
+//            user.setRole(role);
+//            user.setPassword(passwordEncoder.encode(user.getPassword()));
+//            user.setDeleteStatus(false);
+//            iUserRepository.save(user);
+//            iStaffRepository.save(staff);
+//        }catch (Exception e){
+//
+//        }
+//
     }
 
     @Override

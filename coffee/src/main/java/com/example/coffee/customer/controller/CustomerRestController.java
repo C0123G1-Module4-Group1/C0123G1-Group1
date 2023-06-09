@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 
-@RestController
+//@RestController
 @RequestMapping("/api/customer")
 @CrossOrigin("http://localhost:8080/customer/")
 public class CustomerRestController {
-    @Autowired
+//    @Autowired
     private ICustomerService iCustomerService;
 
     @GetMapping("/detail/{id}")

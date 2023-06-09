@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 
-@Controller
+//@Controller
 @RequestMapping("/coupons")
 public class CouponsController {
-    @Autowired
+//    @Autowired
     private ICouponsService iCouponsService;
 
     @GetMapping("/list")

@@ -15,10 +15,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletResponse;
 
 
-@Controller
+//@Controller
 @RequestMapping("/customer")
 public class CustomerController {
-    @Autowired
+//    @Autowired
     private ICustomerService iCustomerService;
 
     @GetMapping("/list")

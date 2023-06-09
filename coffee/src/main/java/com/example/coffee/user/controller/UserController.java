@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import java.security.Principal;
 
-@Controller
+//@Controller
 public class UserController {
-    @Autowired
+//    @Autowired
     private IUserService iUserService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

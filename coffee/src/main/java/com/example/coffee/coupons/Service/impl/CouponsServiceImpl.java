@@ -16,4 +16,9 @@ public class CouponsServiceImpl implements ICouponsService {
     public Page<Coupons> findAllCoupons(Pageable pageable) {
         return iCouponsRepository.findAllByDeleteStatusIsFalse(pageable);
     }
+
+    @Override
+    public Coupons findById(int id) {
+        return iCouponsRepository.findById(id).get();
+    }
 }

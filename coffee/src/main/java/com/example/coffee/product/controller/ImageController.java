@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Controller
+//@Controller
 public class ImageController {
     public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/src/main/uploadImage";
 

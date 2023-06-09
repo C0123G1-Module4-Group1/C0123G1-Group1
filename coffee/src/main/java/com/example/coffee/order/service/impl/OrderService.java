@@ -1,9 +1,17 @@
 package com.example.coffee.order.service.impl;
 
+import com.example.coffee.coupons.Service.ICouponsService;
+import com.example.coffee.coupons.model.Coupons;
+import com.example.coffee.customer.model.Customer;
+import com.example.coffee.customer.service.ICustomerService;
 import com.example.coffee.order.model.Order;
+import com.example.coffee.order.model.StatusOrder;
 import com.example.coffee.order.repository.IOrderRepository;
 import com.example.coffee.order.service.IOrderService;
 
+import com.example.coffee.order.service.IStatusOrderService;
+import com.example.coffee.staff.model.Staff;
+import com.example.coffee.staff.service.IStaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +24,14 @@ import java.util.List;
 public class OrderService implements IOrderService {
     @Autowired
     private IOrderRepository orderRepository;
+    @Autowired
+    private IStaffService staffService;
+    @Autowired
+    private ICustomerService customerService;
+    @Autowired
+    private ICouponsService couponsService;
+    @Autowired
+    private IStatusOrderService statusOrderService;
     @Override
     public List<Order> findAll() {
         return orderRepository.findAll();
@@ -47,7 +63,11 @@ public class OrderService implements IOrderService {
 
     @Override
     public void addOrder() {
-        Order order = new Order();
+        Staff staff = staffService.findById(1);
+        Customer customer = customerService.findCustomer(1);
+        Coupons coupons = couponsService.findById(1);
+        StatusOrder statusOrder = statusOrderService.findById(1);
+        Order order = new Order(staff,customer,coupons,statusOrder);
         this.orderRepository.save(order);
     }
 }

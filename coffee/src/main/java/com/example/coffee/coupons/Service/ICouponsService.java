@@ -6,4 +6,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface ICouponsService {
     Page<Coupons> findAllCoupons(Pageable pageable);
+
+    Coupons findById(int i);
 }

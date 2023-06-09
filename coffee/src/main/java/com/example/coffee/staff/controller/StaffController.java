@@ -20,10 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.soap.MimeHeaders;
 
-@Controller
-@RequestMapping("/staff")
+//@Controller
+//@RequestMapping("/staff")
 public class StaffController {
-    @Autowired
+//    @Autowired
     private IStaffService iStaffService;
     @GetMapping("")
     public String getAll(Model model, @RequestParam(value = "page", defaultValue = "0") int page, HttpServletResponse httpServletResponse){

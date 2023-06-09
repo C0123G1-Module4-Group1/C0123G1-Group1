@@ -2,7 +2,7 @@ package com.example.coffee.product.controller;
 
 import org.springframework.stereotype.Controller;
 
-@Controller
+//@Controller
 public class SizeController {
 //    @Autowired
 //    private ISizeService iSizeService;
