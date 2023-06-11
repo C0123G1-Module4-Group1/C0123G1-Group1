@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add new blog</title>
+    <title>Add new customer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
@@ -17,11 +17,11 @@
         <div class="col-4">
             <div>
                 <div class="my-4 d-flex justify-content-center">
-                    <h1>Thêm mới khách hàng</h1>
+                    <h1>Add new customer</h1>
                 </div>
                 <form th:action="@{/customer/create-customer}" th:object="${customerDTO}" method="post">
                     <div class="mt-3">
-                        <label>Họ Và Tên</label>
+                        <label>Yourname</label>
                         <input class="form-control" required type="text" th:field="*{name}">
                     </div>
                     <div class="mt-3">
@@ -29,11 +29,11 @@
                         <input class="form-control" required type="text" th:field="*{email}">
                     </div>
                     <div class="mt-3">
-                        <label>Số điện thoại</label>
+                        <label>Phone Number</label>
                         <input class="form-control" required type="text" th:field="*{phoneNumber}">
                     </div>
                     <div class="mt-3">
-                        <label>Địa chỉ</label>
+                        <label>Address</label>
                         <input class="form-control" required type="text" th:field="*{adress}">
                     </div>
                     <div class="d-flex justify-content-around mt-5">

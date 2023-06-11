@@ -41,7 +41,7 @@ public class CustomerController {
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDTO, customer);
         boolean check = iCustomerService.createCustomer(customer);
-        redirectAttributes.addFlashAttribute("check", check);
+        redirectAttributes.addFlashAttribute("check1", check);
         redirectAttributes.addFlashAttribute("customerDTO", customerDTO);
         return "redirect:/customer/create";
     }
@@ -67,9 +67,9 @@ public class CustomerController {
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDTO, customer);
         boolean check = iCustomerService.updateCustomer(customer);
-        redirectAttributes.addFlashAttribute("check", check);
+        redirectAttributes.addFlashAttribute("check2", check);
         redirectAttributes.addFlashAttribute("customerDTO", customerDTO);
-        return "redirect:/customer/edit";
+        return "redirect:/customer/update";
     }
 
     @GetMapping("/search")

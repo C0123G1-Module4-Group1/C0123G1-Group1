@@ -8,12 +8,63 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class CouponsServiceImpl implements ICouponsService {
     @Autowired
     private ICouponsRepository iCouponsRepository;
+
+    @Override
+    @Transactional(rollbackOn = Throwable.class)
+    public Boolean updateCoupon(Coupons coupons) {
+        try {
+            iCouponsRepository.save(coupons);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Page<Coupons> findAllCouponsByCodeCoupons(String codeCoupons,Pageable pageable) {
+        return iCouponsRepository.findAllByDeleteStatusIsFalseAndCodeCoupons(codeCoupons,pageable);
+    }
+
     @Override
     public Page<Coupons> findAllCoupons(Pageable pageable) {
         return iCouponsRepository.findAllByDeleteStatusIsFalse(pageable);
+    }
+
+    @Override
+    public Coupons findCoupons(Integer id) {
+        return iCouponsRepository.findCouponsByDeleteStatusIsFalseAndId(id);
+    }
+
+    @Override
+    @Transactional(rollbackOn = Throwable.class)
+    public Boolean createCoupons(Coupons coupons) {
+        try {
+            iCouponsRepository.save(coupons);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional(rollbackOn = Throwable.class)
+    public Boolean deleteCoupons(Integer id) {
+        try {
+            Coupons coupons = findCoupons(id);
+            coupons.setDeleteStatus(true);
+            iCouponsRepository.save(coupons);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

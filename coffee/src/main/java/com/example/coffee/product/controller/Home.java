@@ -6,7 +6,6 @@ import com.example.coffee.product.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class Home {
     }
     @GetMapping("/shopping")
     public  String shoppingCard(){
-        return "shoppingCard";
+        return "shopping-cart";
     }
     @GetMapping("/homeProduct")
     public String ProductPage(Model model) {
