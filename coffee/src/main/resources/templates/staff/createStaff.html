@@ -2,79 +2,93 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<style>
+    .boxed {
+        width: 200px;
+        height: 700px;
+        position: relative;
+        background-clip: padding-box;
+        border: 10px solid transparent;
+        background-color: white;
+        border-radius: 20px;
+    }
+    .boxed:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        margin: -10px;
+        background-image: linear-gradient(to right top, #2979ff, #07a787);
+        border-radius: inherit;
+    }
+    .mg{
+        margin-top: 23px;
+    }
+</style>
 <body>
-<div class="container" style="margin-top: 100px;width: 800px" >
-    <h2 style="text-align: center">Add Employee</h2>
+<div class="container boxed" style="margin-top: 100px;width: 800px; " >
+    <h2 style="text-align: center;margin-top: 20px">Add Employee</h2>
 
     <div id="form" class="form">
         <form action="#" th:action="@{/staff}" th:object="${staff}"
               method="POST" novalidate="novalidate">
-            <div class="input-group input-group-sm mb-3">
+            <div class="input-group input-group-sm mg" style="margin-top: 30px">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Name</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{name}"/>
-                <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-
             </div>
-            <div class="input-group input-group-sm mb-3">
+            <p style="color: red;" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" ></p>
+            <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Address</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{address}"/>
-                <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
-
             </div>
-            <div class="input-group input-group-sm mb-3">
+            <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+            <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Phone Number</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{phoneNumber}"/>
-                <p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
-
             </div>
-            <div class="input-group input-group-sm mb-3">
+            <p style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
+
+            <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Email</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{email}"/>
-                <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-
             </div>
-            <div class="input-group input-group-sm mb-3">
+            <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+            <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Account</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{userDto.account}" required/>
-                <p style="color: red" th:if="${#fields.hasErrors('userDto.account')}"
-                   th:errors="*{userDto.account}"></p>
-
             </div>
-            <div class="input-group input-group-sm mb-3">
+            <p style="color: red" th:if="${#fields.hasErrors('userDto.account')}"
+               th:errors="*{userDto.account}"></p>
+            <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Password</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{userDto.password}"/>
-                <p style="color: red" th:if="${#fields.hasErrors('userDto.password')}"
-                   th:errors="*{userDto.password}"></p>
             </div>
+            <p style="color: red" th:if="${#fields.hasErrors('userDto.password')}"
+               th:errors="*{userDto.password}"></p>
             <span th:text="${result}" style="color: red"></span>
             <br>
 
             <button type="submit" class="btn btn-outline-primary" style="margin-left: 350px">Save</button>
         </form>
-        <p>
-            <a th:href="@{/staff}">
-                <button class="btn btn-outline-dark" style="margin-left: 350px;margin-top: 30px">Back
-                </button>
-            </a>
-        </p>
+
     </div>
 </div>
 </body>

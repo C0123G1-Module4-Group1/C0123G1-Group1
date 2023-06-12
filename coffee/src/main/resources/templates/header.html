@@ -73,9 +73,9 @@
                     <div th:if="${#authentication.getName()}!=anonymousUser">
 
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                <b th:text="${#authentication.getName()}"></b>
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+                                    data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 10%;border: 1px solid #515a6a">
+                                <b th:text="${#authentication.getName().charAt(0)}"></b>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                 <li><a th:href="@{/changePass}">

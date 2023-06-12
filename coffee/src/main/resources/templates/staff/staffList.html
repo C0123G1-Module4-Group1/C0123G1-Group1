@@ -326,7 +326,7 @@
 <div class="app-wrapper">
 
     <div class="app-content pt-3 p-md-3 p-lg-4">
-        <div class="container-xl">
+        <div class="container-xl" style="margin-top: 3%">
 
             <div class="row g-3 mb-4 align-items-center justify-content-between">
                 <div class="col-auto">
@@ -335,25 +335,27 @@
                 <div class="col-auto">
                     <div class="page-utilities">
                         <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
-                            <div class="col-auto">
+<!--                            <div class="col-auto">-->
 
-                                <button th:attr="onclick=|infoDelete(${staffList})|" ;
-                                        class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">Check all employee account
-                                </button>
-                            </div>
+<!--                                <button th:attr="onclick=|infoDelete(${staffList})|" ;-->
+<!--                                        class="btn btn-danger" data-bs-toggle="modal"-->
+<!--                                        data-bs-target="#exampleModal">Check all employee account-->
+<!--                                </button>-->
+<!--                            </div>-->
                             <div class="col-auto d-flex">
                                 <form method="post" class="d-flex" th:action="@{/staff/search}">
                                     <input style="width: 15vw" class="form-control me-2" type="search" name="name"
                                            placeholder="Nhập tên" aria-label="Search" th:value="${name}">
-                                    <button class="btn btn btn-primary text-capitalize" type="submit">Search</button>
+                                    <button class="btn  btn-outline-primary text-capitalize" type="submit" style="border: 1px solid #007700;">Search</button>
                                 </form>
-                                <a th:href="@{/staff}" style="margin-left: 3px"><button class="btn btn btn-primary text-capitalize" type="submit">Reset</button></a>
+                                <a th:href="@{/staff}" style="margin-left: 3px;height: 40px">
+                                    <button class="btn  btn-outline-primary text-capitalize" type="submit" style="height: 40px;border: 1px solid #007700;">Reset</button>
+                                </a>
                             </div><!--//col-->
 
                             <div class="col-auto">
                                 <a th:href="@{/staff/createStaff}">
-                                    <button type="button" class="btn btn-info" >Add new employee
+                                    <button type="button" class="btn btn-primary">Add new employee
                                     </button>
                                 </a>
                             </div>
@@ -361,25 +363,6 @@
                     </div><!--//table-utilities-->
                 </div><!--//col-auto-->
             </div><!--//row-->
-
-
-            <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-                <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab"
-                   href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>
-                <a class="flex-sm-fill text-sm-center nav-link" id="orders-paid-tab" data-bs-toggle="tab"
-                   href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Paid</a>
-                <a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab"
-                   href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">Pending</a>
-                <a class="flex-sm-fill text-sm-center nav-link" id="orders-cancelled-tab" data-bs-toggle="tab"
-                   href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"
-                   aria-selected="false">Cancelled</a>
-                <a class="flex-sm-fill text-sm-center nav-link" data-bs-toggle="tab"
-                   href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"
-                   aria-selected="false">Cancelled</a>
-                <a class="flex-sm-fill text-sm-center nav-link" data-bs-toggle="tab"
-                   href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"
-                   aria-selected="false">Cancelled</a>
-            </nav>
 
 
             <div class="tab-content" id="orders-table-tab-content">
@@ -397,19 +380,19 @@
                                         <td style="font-size: 20px;width: 20%;color: black">Email</td>
                                         <td style="font-size: 20px;width: 24%;color: black">Time to start working</td>
                                         <td colspan="3"
-                                            style="font-size: 20px;width: 18%;color: black;text-align: center">Function
+                                            style="font-size: 20px;width: 18%;color: black;text-align: center">Action
                                         </td>
 
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="staff : ${staffList}" th:if="${staff.user.role.name}!=ADMIN">
-                                        <th th:text="${staff.id}"></th>
-                                        <th th:text="${staff.getName()}"></th>
-                                        <th th:text="${staff.getAddress()}"></th>
-                                        <th th:text="${staff.getPhoneNumber()}"></th>
-                                        <th th:text="${staff.getEmail()}"></th>
-                                        <th th:text="${staff.getCreateAt()}"></th>
+                                        <th th:text="${staff.id}" style="justify-content: center; display: table-cell;vertical-align: middle;"></th>
+                                        <th th:text="${staff.getName()}" style="justify-content: center; display: table-cell;vertical-align: middle;"></th>
+                                        <th th:text="${staff.getAddress()}" style="justify-content: center; display: table-cell;vertical-align: middle;"></th>
+                                        <th th:text="${staff.getPhoneNumber()}" style="justify-content: center; display: table-cell;vertical-align: middle;"></th>
+                                        <th th:text="${staff.getEmail()}" style="justify-content: center; display: table-cell;vertical-align: middle;"></th>
+                                        <th th:text="${staff.getCreateAt()}" style="justify-content: center; display: table-cell;vertical-align: middle;"></th>
                                         <th>
                                             <a th:href="@{/staff/update/{id}(id=${staff.id})}">
                                                 <button class="btn btn-warning text-capitalize">Update</button>
@@ -429,7 +412,7 @@
                                             <!--                                                    data-bs-target="#exampleModal">-->
                                             <!--                                                Delete-->
                                             <!--                                            </button>-->
-                                            <button type="button" class=" btn-del btn btn-danger" fdprocessedid="tkcp7c"
+                                            <button type="button" class="  btn btn-danger text-capitalize"
                                                     th:attr="onclick=|deletes('${staff.getId()}','${staff.getName()}')|">
                                                 Delete
                                             </button>

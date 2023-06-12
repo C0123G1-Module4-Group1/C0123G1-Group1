@@ -46,13 +46,8 @@ public class UserService implements IUserService, UserDetailsService {
     @Override
     public boolean savePass(String pass, String newPass, Authentication authentication) {
         User user = this.iUserRepository.findByAccountAndDeleteStatusIsFalse(authentication.getName());
-        System.out.println(passwordEncoder.encode(pass));
-        if (user.getPassword().equals(passwordEncoder.encode(pass))) {
-            user.setPassword(passwordEncoder.encode(pass));
+            user.setPassword(passwordEncoder.encode(newPass));
             this.iUserRepository.save(user);
             return true;
-        } else {
-            return false;
-        }
     }
 }
