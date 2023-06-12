@@ -2,17 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Cumtomer list</title>
+    <title>Coupons list</title>
     <!-- Meta -->
     <meta charset="utf-8">
     <link rel="stylesheet" href="/static/assets/css/portal.css">
     <link rel="stylesheet" type="text/css"
           href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
 
-    <!--    <link rel="stylesheet" href="/bootstrap520/bootstrap520/css/bootstrap.min.css"/>-->
-    <!--    <link rel="stylesheet" href="datatables/css/dataTables.bootstrap5.min.css"/>-->
-    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"-->
-    <!--          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
     <!-- Font Awesome -->
     <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -38,7 +34,7 @@
           href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../../static/js/customer_restful.js"></script>
+    <script src="../../static/js/coupons_ajax.js"></script>
     <style>
         .active-page {
             background-color: #0a53be;
@@ -197,7 +193,7 @@
   <circle cx="3.5" cy="10.5" r=".5"/>
 </svg>
 						         </span>
-                            <span class="nav-link-text">Customer List</span>
+                            <span class="nav-link-text">Coupons List</span>
                         </a><!--//nav-link-->
                     </li><!--//nav-item-->
                     <li class="nav-item has-submenu">
@@ -371,28 +367,20 @@
                         <div class="row ">
                             <div class="d-flex justify-content-between">
                                 <div class="col-auto">
-                                    <a href="/customer/create">
-                                        <button type="button" class="btn btn-info" fdprocessedid="tkcp7c">Add customer
+                                    <a href="/coupons/create">
+                                        <button type="button" class="btn btn-info" fdprocessedid="tkcp7c">Add coupons
                                         </button>
                                     </a>
                                 </div>
                                 <div class="col-auto">
-                                    <h1 class="app-page-title mb-0">Customer List</h1>
+                                    <h1 class="app-page-title mb-0">Coupons List</h1>
                                 </div>
                                 <div class="col-auto">
-                                    <form th:action="@{/customer/search}"
+                                    <form th:action="@{/coupons/search}"
                                           class="table-search-form row gx-1 align-items-center" method="get">
                                         <div class="col-auto me-2">
-                                            <input type="text" name="nameSearch" th:value="${nameSearch}"
+                                            <input type="text" name="codeCoupons" th:value="${codeCoupons}"
                                                    class="form-control search-orders" placeholder="Search">
-                                        </div>
-                                        <div class="col-auto me-2">
-                                            <select class="form-select w-auto" name="optionSearch"
-                                                    th:value="${optionSearch}">
-                                                <option value="nameCustomer">Customer Name</option>
-                                                <option value="phoneNumber">Phone Number</option>
-                                                <option value="adress">Adress</option>
-                                            </select>
                                         </div>
                                         <div class="col-auto">
                                             <button type="submit" class="btn btn-outline-success" fdprocessedid="ss9bui"
@@ -417,22 +405,24 @@
                                     <thead>
                                     <tr class="flex-sm-fill text-sm-center">
                                         <th class="ms-2" style="font-size: 16px; width: 5%;color: black">Id</th>
-                                        <th style="font-size: 16px;width: 20%;color: black">Name</th>
-                                        <th style="font-size: 16px;width: 15%;color: black">Phone Number</th>
-                                        <th style="font-size: 16px;width: 20%;color: black">Email</th>
-                                        <th style="font-size: 16px;width: 20%;color: black">Adress</th>
+                                        <th style="font-size: 16px;width: 20%;color: black">Code Coupons</th>
+                                        <th style="font-size: 16px;width: 15%;color: black">Value</th>
+                                        <th style="font-size: 16px;width: 15%;color: black">Proviso</th>
+                                        <th style="font-size: 16px;width: 20%;color: black">Begin Time</th>
+                                        <th style="font-size: 16px;width: 20%;color: black">End Time</th>
                                         <th colspan="3" style="font-size: 20px;width: 20%; color: black">Operation</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="flex-sm-fill text-sm-center" th:each="customer : ${customerPage}">
-                                        <td th:text="${customer.id}"></td>
-                                        <td th:text="${customer.name}"></td>
-                                        <td th:text="${customer.phoneNumber}"></td>
-                                        <td th:text="${customer.email}"></td>
-                                        <td th:text="${customer.address}"></td>
+                                    <tr class="flex-sm-fill text-sm-center" th:each="coupons : ${couponsPage}">
+                                        <td th:text="${coupons.id}"></td>
+                                        <td th:text="${coupons.codeCoupons}"></td>
+                                        <td th:text="${coupons.value}"></td>
+                                        <td th:text="${coupons.proviso}"></td>
+                                        <td th:text="${coupons.beginTime}"></td>
+                                        <td th:text="${coupons.endTime}"></td>
                                         <td>
-                                            <a th:href="@{/customer/update/{id}(id=${customer.id})}">
+                                            <a th:href="@{/coupons/update/{id}(id=${coupons.id})}">
                                                 <button type="button" class="btn btn-warning" fdprocessedid="xlhea">
                                                     Update
                                                 </button>
@@ -442,13 +432,13 @@
                                             <button class="btn btn-info" type="button"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal1" fdprocessedid="q2sbyt"
-                                                    th:attr="onclick=|showDetailCustomer('${customer.id}')|">Detail
+                                                    th:attr="onclick=|showDetailCoupons('${coupons.id}')|">Detail
                                             </button>
 
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-danger" fdprocessedid="tkcp7c"
-                                                    th:attr="onclick=|deletes('${customer.id}','${customer.name}')|">
+                                                    th:attr="onclick=|deletes('${coupons.id}','${coupons.codeCoupons}')|">
                                                 Delete
                                             </button>
                                         </td>
@@ -466,41 +456,40 @@
         <ul class="pagination justify-content-center " th:if="${statusSearch==false}">
             <li class="page-item px-2">
                 <a style="border: 1px solid #CCCCCC" class="page-link"
-                   th:href="@{/customer/list(page=${customerPage.number -1})}"
-                   th:if="${customerPage.hasPrevious()}">Previous</a>
+                   th:href="@{/coupons/list(page=${couponsPage.number -1})}"
+                   th:if="${couponsPage.hasPrevious()}">Previous</a>
             </li>
             <li class="page-item d-flex">
-                <span th:each="pageNo: ${#numbers.sequence(0,customerPage.getTotalPages()-1)}" class="px-2">
-                    <a th:href="@{/customer/list(page=${pageNo})}"
-                       th:text="${pageNo}"
-                       th:class="${pageNo == customerPage.getNumber() ? 'active-page': 'page-link'}"
-                       style="border: 1px solid #CCCCCC" class="page-link">
+                <span th:each="pageNo: ${#numbers.sequence(0,couponsPage.getTotalPages()-1)}" class="px-2">
+                    <a th:href="@{/coupons/list(page=${pageNo})}"
+                       th:class="${pageNo == couponsPage.getNumber() ? 'active-page': 'page-link'}"
+                       th:text="${pageNo}" style="border: 1px solid #CCCCCC" class="page-link">
                                         </a>
                 </span>
             </li>
             <li class="page-item px-2">
                 <a style="border: 1px solid #CCCCCC" class="page-link"
-                   th:href="@{/customer/list(page=${customerPage.number +1})}"
-                   th:if="${customerPage.hasNext()}">Next</a>
+                   th:href="@{/coupons/list(page=${couponsPage.number +1})}"
+                   th:if="${couponsPage.hasNext()}">Next</a>
             </li>
         </ul>
         <!--        Phan trang co search-->
         <ul class="pagination justify-content-center " th:if="${statusSearch==true}">
             <li class="page-item px-2">
                 <a style="border: 1px solid #CCCCCC" class="page-link"
-                   th:href="@{/customer/search(page=${customerPage.number -1},nameSearch=${nameSearch},optionSearch=${optionSearch})}"
-                   th:if="${customerPage.hasPrevious()}">Previous</a>
+                   th:href="@{/coupons/search(page=${couponsPage.number -1},codeCoupons=${codeCoupons})}"
+                   th:if="${couponsPage.hasPrevious()}">Previous</a>
             </li>
             <li class="page-item d-flex">
-                <span th:each="pageNo: ${#numbers.sequence(0,customerPage.getTotalPages()-1)}" class="px-2">
-                    <a th:href="@{/customer/search(page=${pageNo},nameSearch=${nameSearch},optionSearch=${optionSearch})}"
+                <span th:each="pageNo: ${#numbers.sequence(0,couponsPage.getTotalPages()-1)}" class="px-2">
+                    <a th:href="@{/coupons/search(page=${pageNo},codeCoupons=${codeCoupons})}"
                        th:text="${pageNo}" style="border: 1px solid #CCCCCC" class="page-link"></a>
                 </span>
             </li>
             <li class="page-item px-2">
                 <a class="page-link" style="border: 1px solid #CCCCCC"
-                   th:href="@{/customer/search(page=${customerPage.number +1},nameSearch=${nameSearch},optionSearch=${optionSearch})}"
-                   th:if="${customerPage.hasNext()}">Next</a>
+                   th:href="@{/coupons/search(page=${couponsPage.number +1},codeCoupons=${codeCoupons})}"
+                   th:if="${couponsPage.hasNext()}">Next</a>
             </li>
         </ul>
     </nav>
@@ -524,25 +513,23 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Customer detail</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Coupons detail</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>
-            <form action="/customer-servlet?action=delete" method="post">
                 <div class="modal-body">
-                    <p>ID Customer: <span id="customerIdDetail"></span></p>
-                    <p>Name customer: <span id="customerNameDetail"></span></p>
-                    <p>Phone Number: <span id="customerPhoneNumberDetail"></span></p>
-                    <p>Email: <span id="customerEmailDetail"></span></p>
-                    <p>Address: <span id="customerAdressDetail"></span></p>
-                    <p>Create Time: <span id="customerCreateAtDetail"></span></p>
-                    <p>Update Time: <span id="customerUpdateAtDetail"></span></p>
+                    <p>ID: <span id="couponsIdDetail"></span></p>
+                    <p>Code Name: <span id="couponsCodeCouponsDetail"></span></p>
+                    <p>Value: <span id="couponsValueDetail"></span></p>
+                    <p>Proviso: <span id="couponsProvisoDetail"></span></p>
+                    <p>Begin Time: <span id="couponsBeginTimeDetail"></span></p>
+                    <p>End Time: <span id="couponsEndTimeDetail"></span></p>
+                    <p>Create Time: <span id="couponsCreateAtDetail"></span></p>
+                    <p>Update Time: <span id="couponsUpdateAtDetail"></span></p>
                 </div>
-            </form>
         </div>
     </div>
 </div>
-
 <!-- MDB -->
 <script
         type="text/javascript"
@@ -552,7 +539,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/yourcode.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+<script src="/static/jquery/jquery-3.5.1.min.js"></script>
 
 </body>
 </html>

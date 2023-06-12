@@ -8,13 +8,13 @@
 <!--<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">-->
 
 <!-- Vendor CSS Files -->
-<link href="/assetshome/vendor/aos/aos.css" rel="stylesheet">
-<link href="/assetshome/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/assetshome/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="/assetshome/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-<link href="/assetshome/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-<link href="/assetshome/vendor/remixicon/remixicon.css" rel="stylesheet">
-<link href="/assetshome/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/aos/aos.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
 <!-- Template Main CSS File -->
 <link href="/assetshome/css/style.css" rel="stylesheet">
@@ -31,23 +31,23 @@
         <div class="container">
             <div class="header-container d-flex align-items-center justify-content-between" style="height: 62px;">
                 <div class="logo">
-                    <h1 class="text-light"><a th:href="@{/homeClient/}"><span>Coffee</span></a></h1>
+                    <h1 class="text-light"><a th:href="@{/home/}"><span>Coffee</span></a></h1>
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto active" th:href="@{/homeClient/}">Trang chủ</a></li>
-                        <li><a class="nav-link scrollto" th:href="@{/homeClient/homeProduct}">Sản phẩm</a></li>
-                        <li><a class="nav-link scrollto " th:href="@{/homeClient/contact}">Liên hệ</a></li>
+                        <li><a class="nav-link scrollto active" th:href="@{/}">Trang chủ</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{home/homeProduct}">Sản phẩm</a></li>
+                        <li><a class="nav-link scrollto " th:href="@{product/contact}">Liên hệ</a></li>
                         <li style="margin-top: 2%;">
-                            <form th:action="@{/homeClient/searchProduct}" method="post" class=""
+                            <form th:action="@{/home/searchProduct}" method="post" class=""
                                   style="margin-left: -4%;display: flex   ">
                                 <input type="text" name="name" th:value="${name}" placeholder="&ensp;&ensp;Tìm kiếm thao tên sản phẩm"
                                        style="margin-left: 10%;border-radius: 30px ;border-color: #f2f2f2">
                                 <button type="submit" class=" getstarted scrollto"  style="border-radius: 30px;margin-left:5px;border: none">Search</button>
                             </form>
                         </li>
-                        <li><a class="getstarted scrollto" th:href="@{/homeClient/shopping}" style="margin-left: 6%">Giỏ hàng</a></li>
+                        <li><a class="getstarted scrollto" th:href="@{/shopping_cart/list}" style="margin-left: 7%">Giỏ hàng</a></li>
 
                     </ul>
                     <!--                    <i class="bi bi-list mobile-nav-toggle"></i>-->
@@ -91,16 +91,16 @@
     </main>
 </div>
 <!-- Vendor JS Files -->
-<script src="/assetshome/vendor/purecounter/purecounter_vanilla.js"></script>
-<script src="/assetshome/vendor/aos/aos.js"></script>
-<script src="/assetshome/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/assetshome/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="/assetshome/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="/assetshome/vendor/swiper/swiper-bundle.min.js"></script>
-<script src="/assetshome/vendor/php-email-form/validate.js"></script>
+<script src="/static/assetshome/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/static/assetshome/vendor/aos/aos.js"></script>
+<script src="/static/assetshome/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/assetshome/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/static/assetshome/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/static/assetshome/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/static/assetshome/vendor/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
-<script src="/assetshome/js/main.js"></script>
+<script src="/static/assetshome/js/main.js"></script>
 
 </body>
 </html>

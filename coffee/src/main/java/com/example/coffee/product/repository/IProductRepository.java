@@ -26,4 +26,5 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
 
     @Query(value = " SELECT p FROM product AS p  WHERE p.name LIKE concat('%',:name,'%')")
     List<Product> findAllByProduct(@Param("name") String name);
+    Product findProductByStatusIsFalseAndId(Integer id);
 }

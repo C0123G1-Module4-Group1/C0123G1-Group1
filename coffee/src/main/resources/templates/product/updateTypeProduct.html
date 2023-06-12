@@ -43,9 +43,9 @@
         </div>
         <form th:action="@{/typeProduct/editType} "method="post"
               th:object="${updateType}">
-          <div class="mt-3 form-group">
-            <label>Type Name Product</label>
-            <input type="text" class="form-control" th:field="*{id}">
+          <div hidden class="mt-3 form-group">
+            <label hidden>Type Name Product</label>
+            <input hidden type="text" class="form-control" th:field="*{id}">
           </div>
           <div class="mt-3 form-group">
             <label>Type Name Product</label>

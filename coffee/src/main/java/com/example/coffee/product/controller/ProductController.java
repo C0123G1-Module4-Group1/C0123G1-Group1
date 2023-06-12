@@ -4,6 +4,7 @@ import com.example.coffee.product.dto.ProductDTO;
 import com.example.coffee.product.model.Product;
 import com.example.coffee.product.service.IProductService;
 import com.example.coffee.product.service.ITypeService;
+import com.example.coffee.shopping_cart.model.Cart;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,11 +27,6 @@ public class ProductController {
     @Autowired
     private ITypeService iTypeService;
 
-
-
-    private static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
-    //    @Value("${upload.path}")
-    private String fileUpload;
 
     //    trang chủ của admin trước khi vào các chức năng
     @GetMapping("/homeAdmin")
@@ -131,6 +127,7 @@ public class ProductController {
     }
 
 
+
 //    @PostMapping("/createSong")
 //    public String createSong(@Validated @ModelAttribute("song") SongDto songDto, BindingResult bindingResult , RedirectAttributes attributes) {
 //        new SongDto().validate(songDto, bindingResult);
@@ -144,5 +141,6 @@ public class ProductController {
 //            return "redirect:/";
 //        }
 //    }
+
 }
 
