@@ -29,23 +29,36 @@ public class StaffService implements IStaffService {
     private PasswordEncoder passwordEncoder;
     @Override
     public Page<Staff> findAll(int page) {
-        return iStaffRepository.findAllByDeleteStatusIsFalse(PageRequest.of(page,7));
+        return iStaffRepository.findAllByDeleteStatusIsFalse(PageRequest.of(page,9));
     }
-
+    @Transactional(rollbackOn = Throwable.class)
     @Override
-    public void saveNew(Staff staff) {
+    public boolean saveNew(Staff staff) {
         try {
+            List<Staff> staffList=iStaffRepository.findAll();
+            List<User> users=iUserRepository.findAll();
             Role role=iRoleRepository.getReferenceById(2);
             User user=staff.getUser();
+            for (int i = 0; i < users.size(); i++) {
+                if (users.get(i).getAccount().equals(user.getAccount())){
+                    return false;
+                }
+            }
+            for (int i = 0; i < staffList.size(); i++) {
+                if (staffList.get(i).getEmail().equals(staff.getEmail()) || staffList.get(i).getPhoneNumber().equals(staff.getPhoneNumber())){
+                    return false;
+                }
+            }
             user.setRole(role);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setDeleteStatus(false);
+            staff.setDeleteStatus(false);
             iUserRepository.save(user);
             iStaffRepository.save(staff);
         }catch (Exception e){
-
+            return false;
         }
-
+return true;
     }
 
     @Override

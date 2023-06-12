@@ -24,7 +24,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.csrf().disable();
 
 //        http.authorizeRequests()
@@ -36,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest().authenticated()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/staff","/staff/*")
+                .antMatchers("/", "/staff","/staff/**","/**")
                 .access("hasAnyRole( 'ADMIN','EMPLOYEE')").and().exceptionHandling().accessDeniedPage("/403")
                 .and().formLogin()//
                 // Submit URL của trang login
