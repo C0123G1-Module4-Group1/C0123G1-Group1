@@ -4,6 +4,7 @@ import com.example.coffee.product.dto.ProductDTO;
 import com.example.coffee.product.model.Product;
 import com.example.coffee.product.service.IProductService;
 import com.example.coffee.product.service.ITypeService;
+import com.example.coffee.shopping_cart.model.Cart;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -144,5 +145,6 @@ public class ProductController {
 //            return "redirect:/";
 //        }
 //    }
+
 }
 

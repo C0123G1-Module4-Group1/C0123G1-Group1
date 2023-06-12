@@ -10,4 +10,10 @@ public interface ICustomerService {
     Boolean createCustomer(Customer customer);
 
     Boolean deleteCustomer(Integer id);
+
+    Customer findCustomer(Integer id);
+
+    Boolean updateCustomer(Customer customer);
+
+    Page<Customer> findAllCustomerByNameOrPhoneNumberOrAdress(String nameSearch,String optionSearch,Pageable pageable);
 }

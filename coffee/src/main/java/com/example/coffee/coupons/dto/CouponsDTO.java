@@ -1,39 +1,30 @@
-package com.example.coffee.coupons.model;
+package com.example.coffee.coupons.dto;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-@Entity(name ="coupons")
-@EntityListeners(AuditingEntityListener.class)
-public class Coupons {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CouponsDTO implements Validator {
     private Integer id;
-    @Column(name = "code_coupons")
+    @NotBlank(message = "Can't be left blank")
     private String codeCoupons;
-    @Column(columnDefinition = "FLOAT DEFAULT 1.0")
+    @NotBlank(message = "Can't be left blank")
     private Float value;
-    @Column(name = "proviso",columnDefinition = "FLOAT DEFAULT 1.0")
+    @NotBlank(message = "Can't be left blank")
     private Float proviso;
-    @Column(name = "begin_time",nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
+    @NotBlank(message = "Can't be left blank")
     private LocalDateTime beginTime;
-    @Column(name = "end_time")
+    @NotBlank(message = "Can't be left blank")
     private LocalDateTime endTime;
-    @CreationTimestamp
-    @Column(name = "create_time", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
+
     private LocalDateTime createTime;
-    @Column(name = "update_time", columnDefinition = "TIMESTAMP DEFAULT now()")
-    @UpdateTimestamp
     private LocalDateTime updateTime;
-    @Column(name = "delete_status")
     private boolean deleteStatus;
 
 
-    public Coupons() {
+    public CouponsDTO() {
     }
 
     public Integer getId() {
@@ -106,5 +97,25 @@ public class Coupons {
 
     public void setDeleteStatus(boolean deleteStatus) {
         this.deleteStatus = deleteStatus;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+    @Override
+    public void validate(Object target, Errors errors) {
+        String regexCodeCoupons = "^[A-Z0-9]{10,10}$";
+        CouponsDTO couponsDTO =(CouponsDTO) target;
+        if (!couponsDTO.codeCoupons.matches(regexCodeCoupons)){
+            errors.rejectValue("codeCoupons", "", "Can't be less than 0 and contain only uppercase letters and numbers");
+        }
+       if (!(couponsDTO.value>0)){
+           errors.rejectValue("value", "", "Not less than 0");
+       }
+        if (!(couponsDTO.proviso>0)){
+            errors.rejectValue("proviso", "", "Not less than 0");
+        }
+
     }
 }
