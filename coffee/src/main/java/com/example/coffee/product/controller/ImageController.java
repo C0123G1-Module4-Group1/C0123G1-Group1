@@ -14,11 +14,11 @@ import java.nio.file.Paths;
 
 @Controller
 public class ImageController {
-    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
+    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/src/main/uploadImage";
 
     @GetMapping("/uploadImage")
     public String displayUploadForm() {
-        return "image";
+        return "uploadImage/image";
     }
 
     @PostMapping("/upload") public String uploadImage(Model model, @RequestParam("image") MultipartFile file) throws IOException {
@@ -27,6 +27,6 @@ public class ImageController {
         fileNames.append(file.getOriginalFilename());
         Files.write(fileNameAndPath, file.getBytes());
         model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
-        return "image";
+        return "uploadImage/image";
     }
 }
