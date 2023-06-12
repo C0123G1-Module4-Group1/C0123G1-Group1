@@ -22,7 +22,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
 
 <body>
-<div style="margin-top: -70%" th:replace="~{header-footer/header-view::headerView}"></div>
+<!--<div style="margin-top: -70%" th:replace="~{header-footer/header-view::headerView}"></div>-->
 
 <div class="container mt-5 mb-5">
     <div class="row d-flex justify-content-center">
@@ -44,35 +44,36 @@
 
                                 <p class="" th:text="${product.describes}"></p>
                                 <div class="btn-group" role="" aria-label="Basic radio toggle button ">
-                                    <span style="margin-top: 2.5%">Size:&ensp;</span>
-                                    <div>
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
+                                    <span style="margin-top: 6%">Size:&ensp;</span>
+                                    <div style="padding: 2%">
+                                        <input type="radio" class="btn-check " name="btnradio" id="btnradio3"
                                                autocomplete="off" checked="">
-                                        <label class="btn btn-outline-danger" for="btnradio1">S</label>
+                                        <label class="btn btn-outline-danger" for="btnradio3">S</label>
                                     </div>
-                                    <div>
+                                    <div style="padding: 2%">
                                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
                                                autocomplete="off" checked="">
                                         <label class="btn btn-outline-danger" for="btnradio2">M</label>
                                     </div>
-                                    <div>
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3"
+                                    <div style="padding: 2%">
+                                            <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
                                                autocomplete="off" checked="">
-                                        <label class="btn btn-outline-danger" for="btnradio3">L</label>
+                                        <label class="btn btn-outline-danger" for="btnradio1">L</label>
                                     </div>
 
 
                                 </div>
-                                <div class="price d-flex flex-row align-items-center" style="margin-top: -7%"><span>Giá:&ensp; <span class="act-price">  <span th:text="${product.price}">00</span></span>&ensp;đ</span>
-                                    <div class="ml-2"><small class="dis-price"></small></div>
-                                    <div class="cart mt-4 align-items-center"style="margin-top: 10%">
-                                        <a class="btn btn-outline-success" style=" margin-top: 50%; ;">Đặt
-                                            ngay</a>
-                                    </div>
-                                </div>
+                                <div class="price d-flex flex-row align-items-center" style="margin-top: 3%" > <small style="font-size: 20px">Giá:  <small th:text="${product.price} "
+                                                                                                                                          style="font-size: 20px;"></small>00
+                                    đ</small></div>
 
+                                </div>
+                                    <a class="btn btn-outline-success" style=" margin-top: 2%;border-radius: 30px" th:href="@{/shopping_cart/operation/__${product.id}__(action='show')}">Đặt
+                                        ngay</a>
+                        <a class="btn btn-outline-secondary" style=" margin-top: 2%;border-radius: 30px;margin-left: 5%" th:href="@{/home/homeProduct/}">Quay lại
+                           </a>
                             </div>
-                            <!--                                          <p class="about" th:text="${product.description}"></p>-->
+
 
                         </div>
                     </div>
@@ -81,7 +82,7 @@
         </div>
     </div>
 </div>
-<div style="margin-top: -70%" th:replace="~{header-footer/footer::footerHome}"></div>
+<!--<div style="margin-top: -70%" th:replace="~{header-footer/footer::footerHome}"></div>-->
 <script src="/static/assetshome/vendor/purecounter/purecounter_vanilla.js"></script>
 <script src="/static/assetshome/vendor/aos/aos.js"></script>
 <script src="/static/assetshome/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

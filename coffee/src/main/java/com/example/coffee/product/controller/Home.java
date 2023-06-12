@@ -31,7 +31,9 @@ public class Home {
     }
 
     @GetMapping("/")
-    public String HomeProduct() {
+    public String HomeProduct(Model model) {
+        List<Product> productList = iProductService.getAll();
+        model.addAttribute("product",productList);
         return "index";
     }
 

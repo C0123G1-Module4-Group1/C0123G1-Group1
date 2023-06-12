@@ -38,8 +38,8 @@
                 <small style="font-size: 20px;color: red"> <small th:text="${product.price} " style="font-size: 20px;color: red"></small>00 đ</small>
             </div>
             <div class=" apointment d-flex" style="margin-top: 1.5%">
-                <a class="btn btn-outline-success " th:href="@{/viewProductType/{id}(id=${product.id})}" style="font-size: 60%;border-radius: 30px;margin-left: 10%">Xem chi tiết</a>
-                <a class="btn btn-outline-success " style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
+                <a class="btn btn-outline-success "  th:href="@{/home/viewProductType/{id}(id=${product.id})}" style="font-size: 60%;border-radius: 30px;margin-left: 10%">Xem chi tiết</a>
+                <a class="btn btn-outline-success " th:href="@{/shopping_cart/operation/__${product.id}__(action='show')}" style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
                     Hàng</a>
             </div>
         </div>
