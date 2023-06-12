@@ -21,14 +21,17 @@ public class UserController {
         return "user/change";
     }
     @PostMapping("/changePass")
-    public String savePass(@RequestParam("pass")String pass, @RequestParam("newPass")String newPass, @RequestParam("newPassConfirm")String newPassConfirm, RedirectAttributes attributes,Authentication authentication){
+    public String savePass(@RequestParam("pass")String pass, @RequestParam("newPass")String newPass, @RequestParam("newPassConfirm")String newPassConfirm, RedirectAttributes attributes,Authentication authentication,Model model){
+        if (authentication.getName().equals("anonymousUser")){
+            return "login/login";
+        }
         if (!newPass.equals(newPassConfirm)){
-            attributes.addFlashAttribute("result","Confirmation password is not correct");
+            model.addAttribute("result","Confirmation password is not correct");
             return "user/change";
         }
          boolean check=iUserService.savePass(pass,newPass,authentication );
         if (!check){
-            attributes.addFlashAttribute("result","Incorrect password");
+            model.addAttribute("result","Incorrect password");
             return "user/change";
         }
         attributes.addFlashAttribute("flag", true);

@@ -4,7 +4,7 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <body>
 <div class="container" style="margin-top: 100px;width: 800px" >
-    <h2 style="text-align: center">Add Employee</h2>
+    <h2 style="text-align: center">Change Password</h2>
 
     <div id="form" class="form">
         <form action="#" th:action="@{/changePass}"
@@ -14,7 +14,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">Password</span>
                 </div>
-                <input id="pass" type="password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                <input name="pass" type="password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                         required/>
 
             </div>
@@ -22,7 +22,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">New Password</span>
                 </div>
-                <input id="newPass" type="password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                <input name="newPass" type="password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        required />
 
             </div>
@@ -30,7 +30,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">New Password confirm</span>
                 </div>
-                <input id="newPassConfirm" type="password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                <input name="newPassConfirm" type="password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        required />
 
             </div>

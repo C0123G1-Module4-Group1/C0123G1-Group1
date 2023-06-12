@@ -24,6 +24,7 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
         User appUser = this.iUserRepository.findByAccountAndDeleteStatusIsFalse(account);
@@ -31,7 +32,6 @@ public class UserService implements IUserService, UserDetailsService {
             System.out.println("User not found! " + account);
             throw new UsernameNotFoundException("User " + account + " was not found in the database");
         }
-
 
 
         List<GrantedAuthority> grantList = new ArrayList<>();
@@ -45,12 +45,13 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public boolean savePass(String pass, String newPass, Authentication authentication) {
-        User user=this.iUserRepository.findByAccountAndDeleteStatusIsFalse(authentication.getName());
-        if (user.getPassword().equals(passwordEncoder.encode(pass))){
-            user.setPassword(pass);
+        User user = this.iUserRepository.findByAccountAndDeleteStatusIsFalse(authentication.getName());
+        System.out.println(passwordEncoder.encode(pass));
+        if (user.getPassword().equals(passwordEncoder.encode(pass))) {
+            user.setPassword(passwordEncoder.encode(pass));
             this.iUserRepository.save(user);
             return true;
-        }else {
+        } else {
             return false;
         }
     }
