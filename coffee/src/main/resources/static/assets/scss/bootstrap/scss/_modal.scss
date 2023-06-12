@@ -120,7 +120,11 @@
   @include overlay-backdrop(var(--#{$prefix}backdrop-zindex), var(--#{$prefix}backdrop-bg), var(--#{$prefix}backdrop-opacity));
 }
 
+<<<<<<< HEAD
+// Modal header-footer
+=======
 // Modal header
+>>>>>>> Vien-branch
 // Top section of the modal w/ title and dismiss
 .modal-header {
   display: flex;

@@ -39,15 +39,19 @@
             <li><a class="nav-link scrollto active" th:href="@{/home}">Trang chủ</a></li>
             <li><a class="nav-link scrollto" th:href="@{product/homeProduct}">Sản phẩm</a></li>
             <li><a class="nav-link scrollto " th:href="@{product/contact}">Liên hệ</a></li>
+            <li><a class="nav-link scrollto active" th:href="@{/homeClient/}">Trang chủ</a></li>
+            <li><a class="nav-link scrollto" th:href="@{/homeClient/homeProduct}">Sản phẩm</a></li>
+            <li><a class="nav-link scrollto " th:href="@{/homeClient/contact}">Liên hệ</a></li>
             <li style="margin-top: 2%;">
-              <form action="" method="post" class="" href="#contact"
+              <form th:action="@{/homeClient/searchProduct}" method="post" class=""
                     style="margin-left: -4%;display: flex   ">
-                <input type="text" name="message" placeholder="    Search"
+                <input type="text" name="name" th:value="${name}" placeholder="&ensp;&ensp;Tìm kiếm theo tên"
                        style="margin-left: 10%;border-radius: 30px ;border-color: #f2f2f2">
-                <a class=" getstarted scrollto" href="#" style="border-radius: 30px">Search</a>
+                <button type="submit" class=" getstarted scrollto"  style="border-radius: 30px;margin-left:5px;border: none">Search</button>
               </form>
             </li>
             <li><a class="getstarted scrollto" th:href="@{/shopping_cart/list}" style="margin-left: 7%">Giỏ hàng</a></li>
+            <li><a class="getstarted scrollto" th:href="@{/homeClient/shopping}" style="margin-left: 6%">Giỏ hàng</a></li>
 
           </ul>
           <!--                    <i class="bi bi-list mobile-nav-toggle"></i>-->
@@ -78,7 +82,7 @@
 
           <div class=" col-md-4 col-6  "
                data-aos="zoom-in" data-aos-delay="400">
-            <a href="#about" class="btn btn-outline-success">Mua thêm sản phẩm</a>
+            <a th:href="@{/homeClient/homeProduct}" class="btn btn-outline-success">Mua thêm sản phẩm</a>
           </div>
         </div>
       </div>

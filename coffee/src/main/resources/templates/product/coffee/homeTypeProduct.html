@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Sản phẩm</title>
+
+</head>
+<!--<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">-->
+
+<!-- Vendor CSS Files -->
+<link href="/static/assetshome/vendor/aos/aos.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="/static/assetshome/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="/static/assetshome/css/style.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+</head>
+<body>
+
+<div style="margin-top: -70%" th:replace="~{header-footer/headers::headerHome}"></div>
+<div class="container mt-5 mb-5">
+    <div class="row g-2 text-center justify-content-center">
+        <div class="col-md-3 text-center justify-content-center" th:each=" product:${homeProductByType}" style="width: 22%;margin-top: 5%">
+            <div class="card p-2 py-3 text-center justify-content-center" style="height: 70%">
+                <div class="img mb-2">
+                    <img th:src="${product.image}" width="100" class="rounded-circle">
+                </div>
+            </div>
+            <div style="margin-top: 3%">
+                <h5 class="mb-0" th:text="${product.name}"></h5>
+                <small style="font-size: 20px;color: red"> <small th:text="${product.price} " style="font-size: 20px;color: red"></small>00 đ</small>
+            </div>
+            <div class=" apointment d-flex" style="margin-top: 1.5%">
+                <a class="btn btn-outline-success " th:href="@{/viewProductType/{id}(id=${product.id})}" style="font-size: 60%;border-radius: 30px;margin-left: 10%">Xem chi tiết</a>
+                <a class="btn btn-outline-success " style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
+                    Hàng</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top: -70%" th:replace="~{header-footer/footer::footerHome}"></div>
+
+<script src="/static/assetshome/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/static/assetshome/vendor/aos/aos.js"></script>
+<script src="/static/assetshome/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/assetshome/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/static/assetshome/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/static/assetshome/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/static/assetshome/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/static/assetshome/js/main.js"></script>
+
+
+</body>
+</html>

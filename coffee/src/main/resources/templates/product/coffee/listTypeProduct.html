@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Product List</title>
+
+  <!-- Meta -->
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+
+  <!-- Font Awesome -->
+  <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet"
+  />
+  <!-- Google Fonts -->
+  <link
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet"
+  />
+  <!-- MDB -->
+  <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+          rel="stylesheet"
+  />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="../../static/assets/css/portal.css">
+</head>
+
+<body class="app">
+<div th:replace="~{header-footer/headerAdmin::header}"></div>
+
+<div class="app-wrapper">
+
+  <div class="app-content pt-3 p-md-3 p-lg-4">
+    <div class="container-xl">
+
+      <div class="row g-3 mb-4 align-items-center justify-content-between">
+        <div class="col-auto">
+          <h1 class="app-page-title mb-0">Product</h1>
+        </div>
+        <div class="col-auto">
+          <div class="page-utilities">
+            <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+              <div class="col-auto">
+                <form class="table-search-form row gx-1 align-items-center" th:action="@{/productCoffee/searchProduct}" method="post">
+                  <div class="col-auto">
+                    <input type="search" id="search-orders" name="name" th:value="${name}"
+                           class="form-control search-orders" placeholder="Search">
+                  </div>
+                  <div class="col-auto">
+                    <button type="submit" class="btn btn-outline-success" fdprocessedid="ss9bui"
+                            style="border:1px solid #33CC66">Search
+                    </button>
+                  </div>
+                </form>
+
+              </div><!--//col-->
+              <div class="col-auto">
+                <a th:href="@{/productCoffee/create}">
+                  <button type="button" class="btn btn-info" fdprocessedid="tkcp7c">Add product
+                  </button>
+                </a>
+              </div>
+            </div><!--//row-->
+          </div><!--//table-utilities-->
+        </div><!--//col-auto-->
+      </div><!--//row-->
+
+
+
+
+
+      <div class="tab-content" id="orders-table-tab-content">
+        <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+          <div class="app-card app-card-orders-table shadow-sm mb-5">
+            <div class="app-card-body">
+              <div class="table-responsive">
+                <table class="table app-table-hover mb-0 text-left">
+                  <thead>
+                  <tr>
+                    <td style="font-size: 16px;width: 5%;color: black">Id</td>
+                    <td style="font-size: 20px;width: 30%;color: black">Name Product</td>
+                    <td style="font-size: 20px;width: 25%;color: black">Price (VND)</td>
+                    <td style="font-size: 20px;width: 20%;color: black">Image</td>
+                    <td colspan="" style="font-size: 20px;width: 50%;color: black">Type Product
+                    </td>
+                    <td colspan="3" style="font-size: 20px;color: black;text-align: center">Function</td>
+
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="product : ${productByType}">
+                    <th th:text="${product.id}"></th>
+                    <th th:text="${product.name}"></th>
+                    <th th:text="${product.price}"></th>
+                    <th><img style="height: 25%;width: 25%" th:src="${product.image}"></th>
+                    <th th:text="${product.typeProduct.typeName}"></th>
+                    <th>
+                      <a th:href="@{/productCoffee/update/{id}(id=${product.id})}">
+                        <button type="button" class="btn btn-warning" fdprocessedid="xlhea">
+                          Update
+                        </button>
+                      </a>
+                    </th>
+                    <th>
+                      <a th:href="@{/productCoffee/viewProduct/{id}(id=${product.id})}">
+                        <button type="button" class="btn btn-primary text-capitalize"
+                                fdprocessedid="q2sbyt">View
+                        </button>
+                      </a>
+
+                    </th>
+                    <th>
+                      <button type="button" class=" btn-del btn btn-danger" fdprocessedid="tkcp7c"
+                              th:attr="onclick=|deletes('${product.id}','${product.name}')|">
+                        Delete
+                      </button>
+
+                    </th>
+
+
+                  </tr>
+                  </tbody>
+                </table>
+              </div><!--//table-responsive-->
+
+            </div><!--//app-card-body-->
+          </div><!--//app-card-->
+        </div>
+      </div><!--//tab-content-->
+
+
+    </div><!--//container-fluid-->
+  </div><!--//app-content-->
+
+<!--  <nav aria-label="Page navigation example">-->
+<!--    <ul class="pagination justify-content-end ">-->
+<!--      <li class="page-item " style="border: 1px solid #CCCCCC">-->
+<!--        <a class="page-link" th:href="@{'/'(page=${prodtypeProductuctPage.number -1})}"-->
+<!--           th:if="${productPage.hasPrevious()}">Previous</a>-->
+<!--      </li>-->
+<!--      &lt;!&ndash;                        <li style="border: 1px solid #CCCCCC" class="page-item active" ><a class="page-link active" th:text="${pageNo}" th:href="@{/(page=${pageNo})}"></a></li>&ndash;&gt;-->
+<!--      <li style="border: 1px solid #CCCCCC;;" class="page-item    "><a class="page-link"-->
+<!--                                                                       th:text="${productPage.number +1}"></a>-->
+<!--      </li>-->
+<!--      <li style="border: 1px solid #CCCCCC" class="page-item">-->
+<!--        <a class="page-link" th:href="@{'/'(page=${productPage.number +1})}"-->
+<!--           th:if="${productPage.hasNext()}">Next</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </nav>-->
+
+</div>
+
+
+<script th:inline="javascript">
+
+  function deletes(id, name) {
+    swal({
+      title: "Are you sure?",
+      text: "Do you want to remove the date name " + " " + name + " " + "?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+
+    })
+            .then((result) => {
+              if (result) {
+                window.location = '/productCoffee/delete/' + id
+              } else {
+                swal("Thank you for not deleting")
+              }
+            });
+  }
+
+  async function detail(id, titles) {
+    Swal.fire({
+      text: 'Would you like to see the details of this title: ' + titles + "",
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonColor: '#CCCCCC',
+      confirmButtonColor: '#3366FF',
+      confirmButtonText: 'May I try it out ?'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+                window.location.href = '/detail/' + id
+        )
+      }
+    })
+  }
+
+</script>
+<!-- MDB -->
+
+
+<script th:inline="javascript">
+
+  <!--    thêm mới-->
+  function createBlog() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Successfully',
+      text: 'Successfully added new!',
+      confirmButtonText: 'Oke',
+      timer: 2000,
+    });
+  }
+
+
+  function createBlog1() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Failure',
+      text: 'Add new failure!',
+      confirmButtonText: 'Oke',
+      timer: 2000,
+    });
+  }
+
+  // xoá
+  function deleteCategory1() {
+    swal({
+      title: "Delete Successfully!",
+      icon: "success",
+      button: "Oke",
+      timer: 2000,
+    });
+  }
+  function deleteCategory2() {
+    swal({
+      title: "Delete failed",
+      icon: "error",
+      button: "Oke",
+      timer: 2000,
+    });
+  }
+
+  // chỉnh sửa
+  function updateCategory() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Successfully',
+      text: 'Successful editing!',
+      confirmButtonText: 'Oke',
+      timer: 2000,
+    });
+  }
+
+  function updateCategory1() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Failure',
+      text: 'Edit failed!',
+      confirmButtonText: 'Oke',
+      timer: 2000,
+    });
+  }
+</script>
+<script th:inline="javascript">
+  let createCategory = /*[[${mess}]]*/ true;
+  let deleteCategory =/*[[${check}]]*/ true;
+  let update =/*[[${flag}]]*/ true;
+  // thêm mới
+  if (createCategory != null) {
+    if (createCategory) {
+      createBlog();
+    } else {
+      createBlog1();
+    }
+  }
+  // xoá
+
+  if (deleteCategory!=null) {
+    if (deleteCategory){
+      deleteCategory1();
+    }else{
+      deleteCategory2();
+    }
+
+  }
+  // update
+  if (update != null) {
+    if (update) {
+      updateCategory();
+    } else {
+      updateCategory1();
+    }
+  }
+
+</script>
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/yourcode.js"></script>
+<script src="/static/jquery/jquery-3.5.1.min.js"></script>
+<script src="/static/dist/sweetalert.js/sweetalert.min.js"></script>
+<script src="/static/dist/sweetalert.css"></script>
+<script src="../../static/assets/plugins/popper.min.js"></script>
+<script src="../../static/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<!-- Page Specific JS -->
+<script src="../../static/assets/js/app.js"></script>
+<!-- FontAwesome JS-->
+<script defer src="../../static/assets/plugins/fontawesome/js/all.min.js"></script>
+</body>
+</html>
+
+
+
+
+

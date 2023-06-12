@@ -1,4 +1,4 @@
-package com.example.coffee.product.service;
+package com.example.coffee.product.service.impl;
 
 
 import com.example.coffee.product.model.Email;

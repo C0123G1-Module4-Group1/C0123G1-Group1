@@ -5,9 +5,7 @@ import com.example.coffee.product.repository.IProductRepository;
 
 import com.example.coffee.product.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +28,8 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Page<Product> findAll(Integer page) {
-        return iProductRepository.findAll(PageRequest.of(page, Integer.parseInt("5"), Sort.by("id").descending()));
+    public Page<Product> findAllByStatusIsFalse(Integer page) {
+        return iProductRepository.findAllByStatusIsFalse(PageRequest.of(page, 5, Sort.by("id").descending()));
     }
 
     @Override
@@ -40,7 +38,31 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public void save(Product product) {
+    public boolean save(Product product) {
         iProductRepository.save(product);
+        return true;
+    }
+
+    @Override
+    public Product findById(Integer id) {
+        return iProductRepository.findById(id).get();
+    }
+
+    @Override
+    public boolean delete(Integer id) {
+        Product product = findById(id);
+        product.setStatus(true);
+        iProductRepository.save(product);
+        return true;
+    }
+
+    @Override
+    public Page<Product> searchProduct( String name, Pageable pageable) {
+        return iProductRepository.findAllByStatusIsFalse(name,pageable);
+    }
+
+    @Override
+    public List<Product> findAllBySearchProduct(String name) {
+        return iProductRepository.findAllByProduct(name);
     }
 }

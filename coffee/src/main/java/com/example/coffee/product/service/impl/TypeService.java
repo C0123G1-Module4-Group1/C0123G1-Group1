@@ -1,5 +1,6 @@
 package com.example.coffee.product.service.impl;
 
+import com.example.coffee.product.model.Product;
 import com.example.coffee.product.model.TypeProduct;
 import com.example.coffee.product.repository.ITypeRepository;
 import com.example.coffee.product.service.ITypeService;
@@ -18,4 +19,28 @@ public class TypeService implements ITypeService {
     public Page<TypeProduct> findAll(Integer page) {
         return iTypeRepository.findAll(PageRequest.of(page,10));
     }
+
+    @Override
+    public List<Product> findAllByStatusIsFalse(Integer id) {
+        return iTypeRepository.findAllByStatusIsFalse(id);
+    }
+
+    @Override
+    public boolean save(TypeProduct typeProduct) {
+        iTypeRepository.save(typeProduct);
+        return true;
+    }
+
+    @Override
+    public boolean delete(Integer id) {
+        iTypeRepository.delete(findById(id));
+        return true;
+    }
+
+    @Override
+    public TypeProduct findById(Integer id) {
+        return iTypeRepository.findById(id).get();
+    }
+
+
 }
