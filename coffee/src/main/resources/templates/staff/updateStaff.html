@@ -57,28 +57,42 @@
                     <span class="input-group-text">Tài khoản</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                       th:field="*{userDto.account}"/>
+                       th:field="*{user.account}"/>
             </div>
             <div class="input-group input-group-sm mb-3" hidden>
                 <div class="input-group-prepend">
                     <span class="input-group-text">Mật khẩu</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                       th:field="*{userDto.password}"/>
+                       th:field="*{user.password}"/>
             </div>
             <div class="input-group input-group-sm mb-3" hidden>
                 <div class="input-group-prepend">
                     <span class="input-group-text">Id user</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                       th:field="*{userDto}"/>
+                       th:field="*{user}"/>
             </div>
             <div class="input-group input-group-sm mb-3" hidden>
                 <div class="input-group-prepend">
                     <span class="input-group-text">Id user</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                       th:field="*{userDto.role}"/>
+                       th:field="*{user.role}"/>
+            </div>
+            <div class="input-group input-group-sm mb-3" hidden>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Id user</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{user.id}"/>
+            </div>
+            <div class="input-group input-group-sm mb-3" hidden>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Id user</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       th:field="*{user.deleteStatus}"/>
             </div>
             <div class="input-group input-group-sm mb-3" hidden>
                 <div class="input-group-prepend">

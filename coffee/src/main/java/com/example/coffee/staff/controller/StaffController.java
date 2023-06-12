@@ -66,26 +66,26 @@ public class StaffController {
     @GetMapping("/update/{id}")
     public String update(@PathVariable("id") Integer id, Model model) {
         Staff staff = iStaffService.findById(id);
-        StaffDto staffDto = new StaffDto();
-        UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(staff.getUser(), userDto);
-        userDto.setRole(staff.getUser().getRole());
-        staffDto.setUserDto(userDto);
-        BeanUtils.copyProperties(staff, staffDto);
-        model.addAttribute("staff", staffDto);
+//        StaffDto staffDto = new StaffDto();
+//        UserDto userDto = new UserDto();
+//        BeanUtils.copyProperties(staff.getUser(), userDto);
+//        userDto.setRole(staff.getUser().getRole());
+//        staffDto.setUserDto(userDto);
+//        BeanUtils.copyProperties(staff, staffDto);
+        model.addAttribute("staff", staff);
         return "staff/updateStaff";
     }
 
     @PostMapping("/update")
-    public String saveStaffUpdate(@Validated @ModelAttribute("staff") StaffDto staffDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String saveStaffUpdate(@Validated @ModelAttribute("staff") Staff staff, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "staff/updateStaff";
         }
-        Staff staff = new Staff();
-        User user = new User();
-        BeanUtils.copyProperties(staffDto, staff);
-        BeanUtils.copyProperties(staffDto.getUserDto(), user);
-        staff.setUser(user);
+//        Staff staff = new Staff();
+//        User user = new User();
+//        BeanUtils.copyProperties(staffDto, staff);
+//        BeanUtils.copyProperties(staffDto.getUserDto(), user);
+//        staff.setUser(user);
         iStaffService.save(staff);
         redirectAttributes.addFlashAttribute("flag", true);
         return "redirect:/staff";
