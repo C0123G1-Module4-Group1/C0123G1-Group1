@@ -62,12 +62,13 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public void addOrder() {
+    public Order addOrder() {
         Staff staff = staffService.findById(1);
         Customer customer = customerService.findCustomer(1);
         Coupons coupons = couponsService.findById(1);
         StatusOrder statusOrder = statusOrderService.findById(1);
         Order order = new Order(staff,customer,coupons,statusOrder);
         this.orderRepository.save(order);
+        return order;
     }
 }

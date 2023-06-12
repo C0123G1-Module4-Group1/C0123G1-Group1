@@ -13,5 +13,5 @@ public interface IOrderService {
 
     Order findById(Integer id);
 
-    void addOrder();
+    Order addOrder();
 }

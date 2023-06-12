@@ -11,4 +11,6 @@ public interface IProductService {
     List<Product>getAll();
 
     void save(Product product);
+
+    Product findById(Integer id);
 }
