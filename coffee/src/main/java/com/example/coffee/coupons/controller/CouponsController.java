@@ -67,7 +67,7 @@ public class CouponsController {
         BeanUtils.copyProperties(couponsDTO, coupons);
         Boolean check= iCouponsService.updateCoupon(coupons);
         redirectAttributes.addFlashAttribute("check2", check);
-        return "redirect:/coupons/update/"+couponsDTO.getId();
+        return "redirect:/coupons/list";
     }
 
     @GetMapping("/search")

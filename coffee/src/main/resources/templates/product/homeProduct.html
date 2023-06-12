@@ -43,8 +43,9 @@
                 <a class="btn btn-outline-success " th:href="@{viewProduct}"
                    style="font-size: 60%;border-radius: 30px;margin-left: 10%">Đặt
                     Ngay</a>
-                <a class="btn btn-outline-success " style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
-                    Hàng</a>
+                <a th:href="@{/shopping_cart/operation/__${product.id}__(action='show')}">
+                    Thêm vào giỏ hàng
+                </a>
             </div>
         </div>
     </div>
@@ -52,7 +53,7 @@
 <div style="margin-top: -70%" th:replace="~{header-footer/footer::footerHome}"></div>
 
 <script src="/static/assetshome/vendor/purecounter/purecounter_vanilla.js"></script>
-<script src="/static/assetshome/vendor/aos/aos.js"></script>
+<scrip-t src="/static/assetshome/vendor/aos/aos.js"></scrip-t>
 <script src="/static/assetshome/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/static/assetshome/vendor/glightbox/js/glightbox.min.js"></script>
 <script src="/static/assetshome/vendor/isotope-layout/isotope.pkgd.min.js"></script>
@@ -61,134 +62,11 @@
 
 <!-- Template Main JS File -->
 <script src="/static/assetshome/js/main.js"></script>
-<script th:inline="javascript">
-
-    function deletes(id, nameProduct) {
-        swal({
-            title: "Are you sure?",
-            text: "Do you want to remove the date name " + " " + nameProduct + " " + "?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-
-        })
-            .then((result) => {
-                if (result) {
-                    window.location = '/delete/' + id
-                } else {
-                    swal("Thank you for not deleting")
-                }
-            });
-    }
-
-    async function detail(id, nameProduct) {
-        Swal.fire({
-            text: 'Would you like to see the details of this title: ' + nameProduct + "",
-            icon: 'question',
-            showCancelButton: true,
-            cancelButtonColor: '#CCCCCC',
-            confirmButtonColor: '#3366FF',
-            confirmButtonText: 'May I try it out ?'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                    window.location.href = '/detail/' + id
-                )
-            }
-        })
-    }
-
-</script>
-<!-- MDB -->
 <script
         type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
 ></script>
 <script src="https://kit.fontawesome.com/yourcode.js"></script>
-<script src="jquery-3.4.1.min.js"></script>
-<script src="sweetalert2.all.min.js"></script>
-<script th:inline="javascript">
-
-    <!--    thêm mới-->
-    function create() {
-        Swal.fire({
-            icon: 'success',
-            title: 'Successfully',
-            text: 'Successfully added new!',
-            confirmButtonText: 'Oke',
-            timer: 2000,
-        });
-    }
-
-
-    function create1() {
-        Swal.fire({
-            icon: 'error',
-            title: 'Failure',
-            text: 'Add new failure!',
-            confirmButtonText: 'Oke',
-            timer: 2000,
-        });
-    }
-
-    // xoá
-    function deleteProduct() {
-        swal({
-            title: "Delete Successfully!",
-            icon: "success",
-            button: "Oke",
-            timer: 2000,
-        });
-    }
-
-    // chỉnh sửa
-    function update2() {
-        Swal.fire({
-            icon: 'success',
-            title: 'Successfully',
-            text: 'Successful editing!',
-            confirmButtonText: 'Oke',
-            timer: 2000,
-        });
-    }
-
-    function update1() {
-        Swal.fire({
-            icon: 'error',
-            title: 'Failure',
-            text: 'Edit failed!',
-            confirmButtonText: 'Oke',
-            timer: 2000,
-        });
-    }
-</script>
-<script th:inline="javascript">
-    let createCategory = /*[[${mess}]]*/ true;
-    let deleteCategory =/*[[${check}]]*/ true;
-    let update =/*[[${flag}]]*/ true;
-    // thêm mới
-    if (createCategory != null) {
-        if (createCategory) {
-            create();
-        } else {
-            create1();
-        }
-    }
-    // xoá
-    if (deleteCategory) {
-        deleteProduct();
-    }
-    // update
-    if (update != null) {
-        if (update) {
-            update2();
-        } else {
-            update1();
-        }
-    }
-
-</script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
 </body>
 </html>

@@ -1,8 +1,12 @@
 package com.example.coffee.coupons.dto;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-public class CouponsDTO {
+public class CouponsDTO implements Validator {
     private Integer id;
     @NotBlank(message = "Can't be left blank")
     private String codeCoupons;
@@ -93,5 +97,25 @@ public class CouponsDTO {
 
     public void setDeleteStatus(boolean deleteStatus) {
         this.deleteStatus = deleteStatus;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+    @Override
+    public void validate(Object target, Errors errors) {
+        String regexCodeCoupons = "^[A-Z0-9]{10,10}$";
+        CouponsDTO couponsDTO =(CouponsDTO) target;
+        if (!couponsDTO.codeCoupons.matches(regexCodeCoupons)){
+            errors.rejectValue("codeCoupons", "", "Can't be less than 0 and contain only uppercase letters and numbers");
+        }
+       if (!(couponsDTO.value>0)){
+           errors.rejectValue("value", "", "Not less than 0");
+       }
+        if (!(couponsDTO.proviso>0)){
+            errors.rejectValue("proviso", "", "Not less than 0");
+        }
+
     }
 }

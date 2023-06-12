@@ -7,6 +7,8 @@ import com.example.coffee.shopping_cart.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -81,6 +83,16 @@ public class CartServiceImpl implements ICartService {
         Map.Entry<Integer, Integer> entry = selectItemInCart(id, cart);
         integerMap.remove(entry.getKey());
         cart.setCart(integerMap);
+    }
+
+    @Override
+    public List<Product> findAllProductByCart(Cart cart) {
+        List<Product>productList=new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : cart.getCart().entrySet()) {
+            Product product =iProductService.findProductById(entry.getKey());
+            productList.add(product);
+        }
+        return productList;
     }
 }
 

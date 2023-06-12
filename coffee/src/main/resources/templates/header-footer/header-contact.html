@@ -37,8 +37,8 @@
                 <nav id="navbar" class="navbar">
                     <ul>
                         <li><a class="nav-link scrollto active" th:href="@{/}">Trang chủ</a></li>
-                        <li><a class="nav-link scrollto" th:href="@{homeProduct}">Sản phẩm</a></li>
-                        <li><a class="nav-link scrollto " th:href="@{contact}">Liên hệ</a></li>
+                        <li><a class="nav-link scrollto" th:href="@{home/homeProduct}">Sản phẩm</a></li>
+                        <li><a class="nav-link scrollto " th:href="@{product/contact}">Liên hệ</a></li>
                         <li style="margin-top: 2%;">
                             <form action="" method="post" class="" href="#contact"
                                   style="margin-left: -4%;display: flex   ">
@@ -47,7 +47,7 @@
                                 <a class=" getstarted scrollto" href="#" style="border-radius: 30px">Search</a>
                             </form>
                         </li>
-                        <li><a class="getstarted scrollto" th:href="@{shopping}" style="margin-left: 7%">Giỏ hàng</a></li>
+                        <li><a class="getstarted scrollto" th:href="@{shopping_cart/list}" style="margin-left: 7%">Giỏ hàng</a></li>
 
                     </ul>
                     <!--                    <i class="bi bi-list mobile-nav-toggle"></i>-->

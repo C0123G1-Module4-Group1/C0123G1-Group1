@@ -9,11 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/shopping_cart")
 @SessionAttributes("cart")
-@RequestMapping("/shopping-cart ")
 public class CartController {
     @Autowired
     private IProductService iProductService;
@@ -22,7 +23,8 @@ public class CartController {
 
     @GetMapping("/list")
     public String showCart(@SessionAttribute("cart") Cart cart, Model model) {
-        model.addAttribute("cart", cart);
+        List<Product>productList=iCartService.findAllProductByCart(cart);
+        model.addAttribute("productList", productList);
         model.addAttribute("countQuantity", iCartService.countItemQuantity(cart));
         model.addAttribute("countProduct", iCartService.countProductQuantity(cart));
         model.addAttribute("totalPayment", iCartService.countTotalPayment(cart));
@@ -50,14 +52,14 @@ public class CartController {
                 break;
             default:
                 iCartService.addProduct(product.get().getId(), cart);
-                return "redirect:/";
+                return "redirect:/home/homeProduct";
         }
-        return "redirect:/shopping-cart";
+        return "redirect:/shopping_cart/list";
     }
 
     @GetMapping("clearAllItem")
     public String clearShoppingCart(@SessionAttribute("cart") Cart cart) {
         cart.getCart().clear();
-        return "redirect:/shopping-cart";
+        return "redirect:/shopping_cart/list";
     }
 }

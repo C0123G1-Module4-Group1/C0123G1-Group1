@@ -36,7 +36,7 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> getAll() {
-        return iProductRepository.findAll();
+        return iProductRepository.findAllByStatusIsFalse();
     }
 
     @Override

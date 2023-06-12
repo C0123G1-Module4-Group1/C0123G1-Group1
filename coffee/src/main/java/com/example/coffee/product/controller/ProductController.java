@@ -7,6 +7,7 @@ import com.example.coffee.product.service.EmailService;
 import com.example.coffee.product.service.IProductService;
 import com.example.coffee.product.service.ISizeService;
 import com.example.coffee.product.service.ITypeService;
+import com.example.coffee.shopping_cart.model.Cart;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.File;
+import java.util.List;
 
 
 @Controller
@@ -100,4 +102,5 @@ public class ProductController {
 //            return "redirect:/";
 //        }
 //    }
+
 }

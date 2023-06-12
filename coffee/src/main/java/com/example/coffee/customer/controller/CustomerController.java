@@ -43,7 +43,7 @@ public class CustomerController {
         boolean check = iCustomerService.createCustomer(customer);
         redirectAttributes.addFlashAttribute("check1", check);
         redirectAttributes.addFlashAttribute("customerDTO", customerDTO);
-        return "redirect:/customer/create";
+        return "redirect:/customer/list";
     }
 
     @GetMapping("/delete/{id}")
@@ -69,7 +69,7 @@ public class CustomerController {
         boolean check = iCustomerService.updateCustomer(customer);
         redirectAttributes.addFlashAttribute("check2", check);
         redirectAttributes.addFlashAttribute("customerDTO", customerDTO);
-        return "redirect:/customer/update";
+        return "redirect:/customer/list";
     }
 
     @GetMapping("/search")
