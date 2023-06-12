@@ -420,6 +420,7 @@
                                         <td style="font-size: 16px;width: 8%;color: black">ID Product</td>
                                         <td style="font-size: 16px;width: 15%;color: black">Name Product</td>
                                         <td style="font-size: 16px;width: 7%;color: black">Price</td>
+                                        <td style="font-size: 16px;width: 7%;color: black">Size</td>
                                         <td style="font-size: 16px;width: 7%;color: black">Quantity</td>
                                         <td style="font-size: 16px;width: 15%;color: black">Create Time</td>
                                         <td style="font-size: 16px;width: 15%;color: black">Total Price</td>
@@ -431,6 +432,7 @@
                                         <th th:text="${list.product.id}"></th>
                                         <th th:text="${list.product.name}"></th>
                                         <th th:text="${list.priceProduct}"></th>
+                                        <th th:text="${list.sizeProduct.size}"></th>
                                         <th th:text="${list.quantity}"></th>
                                         <th th:text="${list.createTime}"></th>
                                         <th th:text="${list.quantity * list.priceProduct}"></th>
