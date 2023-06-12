@@ -342,18 +342,18 @@
                                         data-bs-target="#exampleModal">Check all employee account
                                 </button>
                             </div>
-                            <div class="col-auto">
+                            <div class="col-auto d-flex">
                                 <form method="post" class="d-flex" th:action="@{/staff/search}">
                                     <input style="width: 15vw" class="form-control me-2" type="search" name="name"
                                            placeholder="Nhập tên" aria-label="Search" th:value="${name}">
                                     <button class="btn btn btn-primary text-capitalize" type="submit">Search</button>
                                 </form>
-
+                                <a th:href="@{/staff}" style="margin-left: 3px"><button class="btn btn btn-primary text-capitalize" type="submit">Reset</button></a>
                             </div><!--//col-->
 
                             <div class="col-auto">
                                 <a th:href="@{/staff/createStaff}">
-                                    <button type="button" class="btn btn-info" fdprocessedid="tkcp7c">Add new employee
+                                    <button type="button" class="btn btn-info" >Add new employee
                                     </button>
                                 </a>
                             </div>
@@ -403,7 +403,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="staff : ${staffList}">
+                                    <tr th:each="staff : ${staffList}" th:if="${staff.user.role.name}!=ADMIN">
                                         <th th:text="${staff.id}"></th>
                                         <th th:text="${staff.getName()}"></th>
                                         <th th:text="${staff.getAddress()}"></th>

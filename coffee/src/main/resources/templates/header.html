@@ -78,11 +78,11 @@
                                 <b th:text="${#authentication.getName()}"></b>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <li>
-                                    <button class="dropdown-item" type="button">Setting</button>
-                                </li>
-                                <li><a th:href="@{/logout}" class="btn">
-                                    <button class="dropdown-item" type="button">Logout</button>
+                                <li><a th:href="@{/changePass}">
+                                    <button class="dropdown-item btn btn-info" type="button">change Password</button>
+                                </a></li>
+                                <li><a th:href="@{/logout}" >
+                                    <button class="dropdown-item btn btn-info" type="button">Logout</button>
                                 </a></li>
                             </ul>
                         </div>

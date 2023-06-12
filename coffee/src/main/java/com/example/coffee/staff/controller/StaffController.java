@@ -4,12 +4,15 @@ import com.example.coffee.staff.dto.StaffDto;
 import com.example.coffee.staff.model.Staff;
 import com.example.coffee.staff.service.IStaffService;
 import com.example.coffee.user.dto.UserDto;
+import com.example.coffee.user.model.SecurityUtils;
 import com.example.coffee.user.model.User;
+import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -107,11 +110,12 @@ public class StaffController {
 
     @PostMapping("/search")
     public String search(@RequestParam("name") String name, @RequestParam(value = "page", defaultValue = "0") int page, Model model) {
-        Pageable pageable = PageRequest.of(page, 7);
+        Pageable pageable = PageRequest.of(page, 9);
         Page<Staff> staffList = iStaffService.findAllByName(name, pageable);
         model.addAttribute("staffList", staffList);
         model.addAttribute("name", name);
         return "staff/staffList";
     }
+
 
 }
