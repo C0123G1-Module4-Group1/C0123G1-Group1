@@ -420,7 +420,7 @@
 <!--                                            &lt;!&ndash;                                    </a>&ndash;&gt;-->
 <!--                                        </th>-->
                                         <th>
-                                            <a th:href="@{/orderController/detail/{id}(id=${page.id})}">
+                                            <a th:href="@{/orderController/detail/{id}(id=${page.id})}" >
                                                 <button type="button" class="btn btn-primary text-capitalize"
                                                         data-bs-toggle="modal" fdprocessedid="q2sbyt">View
                                                     <!--                                            th:attr="onclick=|detail('${productCoffeeModelPage.id}','${productCoffeeModelPage.nameProduct}')|">Detail-->
@@ -428,17 +428,10 @@
                                             </a>
                                         </th>
                                         <th>
-                                            <!--                                            <a href="">-->
-                                            <!--                                                <button type="button" class="btn btn-danger" fdprocessedid="tkcp7c"-->
-                                            <!--                                                        data-bs-toggle="modal" data-bs-target="#deleteModal"-->
-                                            <!--                                                        th:attr="onclick=|infoDelete(${page.id})|">-->
-                                            <!--                                                    Delete-->
-                                            <!--                                                </button>-->
-                                            <!--                                                th:attr="onclick=|delete('${productCoffeeModel.id}','${productCoffeeModelPage.nameProduct}')|"-->
-                                            <!--                                            </a>-->
                                             <button type="button" class=" btn-del btn btn-danger" fdprocessedid="tkcp7c"
                                                     th:attr="onclick=|deletes('${page.id}')|">Delete
                                             </button>
+
                                         </th>
                                     </tr>
                                     </tbody>
@@ -467,7 +460,6 @@
             </li>
         </ul>
     </nav>
-
 </div><!--//app-wrapper-->
 
 <!-- Modal -->

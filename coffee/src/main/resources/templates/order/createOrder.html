@@ -343,10 +343,10 @@
                                                 </td>
                                                 <td th:text="${product.getKey().name}">
                                                 </td>
-                                                <td th:text="${product.getKey().price}">
+                                                <td th:text="${product.getKey().price}+ '(S)'">
                                                 </td>
                                                 <td>
-                                                    <select style="border: 1px solid #CCCCCC" class="form-control">
+                                                    <select style="border: 0px solid #CCCCCC">
                                                         <option th:each="size :${sizeProductList}"
                                                                 th:text="${size.size}"
                                                                 th:value="${size.rate}">
@@ -472,14 +472,19 @@
                                                             style="font-size: 20px;color: red"></small>00 đ</small>
                                                 </div>
                                                 <div class=" apointment d-flex" style="margin-top: 1.5%">
-<!--                                                    <a class="btn btn-outline-success "-->
-<!--                                                       th:href="@{/homeClient/viewProductType/{id}(id=${product.id})}"-->
-<!--                                                       style="font-size: 60%;border-radius: 30px;margin-left: 10%">Detail</a>-->
                                                     <a class="btn btn-outline-success "
                                                        th:href="@{/orderController/{id}/{idOrder}/addToCart(id = ${product.id}, idOrder = ${orderDTO.id})}"
-                                                       style="font-size: 60%;margin-left: 12%;border-radius: 30px">Add
-                                                        To Order</a>
+                                                       style="font-size: 60%;margin-left: 12%;border-radius: 30px">Add To Order</a>
+<!--                                                    <a class="btn btn-outline-success "-->
+<!--                                                       th:href="@{/orderController/{id}/{idOrder}/addToCart(id = ${product.id}, idOrder = ${orderDTO.id})}"-->
+<!--                                                       style="font-size: 60%;margin-left: 12%;border-radius: 30px"-->
+<!--                                                       data-bs-toggle="modal"-->
+<!--                                                       data-bs-target="#addModal" th:attr="onclick=|infoAdd(${product.id})|">Add To Order</a>-->
                                                 </div>
+                                                <!--                                            <button type="button" data-bs-toggle="modal" class="btn btn-danger"-->
+                                                <!--                                                    data-bs-target="#addModal" th:attr="onclick=|infoAdd(${row.id},'${row.title}')|">-->
+                                                <!--                                                delete-->
+                                                <!--                                            </button>-->
                                             </div>
                                         </div>
                                     </div>
@@ -494,35 +499,41 @@
 </div><!--//app-wrapper-->
 
 <!-- Modal -->
-<!--<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"-->
-<!--     aria-hidden="true">-->
-<!--    <div class="modal-dialog">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <h5 class="modal-title" id="exampleModalLabel">Delete Order</h5>-->
-<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--            </div>-->
-<!--&lt;!&ndash;            <form th:action="@{/orderController/delete}" method="post">&ndash;&gt;-->
-<!--            <form th:action="@{/delete}" method="get">-->
-<!--                <div class="modal-body">-->
-<!--                    <input hidden id="deleteId" name="deleteId">-->
-<!--                    <span>-->
-<!--                        Delete Order Number-->
-<!--                    </span>-->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Choose Size Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+<!--            <form th:action="@{/orderController/delete}" method="post">-->
+            <form th:action="@{/delete}" method="get">
+                <div class="modal-body">
+                    <input hidden id="deleteId" name="deleteId">
+                    <span>
+                        Choose Size:
+                    </span>
 <!--                    <span id="deleteId1" style=" color: red">-->
 <!--                    </span>-->
+                    <select style="border: 0px solid #CCCCCC" name="size" id="size">
+                        <option th:each="size :${sizeProductList}"
+                                th:text="${size.size}"
+                                th:value="${size.rate}">
+                        </option>
+                    </select>
 <!--                    <span>-->
 <!--                         ?-->
 <!--                    </span>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>-->
-<!--                    <button type="submit" class="btn btn-primary">YES</button>-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-primary">YES</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <!--<script th:inline="javascript">-->
 
@@ -683,10 +694,10 @@
 <script defer src="../static/assets/plugins/fontawesome/js/all.min.js"></script>
 </body>
 </html>
-<!--<script>-->
-<!--    function infoDelete(id) {-->
-<!--        document.getElementById("deleteId").value = id;-->
-<!--        document.getElementById("deleteId1").innerText = id;-->
-<!--    }-->
-<!--</script>-->
+<script>
+    function infoAdd(id) {
+        document.getElementById("deleteId").value = id;
+        document.getElementById("deleteId1").innerText = id;
+    }
+</script>
 
