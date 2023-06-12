@@ -13148,7 +13148,7 @@ head-side-virus:
 heading:
   aliases:
     names:
-      - header-footer
+      - header
     unicodes:
       secondary:
         - 10f1dc
