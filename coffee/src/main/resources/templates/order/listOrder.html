@@ -358,7 +358,7 @@
                                 </select>
                             </div>
                             <div class="col-auto">
-                                <a th:href="@{/create}">
+                                <a th:href="@{/orderController/create}">
                                     <button type="button" class="btn btn-info" fdprocessedid="tkcp7c">Add Order
                                     </button>
                                 </a>
@@ -420,7 +420,7 @@
 <!--                                            &lt;!&ndash;                                    </a>&ndash;&gt;-->
 <!--                                        </th>-->
                                         <th>
-                                            <a th:href="@{/detail/{id}(id=${page.id})}">
+                                            <a th:href="@{/orderController/detail/{id}(id=${page.id})}">
                                                 <button type="button" class="btn btn-primary text-capitalize"
                                                         data-bs-toggle="modal" fdprocessedid="q2sbyt">View
                                                     <!--                                            th:attr="onclick=|detail('${productCoffeeModelPage.id}','${productCoffeeModelPage.nameProduct}')|">Detail-->
@@ -454,7 +454,7 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center ">
             <li class="page-item ">
-                <a class="page-link" th:href="@{'/'(page=${orderPage.number -1})}"
+                <a class="page-link" th:href="@{'/orderController/'(page=${orderPage.number -1})}"
                    th:if="${orderPage.hasPrevious()}">Previous</a>
             </li>
             <!--                        <li style="border: 1px solid #CCCCCC" class="page-item active" ><a class="page-link active" th:text="${pageNo}" th:href="@{/(page=${pageNo})}"></a></li>-->
@@ -462,7 +462,7 @@
                                          th:text="${orderPage.number +1}"></a>
             </li>
             <li class="page-item">
-                <a class="page-link" th:href="@{'/'(page=${orderPage.number +1})}"
+                <a class="page-link" th:href="@{'/orderController/'(page=${orderPage.number +1})}"
                    th:if="${orderPage.hasNext()}">Next</a>
             </li>
         </ul>
@@ -514,7 +514,7 @@
         })
             .then((result) => {
                 if (result) {
-                    window.location = '/delete/' + id
+                    window.location = '/orderController/delete/' + id
                 } else {
                     swal("Thank you for not deleting")
                 }

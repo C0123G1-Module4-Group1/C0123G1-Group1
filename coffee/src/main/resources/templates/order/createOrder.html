@@ -354,11 +354,11 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <a th:href="@{/{id}/{idOrder}/remove(id = ${product.getKey().id}, idOrder = ${orderDTO.id})}">
+                                                    <a th:href="@{/orderController/{id}/{idOrder}/remove(id = ${product.getKey().id}, idOrder = ${orderDTO.id})}">
                                                         <span> - </span>
                                                     </a>
                                                     <span th:text="${product.getValue()}"></span>
-                                                    <a th:href="@{/{id}/{idOrder}/addToCart(id = ${product.getKey().id}, idOrder = ${orderDTO.id})}">
+                                                    <a th:href="@{/orderController/{id}/{idOrder}/addToCart(id = ${product.getKey().id}, idOrder = ${orderDTO.id})}">
                                                         <span> + </span> </a>
                                                 </td>
 <!--                                                <td th:text="${product.getKey().price * product.getValue() * }">-->
@@ -421,15 +421,15 @@
                             </div>
                         </div>
                         <div style="display: flex; justify-content: right; margin: 0; padding: 0">
-                            <a th:href="@{/{idOrder}/removeOrder(idOrder = ${orderDTO.id})}" style=" margin: 5px">
+                            <a th:href="@{/orderController/{idOrder}/removeOrder(idOrder = ${orderDTO.id})}" style=" margin: 5px">
                                 <button type="button" class="btn btn-danger" fdprocessedid="tkcp7c">Remove
                                 </button>
                             </a>
-                            <a th:href="@{/{idOrder}/clearCart(idOrder = ${orderDTO.id})}" style=" margin: 5px">
+                            <a th:href="@{/orderController/{idOrder}/clearCart(idOrder = ${orderDTO.id})}" style=" margin: 5px">
                                 <button type="button" class="btn btn-warning" fdprocessedid="tkcp7c">Clear
                                 </button>
                             </a>
-                            <a th:href="@{/createOrderDetail}" style=" margin: 5px">
+                            <a th:href="@{/orderController/createOrderDetail}" style=" margin: 5px">
                                 <button type="button" class="btn btn-info" fdprocessedid="tkcp7c">Add Order
                                 </button>
                             </a>
@@ -458,7 +458,7 @@
                                                  th:each=" product:${productList}" style="width: 20%;margin-top: 2%">
                                                 <div class="card p-2 py-3 text-center justify-content-center"
                                                      style="height: 70%">
-                                                    <a th:href="@{/{id}/{idOrder}/addToCart(id = ${product.id}, idOrder = ${orderDTO.id})}">
+                                                    <a th:href="@{/orderController/{id}/{idOrder}/addToCart(id = ${product.id}, idOrder = ${orderDTO.id})}">
                                                         <div class="img mb-2">
                                                             <img th:src="${product.image}" width="100"
                                                                  class="rounded-circle">
@@ -472,11 +472,11 @@
                                                             style="font-size: 20px;color: red"></small>00 đ</small>
                                                 </div>
                                                 <div class=" apointment d-flex" style="margin-top: 1.5%">
+<!--                                                    <a class="btn btn-outline-success "-->
+<!--                                                       th:href="@{/homeClient/viewProductType/{id}(id=${product.id})}"-->
+<!--                                                       style="font-size: 60%;border-radius: 30px;margin-left: 10%">Detail</a>-->
                                                     <a class="btn btn-outline-success "
-                                                       th:href="@{/homeClient/viewProductType/{id}(id=${product.id})}"
-                                                       style="font-size: 60%;border-radius: 30px;margin-left: 10%">Detail</a>
-                                                    <a class="btn btn-outline-success "
-                                                       th:href="@{/{id}/{idOrder}/addToCart(id = ${product.id}, idOrder = ${orderDTO.id})}"
+                                                       th:href="@{/orderController/{id}/{idOrder}/addToCart(id = ${product.id}, idOrder = ${orderDTO.id})}"
                                                        style="font-size: 60%;margin-left: 12%;border-radius: 30px">Add
                                                         To Order</a>
                                                 </div>

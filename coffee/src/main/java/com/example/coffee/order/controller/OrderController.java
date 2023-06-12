@@ -25,7 +25,7 @@ import java.util.Map;
 
 @Controller
 @SessionAttributes("cart")
-//@RequestMapping("/orderController")
+@RequestMapping("/orderController")
 public class OrderController {
     @Autowired
     private IOrderService orderService;
@@ -52,7 +52,7 @@ public class OrderController {
     public String deleteOrder(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         boolean check = orderService.deleteOrder(id);
         redirectAttributes.addFlashAttribute("checkDelete",check);
-        return "redirect:/";
+        return "redirect:/orderController/";
     }
     @GetMapping("/detail/{id}")
     public String detailOrder(@PathVariable Integer id,Model model,@RequestParam(value = "page", defaultValue = "0") Integer page){
@@ -103,7 +103,7 @@ public class OrderController {
 //        Product products = productService.findById(id);
 //        this.cartService.addProduct(products,productList);
         this.cartService.addProduct(id,productList);
-        return "redirect:/{idOrder}/returnOrder";
+        return "redirect:/orderController/{idOrder}/returnOrder";
     }
     @GetMapping("/{id}/{idOrder}/remove")
     public String removeToCart(@PathVariable("id") Integer id,@PathVariable("idOrder") Integer idOrder,
@@ -112,7 +112,7 @@ public class OrderController {
 //        Product products = productService.findById(id);
 //        this.cartService.removeProduct(products,productList);
         this.cartService.removeProduct(id,productList);
-        return "redirect:/{idOrder}/returnOrder";
+        return "redirect:/orderController/{idOrder}/returnOrder";
     }
     @GetMapping("/{idOrder}/createOrderDetail")
     public String createOrderDetail(@ModelAttribute("cart") Map<Integer, Integer> productList,@PathVariable("idOrder") Integer idOrder){
@@ -124,12 +124,12 @@ public class OrderController {
                              @PathVariable("idOrder") Integer idOrder,
                              RedirectAttributes ra){
         this.cartService.clearList(productList);
-        return "redirect:/{idOrder}/returnOrder";
+        return "redirect:/orderController/{idOrder}/returnOrder";
     }
     @GetMapping("/{idOrder}/removeOrder")
     public String removeOrder(@PathVariable("idOrder") Integer idOrder){
         orderService.deleteOrder(idOrder);
-        return "redirect:/";
+        return "redirect:/orderController/";
     }
 //    @GetMapping("/cart")
 //    public String carts(@SessionAttribute("cart") Map<Product,Integer> list , Model model){

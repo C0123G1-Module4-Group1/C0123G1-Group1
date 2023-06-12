@@ -453,7 +453,7 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center ">
             <li class="page-item ">
-                <a class="page-link" th:href="@{'/detail/' + ${orderDetail.id}(page=${orderDetailPage.number -1})}"
+                <a class="page-link" th:href="@{'/orderController/detail/' + ${orderDetail.id}(page=${orderDetailPage.number -1})}"
                    th:if="${orderDetailPage.hasPrevious()}">Previous</a>
             </li>
             <!--                        <li style="border: 1px solid #CCCCCC" class="page-item active" ><a class="page-link active" th:text="${pageNo}" th:href="@{/(page=${pageNo})}"></a></li>-->
@@ -461,7 +461,7 @@
                                      th:text="${orderDetailPage.number +1}"></a>
             </li>
             <li class="page-item">
-                <a class="page-link" th:href="@{'/detail/' + ${orderDetail.id}(page=${orderDetailPage.number +1})}"
+                <a class="page-link" th:href="@{'/orderController/detail/' + ${orderDetail.id}(page=${orderDetailPage.number +1})}"
                    th:if="${orderDetailPage.hasNext()}">Next</a>
             </li>
         </ul>
