@@ -3,19 +3,25 @@ package com.example.coffee.product.dto;
 
 
 import com.example.coffee.product.model.TypeProduct;
-import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
-public class ProductDTO {
+public class ProductDTO implements Validator {
     private  Integer id;
+    @NotBlank(message = "Tên không được để trống")
+    @Pattern(regexp = "^\\p{Lu}\\p{Ll}*(\\s\\p{Lu}\\p{Ll}*)*$", message = "Tên phải đúng định dạng.Phải là chữ không được là số" )
     private  String name;
+    @NotBlank(message = "Hình ảnh không được để trống")
     private String image;
     private  String describes;
     private LocalDateTime createTime;
     private  LocalDateTime updateTime;
     private TypeProduct typeProduct;
-
+    @NotNull(message = "Giá tiền không được để trống")
     private Float price;
     private String currency;
     private boolean status;
@@ -118,5 +124,15 @@ public class ProductDTO {
 
     public void setDescribes(String describes) {
         this.describes = describes;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }

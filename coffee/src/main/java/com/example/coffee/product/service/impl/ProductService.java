@@ -27,9 +27,11 @@ public class ProductService implements IProductService {
         return iProductRepository.findAllByStatusIsFalse(PageRequest.of(page, 5, Sort.by("id").descending()));
     }
 
+
+
     @Override
     public List<Product> getAll() {
-        return iProductRepository.findAllByStatusIsFalse();
+        return iProductRepository.findAll();
     }
 
     @Override

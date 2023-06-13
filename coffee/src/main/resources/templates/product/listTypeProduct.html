@@ -40,6 +40,12 @@
 
             <div class="row g-3 mb-4 align-items-center justify-content-between">
                 <div class="col-auto">
+                    <a th:href="@{/typeProduct/createType}">
+                        <button type="button" class="btn btn-success text-capitalize" fdprocessedid="tkcp7c">Add product
+                        </button>
+                    </a>
+                </div>
+                <div class="col-auto">
                     <h1 class="app-page-title mb-0"> Type Product</h1>
                 </div>
                 <div class="col-auto">
@@ -48,23 +54,18 @@
                             <div class="col-auto">
                                 <form class="table-search-form row gx-1 align-items-center" th:action="@{/productCoffee/searchProduct}" method="post">
                                     <div class="col-auto">
-                                        <input type="search" id="search-orders" name="name" th:value="${name}"
+                                        <input style="height: 40px" type="search" id="search-orders" name="name" th:value="${name}"
                                                class="form-control search-orders" placeholder="Search">
                                     </div>
                                     <div class="col-auto">
-                                        <button type="submit" class="btn btn-outline-success" fdprocessedid="ss9bui"
-                                                style="border:1px solid #33CC66">Search
+                                        <button type="submit" class="btn btn-outline-info text-capitalize" fdprocessedid="ss9bui"
+                                                style="border:1px solid #5b99ea">Search
                                         </button>
                                     </div>
                                 </form>
 
                             </div><!--//col-->
-                            <div class="col-auto">
-                                <a th:href="@{/typeProduct/createType}">
-                                    <button type="button" class="btn btn-info" fdprocessedid="tkcp7c">Add product
-                                    </button>
-                                </a>
-                            </div>
+
                         </div><!--//row-->
                     </div><!--//table-utilities-->
                 </div><!--//col-auto-->
@@ -83,7 +84,7 @@
                                         <td style="font-size: 16px;width: 30%;color: black">Type Product</td>
                                         <td style="font-size: 16px;width: 30%;color: black">Create Time</td>
                                         <td style="font-size: 16px;width: 30%;color: black">Update Time</td>
-                                        <td colspan="3" style="font-size: 20px;color: black;text-align: center">Function</td>
+                                        <td colspan="3" style="font-size: 20px;color: black;text-align: center">Action</td>
 
                                     </tr>
                                     </thead>
@@ -95,14 +96,14 @@
                                         <th th:text="${product.updateTime}"></th>
                                         <th>
                                             <a th:href="@{/typeProduct/updateType/{id}(id=${product.id})}">
-                                                <button type="button" class="btn btn-warning" >
+                                                <button type="button" class="btn btn-warning text-capitalize" >
                                                     Update
                                                 </button>
                                             </a>
                                         </th>
 
                                         <th>
-                                            <button type="button" class=" btn-del btn btn-danger" fdprocessedid="tkcp7c"
+                                            <button type="button" class=" btn-del btn btn-danger text-capitalize" fdprocessedid="tkcp7c"
                                                     th:attr="onclick=|deletes('${product.id}','${product.typeName}')|">
                                                 Delete
                                             </button>

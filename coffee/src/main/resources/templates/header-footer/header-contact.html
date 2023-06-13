@@ -31,24 +31,23 @@
         <div class="container">
             <div class="header-container d-flex align-items-center justify-content-between" style="height: 62px;">
                 <div class="logo">
-                    <h1 class="text-light"><a th:href="@{/homeClient/}"><span>Coffee</span></a></h1>
+                    <h1 class="text-light"><a th:href="@{/home/}"><span>Coffee</span></a></h1>
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto active" th:href="@{/}">Trang chủ</a></li>
-                        <li><a class="nav-link scrollto" th:href="@{home/homeProduct}">Sản phẩm</a></li>
-                        <li><a class="nav-link scrollto " th:href="@{product/contact}">Liên hệ</a></li>
+                        <li><a class="nav-link text-capitalize   " style="font-weight: bold;font-size: 20px" th:href="@{/home/}">Trang chủ</a></li>
+                        <li><a class="nav-link text-capitalize" style="font-weight: bold;font-size: 20px" th:href="@{/home/homeProduct}">Sản phẩm</a></li>
+                        <li><a class="nav-link  text-capitalize" style="font-weight: bold;font-size: 20px" th:href="@{/home/contact}">Liên hệ</a></li>
                         <li style="margin-top: 2%;">
-                            <form th:action="@{/homeClient/searchProduct}" method="post" class=""
+                            <form th:action="@{/home/searchProduct}" method="post" class=""
                                   style="margin-left: -4%;display: flex   ">
-                                <input type="text" name="name" th:value="${name}" placeholder="&ensp;&ensp;Tìm kiếm thao tên sản phẩm"
+                                <input type="text" name="name" th:value="${name}" placeholder="&ensp;&ensp;Tìm kiếm theo tên "
                                        style="margin-left: 10%;border-radius: 30px ;border-color: #f2f2f2">
                                 <button type="submit" class=" getstarted scrollto"  style="border-radius: 30px;margin-left:5px;border: none">Search</button>
                             </form>
                         </li>
-                        <li><a class="getstarted scrollto" th:href="@{shopping_cart/list}" style="margin-left: 7%">Giỏ hàng</a></li>
-
+                        <a class=" " th:href="@{/shopping_cart/list}" style="margin-left: -1%" ><img src="data:image/png;base64,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" style="width: 40%"/></a>
                     </ul>
                     <!--                    <i class="bi bi-list mobile-nav-toggle"></i>-->
                 </nav><!-- .navbar -->

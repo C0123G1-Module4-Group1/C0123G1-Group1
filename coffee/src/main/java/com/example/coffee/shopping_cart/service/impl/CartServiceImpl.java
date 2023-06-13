@@ -64,7 +64,7 @@ public class CartServiceImpl implements ICartService {
         long payment = 0;
 
         for (Map.Entry<Integer, Integer> entry : cart.getCart().entrySet()) {
-            Product product =iProductService.findProductById(entry.getKey());
+            Product product =iProductService.findById(entry.getKey());
             payment += product.getPrice() * entry.getValue();
         }
         return payment;
@@ -89,7 +89,7 @@ public class CartServiceImpl implements ICartService {
     public List<Product> findAllProductByCart(Cart cart) {
         List<Product>productList=new ArrayList<>();
         for (Map.Entry<Integer, Integer> entry : cart.getCart().entrySet()) {
-            Product product =iProductService.findProductById(entry.getKey());
+            Product product =iProductService.findById(entry.getKey());
             productList.add(product);
         }
         return productList;

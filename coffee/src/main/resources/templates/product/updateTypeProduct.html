@@ -30,95 +30,59 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <link rel="stylesheet" href="../../static/assets/css/portal.css">
+  <style>
+    .boxed {
+      width: 200px;
+      height: 300px;
+      position: relative;
+      background-clip: padding-box;
+      border: 10px solid transparent;
+      background-color: white;
+      border-radius: 20px;
+    }
+    .boxed:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      margin: -10px;
+      background-image: linear-gradient(to right top, #2979ff, #07a787);
+      border-radius: inherit;
+    }
+    .mg{
+      margin-top: 23px;
+    }
+  </style>
 </head>
-<body>
+<body style="margin-left: 15%">
 <div th:replace="~{header-footer/headerAdmin::header}"></div>
-<div class="container-fluid justify-content-center" style="margin-top: 5%">
-  <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
-      <div>
-        <div class="my-4 d-flex justify-content-center">
-          <h1>Add Type Product</h1>
+<div class="container boxed" style="margin-top: 100px;width: 800px; " >
+  <h2 style="text-align: center;margin-top: 20px">Add Type Product</h2>
+
+  <div id="form" class="form" style="margin-left: 10%;margin-right: 10%">
+    <form action="#" th:action="@{/typeProduct/editType}" method="post"
+          th:object="${updateType}" novalidate="novalidate">
+      <div hidden class="input-group input-group-sm mg" style="margin-top: 30px">
+        <div class="input-group-prepend">
+          <span class="input-group-text">id</span>
         </div>
-        <form th:action="@{/typeProduct/editType} "method="post"
-              th:object="${updateType}">
-          <div class="mt-3 form-group">
-            <label>Type Name Product</label>
-            <input type="text" class="form-control" th:field="*{id}">
-          </div>
-          <div class="mt-3 form-group">
-            <label>Type Name Product</label>
-            <input type="text" class="form-control" th:field="*{typeName}">
-          </div>
-          <div class="d-flex justify-content-around mt-5">
-            <button type="submit" class="btn btn-success " style="color: white">Create Type Product</button>
-          </div>
-        </form>
+        <input hidden type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+               th:field="*{id}"/>
       </div>
-    </div>
-    <div class="col-4"></div>
+      <div class="input-group input-group-sm mg" style="margin-top: 30px">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Name</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+               th:field="*{typeName}"/>
+      </div>
+            <p style="color: red;" th:if="${#fields.hasErrors('typeName')}" th:errors="*{typeName}" ></p>
+      <br>
+      <button type="submit" class="btn btn-success" style="margin-left: 35%">Update Type Product</button>
+    </form>
+
   </div>
 </div>
-<!--<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>-->
-<!--<script>-->
-<!--  const firebaseConfig = {-->
-<!--    apiKey: "AIzaSyC4aFqn1iFEK1CBnKxuPNDE_1AUnZtToZU",-->
-<!--    authDomain: "group1-379a8.firebaseapp.com",-->
-<!--    projectId: "group1-379a8",-->
-<!--    storageBucket: "group1-379a8.appspot.com",-->
-<!--    messagingSenderId: "369039862755",-->
-<!--    appId: "1:369039862755:web:c8761f39faeb0a6ad2ced6",-->
-<!--    measurementId: "G-3LL4BVYJ6P"-->
-<!--  };-->
-<!--  // Initialize Firebase-->
-<!--  firebase.initializeApp(firebaseConfig);-->
-<!--  // const analytics = getAnalytics(app);-->
-<!--  let uploader = document.getElementById('uploader');-->
-<!--  let fileButton = document.getElementById('btnThumbnailURL');-->
-<!--  fileButton.addEventListener('change', function (e) {-->
-<!--    let file = e.target.files[0];-->
-<!--    let storageRef = firebase.storage().ref('img/' + file.name);-->
-<!--    let task = storageRef.put(file);-->
-<!--    task.on('state_changed', function progress(snapshot) {-->
-<!--      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;-->
-<!--      uploader.value = percentage;-->
-
-<!--    });-->
-
-<!--    task-->
-<!--            .then(snapshot => snapshot.ref.getDownloadURL())-->
-<!--            .then(url => {-->
-<!--              document.getElementById('thumbnailURL').setAttribute("value", url);-->
-<!--            })-->
-<!--  });-->
-<!--</script>-->
-
-
-<!--<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyC4aFqn1iFEK1CBnKxuPNDE_1AUnZtToZU",
-    authDomain: "group1-379a8.firebaseapp.com",
-    projectId: "group1-379a8",
-    storageBucket: "group1-379a8.appspot.com",
-    messagingSenderId: "369039862755",
-    appId: "1:369039862755:web:c8761f39faeb0a6ad2ced6",
-    measurementId: "G-3LL4BVYJ6P"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>-->
-
 
 <script th:inline="javascript">
 

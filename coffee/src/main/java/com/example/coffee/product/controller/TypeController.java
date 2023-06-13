@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,7 +27,7 @@ public class TypeController {
     public String displayTypeCoffee(@PathVariable(value = "id") Integer id, Model model) {
         List<Product> productByType = iTypeService.findAllByStatusIsFalse(id);
         model.addAttribute("productByType", productByType);
-        return "product/coffee/listTypeProduct";
+        return "product/coffee/listTypeProduct1234";
     }
 
     @GetMapping("/typeProduct/{id}")
@@ -56,12 +58,16 @@ public class TypeController {
     }
 
     @PostMapping("/createTypeProduct")
-    public String createTypeProduct(@ModelAttribute TypeProductDTO typeProductDTO, RedirectAttributes attributes) {
+    public String createTypeProduct(@Validated  @ModelAttribute("createType") TypeProductDTO typeProductDTO, BindingResult  bindingResult, RedirectAttributes attributes) {
+        if (bindingResult.hasErrors()){
+            return "product/createTypeProduct";
+        }
+
         TypeProduct typeProduct = new TypeProduct();
         BeanUtils.copyProperties(typeProductDTO, typeProduct);
         boolean check = iTypeService.save(typeProduct);
         attributes.addFlashAttribute("mess",check);
-        return "redirect:/typeProduct/createType";
+        return "redirect:/typeProduct/typeProductList";
     }
     @GetMapping("/updateType/{id}")
     public String updateType(@PathVariable("id")Integer id, Model model){
@@ -72,7 +78,10 @@ public class TypeController {
         return "product/updateTypeProduct";
     }
     @PostMapping ("/editType")
-    public String editTypeProduct(@ModelAttribute("typeProduct")TypeProductDTO typeProductDTO,RedirectAttributes attributes){
+    public String editTypeProduct(@Validated @ModelAttribute("updateType")TypeProductDTO typeProductDTO,BindingResult bindingResult,RedirectAttributes attributes){
+      if (bindingResult.hasErrors()){
+          return "product/updateTypeProduct";
+      }
        TypeProduct typeProduct=new TypeProduct();
        BeanUtils.copyProperties(typeProductDTO,typeProduct);
         boolean check= iTypeService.save(typeProduct);

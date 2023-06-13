@@ -1,8 +1,15 @@
 package com.example.coffee.product.dto;
 
-public class TypeProductDTO {
-    private  Integer id;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+public class TypeProductDTO implements Validator {
+    private  Integer id;
+    @NotBlank(message = "Tên không được để trống")
+    @Pattern(regexp = "^\\p{Lu}\\p{Ll}*(\\s\\p{Lu}\\p{Ll}*)*$", message = "Tên phải đúng định dạng.Phải là chữ không được là số" )
     private String typeName;
     private boolean status;
 
@@ -38,5 +45,15 @@ public class TypeProductDTO {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }

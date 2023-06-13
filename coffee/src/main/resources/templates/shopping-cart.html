@@ -1,4 +1,4 @@
-ez
+
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Giỏ hàng</title>
@@ -29,37 +29,32 @@ ez
     <div class="container">
         <div class="table-wrap" style="border: 1px solid #21cf95">
             <table class="table table-responsive table-borderless table-hover">
-                <thead style="background-color: #21cf95">
-                <th>Tên sản phẩm</th>
-                <th>Ảnh</th>
-                <th>Giá bán</th>
-                <th>Số lượng</th>
-                <th>Tổng tiền</th>
-                <th>&nbsp;</th>
+                <thead style="background-color: #21cf95;height: 70%" >
+                <th class="">&ensp;&ensp;</th>
+                <th class="">Tên sản phẩm</th>
+                <th class="">Ảnh</th>
+                <th class="">Giá bán</th>
+                <th class="">Số lượng</th>
+                <th>&nbsp;&ensp;</th>
                 </thead>
                 <tbody>
                 <tr class="align-middle alert border-bottom" role="alert" th:each="product: ${productList}">
+                    <td>&ensp;</td>
                     <td>
                         <div>
                             <p class="m-0 fw-bold" th:text="${product.name}"></p>
                         </div>
                     </td>
                     <td>
-                        <img class="pic"
-                             width="40"
-                             th:href="${product.image}">
+                        <img class=""
+                             width="100"
+                             th:src="${product.image}">
                     </td>
                     <td>
-                        <div class="fw-600"><p class="m-0 text-muted"></p></div>
+                        <div class="fw-600"><p class="m-0 text-muted" th:text="${product.price}"></p></div>
                     </td>
                     <td class="">
                         <p th:text="${countQuantity}">
-                    </td>
-                    <td class="">
-
-                    </td>
-                    <td>
-                        <!--                                          <p th:text="${cartList.price *cartList.quantity}"></p>-->
                     </td>
                     <td>
                         <div class="" data-bs-dismiss="alert">

@@ -4,7 +4,7 @@ import com.example.coffee.product.dto.ProductDTO;
 import com.example.coffee.product.model.Product;
 import com.example.coffee.product.service.IProductService;
 import com.example.coffee.product.service.ITypeService;
-import com.example.coffee.shopping_cart.model.Cart;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -28,18 +30,13 @@ public class ProductController {
     private ITypeService iTypeService;
 
 
-
-    private static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
-    //    @Value("${upload.path}")
-    private String fileUpload;
-
     //    trang chủ của admin trước khi vào các chức năng
     @GetMapping("/homeAdmin")
     public String homeAdmin() {
         return "homeAdmin";
     }
 
-    @GetMapping("/listProduct")
+        @GetMapping("/listProduct")
     public String ShowListProduct(@RequestParam(value = "page", defaultValue = "0") Integer page, Model model,
                                   HttpServletResponse httpResponse) {
         Page<Product> productPage = iProductService.findAllByStatusIsFalse(page);
@@ -52,7 +49,7 @@ public class ProductController {
     //tạo ms sản phẩm
     @GetMapping("/create")
     private String create(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
-        model.addAttribute("productDto", new ProductDTO());
+        model.addAttribute("productDTO", new ProductDTO());
         model.addAttribute("typePage", iTypeService.findAll(page));
         return "product/createProduct";
     }
@@ -72,12 +69,16 @@ public class ProductController {
 //    }
 //tạo ms sản phẩm
     @PostMapping("/createProduct")
-    public String createProduct(@ModelAttribute("productPage") ProductDTO productDTO, RedirectAttributes attributes) {
+    public String createProduct(@Validated @ModelAttribute("productDTO") ProductDTO productDTO, BindingResult bindingResult, RedirectAttributes attributes) {
+     new ProductDTO().validate(productDTO,bindingResult);
+      if (bindingResult.hasErrors()){
+          return "product/createProduct";
+      }
         Product product = new Product();
         BeanUtils.copyProperties(productDTO, product);
         boolean check = iProductService.save(product);
         attributes.addFlashAttribute("mess", check);
-        return ("redirect:/productCoffee/create");
+        return "redirect:/productCoffee/listProduct";
     }
 
     //xoá sản phẩm
@@ -102,7 +103,10 @@ public class ProductController {
 
     //    chỉnh sửa sản phẩm
     @PostMapping("/editProduct")
-    public String editProduct(@ModelAttribute("productDTO") ProductDTO productDTO, RedirectAttributes attributes) {
+    public String editProduct( @Validated @ModelAttribute("productDTO") ProductDTO productDTO,BindingResult bindingResult, RedirectAttributes attributes) {
+        if (bindingResult.hasErrors()){
+            return "product/updateProduct";
+        }
         Product product = new Product();
         BeanUtils.copyProperties(productDTO, product);
         boolean check = iProductService.save(product);
@@ -118,33 +122,26 @@ public class ProductController {
         Product product = iProductService.findById(id);
         BeanUtils.copyProperties(product, productDTO);
         model.addAttribute("productPage", product);
-        return "product/viewProduct";
+        return "product/vieew";
     }
 
     //    tìm kiếm sản phẩm
     @PostMapping("/searchProduct")
-    public String search(@RequestParam("name") String name, @RequestParam(value = "page", defaultValue = "0") Integer page, Model model) {
+    public String search(@RequestParam("name") String name, @RequestParam(value = "page", defaultValue = "0") Integer page, Model model,RedirectAttributes attributes) {
         Pageable pageable= PageRequest.of(page,5);
         Page<Product> productPage = iProductService.searchProduct(name, pageable);
+        if (productPage.isEmpty()){
+            attributes.addFlashAttribute("empty",true);
+            return "redirect:/productCoffee/listProduct";
+        }
         model.addAttribute("productPage", productPage);
         model.addAttribute("name",name);
         return "product/listAdminProduct";
     }
 
 
-//    @PostMapping("/createSong")
-//    public String createSong(@Validated @ModelAttribute("song") SongDto songDto, BindingResult bindingResult , RedirectAttributes attributes) {
-//        new SongDto().validate(songDto, bindingResult);
-//        if (bindingResult.hasErrors()) {
-//            return "create";
-//        } else {
-//            Song song = new Song();
-//            BeanUtils.copyProperties(songDto, song);
-//            iSongService.save(song);
-//            attributes.addFlashAttribute("mess",true);
-//            return "redirect:/";
-//        }
-//    }
+
+
 
 }
 
