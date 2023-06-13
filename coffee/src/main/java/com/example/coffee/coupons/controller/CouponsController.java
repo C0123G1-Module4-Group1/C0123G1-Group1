@@ -79,7 +79,7 @@ public class CouponsController {
         BeanUtils.copyProperties(couponsDTO, coupons);
         boolean check= iCouponsService.updateCoupon(coupons);
         redirectAttributes.addFlashAttribute("check3", check);
-        return "redirect:/coupons/update/"+coupons.getId();
+        return "redirect:/coupons/list";
     }
 
     @GetMapping("/search")
@@ -87,7 +87,7 @@ public class CouponsController {
                                        @RequestParam(name = "page", defaultValue = "0") int page, Model model) {
         Page<Coupons> couponsPage = iCouponsService.findAllCouponsByCodeCoupons('%'+codeCoupons+'%', PageRequest.of(page, 5));
         if(couponsPage.isEmpty()){
-            model.addAttribute("searchMess","There is no data for searching");
+            model.addAttribute("searchMess","There is no data");
         }
         int size = couponsPage.getTotalPages();
         model.addAttribute("size", size);
