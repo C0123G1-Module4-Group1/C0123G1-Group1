@@ -72,7 +72,7 @@ public class Home {
 //    xem chi tiết 1 sản phẩm  ở giao diện
     @GetMapping("/viewProductType/{id}")
     public  String viewType(@PathVariable("id")Integer id,Model model){
-       Product product=iProductService.findById(id);
+       Product product=iProductService.findProductById(id);
        model.addAttribute("product",product);
        return "view";
     }
