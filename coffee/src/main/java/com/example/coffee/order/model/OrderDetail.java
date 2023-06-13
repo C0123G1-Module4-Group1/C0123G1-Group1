@@ -48,6 +48,14 @@ public class OrderDetail {
         this.updateTime = updateTime;
     }
 
+    public OrderDetail(Order order, Product product, SizeProduct sizeProduct, Float priceProduct, Integer quantity) {
+        this.order = order;
+        this.product = product;
+        this.sizeProduct = sizeProduct;
+        this.priceProduct = priceProduct;
+        this.quantity = quantity;
+    }
+
     public SizeProduct getSizeProduct() {
         return sizeProduct;
     }

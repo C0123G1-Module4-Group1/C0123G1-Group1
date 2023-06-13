@@ -1,8 +1,15 @@
 package com.example.coffee.order.service.impl;
 
+import com.example.coffee.order.dto.CartItem;
+import com.example.coffee.order.model.Order;
 import com.example.coffee.order.model.OrderDetail;
+import com.example.coffee.order.model.SizeProduct;
 import com.example.coffee.order.repository.IOrderDetailRepository;
 import com.example.coffee.order.service.IOderDetailService;
+import com.example.coffee.order.service.IOrderService;
+import com.example.coffee.order.service.ISizeProductService;
+import com.example.coffee.product.model.Product;
+import com.example.coffee.product.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +23,12 @@ import java.util.Map;
 public class OrderDetailService implements IOderDetailService {
     @Autowired
     private IOrderDetailRepository orderDetailRepository;
+    @Autowired
+    private IProductService productService;
+    @Autowired
+    private IOrderService orderService;
+    @Autowired
+    private ISizeProductService sizeProductService;
 
     @Override
     public Page<OrderDetail> findAllBiIdOrder(Integer id, Integer page) {
@@ -39,9 +52,13 @@ public void saveOrderDetail(Integer idOrder, OrderDetail orderDetail){
     }
 
     @Override
-    public void addOrderDetail(Map<Integer, Integer> productList, Integer idOrder) {
-        for (Map.Entry<Integer, Integer> p : productList.entrySet()) {
-
+    public void addOrderDetail(Map<Integer, CartItem> productList, Integer idOrder) {
+        for (Map.Entry<Integer, CartItem> p : productList.entrySet()) {
+            Product product = productService.findById(p.getValue().getIdProduct());
+            Order order = orderService.findById(idOrder);
+            SizeProduct size = sizeProductService.findBySize(p.getValue().getSizeProduct());
+            OrderDetail orderDetail = new OrderDetail(order,product,size,p.getValue().getPriceProduct(), p.getValue().getQuantity());
+            orderDetailRepository.save(orderDetail);
         }
     }
 }
