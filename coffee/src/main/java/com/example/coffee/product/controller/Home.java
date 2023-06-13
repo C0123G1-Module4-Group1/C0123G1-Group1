@@ -67,7 +67,7 @@ public class Home {
     @PostMapping("/homeMail")
     public String sendMail(@ModelAttribute("email") Email email) {
         emailService.sendEmail(email);
-        return "redirect:/homeClient/";
+        return "redirect:/home/";
     }
 //    xem chi tiết 1 sản phẩm  ở giao diện
     @GetMapping("/viewProductType/{id}")

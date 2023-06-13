@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Order List</title>
+    <title>Order Detail</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -35,48 +35,42 @@
 <body class="app">
 <div th:replace="~{header-footer/headerAdmin::header}"></div>
 <div class="app-wrapper">
+
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
             <div class="row g-3 mb-4 align-items-center justify-content-between">
                 <div class="col-auto">
-                    <h1 class="app-page-title mb-0">Orders</h1>
+                    <h1 class="app-page-title mb-0">Order</h1>
                 </div>
+            </div><!--//row-->
+            <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+                <table class="table app-table-hover mb-0 text-left">
+                    <thead>
+                    <tr>
+                        <td style="font-size: 16px;width: 10%;color: black">ID</td>
+                        <td style="font-size: 16px;width: 25%;color: black">Name Employee</td>
+                        <td style="font-size: 16px;width: 25%;color: black">Name Customer</td>
+                        <td style="font-size: 16px;width: 10%;color: black">Coupons(%)</td>
+                        <td style="font-size: 16px;width: 25%;color: black">Status Order</td>
+<!--                        <td style="font-size: 16px;width: 15%;color: black">Status Order</td>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:object="${orderDetail}">
+                        <th th:text="${orderDetail.id}"></th>
+                        <th th:text="${orderDetail.staff.name}"></th>
+                        <th th:text="${orderDetail.customer.name}"></th>
+                        <th th:text="${orderDetail.coupons.valuee}"></th>
+                        <th th:text="${orderDetail.status.status}"></th>
+<!--                        <th th:text="${orderDetail.status.status}"></th>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </nav>
+            <div class="row g-3 mb-4 align-items-center justify-content-between">
                 <div class="col-auto">
-                    <div class="page-utilities">
-                        <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
-                            <div class="col-auto">
-<!--                                <form class="table-search-form row gx-1 align-items-center">-->
-<!--                                    <div class="col-auto">-->
-<!--                                        <input type="text" id="search-orders" name="searchorders"-->
-<!--                                               class="form-control search-orders" placeholder="Search">-->
-<!--                                    </div>-->
-<!--                                    <div class="col-auto">-->
-<!--                                        <button type="button" class="btn btn-outline-success" fdprocessedid="ss9bui"-->
-<!--                                                style="border:1px solid #33CC66">Search-->
-<!--                                        </button>-->
-<!--                                    </div>-->
-<!--                                </form>-->
-
-                            </div><!--//col-->
-                            <div class="col-auto">
-
-<!--                                <select class="form-select w-auto">-->
-<!--                                    <option selected value="option-1">All</option>-->
-<!--                                    <option value="option-2">This week</option>-->
-<!--                                    <option value="option-3">This month</option>-->
-<!--                                    <option value="option-4">Last 3 months</option>-->
-
-<!--                                </select>-->
-                            </div>
-                            <div class="col-auto">
-                                <a th:href="@{/orderController/create}">
-                                    <button type="button" class="btn btn-info" fdprocessedid="tkcp7c">Add Order
-                                    </button>
-                                </a>
-                            </div>
-                        </div><!--//row-->
-                    </div><!--//table-utilities-->
-                </div><!--//col-auto-->
+                    <h1 class="app-page-title mb-0">Detail</h1>
+                </div>
             </div><!--//row-->
             <div class="tab-content" id="orders-table-tab-content">
                 <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
@@ -87,49 +81,41 @@
                                     <thead>
                                     <tr>
                                         <td style="font-size: 16px;width: 5%;color: black">ID</td>
-                                        <td style="font-size: 16px;width: 20%;color: black">Name Employee</td>
-                                        <td style="font-size: 16px;width: 20%;color: black">Name Customer</td>
-                                        <td style="font-size: 16px;width: 10%;color: black">Coupons(%)</td>
-                                        <td style="font-size: 16px;width: 25%;color: black">Status Order</td>
-<!--                                        <td style="font-size: 16px;width: 15%;color: black">Total Price</td>-->
-                                        <td colspan="2" style="font-size: 20px;color: black">Action</td>
+                                        <td style="font-size: 16px;width: 8%;color: black">ID Product</td>
+                                        <td style="font-size: 16px;width: 15%;color: black">Name Product</td>
+                                        <td style="font-size: 16px;width: 7%;color: black">Price (S)</td>
+                                        <td style="font-size: 16px;width: 7%;color: black">Size</td>
+                                        <td style="font-size: 16px;width: 7%;color: black">Quantity</td>
+                                        <td style="font-size: 16px;width: 15%;color: black">Create Time</td>
+                                        <td style="font-size: 16px;width: 15%;color: black">Total Price</td>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="page : ${orderPage}">
-                                        <th th:text="${page.id}"></th>
-                                        <th th:text="${page.staff.name}"></th>
-                                        <th th:text="${page.customer.name}"></th>
-                                        <th th:text="${(page.coupons.valuee * 100) % 100}"></th>
-                                        <th th:text="${page.status.status}"></th>
-<!--                                        <th th:text="${page.status.status}"></th>-->
-<!--                                        <th>-->
-<!--                                            &lt;!&ndash;                                    <a th:href="@{/update/{id}(id=${productCoffeeModelPage.id})}">&ndash;&gt;-->
-<!--                                            <button type="button" class="btn btn-warning" fdprocessedid="xlhea">Update-->
-<!--                                            </button>-->
-<!--                                            &lt;!&ndash;                                    </a>&ndash;&gt;-->
-<!--                                        </th>-->
-                                        <th>
-                                            <a th:href="@{/orderController/detail/{id}(id=${page.id})}" >
-                                                <button type="button" class="btn btn-primary text-capitalize"
-                                                        data-bs-toggle="modal" fdprocessedid="q2sbyt">View
-                                                    <!--                                            th:attr="onclick=|detail('${productCoffeeModelPage.id}','${productCoffeeModelPage.nameProduct}')|">Detail-->
-                                                </button>
-                                            </a>
-                                        </th>
-                                        <th>
-                                            <button type="button" class=" btn-del btn btn-danger" fdprocessedid="tkcp7c"
-                                                    th:attr="onclick=|deletes('${page.id}')|">Delete
-                                            </button>
-
-                                        </th>
+                                    <tr th:each="list : ${orderDetailPage}">
+                                        <th th:text="${list.id}"></th>
+                                        <th th:text="${list.product.id}"></th>
+                                        <th th:text="${list.product.name}"></th>
+                                        <th th:text="${list.priceProduct}"></th>
+                                        <th th:text="${list.sizeProduct.size}"></th>
+                                        <th th:text="${list.quantity}"></th>
+                                        <th th:text="${list.createTime}"></th>
+                                        <th th:text="${list.quantity * list.priceProduct * list.sizeProduct.rate}"></th>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div><!--//table-responsive-->
                         </div><!--//app-card-body-->
                     </div><!--//app-card-->
+                    <div class="app-card app-card-orders-table shadow-sm">
+                        <div style="text-align: right;margin-right: 10%;color: orangered; font-size: 18px; height: 110%">
+                            <span >Total Price = </span>
+                            <span th:text="${totalPrice}"></span>
+                            <span>.000đ</span>
+                        </div>
+                    </div>
+
                 </div>
+
             </div><!--//tab-content-->
         </div><!--//container-fluid-->
     </div><!--//app-content-->
@@ -137,19 +123,20 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center ">
             <li class="page-item ">
-                <a class="page-link" th:href="@{'/orderController/'(page=${orderPage.number -1})}"
-                   th:if="${orderPage.hasPrevious()}">Previous</a>
+                <a class="page-link" th:href="@{'/orderController/detail/' + ${orderDetail.id}(page=${orderDetailPage.number -1})}"
+                   th:if="${orderDetailPage.hasPrevious()}">Previous</a>
             </li>
             <!--                        <li style="border: 1px solid #CCCCCC" class="page-item active" ><a class="page-link active" th:text="${pageNo}" th:href="@{/(page=${pageNo})}"></a></li>-->
-            <li class="page-item    "><a class="page-link"
-                                         th:text="${orderPage.number +1}"></a>
+            <li class="page-item"><a class="page-link"
+                                     th:text="${orderDetailPage.number +1}"></a>
             </li>
             <li class="page-item">
-                <a class="page-link" th:href="@{'/orderController/'(page=${orderPage.number +1})}"
-                   th:if="${orderPage.hasNext()}">Next</a>
+                <a class="page-link" th:href="@{'/orderController/detail/' + ${orderDetail.id}(page=${orderDetailPage.number +1})}"
+                   th:if="${orderDetailPage.hasNext()}">Next</a>
             </li>
         </ul>
     </nav>
+
 </div><!--//app-wrapper-->
 
 <!-- Modal -->
@@ -161,7 +148,7 @@
 <!--                <h5 class="modal-title" id="exampleModalLabel">Delete Order</h5>-->
 <!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
 <!--            </div>-->
-<!--&lt;!&ndash;            <form th:action="@{/orderController/delete}" method="post">&ndash;&gt;-->
+<!--            &lt;!&ndash;            <form th:action="@{/orderController/delete}" method="post">&ndash;&gt;-->
 <!--            <form th:action="@{/delete}" method="get">-->
 <!--                <div class="modal-body">-->
 <!--                    <input hidden id="deleteId" name="deleteId">-->
@@ -196,7 +183,7 @@
         })
             .then((result) => {
                 if (result) {
-                    window.location = '/orderController/delete/' + id
+                    window.location = '/delete/' + id
                 } else {
                     swal("Thank you for not deleting")
                 }

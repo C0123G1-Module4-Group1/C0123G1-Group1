@@ -35,7 +35,6 @@
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
-
             <div class="row g-3 mb-4 align-items-center justify-content-between">
                 <div class="col-12">
                     <div class="page-utilities">
@@ -93,7 +92,7 @@
                                     <tr class="flex-sm-fill text-sm-center" th:each="coupons : ${couponsPage}">
                                         <td th:text="${coupons.id}"></td>
                                         <td th:text="${coupons.codeCoupons}"></td>
-                                        <td th:text="${coupons.valuee * 100}"></td>
+                                        <td th:text="${coupons.valuee}"></td>
                                         <td th:text="${coupons.proviso}"></td>
                                         <td th:text="${coupons.beginTime}"></td>
                                         <td th:text="${coupons.endTime}"></td>
@@ -277,6 +276,24 @@
             timer: 2000,
         });
     }
+    function showAlertUpdateSuccess() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Successfully',
+            text: 'Update successfully!',
+            confirmButtonText: 'Oke',
+            timer: 2000,
+        });
+    }
+    function showAlertUpdateFail() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Failure',
+            text: 'Update fail!',
+            confirmButtonText: 'Oke',
+            timer: 2000,
+        });
+    }
 </script>
 <!-- MDB -->
 <script
@@ -298,6 +315,7 @@
 <script th:inline="javascript">
     let create = /*[[${check1}]]*/ true;
     let delete1 =/*[[${check2}]]*/ true;
+    let update =/*[[${check3}]]*/ true;
 
     // thêm mới
     if (create != null) {
@@ -313,6 +331,14 @@
             showAlertDeleteSuccess();
         } else {
             showAlertDeleteFail()
+        }
+    }
+
+    if (update != null) {
+        if (update) {
+            showAlertUpdateSuccess();
+        } else {
+            showAlertUpdateFail();
         }
     }
 </script>
