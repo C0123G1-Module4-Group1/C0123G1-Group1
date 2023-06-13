@@ -5,7 +5,6 @@ import com.example.coffee.product.model.Product;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IProductService {
 

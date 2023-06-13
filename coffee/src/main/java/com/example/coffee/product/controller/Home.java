@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -91,5 +92,27 @@ public class Home {
         model.addAttribute("email", new Email());
         return "product/homeProduct";
     }
+//    gởi mail
+    @PostMapping("/homeMail")
+    public String sendMail(@ModelAttribute("email") Email email) {
+        emailService.sendEmail(email);
+        return "redirect:/homeClient/";
+    }
+//    xem chi tiết 1 sản phẩm  ở giao diện
+    @GetMapping("/viewProductType/{id}")
+    public  String viewType(@PathVariable("id")Integer id,Model model){
+       Product product=iProductService.findById(id);
+       model.addAttribute("product",product);
+       return "view";
+    }
+    //    tìm kiếm sản phẩm
+    @PostMapping("/searchProduct")
+    public String search(@RequestParam("name") String name,  Model model) {
+        List<Product> productList = iProductService.findAllBySearchProduct(name);
+        model.addAttribute("productList", productList);
+        model.addAttribute("name",name);
+        return "product/homeProduct";
+    }
+
 
 }

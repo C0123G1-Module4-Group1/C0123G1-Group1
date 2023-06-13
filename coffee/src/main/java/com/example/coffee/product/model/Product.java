@@ -37,14 +37,14 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "id_type_product" ,referencedColumnName = "id")
      private TypeProduct typeProduct;
-    @ManyToOne
-    @JoinColumn(name = "id_size" ,referencedColumnName = "id")
-    private SizeProduct sizeProduct;
+//    @ManyToOne
+//    @JoinColumn(name = "id_size" ,referencedColumnName = "id")
+//    private SizeProduct sizeProduct;
 
     public Product() {
     }
 
-    public Product(Integer id, String name, String image, String describes, Float price, String currency, boolean status, LocalDateTime createTime, LocalDateTime updateTime, TypeProduct typeProduct, SizeProduct sizeProduct) {
+    public Product(Integer id, String name, String image, String describes, Float price, String currency, boolean status, LocalDateTime createTime, LocalDateTime updateTime, TypeProduct typeProduct) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -55,7 +55,7 @@ public class Product {
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.typeProduct = typeProduct;
-        this.sizeProduct = sizeProduct;
+//        this.sizeProduct = sizeProduct;
     }
 
     public Integer getId() {
@@ -138,11 +138,5 @@ public class Product {
         this.typeProduct = typeProduct;
     }
 
-    public SizeProduct getSizeProduct() {
-        return sizeProduct;
-    }
 
-    public void setSizeProduct(SizeProduct sizeProduct) {
-        this.sizeProduct = sizeProduct;
-    }
 }

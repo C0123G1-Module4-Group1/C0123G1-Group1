@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>update</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+            rel="stylesheet"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="../../static/assets/css/portal.css">
+</head>
+<body>
+<div th:replace="~{header-footer/headerAdmin::header}"></div>
+<div class="container-fluid justify-content-center" style="margin-top: 5%">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div>
+                <div class="my-4 d-flex justify-content-center">
+                    <h1>Update Product</h1>
+                </div>
+                <form th:action="@{/productCoffee/editProduct}" method="post"
+                      th:object="${productDTO}">
+                    <div class="mt-3 form-group">
+                        <input hidden type="text" class="form-control" th:field="*{id}">
+                    </div>
+                    <div class="mt-3 form-group">
+                        <label>Name Product</label>
+                        <input type="text" class="form-control" th:field="*{name}">
+                    </div>
+                    <div class="mt-3 form-group">
+                        <label>Price Product</label>
+                        <input type="number" class="form-control" th:field="*{price}">
+                    </div>
+                    <div class="form-outline mt-3 ">
+                        <label>Type Product</label>
+                        <select style="border: 1px solid #CCCCCC" class="form-control" th:field="*{typeProduct}">
+                            <option th:each="typePage :${typePage}"
+                                    th:text="${typePage.typeName}"
+                                    th:value="${typePage.id}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="thumbnailURL">Image:</label>
+                        <input type="hidden" id="thumbnailURL" th:field="*{image}" />
+                        <input id="btnThumbnailURL" type="file" class="form-control"/>
+                        <progress id="uploader" value="0" max="100">0%</progress>
+                    </div>
+                    <div class="mt-3 form-group">
+                        <input hidden value="vnd" id="nfo" type="text" class="form-control" th:field="*{currency}">
+                    </div>
+                    <div class="mt-3 form-group">
+                        <label>Describes</label>
+                        <textarea  type="text" class="form-control" th:field="*{describes}"></textarea>
+                    </div>
+                    <div class="d-flex justify-content-around mt-5">
+                        <button type="submit" class="btn btn-success " style="color: white">Update Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyC4aFqn1iFEK1CBnKxuPNDE_1AUnZtToZU",
+        authDomain: "group1-379a8.firebaseapp.com",
+        projectId: "group1-379a8",
+        storageBucket: "group1-379a8.appspot.com",
+        messagingSenderId: "369039862755",
+        appId: "1:369039862755:web:c8761f39faeb0a6ad2ced6",
+        measurementId: "G-3LL4BVYJ6P"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // const analytics = getAnalytics(app);
+    let uploader = document.getElementById('uploader');
+    let fileButton = document.getElementById('btnThumbnailURL');
+    fileButton.addEventListener('change', function (e) {
+        let file = e.target.files[0];
+        let storageRef = firebase.storage().ref('img/' + file.name);
+        let task = storageRef.put(file);
+        task.on('state_changed', function progress(snapshot) {
+            let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            uploader.value = percentage;
+
+        });
+
+        task
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then(url => {
+                document.getElementById('thumbnailURL').setAttribute("value", url);
+            })
+    });
+</script>
+
+
+<!--<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyC4aFqn1iFEK1CBnKxuPNDE_1AUnZtToZU",
+    authDomain: "group1-379a8.firebaseapp.com",
+    projectId: "group1-379a8",
+    storageBucket: "group1-379a8.appspot.com",
+    messagingSenderId: "369039862755",
+    appId: "1:369039862755:web:c8761f39faeb0a6ad2ced6",
+    measurementId: "G-3LL4BVYJ6P"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>-->
+
+
+<script th:inline="javascript">
+
+    function deletes(id, titles) {
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to remove the date name " + " " + titles + " " + "?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+
+        })
+            .then((result) => {
+                if (result) {
+                    window.location = '/delete/' + id
+                } else {
+                    swal("Thank you for not deleting")
+                }
+            });
+    }
+
+    async function detail(id, titles) {
+        Swal.fire({
+            text: 'Would you like to see the details of this title: ' + titles + "",
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonColor: '#CCCCCC',
+            confirmButtonColor: '#3366FF',
+            confirmButtonText: 'May I try it out ?'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    window.location.href = '/detail/' + id
+                )
+            }
+        })
+    }
+
+</script>
+
+<script th:inline="javascript">
+
+    <!--    thêm mới-->
+    function createBlog() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Successfully',
+            text: 'Successfully added new!',
+            confirmButtonText: 'Oke',
+            timer: 2000,
+        });
+    }
+
+
+    function createBlog1() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Failure',
+            text: 'Add new failure!',
+            confirmButtonText: 'Oke',
+            timer: 2000,
+        });
+    }
+
+    // xoá
+    function deleteCategory1() {
+        swal({
+            title: "Delete Successfully!",
+            icon: "success",
+            button: "Oke",
+            timer: 2000,
+        });
+    }
+
+    // chỉnh sửa
+    function updateCategory() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Successfully',
+            text: 'Successful editing!',
+            confirmButtonText: 'Oke',
+            timer: 2000,
+        });
+    }
+
+    function updateCategory1() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Failure',
+            text: 'Edit failed!',
+            confirmButtonText: 'Oke',
+            timer: 2000,
+        });
+    }
+</script>
+<script th:inline="javascript">
+    let createCategory = /*[[${mess}]]*/ true;
+    let deleteCategory =/*[[${check}]]*/ true;
+    let update =/*[[${flag}]]*/ true;
+    // thêm mới
+    if (createCategory != null) {
+        if (createCategory) {
+            createBlog();
+        } else {
+            createBlog1();
+        }
+    }
+    // xoá
+    if (deleteCategory) {
+        deleteCategory1();
+    }
+    // update
+    if (update != null) {
+        if (update) {
+            updateCategory();
+        } else {
+            updateCategory1();
+        }
+    }
+
+</script>
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<!--<script src="https://kit.fontawesome.com/yourcode.js"></script>-->
+<script src="/static/jquery/jquery-3.5.1.min.js"></script>
+<!--<script src="/static/dist/sweetalert.js/sweetalert.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"-->
+<!--        crossorigin="anonymous"></script>-->
+
+<!-- Javascript -->
+<script src="../static/assets/plugins/popper.min.js"></script>
+<script src="../static/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<!-- Page Specific JS -->
+<script src="../static/assets/js/app.js"></script>
+<!-- FontAwesome JS-->
+<script defer src="../static/assets/plugins/fontawesome/js/all.min.js"></script>
+</body>
+</html>
+
+
+
