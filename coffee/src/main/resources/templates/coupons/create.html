@@ -5,7 +5,6 @@
     <title>Add new coupons</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="../../static/js/coupons_ajax.js"></script>
 </head>
 <body>
 <div th:replace="~{header::header}"></div>
@@ -17,29 +16,29 @@
                 <div class="my-4 d-flex justify-content-center">
                     <h1>Add new coupons</h1>
                 </div>
-                <form th:action="@{/coupons/create-coupons}" th:object="${couponsDTO}" method="post">
+                <form th:action="@{/coupons/create_coupons}" th:object="${couponsDTO}" method="post">
                     <div class="mt-3">
                         <label>Code Coupons</label>
-                        <input class="form-control" required type="text" th:field="*{codeCoupons}">
+                        <input class="form-control" type="text" th:field="*{codeCoupons}">
                         <p style="color: red" th:if="${#fields.hasErrors('codeCoupons')}" th:errors="*{codeCoupons}"></p>
                     </div>
                     <div class="mt-3">
                         <label>Value</label>
-                        <input class="form-control" required type="text" th:field="*{value}">
-                        <p style="color: red" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></p>
+                        <input class="form-control" type="text" th:field="*{valuee}">
+                        <p style="color: red" th:if="${#fields.hasErrors('valuee')}" th:errors="*{valuee}"></p>
                     </div>
                     <div class="mt-3">
                         <label>Proviso</label>
-                        <input class="form-control" required type="text" th:field="*{proviso}">
+                        <input class="form-control" type="text" th:field="*{proviso}">
                         <p style="color: red" th:if="${#fields.hasErrors('proviso')}" th:errors="*{proviso}"></p>
                     </div>
                     <div class="mt-3">
                         <label>Begin Time</label>
-                        <input class="form-control" required type="date" id="bookingDate" th:field="*{beginTime}">
+                        <input class="form-control"  type="date" name="beginTime" th:field="*{beginTime}">
                     </div>
                     <div class="mt-3">
                         <label>End Time</label>
-                        <input class="form-control" required type="date" id="bookingDate2" th:field="*{endTime}">
+                        <input class="form-control"  type="date" name="endTime" th:field="*{endTime}">
                     </div>
                     <div class="d-flex justify-content-around mt-5">
                         <button type="submit" class="btn btn-success">Create</button>
@@ -56,23 +55,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-<script>$(document).ready(function(){
-    var todaysDate = new Date();   // Get today's date.
-
-    // Get today's date.
-    var year = todaysDate.getFullYear();         // yyyy
-    var month = ("0" + (todaysDate.getMonth() + 1)).slice(-2); // mm
-    var day = ("0" + todaysDate.getDate()).slice(-2);  // dd
-
-    var dtTomorrow = (year + "-" + month + "-" + (+day+1));   // Results in yyyy-mm-dd
-    var dtToday = (year + "-" + month + "-" + day);   // Results in yyyy-mm-dd
-
-    // Now set the max date value for the calendar to be that date.
-    $("#bookingDate").attr('max', ((1+year) + "-" + month + "-" + day));
-    $("#bookingDate").attr('min', dtToday);
-    $("#bookingDate2").attr('max', ((1+year) + "-" + month + "-" + day));
-    $("#bookingDate2").attr('min', dtTomorrow);
-});
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
 </script>
 </body>
 </html>

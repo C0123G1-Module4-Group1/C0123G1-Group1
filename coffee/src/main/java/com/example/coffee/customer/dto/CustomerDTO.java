@@ -10,13 +10,13 @@ public class CustomerDTO implements Validator {
 
     private Integer id;
 
-    @NotBlank(message = "Not less than 0")
+    @NotBlank(message = "Can't be left blank")
     private String name;
-    @NotBlank(message = "Not less than 0")
+    @NotBlank(message = "Can't be left blank")
     private String phoneNumber;
-    @NotBlank(message = "Not less than 0")
+    @NotBlank(message = "Can't be left blank")
     private String email;
-    @NotBlank(message = "Not less than 0")
+    @NotBlank(message = "Can't be left blank")
     private String address;
 
     private LocalDate createTime;
@@ -99,18 +99,18 @@ public class CustomerDTO implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        String regexNameCustomer = "^([\\p{L}\\s]{2,30}\\s)?([\\p{L}\\s]{2,30}\\s)+[\\p{L}\\s]{2,30}$";
+        String regexNameCustomer = "^\\p{Lu}\\p{Ll}*(\\s\\p{Lu}\\p{Ll}*)*$";
         String regexEmailCustomer = "^[a-z]\\w{5,}\\@[a-z]{3,5}\\.[a-z]{2,5}$";
         String regexPhoneNumberCustomer = "^((\\+84)|0)[0-9]{9,10}$";
         CustomerDTO customerDTO =(CustomerDTO) target;
         if (!customerDTO.name.matches(regexNameCustomer)){
-            errors.rejectValue("codeCoupons", "", "Can't be less than 0 and contain only uppercase letters and numbers");
+            errors.rejectValue("name", "", "Can't be less than 0 and contain only uppercase letters and numbers");
         }
         if (!customerDTO.email.matches(regexEmailCustomer)){
-            errors.rejectValue("email", "", "error");
+            errors.rejectValue("email", "", "Email must be at least 6 characters and .com,@");
         }
         if (!customerDTO.phoneNumber.matches(regexPhoneNumberCustomer)){
-            errors.rejectValue("phoneNumber", "", "error");
+            errors.rejectValue("phoneNumber", "", "Phone number must start from 0 or +84 and have 9 or 10 numbers");
         }
     }
 }

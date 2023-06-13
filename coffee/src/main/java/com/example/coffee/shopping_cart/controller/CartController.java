@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-
 @Controller
 @RequestMapping("/shopping_cart")
 @SessionAttributes("cart")
@@ -33,8 +31,8 @@ public class CartController {
 
     @GetMapping("/operation/{id}")
     public String operationToCart(@PathVariable("id") Integer id, @SessionAttribute("cart") Cart cart, @RequestParam(value = "action", required = false) String action) {
-        Optional<Product> product = iProductService.findProduct(id);
-        if (!product.isPresent()) {
+        Product product = iProductService.findProductById(id);
+        if (product!=null) {
             return "/error";
         }
         if (action == null) {
@@ -42,16 +40,16 @@ public class CartController {
         }
         switch (action) {
             case "increase":
-                iCartService.addProduct(product.get().getId(), cart);
+                iCartService.addProduct(product.getId(), cart);
                 break;
             case "reduce":
-                iCartService.subProduct(product.get().getId(), cart);
+                iCartService.subProduct(product.getId(), cart);
                 break;
             case "deleteItem":
-                iCartService.deleteItem(product.get().getId(), cart);
+                iCartService.deleteItem(product.getId(), cart);
                 break;
             default:
-                iCartService.addProduct(product.get().getId(), cart);
+                iCartService.addProduct(product.getId(), cart);
                 return "redirect:/home/homeProduct";
         }
         return "redirect:/shopping_cart/list";

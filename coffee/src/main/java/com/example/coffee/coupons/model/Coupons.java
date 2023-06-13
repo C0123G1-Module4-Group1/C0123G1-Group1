@@ -5,7 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity(name ="coupons")
 @EntityListeners(AuditingEntityListener.class)
@@ -16,19 +16,19 @@ public class Coupons {
     @Column(name = "code_coupons")
     private String codeCoupons;
     @Column(columnDefinition = "FLOAT DEFAULT 1.0")
-    private Float value;
+    private Float valuee;
     @Column(name = "proviso",columnDefinition = "FLOAT DEFAULT 1.0")
     private Float proviso;
-    @Column(name = "begin_time",nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
-    private LocalDateTime beginTime;
+    @Column(name = "begin_time")
+    private LocalDate beginTime;
     @Column(name = "end_time")
-    private LocalDateTime endTime;
+    private LocalDate endTime;
     @CreationTimestamp
     @Column(name = "create_time", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
-    private LocalDateTime createTime;
+    private LocalDate createTime;
     @Column(name = "update_time", columnDefinition = "TIMESTAMP DEFAULT now()")
     @UpdateTimestamp
-    private LocalDateTime updateTime;
+    private LocalDate updateTime;
     @Column(name = "delete_status")
     private boolean deleteStatus;
 
@@ -52,12 +52,12 @@ public class Coupons {
         this.codeCoupons = codeCoupons;
     }
 
-    public Float getValue() {
-        return value;
+    public Float getValuee() {
+        return valuee;
     }
 
-    public void setValue(Float value) {
-        this.value = value;
+    public void setValuee(Float value) {
+        this.valuee = value;
     }
 
     public Float getProviso() {
@@ -68,35 +68,35 @@ public class Coupons {
         this.proviso = proviso;
     }
 
-    public LocalDateTime getBeginTime() {
+    public LocalDate getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(LocalDateTime beginTime) {
+    public void setBeginTime(LocalDate beginTime) {
         this.beginTime = beginTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public LocalDate getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
     }
 
-    public LocalDateTime getCreateTime() {
+    public LocalDate getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(LocalDate createTime) {
         this.createTime = createTime;
     }
 
-    public LocalDateTime getUpdateTime() {
+    public LocalDate getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public void setUpdateTime(LocalDate updateTime) {
         this.updateTime = updateTime;
     }
 

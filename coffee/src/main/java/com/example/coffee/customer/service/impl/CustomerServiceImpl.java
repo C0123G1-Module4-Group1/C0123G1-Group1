@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 
 
 @Service
@@ -22,7 +21,6 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    @Transactional(rollbackOn = Throwable.class)
     public Boolean createCustomer(Customer customer) {
         try {
             iCustomerRepository.save(customer);
@@ -34,7 +32,6 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    @Transactional(rollbackOn = Throwable.class)
     public Boolean deleteCustomer(Integer id) {
         try {
             Customer customer = iCustomerRepository.findById(id).get();
@@ -53,18 +50,18 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    @Transactional(rollbackOn = Throwable.class)
     public Boolean updateCustomer(Customer customer) {
         try {
             iCustomerRepository.save(customer);
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-        return null;
+        return true;
     }
 
     @Override
-    public Page<Customer> findAllCustomerByNameOrPhoneNumberOrAdress(String nameSearch, String optionSearch, Pageable pageable) {
+    public Page<Customer> findAllCustomerByNameOrPhoneNumberOrAddress(String nameSearch, String optionSearch, Pageable pageable) {
         String nameCustomer = "";
         String phoneNumber = "";
         String adress = "";
