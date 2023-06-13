@@ -17,4 +17,6 @@ public interface ICouponsService {
     Boolean updateCoupon(Coupons coupons);
 
     Page<Coupons> findAllCouponsByCodeCoupons(String codeCoupons,Pageable pageable);
+
+
 }

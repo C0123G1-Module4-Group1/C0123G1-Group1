@@ -1,4 +1,23 @@
 package com.example.coffee.order.repository;
 
-public interface IOrderRepository {
+import com.example.coffee.order.model.Order;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import javax.transaction.Transactional;
+
+public interface IOrderRepository extends JpaRepository<Order, Integer> {
+    //@Query(value = "SELECT * FROM orders WHERE status_delete = 0",nativeQuery = true)
+    Page<Order> findAllByDeleteStatusIsFalse(PageRequest id);
+
+//    @Query(value = "UPDATE orders SET status_delete = 1 WHERE id = :id", nativeQuery = true)
+//    void setDeleteStatusToTrue(@Param("id") Integer id);
+    @Query(value = "UPDATE Order SET deleteStatus = 1 WHERE id = :id")
+    @Modifying
+    @Transactional
+    boolean setDeleteStatusToTrue(@Param("id") Integer id);
 }

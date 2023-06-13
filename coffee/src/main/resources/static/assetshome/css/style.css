@@ -660,7 +660,11 @@ section {
 # Cta
 --------------------------------------------------------------*/
 .cta {
+<<<<<<< HEAD
+  background: linear-gradient(rgba(2, 2, 2, 0.7), rgba(0, 0, 0, 0.7)), url("../img/cta-bg.jpg") fixed center center;
+=======
   background: linear-gradient(rgba(2, 2, 2, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1418479631014-8cbf89db3431?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTd8MTg5OTI5fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60") fixed center center;
+>>>>>>> origin/Vien-branch
   background-size: cover;
   padding: 60px 0;
 }
