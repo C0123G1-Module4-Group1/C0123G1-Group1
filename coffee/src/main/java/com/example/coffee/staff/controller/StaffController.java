@@ -39,7 +39,10 @@ public class StaffController {
 
     @GetMapping("/createStaff")
     public String createStaff(Model model) {
-        model.addAttribute("staff", new StaffDto());
+        UserDto userDto=new UserDto();
+        StaffDto staffDto=new StaffDto();
+        staffDto.setUserDto(userDto);
+        model.addAttribute("staff", staffDto);
         return "staff/createStaff";
     }
 
@@ -82,10 +85,7 @@ public class StaffController {
             return "staff/updateStaff";
         }
         Staff staff = new Staff();
-        User user = new User();
         BeanUtils.copyProperties(staffDto, staff);
-        BeanUtils.copyProperties(staffDto.getUserDto(), user);
-        staff.setUser(user);
         iStaffService.save(staff);
         redirectAttributes.addFlashAttribute("flag", true);
         return "redirect:/staff";

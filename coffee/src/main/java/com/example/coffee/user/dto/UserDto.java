@@ -12,7 +12,7 @@ public class UserDto  {
     @NotBlank(message = "Tài khoản ko được để trống")
     private String account;
     @NotBlank(message = "Tài khoản ko được để trống")
-    @Size(min = 5, max = 45, message = "Mật khẩu không được quá 45 kí tự hoặc dưới 5 kí tự!")
+    @Size(min = 5, max = 100, message = "Mật khẩu không được quá 100 kí tự hoặc dưới 5 kí tự!")
     private String password;
     private Boolean deleteStatus;
     private Role role;

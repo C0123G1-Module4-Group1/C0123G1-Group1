@@ -1,160 +1,77 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Employee</title>
+  <title>Employee Detail</title>
 
+  <!-- Meta -->
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+
+  <!-- Font Awesome -->
+  <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet"
+  />
+  <!-- Google Fonts -->
+  <link
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet"
+  />
+  <!-- MDB -->
+  <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+          rel="stylesheet"
+  />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="../../static/assets/css/portal.css">
 </head>
-
-<link rel="stylesheet" type="text/css"
-      href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
-
-<!-- Font Awesome -->
-<link
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        rel="stylesheet"
-/>
-<!-- Google Fonts -->
-<link
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        rel="stylesheet"
-/>
-<!-- MDB -->
-<link
-        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
-        rel="stylesheet"
-/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<link rel="stylesheet" href="../../static/assets/css/portal.css">
 <body>
+<!--<div style="margin-top: -70%" th:replace="~{header-footer/header-view::headerView}"></div>-->
 <div th:replace="~{header-footer/headerAdmin::header}"></div>
-<!-- Dashboard -->
+<div class="container mt-5 mb-5" style=" margin-top: 8%">
+  <div class="row d-flex justify-content-center" style="margin-left: 15%">
+    <div class="col-md-10" style=" margin-top: 10%">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-6" th:object="${staff}">
+            <div class="images p-3">
+              <div class="text-center p-4">
+                <h2 th:text="${staff.name}"></h2>
+                <img style="border: 1px solid slategray" id="main-image" src="https://ibiettuot.com/wp-content/uploads/2021/10/avatar-mac-dinh.png" width="250"/>
 
-<div class="d-flex flex-column flex-lg-row h-lg-full  ">
-    <div class=" col-lg-2" style="position: fixed ;z-index: 5;margin-top: 15%">
-        <nav class="  navbar-vertical h-lg-screen  px-0 py-lg-2 navbar-light   border-bottom-lg-0 border-end-lg"
-             style="background-color: white"
-             id="navbarVertical">
-            <div class="container-fluid">
-                <a class="navbar-brand nav-item nav-link py-lg-2 mb-lg-5 px-lg-6 me-0" href="#"><h3
-                        style=" margin-top: -100%">Coffee Shop</h3></a>
-                <!--                                 User menu (mobile)-->
-                <!--                                <div class="navbar-user d-lg-none"> &lt;!&ndash; Dropdown &ndash;&gt;-->
-                <!--                                    <div class="dropdown"> &lt;!&ndash; Toggle &ndash;&gt; <a href="#" id="sidebarAvatar" role="button"-->
-                <!--                                                                              data-bs-toggle="dropdown" aria-haspopup="true"-->
-                <!--                                                                              aria-expanded="false">-->
-                <!--                                        <div class="avatar-parent-child"> <span-->
-                <!--                                                class="avatar-child avatar-badge bg-success"></span></div>-->
-                <!--                                    </a> &lt;!&ndash; Menu &ndash;&gt;-->
-                <!--                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar"><a href="#"-->
-                <!--                                                                                                                        class="dropdown-item">Profile</a>-->
-                <!--                                            <a href="#" class="dropdown-item">Settings</a> <a href="#" class="dropdown-item">Billing</a>-->
-                <!--                                            <hr class="dropdown-divider">-->
-                <!--                                            <a href="#" class="dropdown-item">Logout</a></div>-->
-                <!--                                    </div>-->
-                <!--                                </div> &lt;!&ndash; Collapse &ndash;&gt;-->
-                <div class=" navbar-collapse " id="sidebarCollapse" style="margin-left: 10%;margin-top: -80%">
-                    <!-- Navigation -->
-                    <ul class="navbar-nav" style="margin-top: -40%">
-                        <li class="nav-item"><a class="nav-link" href="#"><h4> Dashboard</h4></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#"> <i class="bi bi-bar-chart"></i> Product </a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="#"> <i class="bi bi-bookmarks"></i> Staff </a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="#"> <i class="bi bi-people"></i> Order </a></li>
-                        <li class="nav-item"><a class="nav-link" href="#"> <i class="bi bi-people"></i> Customer </a>
-                        </li>
-                    </ul> <!-- Divider -->
-                    <hr class="navbar-divider my-5 opacity-20"><!-- Navigation -->
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="#"> <i class="bi bi-person-square"></i> Account
-                        </a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="#"> <i class="bi bi-box-arrow-left"></i> Logout
-                        </a>
-                        </li>
-                    </ul>
-                </div>
+
+              </div>
             </div>
-        </nav> <!-- Main content -->
-    </div><!-- Vertical Navbar -->
-    <div class=" col-lg-10" style="margin-left: 16.3%">
-        <div class="h-screen flex-grow-1 overflow-y-lg-auto"> <!-- Header -->
-            <nav class="navbar   "
-                 style="position: sticky;top:0;left: 0;right: 0;z-index: 4;margin-left: 1%;background-color: white ">
-                <div class="container-fluid">
-                    <div style="display: flex; margin: 8px;position: relative">
-                        <div>
-                            <a th:href="@{/staff/createStaff}">
-                                <button class="btn btn-success text-capitalize" style="border: 1px solid #dddddd;">
-                                    Add New Employee
-                                </button>
-                            </a>
+          </div>
+          <div class="col-md-6">
+            <div class="product p-4">
+            </div>
+            <div class="mt-4 mb-3">
+              <div style="display: flex">
+              <small style="font-weight: bold"> Address:&nbsp;</small><p class="" th:text="${staff.address}"></p></div>
+              <div style="display: flex"> <small style="font-weight: bold"> PhoneNumber:&nbsp;</small><p class="" th:text="${staff.phoneNumber}"></p></div>
+              <div style="display: flex"> <small style="font-weight: bold"> Email:&nbsp;</small><p class="" th:text="${staff.email}"></p></div>
+              <div style="display: flex"> <small style="font-weight: bold">Time to start working:&nbsp;</small><p class="" th:text="${staff.createAt}"></p></div>
+              <div style="display: flex"><small style="font-weight: bold"> Account:&nbsp;</small><p class="" th:text="${staff.user.getAccount()}"></p></div>
+              <div style="display: flex"><small style="font-weight: bold"> Role:&nbsp;</small><p class="" th:text="${staff.user.role.name}"></p></div>
 
-                        </div>
+          </div>
 
-                    </div>
-                    <form class="d-flex" method="get">
-                        <form method="get" class="d-flex">
-                            <input style="width: 15vw" class="form-control me-2" type="search" name="titles"
-                                   placeholder="Search by Title" aria-label="Search">
-                            <button class="btn btn btn-primary text-capitalize" type="submit">Search</button>
-                        </form>
-                    </form>
-                </div>
-            </nav>
-            </header>
-            <main class="py-6 bg-surface-secondary" style="background-color: white;">
-                <div class="container-fluid"> <!-- Card stats -->
-                    <div class="row g-6 mb-6">
-                        <div class=" col-12">
 
-                        </div>
-                        <div class="card shadow border-0 mb-7">
-                            <div class="card-header"><h5 style="text-align: center;font-size: 180%" class="mb-0">
-                                Employee</h5>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover " style="border: 1px solid #CCCCCC">
-                                    <tr>
-                                        <td style="font-size: 20px;color: black">Id</td>
-                                        <td style="font-size: 20px;width: 18%;color: black">Name </td>
-                                        <td style="font-size: 20px;width: 17%;color: black">Address</td>
-                                        <td style="font-size: 20px;width: 17%;color: black">Phone Number</td>
-                                        <td style="font-size: 20px;width: 17%;color: black">Email</td>
-                                        <td style="font-size: 20px;width: 20%;color: black">Time to start working</td>
-                                        <td style="font-size: 20px;width: 15%;color: black">Account</td>
-                                        <td style="font-size: 20px;width: 15%;color: black">Position</td>
-                                    </tr>
-                                    <tr  th:if="!${staff.getDeleteStatus()}">
-                                        <th th:text="${staff.id}"></th>
-                                        <th th:text="${staff.getName()}"></th>
-                                        <th th:text="${staff.getAddress()}"></th>
-                                        <th th:text="${staff.getPhoneNumber()}"></th>
-                                        <th th:text="${staff.getEmail()}"></th>
-                                        <th th:text="${staff.getCreateAt()}"></th>
-                                        <th th:text="${staff.getUser().getAccount()}"></th>
-                                        <th th:text="${staff.getUser().getRole().getName()}"></th>
-                                    </tr>
-                                </table>
-                                <p>
-                                    <a th:href="@{/staff}">
-                                        <button class="btn btn-outline-dark" style="margin-left: 600px;margin-top: 30px">Back
-                                        </button>
-                                    </a>
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </main>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-
+</div>
+</div>
+<!--<div style="margin-top: -70%" th:replace="~{header-footer/footer::footerHome}"></div>-->
 <script
         type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
@@ -178,16 +95,5 @@
 <script src="../static/assets/js/app.js"></script>
 <!-- FontAwesome JS-->
 <script defer src="../static/assets/plugins/fontawesome/js/all.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-
-<script>
-
-</script>
-<!-- Button to Open the Modal -->
-
-
-<!-- The Modal -->
-
 </body>
 </html>
-
