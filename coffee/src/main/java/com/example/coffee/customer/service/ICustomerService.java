@@ -15,5 +15,5 @@ public interface ICustomerService {
 
     Boolean updateCustomer(Customer customer);
 
-    Page<Customer> findAllCustomerByNameOrPhoneNumberOrAdress(String nameSearch,String optionSearch,Pageable pageable);
+    Page<Customer> findAllCustomerByNameOrPhoneNumberOrAddress(String nameSearch,String optionSearch,Pageable pageable);
 }
