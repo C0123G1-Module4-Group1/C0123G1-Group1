@@ -43,7 +43,6 @@ public class CouponsServiceImpl implements ICouponsService {
     }
 
     @Override
-    @Transactional(rollbackOn = Throwable.class)
     public Boolean createCoupons(Coupons coupons) {
         try {
             iCouponsRepository.save(coupons);
@@ -55,7 +54,6 @@ public class CouponsServiceImpl implements ICouponsService {
     }
 
     @Override
-    @Transactional(rollbackOn = Throwable.class)
     public Boolean deleteCoupons(Integer id) {
         try {
             Coupons coupons = findCoupons(id);

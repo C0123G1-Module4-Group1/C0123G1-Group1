@@ -36,16 +36,15 @@ public class ProductController {
         return "homeAdmin";
     }
 
-        @GetMapping("/listProduct")
+
+    @GetMapping("/listProduct")
     public String ShowListProduct(@RequestParam(value = "page", defaultValue = "0") Integer page, Model model,
                                   HttpServletResponse httpResponse) {
         Page<Product> productPage = iProductService.findAllByStatusIsFalse(page);
         model.addAttribute("productPage", productPage);
-//        xoá cache
         httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         return "product/listAdminProduct";
     }
-
     //tạo ms sản phẩm
     @GetMapping("/create")
     private String create(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
@@ -54,19 +53,6 @@ public class ProductController {
         return "product/createProduct";
     }
 
-    //    @PostMapping("/createProduct")
-//    public String createProduct(@ModelAttribute("productPage") ProductDTO productDTO,@RequestParam("image") MultipartFile image) throws IOException {
-//        Product product = new Product();
-//        BeanUtils.copyProperties(productDTO, product);
-//        StringBuilder fileNames = new StringBuilder();
-////        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, image.getOriginalFilename());
-//        fileNames.append(image.getOriginalFilename());
-//        Files.write(Paths.get(UPLOAD_DIRECTORY), image.getBytes());
-////        model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
-//
-//        iProductService.save(product);
-//        return "redirect:/";
-//    }
 //tạo ms sản phẩm
     @PostMapping("/createProduct")
     public String createProduct(@Validated @ModelAttribute("productDTO") ProductDTO productDTO, BindingResult bindingResult, RedirectAttributes attributes) {
@@ -94,7 +80,7 @@ public class ProductController {
     @GetMapping("/update/{id}")
     public String updateProduct(@PathVariable(value = "id") Integer id, @RequestParam(value = "page", defaultValue = "0") Integer page, Model model) {
         ProductDTO productDTO = new ProductDTO();
-        Product product = iProductService.findById(id);
+        Product product = iProductService.findProductById(id);
         BeanUtils.copyProperties(product, productDTO);
         model.addAttribute("productDTO", productDTO);
         model.addAttribute("typePage", iTypeService.findAll(page));
@@ -119,7 +105,7 @@ public class ProductController {
     @GetMapping("/viewProduct/{id}")
     public String view(@PathVariable("id") Integer id, Model model) {
         ProductDTO productDTO = new ProductDTO();
-        Product product = iProductService.findById(id);
+        Product product = iProductService.findProductById(id);
         BeanUtils.copyProperties(product, productDTO);
         model.addAttribute("productPage", product);
         return "product/vieew";
@@ -129,7 +115,7 @@ public class ProductController {
     @PostMapping("/searchProduct")
     public String search(@RequestParam("name") String name, @RequestParam(value = "page", defaultValue = "0") Integer page, Model model,RedirectAttributes attributes) {
         Pageable pageable= PageRequest.of(page,5);
-        Page<Product> productPage = iProductService.searchProduct(name, pageable);
+        Page<Product> productPage = iProductService.searchProduct(name,pageable);
         if (productPage.isEmpty()){
             attributes.addFlashAttribute("empty",true);
             return "redirect:/productCoffee/listProduct";

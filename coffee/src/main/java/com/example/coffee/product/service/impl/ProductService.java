@@ -9,7 +9,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ProductService implements IProductService {
@@ -18,14 +18,11 @@ public class ProductService implements IProductService {
 
 
     @Override
-    public Optional<Product> findProduct(Integer id) {
-        return iProductRepository.findById(id);
+    public Product findProductById(Integer id) {
+        return iProductRepository.findProductByStatusIsFalseAndId(id);
     }
 
-//    @Override
-//    public Product findProductById(Integer id) {
-//        return iProductRepository.findProductByStatusIsFalseAndId(id);
-//    }
+
 
     @Override
     public Page<Product> findAllByStatusIsFalse(Integer page) {
@@ -44,6 +41,11 @@ public class ProductService implements IProductService {
         iProductRepository.save(product);
         return true;
     }
+
+//    @Override
+//    public List<Product> findAllByProduct(String name) {
+//        return iProductRepository.findAllBySearchProduct(name);
+//    }
 
     @Override
     public Product findById(Integer id) {

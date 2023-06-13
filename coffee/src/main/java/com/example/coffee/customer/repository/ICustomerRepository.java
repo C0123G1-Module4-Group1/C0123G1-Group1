@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
+    @Query("select c from customer as c where c.deleteStatus =false")
     Page<Customer> findAllByDeleteStatusIsFalse(Pageable pageable);
 
     Customer findCustomerByDeleteStatusIsFalseAndId(Integer id);

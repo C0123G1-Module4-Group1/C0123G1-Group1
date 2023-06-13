@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/coupons/")
+@RequestMapping("/api/coupons")
 @CrossOrigin("http://localhost:8080/coupons/")
 public class CouponsRestController {
     @Autowired
