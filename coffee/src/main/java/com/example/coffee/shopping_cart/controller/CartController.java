@@ -32,7 +32,7 @@ public class CartController {
     @GetMapping("/operation/{id}")
     public String operationToCart(@PathVariable("id") Integer id, @SessionAttribute("cart") Cart cart, @RequestParam(value = "action", required = false) String action) {
         Product product = iProductService.findProductById(id);
-        if (product!=null) {
+        if (product==null) {
             return "/error";
         }
         if (action == null) {
