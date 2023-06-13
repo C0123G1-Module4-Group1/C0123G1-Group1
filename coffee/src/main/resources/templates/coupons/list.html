@@ -276,6 +276,24 @@
             timer: 2000,
         });
     }
+    function showAlertUpdateSuccess() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Successfully',
+            text: 'Update successfully!',
+            confirmButtonText: 'Oke',
+            timer: 2000,
+        });
+    }
+    function showAlertUpdateFail() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Failure',
+            text: 'Update fail!',
+            confirmButtonText: 'Oke',
+            timer: 2000,
+        });
+    }
 </script>
 <!-- MDB -->
 <script
@@ -297,6 +315,7 @@
 <script th:inline="javascript">
     let create = /*[[${check1}]]*/ true;
     let delete1 =/*[[${check2}]]*/ true;
+    let update =/*[[${check3}]]*/ true;
 
     // thêm mới
     if (create != null) {
@@ -312,6 +331,14 @@
             showAlertDeleteSuccess();
         } else {
             showAlertDeleteFail()
+        }
+    }
+
+    if (update != null) {
+        if (update) {
+            showAlertUpdateSuccess();
+        } else {
+            showAlertUpdateFail();
         }
     }
 </script>

@@ -19,6 +19,7 @@ import java.security.Principal;
 public class UserController {
     @Autowired
     private IUserService iUserService;
+    @Autowired
     private AuthenticationManager authenticationManager;
 
 
@@ -28,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping("/changePass")
-    public String savePass(@RequestParam("pass") String pass, @RequestParam("newPass") String newPass, @RequestParam("newPassConfirm") String newPassConfirm, RedirectAttributes attributes, Model model) {
+    public String savePass(@RequestParam(value = "pass",defaultValue = "") String pass, @RequestParam(value = "newPass",defaultValue = "") String newPass, @RequestParam(value = "newPassConfirm",defaultValue = "") String newPassConfirm, RedirectAttributes attributes, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         if (newPass.equals(newPassConfirm)) {

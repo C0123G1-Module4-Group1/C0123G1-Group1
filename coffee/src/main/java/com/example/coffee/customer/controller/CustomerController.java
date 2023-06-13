@@ -79,7 +79,7 @@ public class CustomerController {
         BeanUtils.copyProperties(customerDTO, customer);
         boolean check = iCustomerService.updateCustomer(customer);
         redirectAttributes.addFlashAttribute("check3", check);
-        return "redirect:/customer/update/" + customerDTO.getId();
+        return "redirect:/customer/list";
     }
 
     @GetMapping("/search")
@@ -87,7 +87,7 @@ public class CustomerController {
                                        @RequestParam(name = "page", defaultValue = "0") int page, Model model) {
         Page<Customer> customerPage = iCustomerService.findAllCustomerByNameOrPhoneNumberOrAddress(nameSearch, optionSearch, PageRequest.of(page, 5));
         if (customerPage.isEmpty()) {
-            model.addAttribute("searchMess", "There is no data for searching");
+            model.addAttribute("searchMess", "There is no data");
         }
         int size = customerPage.getTotalPages();
         model.addAttribute("size", size);
