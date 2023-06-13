@@ -114,7 +114,7 @@
             </div><!--//app-header-content-->
         </div><!--//container-fluid-->
     </div><!--//app-header-inner-->
-    <div id="app-sidepanel" class="app-sidepanel sidepanel-hidden">
+    <div id="app-sidepanel" class="app-sidepanel sidepanel-hidden" style="position: fixed;left: 0">
         <div id="sidepanel-drop" class="sidepanel-drop"></div>
         <div class="sidepanel-inner d-flex flex-column">
             <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
@@ -325,66 +325,12 @@
 
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
-
             <div class="row g-3 mb-4 align-items-center justify-content-between">
                 <div class="col-auto">
-                    <h1 class="app-page-title mb-0">Orders</h1>
+                    <h1 class="app-page-title mb-0">Order</h1>
                 </div>
-                <div class="col-auto">
-                    <div class="page-utilities">
-                        <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
-                            <div class="col-auto">
-                                <form class="table-search-form row gx-1 align-items-center">
-                                    <div class="col-auto">
-                                        <input type="text" id="search-orders" name="searchorders"
-                                               class="form-control search-orders" placeholder="Search">
-                                    </div>
-                                    <div class="col-auto">
-                                        <button type="button" class="btn btn-outline-success" fdprocessedid="ss9bui"
-                                                style="border:1px solid #33CC66">Search
-                                        </button>
-                                    </div>
-                                </form>
-
-                            </div><!--//col-->
-                            <div class="col-auto">
-
-                                <select class="form-select w-auto">
-                                    <option selected value="option-1">All</option>
-                                    <option value="option-2">This week</option>
-                                    <option value="option-3">This month</option>
-                                    <option value="option-4">Last 3 months</option>
-
-                                </select>
-                            </div>
-                            <div class="col-auto">
-                                <a th:href="@{/create}">
-                                    <button type="button" class="btn btn-info" fdprocessedid="tkcp7c">Add product
-                                    </button>
-                                </a>
-                            </div>
-                        </div><!--//row-->
-                    </div><!--//table-utilities-->
-                </div><!--//col-auto-->
             </div><!--//row-->
-
-
             <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-                <!--                <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab"-->
-                <!--                   href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>-->
-                <!--                <a class="flex-sm-fill text-sm-center nav-link" id="orders-paid-tab" data-bs-toggle="tab"-->
-                <!--                   href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Paid</a>-->
-                <!--                <a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab"-->
-                <!--                   href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">Pending</a>-->
-                <!--                <a class="flex-sm-fill text-sm-center nav-link" id="orders-cancelled-tab" data-bs-toggle="tab"-->
-                <!--                   href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"-->
-                <!--                   aria-selected="false">Cancelled</a>-->
-                <!--                <a class="flex-sm-fill text-sm-center nav-link" data-bs-toggle="tab"-->
-                <!--                   href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"-->
-                <!--                   aria-selected="false">Cancelled</a>-->
-                <!--                <a class="flex-sm-fill text-sm-center nav-link" data-bs-toggle="tab"-->
-                <!--                   href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"-->
-                <!--                   aria-selected="false">Cancelled</a>-->
                 <table class="table app-table-hover mb-0 text-left">
                     <thead>
                     <tr>
@@ -408,6 +354,11 @@
                     </tbody>
                 </table>
             </nav>
+            <div class="row g-3 mb-4 align-items-center justify-content-between">
+                <div class="col-auto">
+                    <h1 class="app-page-title mb-0">Detail</h1>
+                </div>
+            </div><!--//row-->
             <div class="tab-content" id="orders-table-tab-content">
                 <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                     <div class="app-card app-card-orders-table shadow-sm mb-5">
@@ -419,7 +370,7 @@
                                         <td style="font-size: 16px;width: 5%;color: black">ID</td>
                                         <td style="font-size: 16px;width: 8%;color: black">ID Product</td>
                                         <td style="font-size: 16px;width: 15%;color: black">Name Product</td>
-                                        <td style="font-size: 16px;width: 7%;color: black">Price</td>
+                                        <td style="font-size: 16px;width: 7%;color: black">Price (S)</td>
                                         <td style="font-size: 16px;width: 7%;color: black">Size</td>
                                         <td style="font-size: 16px;width: 7%;color: black">Quantity</td>
                                         <td style="font-size: 16px;width: 15%;color: black">Create Time</td>
@@ -435,19 +386,23 @@
                                         <th th:text="${list.sizeProduct.size}"></th>
                                         <th th:text="${list.quantity}"></th>
                                         <th th:text="${list.createTime}"></th>
-                                        <th th:text="${list.quantity * list.priceProduct}"></th>
+                                        <th th:text="${list.quantity * list.priceProduct * list.sizeProduct.rate}"></th>
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div style="text-align: right;margin-right: 10%;color: black;font-size: 18px">
-                                    <span >Total Price = </span>
-                                    <span th:text="${totalPrice}"></span>
-                                    <span>.000đ</span>
-                                </div>
                             </div><!--//table-responsive-->
                         </div><!--//app-card-body-->
                     </div><!--//app-card-->
+                    <div class="app-card app-card-orders-table shadow-sm">
+                        <div style="text-align: right;margin-right: 10%;color: orangered; font-size: 18px; height: 110%">
+                            <span >Total Price = </span>
+                            <span th:text="${totalPrice}"></span>
+                            <span>.000đ</span>
+                        </div>
+                    </div>
+
                 </div>
+
             </div><!--//tab-content-->
         </div><!--//container-fluid-->
     </div><!--//app-content-->

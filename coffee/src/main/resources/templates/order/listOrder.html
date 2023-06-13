@@ -114,7 +114,7 @@
             </div><!--//app-header-content-->
         </div><!--//container-fluid-->
     </div><!--//app-header-inner-->
-    <div id="app-sidepanel" class="app-sidepanel sidepanel-hidden">
+    <div id="app-sidepanel" class="app-sidepanel sidepanel-hidden" style="position: fixed;left: 0">
         <div id="sidepanel-drop" class="sidepanel-drop"></div>
         <div class="sidepanel-inner d-flex flex-column">
             <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
@@ -334,28 +334,28 @@
                     <div class="page-utilities">
                         <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                             <div class="col-auto">
-                                <form class="table-search-form row gx-1 align-items-center">
-                                    <div class="col-auto">
-                                        <input type="text" id="search-orders" name="searchorders"
-                                               class="form-control search-orders" placeholder="Search">
-                                    </div>
-                                    <div class="col-auto">
-                                        <button type="button" class="btn btn-outline-success" fdprocessedid="ss9bui"
-                                                style="border:1px solid #33CC66">Search
-                                        </button>
-                                    </div>
-                                </form>
+<!--                                <form class="table-search-form row gx-1 align-items-center">-->
+<!--                                    <div class="col-auto">-->
+<!--                                        <input type="text" id="search-orders" name="searchorders"-->
+<!--                                               class="form-control search-orders" placeholder="Search">-->
+<!--                                    </div>-->
+<!--                                    <div class="col-auto">-->
+<!--                                        <button type="button" class="btn btn-outline-success" fdprocessedid="ss9bui"-->
+<!--                                                style="border:1px solid #33CC66">Search-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                </form>-->
 
                             </div><!--//col-->
                             <div class="col-auto">
 
-                                <select class="form-select w-auto">
-                                    <option selected value="option-1">All</option>
-                                    <option value="option-2">This week</option>
-                                    <option value="option-3">This month</option>
-                                    <option value="option-4">Last 3 months</option>
+<!--                                <select class="form-select w-auto">-->
+<!--                                    <option selected value="option-1">All</option>-->
+<!--                                    <option value="option-2">This week</option>-->
+<!--                                    <option value="option-3">This month</option>-->
+<!--                                    <option value="option-4">Last 3 months</option>-->
 
-                                </select>
+<!--                                </select>-->
                             </div>
                             <div class="col-auto">
                                 <a th:href="@{/orderController/create}">
@@ -400,8 +400,8 @@
                                         <td style="font-size: 16px;width: 20%;color: black">Name Employee</td>
                                         <td style="font-size: 16px;width: 20%;color: black">Name Customer</td>
                                         <td style="font-size: 16px;width: 10%;color: black">Coupons(%)</td>
-                                        <td style="font-size: 16px;width: 15%;color: black">Status Order</td>
-                                        <td style="font-size: 16px;width: 15%;color: black">Total Price</td>
+                                        <td style="font-size: 16px;width: 25%;color: black">Status Order</td>
+<!--                                        <td style="font-size: 16px;width: 15%;color: black">Total Price</td>-->
                                         <td colspan="2" style="font-size: 20px;color: black">Action</td>
                                     </tr>
                                     </thead>
@@ -412,7 +412,7 @@
                                         <th th:text="${page.customer.name}"></th>
                                         <th th:text="${(page.coupons.value * 100) % 100}"></th>
                                         <th th:text="${page.status.status}"></th>
-                                        <th th:text="${page.status.status}"></th>
+<!--                                        <th th:text="${page.status.status}"></th>-->
 <!--                                        <th>-->
 <!--                                            &lt;!&ndash;                                    <a th:href="@{/update/{id}(id=${productCoffeeModelPage.id})}">&ndash;&gt;-->
 <!--                                            <button type="button" class="btn btn-warning" fdprocessedid="xlhea">Update-->

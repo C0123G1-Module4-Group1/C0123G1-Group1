@@ -40,7 +40,7 @@ public class OrderService implements IOrderService {
     @Override
     public Page<Order> findAll(Integer page) {
 //        return orderRepository.findAll(PageRequest.of(page, Integer.parseInt("5"), Sort.by("id").descending()));
-        return orderRepository.findAllByDeleteStatusIsFalse(PageRequest.of(page, 5, Sort.by("id").descending()));
+        return orderRepository.findAllByDeleteStatusIsFalse(PageRequest.of(page, 8, Sort.by("id").descending()));
     }
 
     @Override
@@ -66,7 +66,7 @@ public class OrderService implements IOrderService {
         Staff staff = staffService.findById(1);
         Customer customer = customerService.findCustomer(1);
         Coupons coupons = couponsService.findById(1);
-        StatusOrder statusOrder = statusOrderService.findById(1);
+        StatusOrder statusOrder = statusOrderService.findById(3);
         Order order = new Order(staff,customer,coupons,statusOrder);
         this.orderRepository.save(order);
         return order;

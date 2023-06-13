@@ -26,7 +26,8 @@ public void saveOrderDetail(Integer idOrder, OrderDetail orderDetail){
 }
     @Override
     public Long getTotalOrder(Integer id) {
-//        double value = orderDetailRepository.getTotalOrder(id);
+//        double total = orderDetailRepository.getTotalOrder(id);
+//        double value = orderDetailRepository.
 //        if(value != 0){
 //            double roundedValue = (double) Math.round(value * 1000) / 1000;
 //            return (long) roundedValue;

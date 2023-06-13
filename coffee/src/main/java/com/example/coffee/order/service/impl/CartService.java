@@ -1,6 +1,10 @@
 package com.example.coffee.order.service.impl;
 
+import com.example.coffee.order.dto.CartItem;
+import com.example.coffee.order.model.SizeProduct;
+import com.example.coffee.order.service.ICartItemService;
 import com.example.coffee.order.service.ICartService;
+import com.example.coffee.order.service.ISizeProductService;
 import com.example.coffee.product.model.Product;
 import com.example.coffee.product.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,71 +20,126 @@ import java.util.Map;
 public class CartService implements ICartService {
     @Autowired
     private IProductService productService;
-    @Override
-    public boolean checkItemInCart(Product products, Map<Integer, Integer> productIntegerMap) {
-        for (Map.Entry<Integer, Integer> e : productIntegerMap.entrySet()) {
-            if (e.getKey().equals(products.getId())) {
+    @Autowired
+    private ISizeProductService sizeProductService;
+
+    //    @Override
+    public boolean checkItemInCart(Integer id, Map<Integer, CartItem> cart) {
+        for (Map.Entry<Integer, CartItem> e : cart.entrySet()) {
+            if (e.getKey().equals(id)) {
                 return true;
             }
         }
         return false;
     }
-    @Override
-    public Map.Entry<Integer, Integer> productIntegerEntry(Product products, Map<Integer, Integer> productIntegerMap) {
-        for (Map.Entry<Integer, Integer> p : productIntegerMap.entrySet()) {
-            if (p.getKey().equals(products.getId())) {
+
+    //    @Override
+    public Map.Entry<Integer, CartItem> productIntegerEntry(Integer id, Map<Integer, CartItem> productIntegerMap) {
+        for (Map.Entry<Integer, CartItem> p : productIntegerMap.entrySet()) {
+            if (p.getKey().equals(id)) {
                 return p;
             }
         }
         return null;
     }
-    @Override
-    public double countTotalPayment(Map<Integer, Integer> list) {
+
+    //    @Override
+    public double countTotalPayment(Map<Integer, CartItem> cart) {
         float sum = 0;
-        for (Map.Entry<Integer, Integer> e : list.entrySet()) {
-            sum = sum + productService.findById(e.getKey()).getPrice() * e.getValue();
+        for (Map.Entry<Integer, CartItem> e : cart.entrySet()) {
+            sum = sum + e.getValue().getPriceProduct() * e.getValue().getQuantity() * e.getValue().getSizeRate();
         }
         return sum;
     }
 
+    //
     @Override
-    public void addProduct(Integer id, Map<Integer, Integer> mapProduct) {
+    public void addQuantity(Integer id, Map<Integer, CartItem> cart, Product product) {
         Integer quantity;
-        if (checkItemInCart(productService.findById(id), mapProduct)) {
-            Map.Entry<Integer,Integer> m = productIntegerEntry(productService.findById(id),mapProduct);
-            quantity = m.getValue() + 1;
-            mapProduct.replace(m.getKey(),quantity);
+        if (checkItemInCart(id, cart)) {
+            Map.Entry<Integer, CartItem> m = productIntegerEntry(id, cart);
+            quantity = m.getValue().getQuantity() + 1;
+            CartItem cartItem = new CartItem(m.getValue().getId(), m.getValue().getIdProduct(), m.getValue().getNameProduct(), m.getValue().getSizeProduct(), m.getValue().getSizeRate(), m.getValue().getPriceProduct(), quantity);
+            cart.replace(m.getKey(), cartItem);
         } else {
-            mapProduct.put(id, 1);
+            CartItem cartItem = new CartItem(product.getId(), product.getId(), product.getName(), "S", 1f, product.getPrice(), 1);
+            cart.put(id, cartItem);
         }
     }
 
     @Override
-    public void removeProduct(Integer id, Map<Integer, Integer> productList) {
+    public void removeQuantity(Integer id, Map<Integer, CartItem> cart, Product product) {
         Integer quantity;
-        if (checkItemInCart(productService.findById(id), productList)) {
-            Map.Entry<Integer,Integer> m = productIntegerEntry(productService.findById(id),productList);
-            quantity = m.getValue() - 1;
-            productList.replace(m.getKey(),quantity);
-            if (m.getValue()==0){
-                productList.remove(m.getKey());
+        if (checkItemInCart(id, cart)) {
+            Map.Entry<Integer, CartItem> m = productIntegerEntry(id, cart);
+            quantity = m.getValue().getQuantity() - 1;
+            CartItem cartItem = new CartItem(m.getValue().getId(), m.getValue().getIdProduct(), m.getValue().getNameProduct(), m.getValue().getSizeProduct(), m.getValue().getSizeRate(), m.getValue().getPriceProduct(), quantity);
+            cart.replace(m.getKey(), cartItem);
+            if (m.getValue().getQuantity() == 0) {
+                cart.remove(m.getKey());
             }
-        } else {
-            productList.put(id, 1);
         }
     }
 
     @Override
-    public void clearList(Map<Integer, Integer> productList) {
-        productList.clear();
+    public void addSize(Integer id, Map<Integer, CartItem> cart, Product products) {
+        if (checkItemInCart(id, cart)) {
+            Map.Entry<Integer, CartItem> m = productIntegerEntry(id, cart);
+//            SizeProduct sizeProduct = sizeProductService.findBySize(m.getValue().getSizeProduct());
+            if(m.getValue().getSizeProduct().equals("S")){
+                CartItem cartItem = new CartItem(m.getValue().getId(), m.getValue().getIdProduct(), m.getValue().getNameProduct(), "M", 1.2f, m.getValue().getPriceProduct(), m.getValue().getQuantity());
+                cart.replace(m.getKey(), cartItem);
+
+            }else if (m.getValue().getSizeProduct().equals("M")){
+                CartItem cartItem = new CartItem(m.getValue().getId(), m.getValue().getIdProduct(), m.getValue().getNameProduct(), "L", 1.5f, m.getValue().getPriceProduct(), m.getValue().getQuantity());
+                cart.replace(m.getKey(), cartItem);
+            }
+        }
     }
 
     @Override
-    public Map<Product,Integer> getListProduct(Map<Integer, Integer> list) {
-        Map<Product,Integer> cart = new LinkedHashMap<>();
-        for (Map.Entry<Integer, Integer> l :list.entrySet()) {
-            cart.put(productService.findById(l.getKey()),l.getValue());
+    public void removeSize(Integer id, Map<Integer, CartItem> cart, Product products) {
+        if (checkItemInCart(id, cart)) {
+            Map.Entry<Integer, CartItem> m = productIntegerEntry(id, cart);
+//            SizeProduct sizeProduct = sizeProductService.findBySize(m.getValue().getSizeProduct());
+            if(m.getValue().getSizeProduct().equals("L")){
+                CartItem cartItem = new CartItem(m.getValue().getId(), m.getValue().getIdProduct(), m.getValue().getNameProduct(), "M", 1.2f, m.getValue().getPriceProduct(), m.getValue().getQuantity());
+                cart.replace(m.getKey(), cartItem);
+
+            }else if (m.getValue().getSizeProduct().equals("M")){
+                CartItem cartItem = new CartItem(m.getValue().getId(), m.getValue().getIdProduct(), m.getValue().getNameProduct(), "S", 1f, m.getValue().getPriceProduct(), m.getValue().getQuantity());
+                cart.replace(m.getKey(), cartItem);
+            }
         }
-        return cart;
     }
+
+//
+//    @Override
+//    public void removeProduct(Integer id, Map<Integer, Integer> productList) {
+//        Integer quantity;
+//        if (checkItemInCart(productService.findById(id), productList)) {
+//            Map.Entry<Integer,Integer> m = productIntegerEntry(productService.findById(id),productList);
+//            quantity = m.getValue() - 1;
+//            productList.replace(m.getKey(),quantity);
+//            if (m.getValue()==0){
+//                productList.remove(m.getKey());
+//            }
+//        } else {
+//            productList.put(id, 1);
+//        }
+//    }
+//
+//    @Override
+//    public void clearList(Map<Integer, CartItem> cart) {
+//        cart.clear();
+//    }
+//
+//    @Override
+//    public Map<Product,Integer> getListProduct(Map<Integer, Integer> list) {
+//        Map<Product,Integer> cart = new LinkedHashMap<>();
+//        for (Map.Entry<Integer, Integer> l :list.entrySet()) {
+//            cart.put(productService.findById(l.getKey()),l.getValue());
+//        }
+//        return cart;
+//    }
 }

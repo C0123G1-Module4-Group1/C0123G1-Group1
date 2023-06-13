@@ -1,15 +1,12 @@
 package com.example.coffee.order.controller;
 
+import com.example.coffee.order.dto.CartItem;
 import com.example.coffee.order.model.Order;
 import com.example.coffee.order.model.OrderDetail;
 import com.example.coffee.order.model.SizeProduct;
-import com.example.coffee.order.service.ICartService;
-import com.example.coffee.order.service.IOderDetailService;
-import com.example.coffee.order.service.IOrderService;
-import com.example.coffee.order.service.ISizeProductService;
+import com.example.coffee.order.service.*;
 import com.example.coffee.product.model.Product;
 import com.example.coffee.product.service.IProductService;
-import org.hibernate.engine.jdbc.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -37,6 +34,8 @@ public class OrderController {
     private ICartService cartService;
     @Autowired
     private ISizeProductService sizeProductService;
+    @Autowired
+    private IOrderDetailDTOService orderDetailDTOService;
 
     @GetMapping("/")
     public String getList(@RequestParam(value = "page", defaultValue = "0") Integer page, Model model, HttpServletResponse httpResponse) {
@@ -64,86 +63,138 @@ public class OrderController {
         return "/order/orderDetail";
     }
 
+    //    @ModelAttribute("cart")
+//    public Map<Integer, Integer> initCart() {
+//        return new LinkedHashMap<>();
+//    }
     @ModelAttribute("cart")
-    public Map<Integer, Integer> initCart() {
+    public Map<Integer, CartItem> initCart() {
         return new LinkedHashMap<>();
     }
 
     @GetMapping("/create")
-    public String createOrder(@ModelAttribute("cart") Map<Integer, Integer> list, Model model) {
-        cartService.clearList(list);
-        Order orderDTO = orderService.addOrder();
-        List<SizeProduct> sizeProductList = sizeProductService.getAll();
+    public String createOrder(@ModelAttribute("cart") Map<Integer, CartItem> cartDTO, Model model) {
+//        cartService.clearList(list);
+//        Order orderDTO = orderService.addOrder();
+//        Integer idOrder = orderDTO.getId();
+//        List<SizeProduct> sizeProductList = sizeProductService.getAll();
         List<Product> productList = productService.getAll();
-        Map<Product, Integer> mapProduct = cartService.getListProduct(list);
-        double total = cartService.countTotalPayment(list);
+//        Map<Product, Integer> mapProduct = cartService.getListProduct(list);
+//        Map<CartItem, String> mapOrderDetailDTO = orderDetailDTOService.getListOrderDetailDTO(mapProduct, idOrder, map);
+//        total chua co * size
+//        double total = cartService.countTotalPayment(list);
         model.addAttribute("productList", productList);
-        model.addAttribute("cartDTO", mapProduct);
-        model.addAttribute("total", total);
-        model.addAttribute("orderDTO", orderDTO);
-        model.addAttribute("sizeProductList", sizeProductList);
+        model.addAttribute("cartDTO", cartDTO);
+//        model.addAttribute("cartDTO", mapProduct);
+//        model.addAttribute("total", total);
+//        model.addAttribute("orderDTO", orderDTO);
+//        model.addAttribute("sizeProductList", sizeProductList);
+//        model.addAttribute("mapOrderDetailDTO", mapOrderDetailDTO);
         return "/order/createOrder";
     }
 
-    @GetMapping("/{idOrder}/returnOrder")
-    public String returnOrder(@ModelAttribute("cart") Map<Integer, Integer> list, Model model, @PathVariable("idOrder") Integer idOrder) {
-        Order order = orderService.findById(idOrder);
-        List<SizeProduct> sizeProductList = sizeProductService.getAll();
+    @GetMapping("/returnCreateOrder")
+    public String returnOrder(@ModelAttribute("cart") Map<Integer, CartItem> cartDTO, Model model) {
+//        Order order = orderService.findById(idOrder);
+//        List<SizeProduct> sizeProductList = sizeProductService.getAll();
         List<Product> productList = productService.getAll();
         model.addAttribute("productList", productList);
-        Map<Product, Integer> mapProduct = cartService.getListProduct(list);
-        model.addAttribute("cartDTO", mapProduct);
-        double total = cartService.countTotalPayment(list);
+//        Map<Product, Integer> mapProduct = cartService.getListProduct(list);
+//        Map<OrderDetailDTO, String> mapOrderDetailDTO = orderDetailDTOService.getListOrderDetailDTO(mapProduct, idOrder, map);
+        model.addAttribute("cartDTO", cartDTO);
+        double total = cartService.countTotalPayment(cartDTO);
         model.addAttribute("total", total);
-        model.addAttribute("orderDTO", order);
-        model.addAttribute("sizeProductList", sizeProductList);
+//        model.addAttribute("orderDTO", order);
+//        model.addAttribute("sizeProductList", sizeProductList);
+//        model.addAttribute("mapOrderDetailDTO", mapOrderDetailDTO);
         return "/order/createOrder";
     }
 
-    @GetMapping("/{id}/{idOrder}/addToCart")
-    public String addToCart(@PathVariable("id") Integer id, @PathVariable("idOrder") Integer idOrder,
+    @GetMapping("/{id}/addQuantity")
+    public String addQuantity(@PathVariable("id") Integer id,
                             RedirectAttributes ra,
-                            @ModelAttribute("cart") Map<Integer, Integer> productList) {
-//        Product products = productService.findById(id);
+                            @ModelAttribute("cart") Map<Integer, CartItem> cart) {
+        Product products = productService.findById(id);
 //        this.cartService.addProduct(products,productList);
-        this.cartService.addProduct(id, productList);
-        return "redirect:/orderController/{idOrder}/returnOrder";
+        this.cartService.addQuantity(id, cart, products);
+        return "redirect:/orderController/returnCreateOrder";
+    }
+    @GetMapping("/{id}/removeQuantity")
+    public String removeQuantity(@PathVariable("id") Integer id,
+                            RedirectAttributes ra,
+                            @ModelAttribute("cart") Map<Integer, CartItem> cart) {
+        Product products = productService.findById(id);
+//        this.cartService.addProduct(products,productList);
+        this.cartService.removeQuantity(id, cart, products);
+        return "redirect:/orderController/returnCreateOrder";
+    }
+    @GetMapping("/{id}/addSize")
+    public String addSize(@PathVariable("id") Integer id,
+                            RedirectAttributes ra,
+                            @ModelAttribute("cart") Map<Integer, CartItem> cart) {
+        Product products = productService.findById(id);
+//        this.cartService.addProduct(products,productList);
+        this.cartService.addSize(id, cart, products);
+        return "redirect:/orderController/returnCreateOrder";
+    }
+    @GetMapping("/{id}/removeSize")
+    public String removeSize(@PathVariable("id") Integer id,
+                                 RedirectAttributes ra,
+                                 @ModelAttribute("cart") Map<Integer, CartItem> cart) {
+        Product products = productService.findById(id);
+//        this.cartService.addProduct(products,productList);
+        this.cartService.removeSize(id, cart, products);
+        return "redirect:/orderController/returnCreateOrder";
+    }
+//    @GetMapping("/{id}/{idOrder}/remove")
+//    public String removeToCart(@PathVariable("id") Integer id, @PathVariable("idOrder") Integer idOrder,
+//                               RedirectAttributes ra,
+//                               @ModelAttribute("cart") Map<Integer, Integer> productList) {
+//        this.cartService.removeProduct(id, productList);
+//        return "redirect:/orderController/{idOrder}/returnOrder";
+//    }
+
+    @GetMapping("/addOrderDetail")
+    public String addOrderDetailToCart(@RequestParam Integer idProduct, @RequestParam Integer idSize) {
+        Product product = productService.findById(idProduct);
+//        orderDetailDTOService.addOrderDetailDTO(product.getId(),product.)
+        return "/listBlog";
     }
 
-    @GetMapping("/{id}/{idOrder}/remove")
-    public String removeToCart(@PathVariable("id") Integer id, @PathVariable("idOrder") Integer idOrder,
-                               RedirectAttributes ra,
-                               @ModelAttribute("cart") Map<Integer, Integer> productList) {
-        this.cartService.removeProduct(id, productList);
-        return "redirect:/orderController/{idOrder}/returnOrder";
-    }
+//    @GetMapping("/{id}/{idOrder}/addSize")
+//    public String addSize(@PathVariable("id") Integer id, @PathVariable("idOrder") Integer idOrder,
+//                          RedirectAttributes ra,
+//                          @ModelAttribute("orderDetailDTO") Map<OrderDetailDTO, String> mapOrderDetailDTO) {
+////        this.cartService.addSize(id, mapOrderDetailDTO);
+//        return "redirect:/orderController/{idOrder}/returnOrder";
+//    }
+//    @GetMapping("/{id}/{idOrder}/removeSize")
+//    public String removeSize(@PathVariable("id") Integer id, @PathVariable("idOrder") Integer idOrder,
+//                               RedirectAttributes ra,
+//                               @ModelAttribute("orderDetailDTO") Map<OrderDetailDTO, String> mapOrderDetailDTO ) {
+////        this.cartService.removeSize(id, mapOrderDetailDTO);
+//        return "redirect:/orderController/{idOrder}/returnOrder";
+//    }
 
-    @GetMapping("/{idOrder}/createOrderDetail")
-    public String createOrderDetail(@ModelAttribute("cart") Map<Integer, Integer> productList, @PathVariable("idOrder") Integer idOrder) {
-        this.oderDetailService.addOrderDetail(productList, idOrder);
+
+    @GetMapping("/createOrder")
+    public String createOrderDetail(@ModelAttribute("cart") Map<Integer, CartItem> cart) {
+//        this.oderDetailService.addOrderDetail(cart);
         return "redirect:/create";
     }
 
-    @GetMapping("/{idOrder}/clearCart")
-    public String clearOrder(@ModelAttribute("cart") Map<Integer, Integer> productList,
-                             @PathVariable("idOrder") Integer idOrder,
+    @GetMapping("/clearCart")
+    public String clearOrder(@ModelAttribute("cart") Map<Integer, CartItem> cart,
                              RedirectAttributes ra) {
-        this.cartService.clearList(productList);
-        return "redirect:/orderController/{idOrder}/returnOrder";
+        cart.clear();
+        return "redirect:/orderController/returnCreateOrder";
     }
 
-    @GetMapping("/{idOrder}/removeOrder")
-    public String removeOrder(@PathVariable("idOrder") Integer idOrder,
-                              @ModelAttribute("cart") Map<Integer, Integer> productList) {
-        cartService.clearList(productList);
-        orderService.deleteOrder(idOrder);
-        return "redirect:/orderController/";
-    }
-//    @GetMapping("/cart")
-//    public String carts(@SessionAttribute("cart") Map<Product,Integer> list , Model model){
-//        model.addAttribute("cart",list);
-//        double total = cartService.countTotalPayment(list);
-//        model.addAttribute("total", total);
-//        return "/order/createOrder";
+//    @GetMapping("/{idOrder}/removeOrder")
+//    public String removeOrder(@PathVariable("idOrder") Integer idOrder,
+//                              @ModelAttribute("cart") Map<Integer, Integer> productList) {
+//        cartService.clearList(productList);
+//        orderService.deleteOrder(idOrder);
+//        return "redirect:/orderController/";
 //    }
 }

@@ -15,4 +15,14 @@ public class SizeProductService implements ISizeProductService {
     public List<SizeProduct> getAll() {
         return sizeProductRepository.findAll();
     }
+
+    @Override
+    public SizeProduct findById(Integer sizeProduct) {
+        return sizeProductRepository.findById(sizeProduct).get();
+    }
+
+    @Override
+    public SizeProduct findBySize(String sizeProduct) {
+        return sizeProductRepository.findBySize(sizeProduct);
+    }
 }
