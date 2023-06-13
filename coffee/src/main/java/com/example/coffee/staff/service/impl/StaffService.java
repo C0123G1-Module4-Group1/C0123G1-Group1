@@ -63,7 +63,12 @@ return true;
 
     @Override
     public void save(Staff staff) {
-        iStaffRepository.save(staff);
+        Staff staff1=iStaffRepository.findById(staff.getId()).get();
+        staff1.setName(staff.getName());
+        staff1.setAddress(staff.getAddress());
+        staff1.setPhoneNumber(staff.getPhoneNumber());
+        staff1.setEmail(staff.getEmail());
+        iStaffRepository.save(staff1);
     }
 
     @Override

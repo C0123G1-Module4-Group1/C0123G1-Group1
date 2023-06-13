@@ -71,24 +71,21 @@
 <!--                </div>&lt;!&ndash;//app-utility-item&ndash;&gt;-->
                 <div class="app-utility-item app-user-dropdown dropdown">
                     <div th:if="${#authentication.getName()}!=anonymousUser">
-
                         <div class="dropdown">
-                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu2"
-                                    data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 10%;border: 1px solid #515a6a">
-                                <b th:text="${#authentication.getName().charAt(0)}"></b>
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu2" style="background-color: white;margin-bottom: 5px"
+                                    data-bs-toggle="dropdown" aria-expanded="false" >
+                                <img src="https://cdn-icons-png.flaticon.com/512/147/147142.png">
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                 <li><a th:href="@{/changePass}">
                                     <button class="dropdown-item btn btn-info" type="button">change Password</button>
                                 </a></li>
-                                <li><a th:href="@{/logout}" >
-                                    <button class="dropdown-item btn btn-info" type="button">Logout</button>
-                                </a></li>
+                                <li>
+                                    <a th:href="@{/logout}" style="margin-left: 3px"> Logout<i class="fa fa-sign-out fa-2x" style="margin-left: 4px"></i></a>
+                                </li>
                             </ul>
                         </div>
-                    </div>
-                    <div th:if="${#authentication.getName()}==anonymousUser">
-                        <a th:href="@{/login}" class="btn btn-outline-primary">Login</a>
+
                     </div>
                 </div><!--//app-user-dropdown-->
             </div><!--//app-utilities-->

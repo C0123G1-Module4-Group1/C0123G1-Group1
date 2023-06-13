@@ -39,7 +39,10 @@ public class StaffController {
 
     @GetMapping("/createStaff")
     public String createStaff(Model model) {
-        model.addAttribute("staff", new StaffDto());
+        UserDto userDto=new UserDto();
+        StaffDto staffDto=new StaffDto();
+        staffDto.setUserDto(userDto);
+        model.addAttribute("staff", staffDto);
         return "staff/createStaff";
     }
 
@@ -66,26 +69,23 @@ public class StaffController {
     @GetMapping("/update/{id}")
     public String update(@PathVariable("id") Integer id, Model model) {
         Staff staff = iStaffService.findById(id);
-//        StaffDto staffDto = new StaffDto();
-//        UserDto userDto = new UserDto();
-//        BeanUtils.copyProperties(staff.getUser(), userDto);
-//        userDto.setRole(staff.getUser().getRole());
-//        staffDto.setUserDto(userDto);
-//        BeanUtils.copyProperties(staff, staffDto);
-        model.addAttribute("staff", staff);
+        StaffDto staffDto = new StaffDto();
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(staff.getUser(), userDto);
+        userDto.setRole(staff.getUser().getRole());
+        staffDto.setUserDto(userDto);
+        BeanUtils.copyProperties(staff, staffDto);
+        model.addAttribute("staff", staffDto);
         return "staff/updateStaff";
     }
 
     @PostMapping("/update")
-    public String saveStaffUpdate(@Validated @ModelAttribute("staff") Staff staff, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String saveStaffUpdate(@Validated @ModelAttribute("staff") StaffDto staffDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "staff/updateStaff";
         }
-//        Staff staff = new Staff();
-//        User user = new User();
-//        BeanUtils.copyProperties(staffDto, staff);
-//        BeanUtils.copyProperties(staffDto.getUserDto(), user);
-//        staff.setUser(user);
+        Staff staff = new Staff();
+        BeanUtils.copyProperties(staffDto, staff);
         iStaffService.save(staff);
         redirectAttributes.addFlashAttribute("flag", true);
         return "redirect:/staff";

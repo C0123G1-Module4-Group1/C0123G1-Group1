@@ -3,7 +3,6 @@ package com.example.coffee.user.controller;
 import com.example.coffee.user.model.User;
 import com.example.coffee.user.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.management.remote.JMXAuthenticator;
-import javax.servlet.http.Cookie;
 import java.security.Principal;
 
 @Controller
