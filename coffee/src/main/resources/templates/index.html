@@ -34,7 +34,7 @@
                         <img src="https://gongcha.com.vn/wp-content/uploads/2017/12/ly-tra.png" width="100">
 
                         <div class="text-center">
-                            <a th:href="@{homeProduct}" class="more-btn">Xem ngay <i class="bx bx-chevron-right"></i></a>
+                            <a th:href="@{/home/homeProduct}" class="more-btn">Xem ngay <i class="bx bx-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
             <div class="text-center" data-aos="zoom-in">
                 <h3>Trà Sữa</h3>
                 <p> Cuối tuần uống ly trà chanh tám chuyện cuộc đời. Xua đi bao khó khăn, mệt mỏi của cuộc sống</p>
-                <a class="cta-btn" href="#">Mua Ngay</a>
+                <a class="cta-btn" th:href="@{/typeProduct/typeProduct/{id}(id=2)}">Mua Ngay</a>
             </div>
 
         </div>
@@ -105,7 +105,7 @@
             <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-lg-4 col-md-6 portfolio-item filter-cafe">
                     <div class="portfolio-wrap">
-                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__PHINDI_CHOCO.jpg" class="img-fluid" alt="">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/04_2023/New_product/HLC_New_logo_5.1_Products__BAC_XIU.jpg" class="img-fluid" alt="">
                     </div>
                 </div>
 
@@ -117,13 +117,13 @@
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-cafe">
                     <div class="portfolio-wrap">
-                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__PHINDI_CHOCO.jpg" class="img-fluid" alt="">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/04_2023/HLC_New_logo_5.1_Products__PHIN_DEN_DA.jpg" class="img-fluid" alt="">
                     </div>
                 </div>
 <!--                    trà sữa-->
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <div class="portfolio-wrap">
-                        <img src="https://gongcha.com.vn/wp-content/uploads/2023/02/Tra-Sua-Dau-Cookie-1.png" class="img-fluid" alt="">
+                        <img src="https://gongcha.com.vn/wp-content/uploads/2018/02/Tr%C3%A0-s%E1%BB%AFa-Pudding-%C4%91%E1%BA%ADu-%C4%91%E1%BB%8F-2.png" class="img-fluid" alt="">
                     </div>
                 </div>
 
@@ -135,7 +135,7 @@
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <div class="portfolio-wrap">
-                        <img src="https://gongcha.com.vn/wp-content/uploads/2023/02/Tra-Sua-Dau-Cookie-1.png" class="img-fluid" alt="">
+                        <img src="https://gongcha.com.vn/wp-content/uploads/2021/12/Tra-Sua-Dao.png" class="img-fluid" alt="">
                     </div>
                 </div>
               <!--trà-->
@@ -147,25 +147,25 @@
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                     <div class="portfolio-wrap">
-                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__TRA_SEN_VANG_CU_NANG.jpg" class="img-fluid" alt="">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__TRA_TACH_VAI.jpg" class="img-fluid" alt="">
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                     <div class="portfolio-wrap">
-                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__TRA_SEN_VANG_CU_NANG.jpg" class="img-fluid" alt="">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__TRA_THANH_DAO-09.jpg" class="img-fluid" alt="">
                     </div>
                 </div>
 
 <!--                đá xay-->
                 <div class="col-lg-4 col-md-6 portfolio-item filter-web">
                     <div class="portfolio-wrap">
-                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__FREEZE_TRA_XANH.jpg" class="img-fluid" alt="">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/04_2023/New_product/HLC_New_logo_5.1_Products__FREEZE_CHOCO.jpg" class="img-fluid" alt="">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 portfolio-item filter-web">
                     <div class="portfolio-wrap">
-                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__FREEZE_TRA_XANH.jpg" class="img-fluid" alt="">
+                        <img src="https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__COOKIES_FREEZE.jpg" class="img-fluid" alt="">
 
                     </div>
                 </div>
@@ -202,8 +202,8 @@
                                 </div>
                                 <div class="member-info">
                                     <h4>TRÀ THẠCH VẢI</h4>
-                                        <div class=" apointment d-flex " style="margin-top: 1.5%">
-                                            <a class="btn btn-outline-success " style="font-size: 60%;border-radius: 30px;margin-left: 17%">Đặt
+                                        <div class=" apointment d-flex " style="margin-top: 2%">
+                                            <a class="btn btn-outline-success " style="font-size: 60%;border-radius: 30px;margin-left: 20%">Đặt
                                                 Ngay</a>
                                             <a class="btn btn-outline-success " style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
                                                 Hàng</a>
@@ -219,11 +219,12 @@
                                 </div>
                                 <div class="member-info">
                                     <h4>PHIN ĐEN ĐÁ</h4>
-                                    <div class=" apointment d-flex " style="margin-top: 1.5%">
-                                        <a class="btn btn-outline-success " style="font-size: 60%;border-radius: 30px;margin-left: 17%">Đặt
+                                    <div class=" apointment d-flex " style="margin-top: 2%">
+                                        <a class="btn btn-outline-success " style="font-size: 60%;border-radius: 30px;margin-left: 20%">Đặt
                                             Ngay</a>
                                         <a class="btn btn-outline-success " style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
                                             Hàng</a>
+
                                     </div>
                                 </div>
                             </div>
@@ -235,8 +236,8 @@
                                 </div>
                                 <div class="member-info">
                                     <h4>TRÀ SỮA PHÔ MAI TƯƠI</h4>
-                                    <div class=" apointment d-flex " style="margin-top: 1.5%">
-                                        <a class="btn btn-outline-success " style="font-size: 60%;border-radius: 30px;margin-left: 17%">Đặt
+                                    <div class=" apointment d-flex " style="margin-top: 2%">
+                                        <a class="btn btn-outline-success " style="font-size: 60%;border-radius: 30px;margin-left: 20%">Đặt
                                             Ngay</a>
                                         <a class="btn btn-outline-success " style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
                                             Hàng</a>
@@ -251,8 +252,8 @@
                                 </div>
                                 <div class="member-info">
                                     <h4>FREEZE TRÀ XANH</h4>
-                                    <div class=" apointment d-flex " style="margin-top: 1.5%">
-                                        <a class="btn btn-outline-success " style="font-size: 60%;border-radius: 30px;margin-left: 17%">Đặt
+                                    <div class=" apointment d-flex " style="margin-top: 2%">
+                                        <a class="btn btn-outline-success " style="font-size: 60%;border-radius: 30px;margin-left: 20%">Đặt
                                             Ngay</a>
                                         <a class="btn btn-outline-success " style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
                                             Hàng</a>

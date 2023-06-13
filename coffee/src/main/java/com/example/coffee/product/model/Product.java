@@ -18,13 +18,14 @@ public class Product {
     @Column(name = "img",columnDefinition = "TEXT")
      private String image;
     @Column(name = "description",columnDefinition = "TEXT")
+
     private  String describes;
     @Column(name = "price",columnDefinition = "FLOAT")
     private Float price;
     @Column(name = "currency_unit",columnDefinition = "VARCHAR(10)")
 
     private String currency;
-    @Column(name = "status_delete",columnDefinition = "BIT DEFAULT 0")
+    @Column(name = "status_delete",columnDefinition = "BIT")
     private boolean status;
 
     @CreationTimestamp
@@ -36,7 +37,9 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "id_type_product" ,referencedColumnName = "id")
      private TypeProduct typeProduct;
-
+//    @ManyToOne
+//    @JoinColumn(name = "id_size" ,referencedColumnName = "id")
+//    private SizeProduct sizeProduct;
 
     public Product() {
     }
@@ -52,6 +55,7 @@ public class Product {
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.typeProduct = typeProduct;
+//        this.sizeProduct = sizeProduct;
     }
 
     public Integer getId() {
@@ -133,5 +137,6 @@ public class Product {
     public void setTypeProduct(TypeProduct typeProduct) {
         this.typeProduct = typeProduct;
     }
+
 
 }

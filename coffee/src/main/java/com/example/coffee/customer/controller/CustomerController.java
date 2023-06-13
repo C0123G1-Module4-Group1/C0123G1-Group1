@@ -9,23 +9,25 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 
 
-//@Controller
+@Controller
 @RequestMapping("/customer")
 public class CustomerController {
-//    @Autowired
+    @Autowired
     private ICustomerService iCustomerService;
 
     @GetMapping("/list")
     public String showList(@RequestParam(value = "page", defaultValue = "0") Integer page, Model model, HttpServletResponse response) {
         Page<Customer> customerPage = iCustomerService.findAllCustomer(PageRequest.of(page, 5));
         model.addAttribute("customerPage", customerPage);
-        model.addAttribute("statusSearch",false);
+        model.addAttribute("statusSearch", false);
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         return "/customer/list";
     }
@@ -37,49 +39,62 @@ public class CustomerController {
     }
 
     @PostMapping("/create-customer")
-    public String createCustomer(@ModelAttribute("customerDto") CustomerDTO customerDTO, RedirectAttributes redirectAttributes) {
+    public String createCustomer(@Validated @ModelAttribute("customerDTO") CustomerDTO customerDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new CustomerDTO().validate(customerDTO, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            return "/customer/create";
+        }
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDTO, customer);
         boolean check = iCustomerService.createCustomer(customer);
-        redirectAttributes.addFlashAttribute("check", check);
-        redirectAttributes.addFlashAttribute("customerDTO", customerDTO);
-        return "redirect:/customer/create";
+        redirectAttributes.addFlashAttribute("check1", check);
+        return "redirect:/customer/list";
     }
 
     @GetMapping("/delete/{id}")
+
     public String deleteCustomer(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         Boolean check = iCustomerService.deleteCustomer(id);
-        redirectAttributes.addFlashAttribute("check", check);
+        redirectAttributes.addFlashAttribute("check2", check);
         return "redirect:/customer/list";
     }
 
     @GetMapping("/update/{id}")
-    public String editCustomer(@PathVariable("id") Integer id, Model model) {
+    public String editCustomer(@PathVariable("id") Integer id, Model model, HttpServletResponse response) {
         Customer customer = iCustomerService.findCustomer(id);
         CustomerDTO customerDTO = new CustomerDTO();
         BeanUtils.copyProperties(customer, customerDTO);
         model.addAttribute("customerDTO", customerDTO);
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         return "/customer/edit";
     }
 
-    @PostMapping("/update-customer")
-    public String updateCustomer(@ModelAttribute("customerDto") CustomerDTO customerDTO, RedirectAttributes redirectAttributes) {
+    @PostMapping("/update")
+    public String updateCustomer(@Validated @ModelAttribute("customerDTO") CustomerDTO customerDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new CustomerDTO().validate(customerDTO, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            return "/customer/edit";
+        }
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDTO, customer);
         boolean check = iCustomerService.updateCustomer(customer);
-        redirectAttributes.addFlashAttribute("check", check);
-        redirectAttributes.addFlashAttribute("customerDTO", customerDTO);
-        return "redirect:/customer/edit";
+        redirectAttributes.addFlashAttribute("check3", check);
+        return "redirect:/customer/update/" + customerDTO.getId();
     }
 
     @GetMapping("/search")
-    public String searchCustomerByName(@RequestParam("nameSearch") String nameSearch,@RequestParam("optionSearch") String optionSearch,
+    public String searchCustomerByName(@RequestParam("nameSearch") String nameSearch, @RequestParam("optionSearch") String optionSearch,
                                        @RequestParam(name = "page", defaultValue = "0") int page, Model model) {
-        Page<Customer> customerPage = iCustomerService.findAllCustomerByNameOrPhoneNumberOrAdress(nameSearch,optionSearch, PageRequest.of(page, 5));
+        Page<Customer> customerPage = iCustomerService.findAllCustomerByNameOrPhoneNumberOrAddress(nameSearch, optionSearch, PageRequest.of(page, 5));
+        if (customerPage.isEmpty()) {
+            model.addAttribute("searchMess", "There is no data for searching");
+        }
+        int size = customerPage.getTotalPages();
+        model.addAttribute("size", size);
         model.addAttribute("customerPage", customerPage);
-        model.addAttribute("nameSearch",nameSearch);
-        model.addAttribute("optionSearch",optionSearch);
-        model.addAttribute("statusSearch",true);
+        model.addAttribute("nameSearch", nameSearch);
+        model.addAttribute("optionSearch", optionSearch);
+        model.addAttribute("statusSearch", true);
         return "/customer/list";
     }
 }

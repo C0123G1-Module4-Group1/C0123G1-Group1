@@ -7,12 +7,12 @@ import org.springframework.validation.Validator;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class UserDto implements Validator {
+public class UserDto  {
     private Integer id;
     @NotBlank(message = "Tài khoản ko được để trống")
     private String account;
     @NotBlank(message = "Tài khoản ko được để trống")
-    @Size(min = 5, max = 45, message = "Mật khẩu không được quá 45 kí tự hoặc dưới 5 kí tự!")
+    @Size(min = 5, max = 100, message = "Mật khẩu không được quá 100 kí tự hoặc dưới 5 kí tự!")
     private String password;
     private Boolean deleteStatus;
     private Role role;
@@ -66,13 +66,5 @@ public class UserDto implements Validator {
         this.role = role;
     }
 
-    @Override
-    public boolean supports(Class<?> clazz) {
-        return false;
-    }
 
-    @Override
-    public void validate(Object target, Errors errors) {
-
-    }
 }

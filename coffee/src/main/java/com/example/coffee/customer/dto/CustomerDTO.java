@@ -1,26 +1,29 @@
 package com.example.coffee.customer.dto;
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
-public class CustomerDTO {
+public class CustomerDTO implements Validator {
 
     private Integer id;
 
-    @NotBlank(message = "Không được để trống")
+    @NotBlank(message = "Can't be left blank")
     private String name;
-    @NotBlank(message = "Không được để trống")
+    @NotBlank(message = "Can't be left blank")
     private String phoneNumber;
-    @NotBlank(message = "Không được để trống")
+    @NotBlank(message = "Can't be left blank")
     private String email;
-    @NotBlank(message = "Không được để trống")
-    private String adress;
+    @NotBlank(message = "Can't be left blank")
+    private String address;
 
     private LocalDate createTime;
 
     private LocalDate updateTime;
 
-    private boolean deleteStatus;
+    private boolean statusDelete;
 
     public CustomerDTO() {
     }
@@ -57,12 +60,12 @@ public class CustomerDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public LocalDate getCreateTime() {
@@ -81,11 +84,33 @@ public class CustomerDTO {
         this.updateTime = updateTime;
     }
 
-    public boolean isDeleteStatus() {
-        return deleteStatus;
+    public boolean isStatusDelete() {
+        return statusDelete;
     }
 
-    public void setDeleteStatus(boolean deleteStatus) {
-        this.deleteStatus = deleteStatus;
+    public void setStatusDelete(boolean statusDelete) {
+        this.statusDelete = statusDelete;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        String regexNameCustomer = "^\\p{Lu}\\p{Ll}*(\\s\\p{Lu}\\p{Ll}*)*$";
+        String regexEmailCustomer = "^[a-z]\\w{5,}\\@[a-z]{3,5}\\.[a-z]{2,5}$";
+        String regexPhoneNumberCustomer = "^((\\+84)|0)[0-9]{9,10}$";
+        CustomerDTO customerDTO =(CustomerDTO) target;
+        if (!customerDTO.name.matches(regexNameCustomer)){
+            errors.rejectValue("name", "", "Can't be less than 0 and contain only uppercase letters and numbers");
+        }
+        if (!customerDTO.email.matches(regexEmailCustomer)){
+            errors.rejectValue("email", "", "Email must be at least 6 characters and .com,@");
+        }
+        if (!customerDTO.phoneNumber.matches(regexPhoneNumberCustomer)){
+            errors.rejectValue("phoneNumber", "", "Phone number must start from 0 or +84 and have 9 or 10 numbers");
+        }
     }
 }

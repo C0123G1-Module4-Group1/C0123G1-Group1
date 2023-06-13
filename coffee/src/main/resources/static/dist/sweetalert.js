@@ -711,7 +711,7 @@ var setParameters = function setParameters(params) {
   }
 
   /*
-   * Custom uploadImage
+   * Custom image
    */
   if (params.imageUrl) {
     var $customIcon = modal.querySelector('.sa-icon.sa-custom');

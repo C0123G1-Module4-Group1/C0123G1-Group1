@@ -16,12 +16,12 @@ public class Customer {
     private Integer id;
     @Column(columnDefinition = "VARCHAR(100)")
     private String name;
-    @Column(name = "phone", columnDefinition = "VARCHAR(10)")
+    @Column(name = "phone", columnDefinition = "VARCHAR(11)")
     private String phoneNumber;
     @Column(columnDefinition = "VARCHAR(50)")
     private String email;
     @Column(columnDefinition = "TEXT")
-    private String adress;
+    private String address;
     @CreationTimestamp
     @Column(name = "create_time", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
     private LocalDateTime createTime;
@@ -67,12 +67,12 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String adress) {
+        this.address = adress;
     }
 
     public LocalDateTime getCreateTime() {

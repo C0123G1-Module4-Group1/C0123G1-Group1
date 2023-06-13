@@ -65,7 +65,7 @@ public class OrderService implements IOrderService {
     public Order addOrder() {
         Staff staff = staffService.findById(1);
         Customer customer = customerService.findCustomer(1);
-        Coupons coupons = couponsService.findById(1);
+        Coupons coupons = couponsService.findCoupons(1);
         StatusOrder statusOrder = statusOrderService.findById(3);
         Order order = new Order(staff,customer,coupons,statusOrder);
         this.orderRepository.save(order);

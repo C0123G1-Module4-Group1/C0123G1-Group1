@@ -34,8 +34,6 @@ public class OrderController {
     private ICartService cartService;
     @Autowired
     private ISizeProductService sizeProductService;
-    @Autowired
-    private IOrderDetailDTOService orderDetailDTOService;
 
     @GetMapping("/")
     public String getList(@RequestParam(value = "page", defaultValue = "0") Integer page, Model model, HttpServletResponse httpResponse) {

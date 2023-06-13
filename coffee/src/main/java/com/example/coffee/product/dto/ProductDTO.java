@@ -1,21 +1,27 @@
 package com.example.coffee.product.dto;
 
 
-import com.example.coffee.order.model.SizeProduct;
-import com.example.coffee.product.model.TypeProduct;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.example.coffee.product.model.TypeProduct;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
-public class ProductDTO {
+public class ProductDTO implements Validator {
     private  Integer id;
+    @NotBlank(message = "Tên không được để trống")
+    @Pattern(regexp = "^\\p{Lu}\\p{Ll}*(\\s\\p{Lu}\\p{Ll}*)*$", message = "Tên phải đúng định dạng.Phải là chữ không được là số" )
     private  String name;
-    private MultipartFile image;
+    @NotBlank(message = "Hình ảnh không được để trống")
+    private String image;
     private  String describes;
     private LocalDateTime createTime;
     private  LocalDateTime updateTime;
     private TypeProduct typeProduct;
-    private SizeProduct sizeProduct;
+    @NotNull(message = "Giá tiền không được để trống")
     private Float price;
     private String currency;
     private boolean status;
@@ -24,7 +30,7 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
-    public ProductDTO(Integer id, String name, MultipartFile image, String describes, LocalDateTime createTime, LocalDateTime updateTime, TypeProduct typeProduct, SizeProduct sizeProduct, Float price, String currency, boolean status) {
+    public ProductDTO(Integer id, String name, String image, String describes, LocalDateTime createTime, LocalDateTime updateTime, TypeProduct typeProduct, Float price, String currency, boolean status) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -32,7 +38,7 @@ public class ProductDTO {
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.typeProduct = typeProduct;
-        this.sizeProduct = sizeProduct;
+
         this.price = price;
         this.currency = currency;
         this.status = status;
@@ -62,13 +68,6 @@ public class ProductDTO {
         this.price = price;
     }
 
-    public SizeProduct getSizeProduct() {
-        return sizeProduct;
-    }
-
-    public void setSizeProduct(SizeProduct sizeProduct) {
-        this.sizeProduct = sizeProduct;
-    }
 
 
     public Integer getId() {
@@ -87,11 +86,11 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public MultipartFile getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(MultipartFile image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -125,5 +124,15 @@ public class ProductDTO {
 
     public void setDescribes(String describes) {
         this.describes = describes;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }
