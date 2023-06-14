@@ -1,7 +1,7 @@
 package com.example.coffee.shopping_cart.service;
 
 import com.example.coffee.product.model.Product;
-import com.example.coffee.shopping_cart.model.Cart;
+
 import com.example.coffee.shopping_cart.model.CartOnline;
 
 import java.util.List;

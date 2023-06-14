@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class CartServiceImpl implements ICartService {
+
     @Autowired
     private IProductService iProductService;
 
@@ -57,6 +59,7 @@ public class CartServiceImpl implements ICartService {
         }
         return productQuantity;
     }
+
 
     @Override
     public Integer countItemQuantity(Map<Integer,CartOnline> cart) {

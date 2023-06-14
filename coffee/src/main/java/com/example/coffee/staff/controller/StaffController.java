@@ -59,7 +59,7 @@ public class StaffController {
         boolean check=true;
         check= iStaffService.saveNew(staff);
         if (!check){
-            model.addAttribute("result","Email hoặc số điện thoại hoặc account bị trùng lặp!!!!");
+            model.addAttribute("result","Email or phone number or account is duplicated!!!!");
             return "staff/createStaff";
         }
         redirectAttributes.addFlashAttribute("mess", true);

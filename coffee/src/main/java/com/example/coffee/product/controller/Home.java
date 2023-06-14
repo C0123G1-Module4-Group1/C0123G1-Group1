@@ -4,7 +4,7 @@ import com.example.coffee.product.model.Email;
 import com.example.coffee.product.model.Product;
 import com.example.coffee.product.service.IProductService;
 import com.example.coffee.product.service.impl.EmailService;
-import com.example.coffee.shopping_cart.model.Cart;
+
 import com.example.coffee.shopping_cart.model.CartOnline;
 import com.example.coffee.shopping_cart.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +41,10 @@ public class Home {
     }
 
     @GetMapping("/contact")
-    public String Contact() {
+    public String Contact(Model model) {
+        model.addAttribute("email",new Email());
         return "contact";
     }
-
     @GetMapping("/viewProduct")
     public String ViewProduct() {
         return "view";
@@ -66,6 +66,7 @@ public class Home {
         model.addAttribute("email", new Email());
         return "product/homeProduct";
     }
+
 //    gởi mail
     @PostMapping("/homeMail")
     public String sendMail(@ModelAttribute("email") Email email) {

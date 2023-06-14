@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//Sử dụng thuật toán Bcrypt để mã hóa password.
+    //Sử dụng thuật toán Bcrypt để mã hóa password.
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -28,22 +28,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
-//        http.authorizeRequests()
-//                .antMatchers("/*")
-//                .access("hasAnyRole( 'ADMIN','EMPLOYEE')");
 
         // Cấu hình cho Login Form.
         http.authorizeRequests().antMatchers("/login","/home/**","/static/**","/shopping_cart/list","/shopping_cart/operation/").permitAll()
 //                .anyRequest().authenticated()
+                .antMatchers("/changePass","/coupons/**","/api/coupons/**","/customer/**","/api/customer/**","/orderController/**","/productCoffee/**","/typeProduct/**")
+                .access("hasAnyRole('EMPLOYEE', 'ADMIN')")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/staff","/staff/**","/**","/productCoffee/**")
-                .access("hasAnyRole( 'ADMIN','EMPLOYEE')").and().exceptionHandling().accessDeniedPage("/403")
+                .antMatchers("/", "/staff","/staff/**")
+                .access("hasRole( 'ADMIN')").and().exceptionHandling().accessDeniedPage("/403")
                 .and().formLogin()//
                 // Submit URL của trang login
                 .loginProcessingUrl("/j_spring_security") // Submit URL
                 .loginPage("/login")//
-                .defaultSuccessUrl("/staff")//
+                .defaultSuccessUrl("/productCoffee/listProduct")//
                 .failureUrl("/login?error=true")
                 .usernameParameter("account")//
                 .passwordParameter("password")
