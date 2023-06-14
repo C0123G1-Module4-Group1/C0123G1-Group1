@@ -120,9 +120,10 @@ public class ProductController {
         Pageable pageable= PageRequest.of(page,5);
         Page<Product> productPage = iProductService.searchProduct(name,pageable);
         if (productPage.isEmpty()){
-            attributes.addFlashAttribute("empty",true);
-            return "redirect:/productCoffee/listProduct";
+            model.addAttribute("searchMess","There is no data for search");
         }
+        int size = productPage.getTotalPages();
+        model.addAttribute("size", size);
         model.addAttribute("productPage", productPage);
         model.addAttribute("name",name);
         return "product/listAdminProduct";
