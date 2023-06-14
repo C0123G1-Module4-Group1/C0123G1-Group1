@@ -50,7 +50,7 @@ public class UserController {
                 return "user/change";
             }
             attributes.addFlashAttribute("flag", true);
-            return "redirect:/productCoffee/listProduct";
+            return "redirect:/orderController/";
 
         } else {
             model.addAttribute("result", "New password and password confirmation do not match");
