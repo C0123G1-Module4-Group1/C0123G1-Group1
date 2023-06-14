@@ -79,15 +79,18 @@ public class CustomerController {
         BeanUtils.copyProperties(customerDTO, customer);
         boolean check = iCustomerService.updateCustomer(customer);
         redirectAttributes.addFlashAttribute("check3", check);
-        return "redirect:/customer/update/" + customerDTO.getId();
+        return "redirect:/customer/list";
     }
 
     @GetMapping("/search")
-    public String searchCustomerByName(@RequestParam("nameSearch") String nameSearch, @RequestParam("optionSearch") String optionSearch,
+    public String searchCustomerByName(@RequestParam(name = "nameSearch",defaultValue = "-1") String nameSearch,@RequestParam("optionSearch") String optionSearch,
                                        @RequestParam(name = "page", defaultValue = "0") int page, Model model) {
-        Page<Customer> customerPage = iCustomerService.findAllCustomerByNameOrPhoneNumberOrAddress(nameSearch, optionSearch, PageRequest.of(page, 5));
+        Page<Customer> customerPage = iCustomerService.findAllCustomerByNameOrPhoneNumberOrAddress(nameSearch,optionSearch, PageRequest.of(page, 5));
         if (customerPage.isEmpty()) {
-            model.addAttribute("searchMess", "There is no data for searching");
+            model.addAttribute("searchMess", "There is no data");
+        }
+        if (nameSearch.equals("-1")){
+            nameSearch="";
         }
         int size = customerPage.getTotalPages();
         model.addAttribute("size", size);

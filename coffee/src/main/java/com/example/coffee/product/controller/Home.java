@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/home")
-@SessionAttributes("cart")
+@SessionAttributes("cartOnline")
 public class Home {
     @Autowired
     private IProductService iProductService;
@@ -25,7 +25,7 @@ public class Home {
     @Autowired
     private EmailService emailService;
 
-    @ModelAttribute("cart")
+    @ModelAttribute("cartOnline")
     public Cart setupCart() {
         return new Cart();
     }
@@ -52,7 +52,7 @@ public class Home {
         return "shopping-cart";
     }
     @GetMapping("/homeProduct")
-    public String creatShoppingCart(@ModelAttribute("cart") Cart cart, Model model) {
+    public String creatShoppingCart(@ModelAttribute("cartOnline") Cart cart, Model model) {
         List<Product> productList = iProductService.getAll();
         model.addAttribute("productList", productList);
         Integer countItem = iCartService.countItemQuantity(cart);
@@ -67,7 +67,7 @@ public class Home {
     @PostMapping("/homeMail")
     public String sendMail(@ModelAttribute("email") Email email) {
         emailService.sendEmail(email);
-        return "redirect:/homeClient/";
+        return "redirect:/home/";
     }
 //    xem chi tiết 1 sản phẩm  ở giao diện
     @GetMapping("/viewProductType/{id}")

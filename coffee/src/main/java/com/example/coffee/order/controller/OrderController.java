@@ -72,7 +72,7 @@ public class OrderController {
 
     @GetMapping("/create")
     public String createOrder(@ModelAttribute("cart") Map<Integer, CartItem> cartDTO, Model model) {
-//        cartService.clearList(list);
+        cartDTO.clear();
 //        Order orderDTO = orderService.addOrder();
 //        Integer idOrder = orderDTO.getId();
 //        List<SizeProduct> sizeProductList = sizeProductService.getAll();
@@ -152,33 +152,19 @@ public class OrderController {
 //        return "redirect:/orderController/{idOrder}/returnOrder";
 //    }
 
-    @GetMapping("/addOrderDetail")
-    public String addOrderDetailToCart(@RequestParam Integer idProduct, @RequestParam Integer idSize) {
-        Product product = productService.findById(idProduct);
-//        orderDetailDTOService.addOrderDetailDTO(product.getId(),product.)
-        return "/listBlog";
-    }
-
-//    @GetMapping("/{id}/{idOrder}/addSize")
-//    public String addSize(@PathVariable("id") Integer id, @PathVariable("idOrder") Integer idOrder,
-//                          RedirectAttributes ra,
-//                          @ModelAttribute("orderDetailDTO") Map<OrderDetailDTO, String> mapOrderDetailDTO) {
-////        this.cartService.addSize(id, mapOrderDetailDTO);
-//        return "redirect:/orderController/{idOrder}/returnOrder";
-//    }
-//    @GetMapping("/{id}/{idOrder}/removeSize")
-//    public String removeSize(@PathVariable("id") Integer id, @PathVariable("idOrder") Integer idOrder,
-//                               RedirectAttributes ra,
-//                               @ModelAttribute("orderDetailDTO") Map<OrderDetailDTO, String> mapOrderDetailDTO ) {
-////        this.cartService.removeSize(id, mapOrderDetailDTO);
-//        return "redirect:/orderController/{idOrder}/returnOrder";
+//    @GetMapping("/addOrderDetail")
+//    public String addOrderDetailToCart(@RequestParam Integer idProduct, @RequestParam Integer idSize) {
+//        Product product = productService.findById(idProduct);
+////        orderDetailDTOService.addOrderDetailDTO(product.getId(),product.)
+//        return "/listBlog";
 //    }
 
-
-    @GetMapping("/createOrder")
+    @GetMapping("/createOrderDetail")
     public String createOrderDetail(@ModelAttribute("cart") Map<Integer, CartItem> cart) {
-//        this.oderDetailService.addOrderDetail(cart);
-        return "redirect:/create";
+        Order orderDTO = orderService.addOrder();
+        Integer idOrder = orderDTO.getId();
+        this.oderDetailService.addOrderDetail(cart,idOrder);
+        return "redirect:/orderController/create";
     }
 
     @GetMapping("/clearCart")
@@ -188,11 +174,9 @@ public class OrderController {
         return "redirect:/orderController/returnCreateOrder";
     }
 
-//    @GetMapping("/{idOrder}/removeOrder")
-//    public String removeOrder(@PathVariable("idOrder") Integer idOrder,
-//                              @ModelAttribute("cart") Map<Integer, Integer> productList) {
-//        cartService.clearList(productList);
-//        orderService.deleteOrder(idOrder);
-//        return "redirect:/orderController/";
-//    }
+    @GetMapping("/removeOrder")
+    public String removeOrder(@ModelAttribute("cart") Map<Integer, CartItem> cart) {
+        cart.clear();
+        return "redirect:/orderController/";
+    }
 }
