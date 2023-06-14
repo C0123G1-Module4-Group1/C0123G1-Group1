@@ -64,14 +64,14 @@
     <div id="form" class="form" style="margin-left: 15%;margin-right: 15%">
         <form th:action="@{/coupons/create_coupons}" th:object="${couponsDTO}" method="post"
               novalidate="novalidate">
-            <div class="input-group input-group-sm mg" style="margin-top: 30px">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Code Discount</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                       th:field="*{codeCoupons}"/>
-            </div>
-            <p style="color: red;" th:if="${#fields.hasErrors('codeCoupons')}" th:errors="*{codeCoupons}"></p>
+<!--            <div class="input-group input-group-sm mg" style="margin-top: 30px">-->
+<!--                <div class="input-group-prepend">-->
+<!--                    <span class="input-group-text">Code Discount</span>-->
+<!--                </div>-->
+<!--                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"-->
+<!--                       th:field="*{codeCoupons}"/>-->
+<!--            </div>-->
+<!--            <p style="color: red;" th:if="${#fields.hasErrors('codeCoupons')}" th:errors="*{codeCoupons}"></p>-->
             <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend">
                     <span class="input-group-text mt-3">Value</span>
@@ -92,16 +92,18 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text mt-3">Begin Time</span>
                 </div>
-                <input type="date" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                <input type="datetime-local" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{beginTime}"/>
             </div>
+            <p style="color: red" th:if="${#fields.hasErrors('beginTime')}" th:errors="*{beginTime}"></p>
             <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend">
                     <span class="input-group-text mt-3">End Time</span>
                 </div>
-                <input type="date" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                <input type="datetime-local" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{endTime}"/>
             </div>
+            <p style="color: red" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></p>
             <div class="d-flex justify-content-around mt-5">
                 <button type="submit" class="btn btn-success">Create</button>
             </div>
@@ -109,6 +111,21 @@
     </div>
 </div>
 </body>
+<!--<script>$(document).ready(function(){-->
+<!--    var todaysDate = new Date();   // Get today's date.-->
+
+<!--    // Get today's date.-->
+<!--    var year = todaysDate.getFullYear();         // yyyy-->
+<!--    var month = ("0" + (todaysDate.getMonth() + 1)).slice(-2); // mm-->
+<!--    var day = ("0" + todaysDate.getDate()).slice(-2);  // dd-->
+
+<!--    var dtToday = (year + "-" + month + "-" + (+day+1));   // Results in yyyy-mm-dd-->
+
+<!--    // Now set the max date value for the calendar to be that date.-->
+<!--    $("#bookingDate").attr('max', ((1+year) + "-" + month + "-" + day));-->
+<!--    $("#bookingDate").attr('min', dtToday);-->
+<!--});-->
+<!--</script>-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>

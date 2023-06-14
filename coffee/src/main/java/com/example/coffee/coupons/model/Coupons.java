@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity(name ="coupons")
 @EntityListeners(AuditingEntityListener.class)
@@ -15,13 +16,13 @@ public class Coupons {
     private Integer id;
     @Column(name = "code_coupons",columnDefinition = "VARCHAR(8)")
     private String codeCoupons;
-    @Column(columnDefinition = "FLOAT DEFAULT 1.0")
+    @Column(columnDefinition = "INT DEFAULT 1")
     private Integer valuee;
     private Integer proviso;
     @Column(name = "begin_time")
-    private LocalDate beginTime;
+    private LocalDateTime beginTime;
     @Column(name = "end_time")
-    private LocalDate endTime;
+    private LocalDateTime endTime;
     @CreationTimestamp
     @Column(name = "create_time", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
     private LocalDate createTime;
@@ -67,19 +68,19 @@ public class Coupons {
         this.proviso = proviso;
     }
 
-    public LocalDate getBeginTime() {
+    public LocalDateTime getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(LocalDate beginTime) {
+    public void setBeginTime(LocalDateTime beginTime) {
         this.beginTime = beginTime;
     }
 
-    public LocalDate getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDate endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 

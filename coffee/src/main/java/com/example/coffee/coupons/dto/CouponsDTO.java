@@ -1,14 +1,13 @@
 package com.example.coffee.coupons.dto;
-import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.validation.constraints.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class CouponsDTO implements Validator {
-    @NotBlank(message = "cannot be left blank")
+    private Integer id;
     private String codeCoupons;
     @NotNull(message = "cannot be left blank")
     @Min(value = 1, message = "cannot be less than or less equal 0%")
@@ -17,8 +16,14 @@ public class CouponsDTO implements Validator {
     @NotNull(message = "cannot be left blank")
     @Min(value = 0,message = "cannot be less than 0")
     private Integer proviso;
-    private LocalDate beginTime;
-    private LocalDate endTime;
+    @NotNull(message = "cannot be left blank")
+    @FutureOrPresent(message = "Current or future date and time")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime beginTime;
+    @NotNull(message = "cannot be left blank")
+    @Future(message="Future date and time")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime endTime;
 
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
@@ -26,6 +31,14 @@ public class CouponsDTO implements Validator {
 
 
     public CouponsDTO() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCodeCoupons() {
@@ -52,19 +65,19 @@ public class CouponsDTO implements Validator {
         this.proviso = proviso;
     }
 
-    public LocalDate getBeginTime() {
+    public LocalDateTime getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(LocalDate beginTime) {
+    public void setBeginTime(LocalDateTime beginTime) {
         this.beginTime = beginTime;
     }
 
-    public LocalDate getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDate endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
@@ -98,10 +111,5 @@ public class CouponsDTO implements Validator {
     }
     @Override
     public void validate(Object target, Errors errors) {
-//        String regexCodeCoupons = "^[A-Z0-9]{1,10}$";
-//        CouponsDTO couponsDTO =(CouponsDTO) target;
-//        if (!couponsDTO.codeCoupons.matches(regexCodeCoupons)){
-//            errors.rejectValue("codeCoupons", "", "Can't be less than 0 and contain only uppercase letters and numbers");
-//        }
     }
 }
