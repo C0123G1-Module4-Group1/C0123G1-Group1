@@ -29,6 +29,7 @@
         <div class="table-wrap" style="border: 1px solid #21cf95">
             <div th:if="${productList.size()==0||productList.isEmpty()}" class="my-5">
                 <h4 style="color: red;text-align: center">Không có sản phẩm nào trong giỏ hàng</h4>
+                <a th:href="@{/home/homeProduct}" class="btn-outline-success btn"style="margin-bottom: 2%;margin-top: 2%;margin-left: 45%;border-radius: 30px">Quay lại</a>
             </div>
             <table th:if="${!productList.isEmpty()||productList.size()!=0}"
                    class="table table-responsive table-borderless table-hover">
@@ -87,12 +88,12 @@
                 </tbody>
             </table>
             <a class="btn btn-outline-danger" style="text-decoration: none;margin-left: 3%">
-                <span class="ml-1"> <i class="fa-solid fa-trash"></i> Xoá tất cả</span></a>
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                <span class="ml-1"> <i class="fa-solid fa-trash"></i>Xoá tất cả</span></a>
+            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
                     style="margin-left: 5%">
                 Thanh toán
             </button>
-            <p  style="color: #21cf95 ;margin-left: 55%">Tổng tiền:<span th:text="${totalPayment}"></span></p>
+            <h4  style="color: #21cf95 ;margin-left: 55%" th:text="${'Tổng tiền: ' +totalPayment}"></h4>
         </div>
     </div>
 </div>

@@ -1200,7 +1200,7 @@ section {
 }
 
 .contact .php-email-form .loading:before {
-  content: "";
+
   display: inline-block;
   border-radius: 50%;
   width: 24px;

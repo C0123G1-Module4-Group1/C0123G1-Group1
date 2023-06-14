@@ -4,7 +4,11 @@
     <title>Trang Chủ</title>
 
 </head>
+<style>
 
+
+
+</style>
 <link href="/assetshome/vendor/aos/aos.css" rel="stylesheet">
 <link href="/assetshome/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/assetshome/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -15,6 +19,7 @@
 <script src="/static/jquery/jquery-3.5.1.min.js"></script>
 <!-- Template Main CSS File -->
 <link href="/assetshome/css/style.css" rel="stylesheet">
+<style></style>
 
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>-->
 </head>
@@ -29,10 +34,12 @@
                 </div>
 
                 <nav id="navbar" class="navbar">
-                    <ul>
-                        <li><a class="nav-link text-capitalize   " style="font-weight: bold;font-size: 20px" th:href="@{/home/}">Trang chủ</a></li>
+                    <ul class="nav" >
+
+                        <li><a class="nav-link text-capitalize " style="font-weight: bold;font-size: 20px" th:href="@{/home/}">Trang chủ</a></li>
                         <li><a class="nav-link text-capitalize" style="font-weight: bold;font-size: 20px" th:href="@{/home/homeProduct}">Sản phẩm</a></li>
                         <li><a class="nav-link  text-capitalize" style="font-weight: bold;font-size: 20px" th:href="@{/home/contact}">Liên hệ</a></li>
+
                         <li style="margin-top: 2%;">
                             <form th:action="@{/home/searchProduct}" method="post" class=""
                                   style="margin-left: -4%;display: flex   ">
@@ -85,6 +92,7 @@
         </section>
     </main>
 </div>
+
 <!-- Vendor JS Files -->
 <script src="/assetshome/vendor/purecounter/purecounter_vanilla.js"></script>
 <script src="/assetshome/vendor/aos/aos.js"></script>

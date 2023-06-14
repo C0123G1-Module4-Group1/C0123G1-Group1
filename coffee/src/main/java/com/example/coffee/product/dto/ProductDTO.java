@@ -12,16 +12,16 @@ import java.time.LocalDateTime;
 
 public class ProductDTO implements Validator {
     private  Integer id;
-    @NotBlank(message = "Tên không được để trống")
-    @Pattern(regexp = "^\\p{Lu}\\p{Ll}*(\\s\\p{Lu}\\p{Ll}*)*$", message = "Tên phải đúng định dạng.Phải là chữ không được là số" )
+    @NotBlank(message = "cannot be left blank")
+    @Pattern(regexp = "^\\p{Lu}\\p{Ll}*(\\s\\p{Lu}\\p{Ll}*)*$", message = "Name must be in the correct format.Must be letters not numbers" )
     private  String name;
-    @NotBlank(message = "Hình ảnh không được để trống")
+    @NotBlank(message = "cannot be left blank")
     private String image;
     private  String describes;
     private LocalDateTime createTime;
     private  LocalDateTime updateTime;
     private TypeProduct typeProduct;
-    @NotNull(message = "Giá tiền không được để trống")
+    @NotNull(message = "cannot be left blank")
     private Float price;
     private String currency;
     private boolean status;
