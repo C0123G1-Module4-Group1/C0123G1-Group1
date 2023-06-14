@@ -76,15 +76,15 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text mt-3">Value</span>
                 </div>
-                <input type="text" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                <input type="number" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{valuee}"/>
             </div>
             <p style="color: red" th:if="${#fields.hasErrors('valuee')}" th:errors="*{valuee}"></p>
             <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend mt-3">
-                    <span class="input-group-text">Address</span>
+                    <span class="input-group-text">Proviso</span>
                 </div>
-                <input type="text" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                <input type="number" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{proviso}"/>
             </div>
             <p style="color: red" th:if="${#fields.hasErrors('proviso')}" th:errors="*{proviso}"></p>
