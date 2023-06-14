@@ -13,12 +13,11 @@ public class Coupons {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "code_coupons")
+    @Column(name = "code_coupons",columnDefinition = "VARCHAR(8)")
     private String codeCoupons;
     @Column(columnDefinition = "FLOAT DEFAULT 1.0")
-    private Float valuee;
-    @Column(name = "proviso",columnDefinition = "FLOAT DEFAULT 1.0")
-    private Float proviso;
+    private Integer valuee;
+    private Integer proviso;
     @Column(name = "begin_time")
     private LocalDate beginTime;
     @Column(name = "end_time")
@@ -52,19 +51,19 @@ public class Coupons {
         this.codeCoupons = codeCoupons;
     }
 
-    public Float getValuee() {
+    public Integer getValuee() {
         return valuee;
     }
 
-    public void setValuee(Float value) {
+    public void setValuee(Integer value) {
         this.valuee = value;
     }
 
-    public Float getProviso() {
+    public Integer getProviso() {
         return proviso;
     }
 
-    public void setProviso(Float proviso) {
+    public void setProviso(Integer proviso) {
         this.proviso = proviso;
     }
 

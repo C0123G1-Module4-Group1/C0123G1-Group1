@@ -1,25 +1,22 @@
 package com.example.coffee.coupons.dto;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class CouponsDTO implements Validator {
-    private Integer id;
     @NotBlank(message = "cannot be left blank")
     private String codeCoupons;
     @NotNull(message = "cannot be left blank")
-    @DecimalMin(value = "0.01", message = "Value cannot be 0%")
-    @DecimalMax(value ="1.0",message = "Value should not be more than 100%" )
-    private Float valuee;
+    @Min(value = 1, message = "cannot be less than or less equal 0%")
+    @Max(value =100,message = "cannot be more than 100%" )
+    private Integer valuee;
     @NotNull(message = "cannot be left blank")
-    @DecimalMin(value = "0.01", message = "Value cannot be 0%")
-    private Float proviso;
+    @Min(value = 0,message = "cannot be less than 0")
+    private Integer proviso;
     private LocalDate beginTime;
     private LocalDate endTime;
 
@@ -31,14 +28,6 @@ public class CouponsDTO implements Validator {
     public CouponsDTO() {
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getCodeCoupons() {
         return codeCoupons;
     }
@@ -47,19 +36,19 @@ public class CouponsDTO implements Validator {
         this.codeCoupons = codeCoupons;
     }
 
-    public Float getValuee() {
+    public Integer getValuee() {
         return valuee;
     }
 
-    public void setValuee(Float valuee) {
+    public void setValuee(Integer valuee) {
         this.valuee = valuee;
     }
 
-    public Float getProviso() {
+    public Integer getProviso() {
         return proviso;
     }
 
-    public void setProviso(Float proviso) {
+    public void setProviso(Integer proviso) {
         this.proviso = proviso;
     }
 
@@ -109,10 +98,10 @@ public class CouponsDTO implements Validator {
     }
     @Override
     public void validate(Object target, Errors errors) {
-        String regexCodeCoupons = "^[A-Z0-9]{1,10}$";
-        CouponsDTO couponsDTO =(CouponsDTO) target;
-        if (!couponsDTO.codeCoupons.matches(regexCodeCoupons)){
-            errors.rejectValue("codeCoupons", "", "Can't be less than 0 and contain only uppercase letters and numbers");
-        }
+//        String regexCodeCoupons = "^[A-Z0-9]{1,10}$";
+//        CouponsDTO couponsDTO =(CouponsDTO) target;
+//        if (!couponsDTO.codeCoupons.matches(regexCodeCoupons)){
+//            errors.rejectValue("codeCoupons", "", "Can't be less than 0 and contain only uppercase letters and numbers");
+//        }
     }
 }

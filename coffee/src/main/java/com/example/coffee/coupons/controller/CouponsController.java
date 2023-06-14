@@ -87,7 +87,7 @@ public class CouponsController {
                                        @RequestParam(name = "page", defaultValue = "0") int page, Model model) {
         Page<Coupons> couponsPage = iCouponsService.findAllCouponsByCodeCoupons('%'+codeCoupons+'%', PageRequest.of(page, 5));
         if(couponsPage.isEmpty()){
-            model.addAttribute("searchMess","There is no data");
+            model.addAttribute("searchMess","There is no data for search");
         }
         int size = couponsPage.getTotalPages();
         model.addAttribute("size", size);
