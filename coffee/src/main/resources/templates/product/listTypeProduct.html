@@ -52,7 +52,7 @@
                     <div class="page-utilities">
                         <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                             <div class="col-auto">
-                                <form class="table-search-form row gx-1 align-items-center" th:action="@{/productCoffee/searchProduct}" method="post">
+                                <form class="table-search-form row gx-1 align-items-center" th:action="@{/typeProduct/searchTypeProduct}" method="post">
                                     <div class="col-auto">
                                         <input style="height: 40px" type="search" id="search-orders" name="name" th:value="${name}"
                                                class="form-control search-orders" placeholder="Search">
@@ -89,7 +89,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="product : ${typeProductList}">
+                                    <tr th:each="product : ${typeProductList}" class="flex-sm-fill text-sm-center">
                                         <th th:text="${product.id}"></th>
                                         <th th:text="${product.typeName}"></th>
                                         <th th:text="${product.createTime}"></th>
@@ -114,6 +114,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <p style="color: red;text-align: center" th:text="${searchMess}"></p>
                             </div><!--//table-responsive-->
 
                         </div><!--//app-card-body-->

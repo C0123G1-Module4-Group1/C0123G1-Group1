@@ -74,8 +74,7 @@ public class UserController {
     public String accessDenied(Model model, Principal principal) {
         if (principal != null) {
 
-            String message = "Hi " + principal.getName() //
-                    + "<br> You do not have permission to access this page!";
+            String message = "Hi " + principal.getName();
             model.addAttribute("message", message);
 
         }

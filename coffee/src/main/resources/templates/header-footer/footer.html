@@ -56,7 +56,7 @@
                         </ul>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                    <div class="col-lg-4 col-md-6 ">
                         <h4>Hòm thư góp ý!</h4>
                         <p>Bạn có những nhận xét hay góp ý </p>
                         <p>Thì phải đóng góp cho chúng tôi </p>
@@ -65,9 +65,8 @@
                         <form th:action="@{/home/homeMail}" method="post">
                             <input hidden type="text" id="to" name="to" value="heeyeon0992002@gmail.com">
                             <input hidden value="Đóng góp ý kiến" type="text" id="subject" name="subject">
-                            <input style="border: none" type="text" id="message" name="message"
-                                   placeholder="&ensp;&ensp;nội dung góp ý">
-                            <input type="submit" value="Gửi đi">
+                            <input style="height: 16%;width: 60%;border-radius: 30px;" type="text" id="message" name="message" placeholder="&ensp;&ensp;nội dung góp ý">
+                            <input type="submit" class=" btn btn-outline-success" style="height: 16%;width: 20%;border-radius: 30px;" value="Gửi đi">
                         </form>
                     </div>
                 </div>

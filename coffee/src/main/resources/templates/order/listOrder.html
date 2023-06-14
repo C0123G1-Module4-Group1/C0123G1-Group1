@@ -77,18 +77,18 @@
                                 <table class="table app-table-hover mb-0 text-left">
                                     <thead>
                                     <tr>
-                                        <th style="font-size: 16px;width: 10%;color: black;text-align: center">Order Code</th>
-                                        <th style="font-size: 16px;width: 17%;color: black">Name Employee</th>
-                                        <th style="font-size: 16px;width: 15%;color: black">Name Customer</th>
+                                        <th style="font-size: 16px;width: 12%;color: black;text-align: center">Order Code</th>
+                                        <th style="font-size: 16px;width: 16%;color: black">Name Employee</th>
+                                        <th style="font-size: 16px;width: 16%;color: black">Name Customer</th>
                                         <th style="font-size: 16px;width: 10%;color: black">Coupons(%)</th>
-                                        <th style="font-size: 16px;width: 30%;color: black">Status Order</th>
+                                        <th style="font-size: 16px;width: 30%;color: black;text-align: center">Status Order</th>
 <!--                                        <td style="font-size: 16px;width: 15%;color: black">Total Price</td>-->
                                         <th colspan="2" style="font-size: 16px;color: black">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="page : ${orderPage}">
-                                        <th style="text-align: center" th:text="${page.id}"></th>
+                                        <th style="text-align: center" th:text="${page.codeOrder}"></th>
                                         <th th:text="${page.staff.name}"></th>
                                         <th th:text="${page.customer.name}"></th>
                                         <th  th:text="${(page.coupons.valuee * 100) % 100}"></th>
