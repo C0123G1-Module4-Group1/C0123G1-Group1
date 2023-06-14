@@ -14,10 +14,13 @@ public interface IOrderRepository extends JpaRepository<Order, Integer> {
     //@Query(value = "SELECT * FROM orders WHERE status_delete = 0",nativeQuery = true)
     Page<Order> findAllByDeleteStatusIsFalse(PageRequest id);
 
-//    @Query(value = "UPDATE orders SET status_delete = 1 WHERE id = :id", nativeQuery = true)
+    //    @Query(value = "UPDATE orders SET status_delete = 1 WHERE id = :id", nativeQuery = true)
 //    void setDeleteStatusToTrue(@Param("id") Integer id);
     @Query(value = "UPDATE Order SET deleteStatus = 1 WHERE id = :id")
     @Modifying
     @Transactional
     boolean setDeleteStatusToTrue(@Param("id") Integer id);
+
+    @Query(value = "SELECT * FROM orders WHERE id LIKE :id", nativeQuery = true)
+    Page<Order> findAllByIdContainingAndDeleteStatusIsFalse(@Param("id") Integer id, PageRequest id1);
 }

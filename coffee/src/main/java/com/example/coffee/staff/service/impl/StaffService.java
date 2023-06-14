@@ -81,4 +81,9 @@ return true;
         Page<Staff> staffList=iStaffRepository.findByNameStaff(name,page);
         return staffList;
     }
+
+    @Override
+    public Staff findByUser(User user) {
+        return iStaffRepository.findByUser(user);
+    }
 }

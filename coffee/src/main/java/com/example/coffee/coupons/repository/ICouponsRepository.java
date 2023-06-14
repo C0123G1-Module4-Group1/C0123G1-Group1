@@ -7,11 +7,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface ICouponsRepository extends JpaRepository<Coupons, Integer> {
     Page<Coupons> findAllByDeleteStatusIsFalse(Pageable pageable);
 
     Coupons findCouponsByDeleteStatusIsFalseAndId(Integer id);
 
     @Query("select c from coupons as c where c.deleteStatus=false and c.codeCoupons like :codeCoupons")
-    Page<Coupons> findAllByDeleteStatusIsFalseAndCodeCoupons(@Param("codeCoupons")String codeCoupons, Pageable pageable);
+    Page<Coupons> findAllByDeleteStatusIsFalseAndCodeCoupons(@Param("codeCoupons") String codeCoupons, Pageable pageable);
+
+    @Query(value = "SELECT * FROM coupons WHERE (proviso * 1000) <= :total AND delete_status = 0", nativeQuery = true)
+    List<Coupons> getAll(double total);
 }

@@ -50,4 +50,9 @@ public class UserService implements IUserService, UserDetailsService {
             this.iUserRepository.save(user);
             return true;
     }
+
+    @Override
+    public User findUserByUserName(String name) {
+        return iUserRepository.findByAccountAndDeleteStatusIsFalse(name);
+    }
 }
