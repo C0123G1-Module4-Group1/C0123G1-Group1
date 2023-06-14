@@ -116,11 +116,16 @@ public class OrderController {
         String note = "";
         model.addAttribute("note", note);
 //        Float couponsVlue = 0f;
-//        Coupons coupons = couponsService.findCouponsByProviso(total);
-//        if(coupons != null || coupons.getValuee()>0){
-//            couponsVlue = coupons.getValuee();
+        Float coupons = couponsService.findCouponsByProviso(total);
+//        if(coupons > 0){
+//            couponsVlue = coupons;
 //        }
-//        model.addAttribute("coupons", couponsVlue);
+        model.addAttribute("coupons", coupons);
+        double payment = total;
+        if(coupons != 0 || total !=0){
+            payment = (double) (Math.round(total * (1 - (coupons/100)) * 10) / 10) ;
+        }
+        model.addAttribute("payment",payment);
 //        model.addAttribute("orderDTO", order);
 //        model.addAttribute("sizeProductList", sizeProductList);
 //        model.addAttribute("mapOrderDetailDTO", mapOrderDetailDTO);
