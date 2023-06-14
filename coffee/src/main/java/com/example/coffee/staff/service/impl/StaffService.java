@@ -29,7 +29,7 @@ public class StaffService implements IStaffService {
     private PasswordEncoder passwordEncoder;
     @Override
     public Page<Staff> findAll(int page) {
-        return iStaffRepository.findAllByDeleteStatusIsFalse(PageRequest.of(page,9));
+        return iStaffRepository.findAllByDeleteStatusIsFalse(PageRequest.of(page,7));
     }
     @Transactional(rollbackOn = Throwable.class)
     @Override
@@ -80,5 +80,10 @@ return true;
     public Page<Staff> findAllByName(String name,Pageable page) {
         Page<Staff> staffList=iStaffRepository.findByNameStaff(name,page);
         return staffList;
+    }
+
+    @Override
+    public Staff findByUser(User user) {
+        return iStaffRepository.findByUser(user);
     }
 }

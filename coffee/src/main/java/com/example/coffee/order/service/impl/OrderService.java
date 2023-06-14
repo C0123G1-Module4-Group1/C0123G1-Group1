@@ -12,12 +12,18 @@ import com.example.coffee.order.service.IOrderService;
 import com.example.coffee.order.service.IStatusOrderService;
 import com.example.coffee.staff.model.Staff;
 import com.example.coffee.staff.service.IStaffService;
+import com.example.coffee.user.model.User;
+import com.example.coffee.user.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import java.net.Authenticator;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -32,6 +38,8 @@ public class OrderService implements IOrderService {
     private ICouponsService couponsService;
     @Autowired
     private IStatusOrderService statusOrderService;
+    @Autowired
+    private IUserService userService;
     @Override
     public List<Order> findAll() {
         return orderRepository.findAll();
@@ -62,13 +70,19 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Order addOrder() {
-        Staff staff = staffService.findById(1);
+    public Order addOrder(String note, Authentication authentication) {
+        User user = userService.findUserByUserName(authentication.getName());
+        Staff staff = staffService.findByUser(user);
         Customer customer = customerService.findCustomer(1);
         Coupons coupons = couponsService.findCoupons(1);
         StatusOrder statusOrder = statusOrderService.findById(3);
-        Order order = new Order(staff,customer,coupons,statusOrder);
+        Order order = new Order(staff,customer,coupons,statusOrder,note);
         this.orderRepository.save(order);
         return order;
+    }
+
+    @Override
+    public Page<Order> findAllByIdContaining(Integer id, int page) {
+        return orderRepository.findAllByIdContainingAndDeleteStatusIsFalse(id, PageRequest.of(page, 8, Sort.by("id").descending()));
     }
 }

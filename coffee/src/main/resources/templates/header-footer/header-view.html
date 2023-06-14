@@ -27,8 +27,8 @@
 
 <div th:fragment="headerView">
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-center">
-        <div class="container">
+    <header id="header" class=" d-flex align-items-center" style="position: fixed;top:0;width: 100%">
+        <div class="container" style="max-width: 100%;padding: 0">
             <div class="header-container d-flex align-items-center justify-content-between" style="height: 62px;">
                 <div class="logo">
                     <h1 class="text-light"><a th:href="@{/home/}"><span>Coffee</span></a></h1>
@@ -65,7 +65,27 @@
                 <!--        <a href="#about" class="btn-get-started scrollto">Mua ngay</a>-->
             </div>
         </section><!-- End Hero -->
+        <section id="clients" class="clients text-center justify-content-center">
+            <div class="container text-center justify-content-center">
+                <div class="row text-center justify-content-center">
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+                        <a th:href="@{/typeProduct/typeProduct/{id}(id=1)}"  class="btn-get-started scrollto">Coffee</a>
+                    </div>
 
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="200">
+                        <a th:href="@{/typeProduct/typeProduct/{id}(id=2)}"  class="btn-get-started scrollto">Trà sữa</a>
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="300">
+                        <a th:href="@{/typeProduct/typeProduct/{id}(id=3)}"  class="btn-get-started scrollto">Trà nguyên chất</a>
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="400">
+                        <a th:href="@{/typeProduct/typeProduct/{id}(id=4)}"  class="btn-get-started scrollto">Đá xay</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
 </div>

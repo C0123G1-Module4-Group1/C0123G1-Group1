@@ -27,8 +27,8 @@
 
 <div th:fragment="headerContact">
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-center">
-        <div class="container">
+    <header id="header" class=" d-flex align-items-center" style="position: fixed;top:0;width: 100%">
+        <div class="container" style="max-width: 100%;padding: 0">
             <div class="header-container d-flex align-items-center justify-content-between" style="height: 62px;">
                 <div class="logo">
                     <h1 class="text-light"><a th:href="@{/home/}"><span>Coffee</span></a></h1>
@@ -41,7 +41,7 @@
                         <li><a class="nav-link  text-capitalize" style="font-weight: bold;font-size: 20px" th:href="@{/home/contact}">Liên hệ</a></li>
                         <li style="margin-top: 2%;">
                             <form th:action="@{/home/searchProduct}" method="post" class=""
-                                  style="margin-left: -4%;display: flex   ">
+                                  style="margin-left: -4%;display: flex">
                                 <input type="text" name="name" th:value="${name}" placeholder="&ensp;&ensp;Tìm kiếm theo tên "
                                        style="margin-left: 10%;border-radius: 30px ;border-color: #f2f2f2">
                                 <button type="submit" class=" getstarted scrollto"  style="border-radius: 30px;margin-left:5px;border: none">Search</button>

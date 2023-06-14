@@ -8,8 +8,8 @@ import javax.validation.constraints.Pattern;
 
 public class TypeProductDTO implements Validator {
     private  Integer id;
-    @NotBlank(message = "Tên không được để trống")
-    @Pattern(regexp = "^\\p{Lu}\\p{Ll}*(\\s\\p{Lu}\\p{Ll}*)*$", message = "Tên phải đúng định dạng.Phải là chữ không được là số" )
+    @NotBlank(message = "cannot be left blank")
+    @Pattern(regexp = "^\\p{Lu}\\p{Ll}*(\\s\\p{Lu}\\p{Ll}*)*$", message = "Name must be in the correct format.Must be letters not numbers" )
     private String typeName;
     private boolean status;
 
