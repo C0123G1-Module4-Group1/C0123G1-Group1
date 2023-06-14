@@ -20,6 +20,6 @@ public interface ICouponsRepository extends JpaRepository<Coupons, Integer> {
     @Query(value = "SELECT * FROM coupons WHERE (proviso * 1000) <= :total AND delete_status = 0", nativeQuery = true)
     List<Coupons> getAll(double total);
 
-    @Query(value = "SELECT valuee FROM coupons WHERE (proviso*1000) <= :total AND delete_status = 0 AND begin_time < now() AND end_time > now()", nativeQuery = true)
-    Float findCouponsByProviso(@Param("total") double total);
+    @Query(value = "SELECT * FROM coupons WHERE proviso <= :total AND delete_status = 0 AND begin_time < now() AND end_time > now()", nativeQuery = true)
+    Coupons findCouponsByProviso(@Param("total") double total);
 }
