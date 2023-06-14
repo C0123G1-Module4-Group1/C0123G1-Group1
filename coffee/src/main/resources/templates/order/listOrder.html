@@ -128,7 +128,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="page : ${orderPage}">
+                                    <tr th:each="page : ${orderPage}" class="flex-sm-fill text-sm-center">
                                         <th th:text="${page.id}"></th>
                                         <th th:text="${page.staff.name}"></th>
                                         <th th:text="${page.customer.name}"></th>
