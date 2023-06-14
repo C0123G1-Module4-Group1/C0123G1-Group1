@@ -15,6 +15,7 @@ import java.util.List;
 
 public interface IProductRepository extends JpaRepository<Product, Integer> {
     Page<Product> findAllByStatusIsFalse(Pageable pageable);
+    List<Product> findAllByStatusIsFalse();
 
 
     //    @Query(value = "update product set status= 1 where id= :id")

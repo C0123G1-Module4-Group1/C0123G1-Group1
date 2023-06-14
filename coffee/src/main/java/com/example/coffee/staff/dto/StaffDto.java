@@ -13,15 +13,15 @@ import java.time.LocalDateTime;
 
 public class StaffDto implements Validator {
     private Integer id;
-    @NotBlank(message = "Tên không được để trống")
+    @NotBlank(message = "cannot be left blank")
     private String name;
-    @NotBlank(message = "Địa chỉ không được để trống")
+    @NotBlank(message = "cannot be left blank")
     private String address;
-    @NotBlank(message = "Số điện thoại không được để trống")
-    @Pattern(regexp = "^0\\d{9}$", message = "Số điện thoại phải có 10 số,bắt đầu bằng số 0")
+    @NotBlank(message = "cannot be left blank")
+    @Pattern(regexp = "^0\\d{9}$", message = "Phone number must have 10 digits, starting with 0")
     private String phoneNumber;
-    @Email(message = "Phải đúng định dangj Email(*@gmail.com)")
-    @NotBlank(message = "Email không được để trống.")
+    @Email(message = "Must be in correct email format(*@gmail.com)")
+    @NotBlank(message = "cannot be left blank")
     private String email;
     private UserDto userDto;
     private Boolean deleteStatus;

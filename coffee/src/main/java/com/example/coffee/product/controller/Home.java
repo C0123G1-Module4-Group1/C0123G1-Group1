@@ -4,7 +4,8 @@ import com.example.coffee.product.model.Email;
 import com.example.coffee.product.model.Product;
 import com.example.coffee.product.service.IProductService;
 import com.example.coffee.product.service.impl.EmailService;
-import com.example.coffee.shopping_cart.model.Cart;
+
+import com.example.coffee.shopping_cart.model.CartOnline;
 import com.example.coffee.shopping_cart.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/home")
@@ -26,8 +29,8 @@ public class Home {
     private EmailService emailService;
 
     @ModelAttribute("cartOnline")
-    public Cart setupCart() {
-        return new Cart();
+    public Map<Integer, CartOnline>  setupCart() {
+        return new  LinkedHashMap<>();
     }
 
     @GetMapping("/")
@@ -38,10 +41,10 @@ public class Home {
     }
 
     @GetMapping("/contact")
-    public String Contact() {
+    public String Contact(Model model) {
+        model.addAttribute("email",new Email());
         return "contact";
     }
-
     @GetMapping("/viewProduct")
     public String ViewProduct() {
         return "view";
@@ -52,7 +55,7 @@ public class Home {
         return "shopping-cart";
     }
     @GetMapping("/homeProduct")
-    public String creatShoppingCart(@ModelAttribute("cartOnline") Cart cart, Model model) {
+    public String creatShoppingCart(@ModelAttribute("cartOnline") Map<Integer,CartOnline> cart, Model model) {
         List<Product> productList = iProductService.getAll();
         model.addAttribute("productList", productList);
         Integer countItem = iCartService.countItemQuantity(cart);
@@ -63,6 +66,7 @@ public class Home {
         model.addAttribute("email", new Email());
         return "product/homeProduct";
     }
+
 //    gởi mail
     @PostMapping("/homeMail")
     public String sendMail(@ModelAttribute("email") Email email) {

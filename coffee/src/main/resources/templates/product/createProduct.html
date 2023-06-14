@@ -29,31 +29,31 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="../../static/assets/css/portal.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-<style>
-    .boxed {
-        width: 200px;
-        height: 550px;
-        position: relative;
-        background-clip: padding-box;
-        border: 10px solid transparent;
-        background-color: white;
-        border-radius: 20px;
-    }
-    .boxed:before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        margin: -10px;
-        background-image: linear-gradient(to right top, #2979ff, #07a787);
-        border-radius: inherit;
-    }
-    .mg{
-        margin-top: 23px;
-    }
-</style>
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">-->
+    <style>
+        .boxed {
+            width: 200px;
+            height: 550px;
+            position: relative;
+            background-clip: padding-box;
+            border: 10px solid transparent;
+            background-color: white;
+            border-radius: 20px;
+        }
+        .boxed:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            margin: -10px;
+            background-image: linear-gradient(to right top, #2979ff, #07a787);
+            border-radius: inherit;
+        }
+        .mg{
+            margin-top: 23px;
+        }
+    </style>
 
 <body style="margin-left: 15%">
 <div th:replace="~{header-footer/headerAdmin::header}"></div>
@@ -112,12 +112,14 @@
                     <span class="input-group-text">Describes</span>
                 </div>
                 <textarea type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                       th:field="*{describes}"></textarea>
+                          th:field="*{describes}"></textarea>
 
             </div>
+<!--            <img id="previewImage" src="" alt="Preview Image" style="display: none; width: 20vw;height: auto" />-->
+<!--            <img id="newImage" src="" alt="New Image" style="display: none; width: 20%;height: auto" />-->
             <br>
             <br>
-            <button type="submit" class="btn btn-success" style="margin-left: 35%">Create Product</button>
+            <button type="submit" id="createButton" class="btn btn-success" style="margin-left: 35%">Create Product</button>
         </form>
 
     </div>
@@ -150,13 +152,20 @@
             let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             uploader.value = percentage;
 
+            if (percentage === 100) {
+                document.getElementById('createButton').removeAttribute('disabled');
+            } else {
+                document.getElementById('createButton').setAttribute('disabled', 'disabled');
+            }
         });
 
-        task
-            .then(snapshot => snapshot.ref.getDownloadURL())
+        task.then(snapshot => snapshot.ref.getDownloadURL())
             .then(url => {
                 document.getElementById('thumbnailURL').setAttribute("value", url);
-            })
+                previewImage.style.display = 'none';
+                newImage.src = url;
+                newImage.style.display = 'block';
+            });
     });
 </script>
 

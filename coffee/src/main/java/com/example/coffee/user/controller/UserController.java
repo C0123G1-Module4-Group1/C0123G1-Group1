@@ -32,12 +32,16 @@ public class UserController {
     public String savePass(@RequestParam(value = "pass",defaultValue = "") String pass, @RequestParam(value = "newPass",defaultValue = "") String newPass, @RequestParam(value = "newPassConfirm",defaultValue = "") String newPassConfirm, RedirectAttributes attributes, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
+        if (newPass.equals("")){
+            model.addAttribute("result", "Password can not be blank");
+            return "user/change";
+        }
         if (newPass.equals(newPassConfirm)) {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, pass);
             try {
                 authenticationManager.authenticate(token);
             } catch (BadCredentialsException e) {
-                model.addAttribute("result", "Mật khẩu hiện tại không đúng");
+                model.addAttribute("result", "Current password is incorrect");
                 return "user/change";
             }
             boolean check = iUserService.savePass(pass, newPass, authentication);
@@ -46,10 +50,10 @@ public class UserController {
                 return "user/change";
             }
             attributes.addFlashAttribute("flag", true);
-            return "redirect:/staff";
+            return "redirect:/orderController/";
 
         } else {
-            model.addAttribute("result", "Mật khẩu mới và xác nhận mật khẩu không khớp");
+            model.addAttribute("result", "New password and password confirmation do not match");
             return "user/change";
         }
 

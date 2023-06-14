@@ -27,8 +27,8 @@
 
 <div th:fragment="headerShopping">
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center">
-    <div class="container">
+  <header id="header" class=" d-flex align-items-center" style="position: fixed;top:0;width: 100%">
+    <div class="container" style="max-width: 100%;padding: 0">
       <div class="header-container d-flex align-items-center justify-content-between" style="height: 62px;">
         <div class="logo">
           <h1 class="text-light"><a th:href="@{/home/}"><span>Coffee</span></a></h1>
@@ -71,13 +71,13 @@
 
         <div class="row  justify-content-between">
           <div class=" col-md-4 col-6  "
-               data-aos="zoom-in" data-aos-delay="400">
-            <a class="btn-get-started">THÔNG TIN SẢN PHẨM</a>
+               data-aos="zoom-in" data-aos-delay="400" style="font-size: 30px">
+            <a class="btn-get-started"> THÔNG TIN SẢN PHẨM</a>
           </div>
 
           <div class=" col-md-4 col-6  "
                data-aos="zoom-in" data-aos-delay="400">
-            <a th:href="@{/home/homeProduct}" class="btn btn-outline-success">Mua thêm sản phẩm</a>
+            <a th:href="@{/home/homeProduct}" class="btn btn-outline-success" style="border-radius: 30px;">Mua thêm sản phẩm</a>
           </div>
         </div>
       </div>
