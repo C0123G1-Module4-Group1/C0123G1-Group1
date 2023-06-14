@@ -43,5 +43,10 @@ public class TypeService implements ITypeService {
         return iTypeRepository.findById(id).get();
     }
 
+    @Override
+    public List<TypeProduct> findAllByTypeProduct(String name) {
+        return iTypeRepository.findAllByTypeProduct(name);
+    }
+
 
 }

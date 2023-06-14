@@ -23,6 +23,7 @@ public interface ICouponsService {
 
     List<Coupons> getAll(double total);
 
-    Float findCouponsByProviso(double total);
-    public String createCodeName();
+    Coupons findCouponsByProviso(double total);
+//    Float findCouponsByProviso(double total);
+    String createCodeName();
 }

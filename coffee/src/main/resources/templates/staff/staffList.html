@@ -103,7 +103,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="staff : ${staffList}" th:if="${staff.user.role.name}!=ADMIN">
+                                    <tr th:each="staff : ${staffList}" th:if="${staff.user.role.name}!=ADMIN" class="flex-sm-fill text-sm-center">
                                         <th th:text="${staff.id}"
                                             style="justify-content: center; display: table-cell;vertical-align: middle;"></th>
                                         <th th:text="${staff.getName()}"
@@ -141,6 +141,10 @@
                                             </button>
                                         </th>
 
+                                    </tr>
+                                    <tr th:if="${staffList.size<1}">
+                                        <h5 style="color: red;text-align: center" >
+                                            Empty results</h5>
                                     </tr>
                                     </tbody>
                                 </table>

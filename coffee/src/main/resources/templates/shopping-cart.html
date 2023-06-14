@@ -20,18 +20,18 @@
 <!-- MDB -->
 
 
-<!--<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>-->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
 <body>
 <div style="margin-top: -70%" th:replace="~{header-footer/header-shopping::headerShopping}"></div>
 <div class="d-flex align-items-center">
     <div class="container">
-        <div class="table-wrap" style="border: 1px solid #21cf95">
-            <div th:if="${productList.size()==0||productList.isEmpty()}" class="my-5">
-                <h4 style="color: red;text-align: center">Không có sản phẩm nào trong giỏ hàng</h4>
-                <a th:href="@{/home/homeProduct}" class="btn-outline-success btn"style="margin-bottom: 2%;margin-top: 2%;margin-left: 45%;border-radius: 30px">Quay lại</a>
-            </div>
-            <table th:if="${!productList.isEmpty()||productList.size()!=0}"
+        <div th:if="${totalPayment}==0" class="my-5">
+            <h4 style="color: red;text-align: center">Không có sản phẩm nào trong giỏ hàng</h4>
+            <a th:href="@{/home/homeProduct}" class="btn-outline-success btn"style="margin-bottom: 2%;margin-top: 2%;margin-left: 45%;border-radius: 30px">Quay lại</a>
+        </div>
+        <div class="table-wrap" style="border: 1px solid #21cf95" th:if="${!productList.isEmpty()||productList.size()!=0}">
+
+            <table
                    class="table table-responsive table-borderless table-hover">
                 <thead>
                 <tr style="background-color: #21cf95;height: 70%">
@@ -40,7 +40,7 @@
                     <th class="text-center">Kích thước</th>
                     <th class="text-center">Giá bán</th>
                     <th class="text-center">Số lượng</th>
-                    <th class="text-center">Thao tác</th>
+                    <th class="text-center">&ensp;</th>
                 </tr>
                 </thead>
                 <tbody th:each="product: ${productList}">
@@ -78,22 +78,21 @@
                         </div>
                     </td>
                     <td>
-                        <a>
                             <a th:href="@{/shopping_cart/operation/{id}(id=${product.idProduct},action='deleteItem')}">
-                                <button class="btn btn-danger" type="button">Delete</button>
+    <img style="width: 15%;color: red" src="data:image/png;base64,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"/>
                             </a>
-                        </a>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <a class="btn btn-outline-danger" style="text-decoration: none;margin-left: 3%">
-                <span class="ml-1"> <i class="fa-solid fa-trash"></i>Xoá tất cả</span></a>
+            <div style="margin-left:  80%;">
+            <a class="btn btn-outline-danger" style="text-decoration: none;margin-left: 3%;border-radius: 30px" th:href="@{/shopping_cart/clearAllItem}">
+                <span class="ml-1"> <i class="fa-solid fa-trash"></i> Xoá tất cả</span></a>
             <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                    style="margin-left: 5%">
+                    style="margin-left: 5%;border-radius: 30px">
                 Thanh toán
-            </button>
-            <h4  style="color: #21cf95 ;margin-left: 55%" th:text="${'Tổng tiền: ' +totalPayment}"></h4>
+            </button></div>
+            <h3  style="color: red ;margin-left: 50%">Tổng tiền:<span th:text="${totalPayment+'.000 VND'}"></span></h3>
         </div>
     </div>
 </div>
@@ -157,10 +156,10 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
 
-<!--<button id="btnInfo">Info</button>-->
-<!--<button id="btnSuccess">Success</button>-->
-<!--<button id="btnError">Error</button>-->
-<!--<button id="btnWarning">Warning</button>-->
+<button id="btnInfo">Info</button>
+<button id="btnSuccess">Success</button>
+<button id="btnError">Error</button>
+<button id="btnWarning">Warning</button>
 
 <!-- jquery -->
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -168,40 +167,37 @@
 
 
 <!-- core script  -->
-<!--<script type="text/javascript">-->
-<!--    // consts-->
-<!--    const btnInfo = document.getElementById('btnInfo');-->
-<!--    const btnSuccess = document.getElementById('btnSuccess');-->
-<!--    const btnError = document.getElementById('btnError');-->
-<!--    const btnWarning = document.getElementById('btnWarning');-->
+<script type="text/javascript">
+    // consts
+    const btnInfo = document.getElementById('btnInfo');
+    // const btnSuccess = document.getElementById('btnSuccess');
+    const btnError = document.getElementById('btnError');
+    const btnWarning = document.getElementById('btnWarning');
 
-<!--    // Event Listeners-->
-<!--    btnInfo.addEventListener('click', displayInfoToaster);-->
-<!--    btnSuccess.addEventListener('click', displaySuccessToaster);-->
-<!--    btnError.addEventListener('click', displayErrorToaster);-->
-<!--    btnWarning.addEventListener('click', displayWarningToaster);-->
+    // Event Listeners
+    btnInfo.addEventListener('click', displayInfoToaster);
 
-<!--    // functions-->
-<!--    function displayInfoToaster() {-->
-<!--        toastr.options.timeOut = 1500; // 1.5s-->
-<!--        toastr.info('info messages');-->
-<!--    }-->
+    btnError.addEventListener('click', displayErrorToaster);
+    btnWarning.addEventListener('click', displayWarningToaster);
 
-<!--    function displaySuccessToaster() {-->
-<!--        toastr.options.timeOut = 1500; // 1.5s-->
-<!--        toastr.success('Success messages');-->
-<!--    }-->
+    // functions
+    function displayInfoToaster() {
+        toastr.options.timeOut = 1500; // 1.5s
+        toastr.info('info messages');
+    }
 
-<!--    function displayErrorToaster() {-->
-<!--        toastr.options.timeOut = 1500; // 1.5s-->
-<!--        toastr.error('errors messages');-->
-<!--    }-->
 
-<!--    function displayWarningToaster() {-->
-<!--        toastr.options.timeOut = 1500; // 1.5s-->
-<!--        toastr.warning('warning messages');-->
-<!--    }-->
-<!--</script>-->
+
+    function displayErrorToaster() {
+        toastr.options.timeOut = 1500; // 1.5s
+        toastr.error('errors messages');
+    }
+
+    function displayWarningToaster() {
+        toastr.options.timeOut = 1500; // 1.5s
+        toastr.warning('warning messages');
+    }
+</script>
 <script src="/static/assetshome/vendor/purecounter/purecounter_vanilla.js"></script>
 <script src="/static/assetshome/vendor/aos/aos.js"></script>
 <script src="/static/assetshome/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

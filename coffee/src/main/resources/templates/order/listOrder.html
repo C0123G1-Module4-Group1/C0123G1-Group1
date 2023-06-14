@@ -69,47 +69,6 @@
                     </div><!--//table-utilities-->
                 </div><!--//col-auto-->
             </div><!--//row-->
-<!--            <div class="row g-3 mb-4 align-items-center justify-content-between">-->
-<!--                <div class="col-auto">-->
-<!--                    <h1 class="app-page-title mb-0">Orders</h1>-->
-<!--                </div>-->
-<!--                <div class="col-auto">-->
-<!--                    <div class="page-utilities">-->
-<!--                        <div class="row g-2 justify-content-start justify-content-md-end align-items-center">-->
-<!--                            <div class="col-auto">-->
-<!--&lt;!&ndash;                                <form class="table-search-form row gx-1 align-items-center">&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <div class="col-auto">&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <input type="text" id="search-orders" name="searchorders"&ndash;&gt;-->
-<!--&lt;!&ndash;                                               class="form-control search-orders" placeholder="Search">&ndash;&gt;-->
-<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <div class="col-auto">&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <button type="button" class="btn btn-outline-success" fdprocessedid="ss9bui"&ndash;&gt;-->
-<!--&lt;!&ndash;                                                style="border:1px solid #33CC66">Search&ndash;&gt;-->
-<!--&lt;!&ndash;                                        </button>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </form>&ndash;&gt;-->
-
-<!--                            </div>&lt;!&ndash;//col&ndash;&gt;-->
-<!--                            <div class="col-auto">-->
-
-<!--&lt;!&ndash;                                <select class="form-select w-auto">&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <option selected value="option-1">All</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <option value="option-2">This week</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <option value="option-3">This month</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <option value="option-4">Last 3 months</option>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                                </select>&ndash;&gt;-->
-<!--                            </div>-->
-<!--                            <div class="col-auto">-->
-<!--                                <a th:href="@{/orderController/create}">-->
-<!--                                    <button type="button" class="btn btn-info" fdprocessedid="tkcp7c">Add Order-->
-<!--                                    </button>-->
-<!--                                </a>-->
-<!--                            </div>-->
-<!--                        </div>&lt;!&ndash;//row&ndash;&gt;-->
-<!--                    </div>&lt;!&ndash;//table-utilities&ndash;&gt;-->
-<!--                </div>&lt;!&ndash;//col-auto&ndash;&gt;-->
-<!--            </div>&lt;!&ndash;//row&ndash;&gt;-->
             <div class="tab-content" id="orders-table-tab-content">
                 <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                     <div class="app-card app-card-orders-table shadow-sm mb-5">
@@ -117,22 +76,22 @@
                             <div class="table-responsive">
                                 <table class="table app-table-hover mb-0 text-left">
                                     <thead>
-                                    <tr class="flex-sm-fill text-sm-center">
-                                    <td style="font-size: 16px;width: 10%;color: black;font-weight: 600">Order Code</td>
-                                        <td style="font-size: 16px;width: 18%;color: black;font-weight: 600">Name Employee</td>
-                                        <td style="font-size: 16px;width: 18%;color: black;font-weight: 600">Name Customer</td>
-                                        <td style="font-size: 16px;width: 10%;color: black;font-weight: 600">Coupons(%)</td>
-                                        <td style="font-size: 16px;width: 25%;color: black;font-weight: 600">Status Order</td>
+                                    <tr>
+                                        <th style="font-size: 16px;width: 10%;color: black;text-align: center">Order Code</th>
+                                        <th style="font-size: 16px;width: 17%;color: black">Name Employee</th>
+                                        <th style="font-size: 16px;width: 15%;color: black">Name Customer</th>
+                                        <th style="font-size: 16px;width: 10%;color: black">Coupons(%)</th>
+                                        <th style="font-size: 16px;width: 30%;color: black">Status Order</th>
 <!--                                        <td style="font-size: 16px;width: 15%;color: black">Total Price</td>-->
-                                        <td colspan="2" style="font-size: 20px;color: black">Action</td>
+                                        <th colspan="2" style="font-size: 16px;color: black">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="page : ${orderPage}">
-                                        <th th:text="${page.id}"></th>
+                                        <th style="text-align: center" th:text="${page.id}"></th>
                                         <th th:text="${page.staff.name}"></th>
                                         <th th:text="${page.customer.name}"></th>
-                                        <th th:text="${(page.coupons.valuee * 100) % 100}"></th>
+                                        <th  th:text="${(page.coupons.valuee * 100) % 100}"></th>
                                         <th th:text="${page.status.status}"></th>
 <!--                                        <th th:text="${page.status.status}"></th>-->
 <!--                                        <th>-->
