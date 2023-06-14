@@ -77,7 +77,7 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><h3 class="dropdown-item" th:text="${#authentication.getName()}" style="font-weight: 600"></h3></li>
-                        <li><a class="dropdown-item" th:href="@{/changePass}">Change Password</a></li>
+                        <li><a class="dropdown-item" th:href="@{/changePass}" th:if="${#authentication.getName()}!=hovien123">Change Password</a></li>
                         <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </div>

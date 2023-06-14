@@ -32,11 +32,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Cấu hình cho Login Form.
         http.authorizeRequests().antMatchers("/login","/home/**","/static/**","/shopping_cart/list","/shopping_cart/operation/").permitAll()
 //                .anyRequest().authenticated()
-                .antMatchers("/changePass","/coupons/**","/api/coupons/**","/customer/**","/api/customer/**","/orderController/**","/productCoffee/**","/typeProduct/**")
+                .antMatchers("/changePass","/customer/**","/api/customer/**","/orderController/**")
                 .access("hasAnyRole('EMPLOYEE', 'ADMIN')")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/staff","/staff/**")
+                .antMatchers("/", "/staff","/staff/**","/coupons/**","/api/coupons/**","/productCoffee/**","/typeProduct/**")
                 .access("hasRole( 'ADMIN')").and().exceptionHandling().accessDeniedPage("/403")
                 .and().formLogin()//
                 // Submit URL của trang login
