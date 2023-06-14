@@ -8,11 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
-    @Query("select c from customer as c where c.deleteStatus =false")
+    @Query(value = "select * from customer as c where c.delete_status =false order by c.id desc ",nativeQuery = true)
     Page<Customer> findAllByDeleteStatusIsFalse(Pageable pageable);
 
     Customer findCustomerByDeleteStatusIsFalseAndId(Integer id);
 
-    @Query("select c from customer as c where c.deleteStatus=false and c.name like :name and c.phoneNumber like :phoneNumber and c.address like :adress ")
-    Page<Customer> findAllByName(@Param("name")String name,@Param("phoneNumber")String phoneNumber,@Param("adress")String adress,Pageable pageable);
+    @Query("select c from customer as c where c.deleteStatus=false and c.name like :name and c.phoneNumber like :phoneNumber and c.address like :address ")
+    Page<Customer> findAllByName(@Param("name")String name,@Param("phoneNumber")String phoneNumber,@Param("address")String address,Pageable pageable);
 }

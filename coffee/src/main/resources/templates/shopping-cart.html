@@ -54,7 +54,7 @@
                         <div class="fw-600"><p class="m-0 text-muted" th:text="${product.price}"></p></div>
                     </td>
                     <td class="">
-                        <p th:text="${countQuantity}">
+                        <p th:text="${countProduct}">
                     </td>
                     <td>
                         <div class="" data-bs-dismiss="alert">
@@ -88,7 +88,7 @@
             <div class=" border-right">
                 <div class="p-3 py-5" style="margin-top: -5%">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <form action="">
+                        <form th:action="@{/customer/create-customer}" th:object="${customerDTO}" method="post">
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Tên của bạn*</label><input
                                         style="border-radius: 30px"
@@ -114,15 +114,6 @@
                                         type="text" class="form-control"
                                         placeholder=""
                                         value=""></div>
-                                <div class="col-md-12"><label class="labels">Hình thức thanh toán*</label><input
-                                        style="border-radius: 30px"
-                                        type="text" class="form-control"
-                                        placeholder=""
-                                        value=""></div>
-                                <div class="col-md-12"><label class="labels">Ghi chú*</label><textarea
-                                        style="border-radius: 30px" class="form-control" name="message"
-                                        placeholder=""></textarea>
-                                </div>
                             </div>
                         </form>
                     </div>
