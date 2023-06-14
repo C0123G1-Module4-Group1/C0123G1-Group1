@@ -10,13 +10,13 @@ public class CustomerDTO implements Validator {
 
     private Integer id;
 
-    @NotBlank(message = "Can't be left blank")
+    @NotBlank(message = "cannot be left blank")
     private String name;
-    @NotBlank(message = "Can't be left blank")
+    @NotBlank(message = "cannot be left blank")
     private String phoneNumber;
-    @NotBlank(message = "Can't be left blank")
+    @NotBlank(message = "cannot be left blank")
     private String email;
-    @NotBlank(message = "Can't be left blank")
+    @NotBlank(message = "cannot be left blank")
     private String address;
 
     private LocalDate createTime;

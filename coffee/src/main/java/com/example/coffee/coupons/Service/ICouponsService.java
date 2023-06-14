@@ -4,6 +4,8 @@ import com.example.coffee.coupons.model.Coupons;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface ICouponsService {
 
     Page<Coupons> findAllCoupons(Pageable pageable);
@@ -19,4 +21,7 @@ public interface ICouponsService {
     Page<Coupons> findAllCouponsByCodeCoupons(String codeCoupons,Pageable pageable);
 
 
+    List<Coupons> getAll(double total);
+
+    Float findCouponsByProviso(double total);
 }

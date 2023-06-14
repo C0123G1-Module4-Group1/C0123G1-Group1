@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class CouponsServiceImpl implements ICouponsService {
@@ -30,6 +31,22 @@ public class CouponsServiceImpl implements ICouponsService {
     @Override
     public Page<Coupons> findAllCouponsByCodeCoupons(String codeCoupons,Pageable pageable) {
         return iCouponsRepository.findAllByDeleteStatusIsFalseAndCodeCoupons(codeCoupons,pageable);
+    }
+
+    @Override
+    public List<Coupons> getAll(double total) {
+        return iCouponsRepository.getAll(total);
+    }
+
+    @Override
+    public Float findCouponsByProviso(double total) {
+        Float coupons = iCouponsRepository.findCouponsByProviso(total);
+        if(coupons != null){
+            return coupons;
+        }else {
+            return 0f;
+        }
+
     }
 
     @Override

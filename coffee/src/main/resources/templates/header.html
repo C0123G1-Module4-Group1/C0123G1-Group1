@@ -5,6 +5,8 @@
     <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <div th:fragment="header">
@@ -69,24 +71,45 @@
 <!--                        </svg>-->
 <!--                    </a>-->
 <!--                </div>&lt;!&ndash;//app-utility-item&ndash;&gt;-->
-                <div class="app-utility-item app-user-dropdown dropdown">
-                    <div th:if="${#authentication.getName()}!=anonymousUser">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu2" style="background-color: white;margin-bottom: 5px"
-                                    data-bs-toggle="dropdown" aria-expanded="false" >
-                                <img src="https://cdn-icons-png.flaticon.com/512/147/147142.png">
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <li><a th:href="@{/changePass}">
-                                    <button class="dropdown-item btn btn-info" type="button">change Password</button>
-                                </a></li>
-                                <li>
-                                    <a th:href="@{/logout}" style="margin-left: 3px"> Logout<i class="fa fa-sign-out fa-2x" style="margin-left: 4px"></i></a>
-                                </li>
-                            </ul>
-                        </div>
+                <div class="dropdown" style="background-color: white">
+                    <button style="background-color: white" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://cdn-icons-png.flaticon.com/512/147/147142.png" style="height: 30px">
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><h3 class="dropdown-item" th:text="${#authentication.getName()}" style="font-weight: 600"></h3></li>
+                        <li><a class="dropdown-item" th:href="@{/changePass}">Change Password</a></li>
+                        <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                    </ul>
+                </div>
+<!--                <div class="dropdown" style="padding-right: 25px;">-->
+<!--                    <button class="btn btn-secondary dropdown-toggle" style="background-color: white;margin-bottom: 5px;width: 30px;height: 30px"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                        <img src="https://cdn-icons-png.flaticon.com/512/147/147142.png" style="height: 30px">-->
+<!--                    </button>-->
+<!--                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--                        <a class="dropdown-item" th:text="${#authentication.getName()}"></a>-->
+<!--                        <a class="dropdown-item" th:href="@{/changePass}">Change Password</a>-->
+<!--                        <a class="dropdown-item" th:href="@{/logout}">Logout<i class="fa fa-sign-out fa-2x" style="margin-left: 4px"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class=" app-user-dropdown dropdown">-->
+<!--                    <div th:if="${#authentication.getName()}!=anonymousUser">-->
+<!--                        <div class="dropdown">-->
+<!--                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu2" style="background-color: white;margin-bottom: 5px"-->
+<!--                                    data-bs-toggle="dropdown" aria-expanded="false" >-->
+<!--                                <img src="https://cdn-icons-png.flaticon.com/512/147/147142.png">-->
+<!--                            </button>-->
+<!--                            <ul  aria-labelledby="dropdownMenu2">-->
+<!--                                <li style="justify-content: center"><span th:text="${#authentication.getName()}" style="font-weight: 600;font-size: 20px;text-align: center"></span></li>-->
+<!--                                <li><a th:href="@{/changePass}" class="dropdown-item ">-->
+<!--                                    change Password-->
+<!--                                </a></li>-->
+<!--                                <li>-->
+<!--                                    <a th:href="@{/logout}" style="margin-left: 3px"> Logout<i class="fa fa-sign-out fa-2x" style="margin-left: 4px"></i></a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
 
-                    </div>
+<!--                    </div>-->
                 </div><!--//app-user-dropdown-->
             </div><!--//app-utilities-->
         </div><!--//row-->

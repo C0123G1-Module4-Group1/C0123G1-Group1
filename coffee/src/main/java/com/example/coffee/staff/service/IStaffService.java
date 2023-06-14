@@ -1,6 +1,7 @@
 package com.example.coffee.staff.service;
 
 import com.example.coffee.staff.model.Staff;
+import com.example.coffee.user.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,4 +16,6 @@ public interface IStaffService {
     Staff findById(Integer id);
 
     Page<Staff> findAllByName(String name, Pageable page);
+
+    Staff findByUser(User user);
 }

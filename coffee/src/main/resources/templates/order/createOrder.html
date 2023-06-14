@@ -65,23 +65,28 @@
                                                         </div>
                                                     </div>
                                                 </a>
-                                                <div style="margin-top: 3%">
-                                                    <h5 class="mb-0" th:text="${product.name}"></h5>
-                                                    <small style="font-size: 20px;color: red"> <small
-                                                            th:text="${product.price} "
-                                                            style="font-size: 20px;color: red"></small>00 đ</small>
+                                                <div style="margin-top: 3%;">
+                                                    <h5 style="font-size: 15px" class="mb-0"
+                                                        th:text="${product.name}"></h5>
+                                                    <small style="font-size: 15px;color: red">
+                                                        <small
+                                                                th:text="${product.price} "
+                                                                style="font-size: 15px;color: red">
+
+                                                        </small>00 đ
+                                                    </small>
                                                 </div>
-                                                <div class=" apointment d-flex" style="margin-top: 1.5%">
-                                                    <!--                                                    <a class="btn btn-outline-success "-->
-                                                    <!--                                                       th:href="@{/orderController/{id}/{idOrder}/addToCart(id = ${product.id}, idOrder = ${orderDTO.id})}"-->
-                                                    <!--                                                       style="font-size: 60%;margin-left: 12%;border-radius: 30px">Add To Order</a>-->
-                                                    <a class="btn btn-outline-success "
-                                                       style="font-size: 60%;margin-left: 12%;border-radius: 30px"
-                                                       data-bs-toggle="modal"
-                                                       data-bs-target="#addModal"
-                                                       th:attr="onclick=|infoAdd(${product.id},'${product.name}')|">Add
-                                                        To Order</a>
-                                                </div>
+                                                <!--                                                <div class=" apointment d-flex" style="margin-top: 1.5%">-->
+                                                <!--                                                    &lt;!&ndash;                                                    <a class="btn btn-outline-success "&ndash;&gt;-->
+                                                <!--                                                    &lt;!&ndash;                                                       th:href="@{/orderController/{id}/{idOrder}/addToCart(id = ${product.id}, idOrder = ${orderDTO.id})}"&ndash;&gt;-->
+                                                <!--                                                    &lt;!&ndash;                                                       style="font-size: 60%;margin-left: 12%;border-radius: 30px">Add To Order</a>&ndash;&gt;-->
+                                                <!--                                                    <a class="btn btn-outline-success "-->
+                                                <!--                                                       style="font-size: 60%;margin-left: 12%;border-radius: 30px"-->
+                                                <!--                                                       data-bs-toggle="modal"-->
+                                                <!--                                                       data-bs-target="#addModal"-->
+                                                <!--                                                       th:attr="onclick=|infoAdd(${product.id},'${product.name}')|">Add-->
+                                                <!--                                                        To Order</a>-->
+                                                <!--                                                </div>-->
                                                 <!--                                                <button type="button" data-bs-toggle="modal" class="btn btn-danger"-->
                                                 <!--                                                        data-bs-target="#addModal"-->
                                                 <!--                                                        th:attr="onclick=|infoAdd(${row.id},'${row.title}')|">-->
@@ -106,116 +111,132 @@
                             <h1 class="app-page-title mb-0">Order: </h1>
                             <!--                            <h3 class="app-page-title mb-0" style="color: orangered" th:text="${orderDTO.id}"></h3>-->
                         </div>
+
                         <div class="row g-0 mb-4 align-items-center justify-content-between">
-                            <div th:object="${cartDTO}">
-                                <div class="container" style="margin: 0">
-                                    <div class="table-wrap" style="display: flex">
-                                        <!--                                        <div class="col-md-9">-->
-                                        <table class="table table-responsive table-borderless">
-                                            <thead>
-                                            <th hidden>ID</th>
-                                            <th size="25%">Product Name</th>
-                                            <th size="20%">Price</th>
-                                            <th size="10%">Size</th>
-                                            <th size="20%">Quantity</th>
-                                            <!--                                            <th size="25%">Total</th>-->
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="cart : ${cartDTO.entrySet()}"
-                                                class="align-middle alert border-bottom" role="alert">
-                                                <td hidden th:text="${cart.getKey()}">
-                                                </td>
-                                                <td th:text="${cart.getValue().nameProduct}">
-                                                </td>
-                                                <td th:text="${cart.getValue().priceProduct * cart.getValue().sizeRate}">
-                                                </td>
-                                                <td>
-                                                    <a th:href="@{/orderController/{id}/removeSize(id = ${cart.getKey()})}">
-                                                        <span> < </span>
-                                                    </a>
-                                                    <span th:text="${cart.getValue().sizeProduct}"></span>
-                                                    <a th:href="@{/orderController/{id}/addSize(id = ${cart.getKey()})}">
-                                                        <span> > </span>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a th:href="@{/orderController/{id}/removeQuantity(id = ${cart.getKey()})}">
-                                                        <span> - </span>
-                                                    </a>
-                                                    <span th:text="${cart.getValue().quantity}"></span>
-                                                    <a th:href="@{/orderController/{id}/addQuantity(id = ${cart.getKey()})}">
-                                                        <span> + </span>
-                                                    </a>
-                                                </td>
-                                                <!--                                                <td th:text="${product.getKey().price * product.getValue() * }">-->
-                                                <!--                                                    <span> vnd </span>-->
-                                                <!--                                                </td>-->
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <!--                                        </div>-->
+                            <form th:action="@{/orderController/createOrderDetail}">
+                                <div th:object="${cartDTO}">
+                                    <div class="container" style="margin: 0">
+                                        <div class="table-wrap" style="display: flex">
+                                            <!--                                        <div class="col-md-9">-->
+                                            <table class="table table-responsive table-borderless">
+                                                <thead>
+                                                <th hidden>ID</th>
+                                                <th size="25%">Product Name</th>
+                                                <th size="30%">Price</th>
+                                                <th size="5%"></th>
+                                                <th size="20%">Size</th>
+                                                <th size="20%">Quantity</th>
+                                                <!--                                            <th size="25%">Total</th>-->
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="cart : ${cartDTO.entrySet()}"
+                                                    class="align-middle alert border-bottom" role="alert">
+                                                    <td hidden th:text="${cart.getKey()}">
+                                                    </td>
+                                                    <td th:text="${cart.getValue().nameProduct}">
+                                                    </td>
+                                                    <td th:text="${cart.getValue().priceProduct * cart.getValue().sizeRate * 1000}">
+                                                    </td>
+                                                    <td size="5%">
+                                                    </td>
+                                                    <td>
+                                                        <a th:href="@{/orderController/{id}/removeSize(id = ${cart.getKey()})}">
+                                                            <span style="font-size: 15px"> < </span>
+                                                        </a>
+                                                        <span th:text="${cart.getValue().sizeProduct}"></span>
+                                                        <a th:href="@{/orderController/{id}/addSize(id = ${cart.getKey()})}">
+                                                            <span style="font-size: 15px"> > </span>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a th:href="@{/orderController/{id}/removeQuantity(id = ${cart.getKey()})}">
+                                                            <span style="font-size: 15px"> - </span>
+                                                        </a>
+                                                        <span th:text="${cart.getValue().quantity}"></span>
+                                                        <a th:href="@{/orderController/{id}/addQuantity(id = ${cart.getKey()})}">
+                                                            <span style="font-size: 15px"> + </span>
+                                                        </a>
+                                                    </td>
+                                                    <!--                                                <td th:text="${product.getKey().price * product.getValue() * }">-->
+                                                    <!--                                                    <span> vnd </span>-->
+                                                    <!--                                                </td>-->
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <!--                                        </div>-->
+                                        </div>
+                                        <!--                                </div>-->
                                     </div>
-                                    <!--                                </div>-->
                                 </div>
-                            </div>
-                            <!--                        <div class="mt-3 form-group">-->
-                            <!--                            <label>Note</label>-->
-                            <!--                            <textarea type="text" class="form-control"></textarea>-->
-                            <!--                        </div>-->
-                            <div class="row mb-1 align-items-center justify-content-between"
-                                 style="margin: 0 0 10%; padding: 0">
-                                <div class="col-6" style="margin: 0; padding-right: 2%">
-                                    <table>
-                                        <tr>
-                                            <th scope="row">Note</th>
-                                            <td>
-                                            <textarea class="form-control"
-                                                      type="text"
+                                <!--                        <div class="mt-3 form-group">-->
+                                <!--                            <label>Note</label>-->
+                                <!--                            <textarea type="text" class="form-control"></textarea>-->
+                                <!--                        </div>-->
+                                <div class="row mb-1 align-items-center justify-content-between"
+                                     style="margin: 0 0 10%; padding: 0">
+                                    <div class="col-6" style="margin: 0; padding-right: 2%">
+                                        <table>
+                                            <tr>
+                                                <th scope="row">Note</th>
+                                                <td>
+                                            <textarea class="form-control" name="note"
+                                                      type="text" th:text="${note}" th:value="${note}"
                                             ></textarea>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Total</th>
-                                            <td>
-                                                <input type="text" class="form-control" th:value="${total}">
-                                            </td>
-                                        </tr>
-                                    </table>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Total</th>
+                                                <td>
+                                                    <input disabled type="text" class="form-control"
+                                                           th:value="${total}">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-6" style="margin: 0; padding:0; box-sizing: border-box">
+                                        <table>
+                                            <tr>
+                                                <th scope="row">
+<!--                                                    data-bs-toggle="modal"-->
+<!--                                                    data-bs-target="#addModal" th:attr="onclick=|infoAdd|">-->
+<!--                                                    <div class="form-check">-->
+<!--                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />-->
+<!--                                                        <label class="form-check-label" for="flexCheckDefault">Coupons</label>-->
+<!--                                                    </div>-->
+                                                    Coupons
+                                                </th>
+                                                <td>
+                                                    <input disabled name="coupons" type="text" class="form-control" th:value="${coupons}">
+<!--                                                    <input disabled name="coupons" type="text" class="form-control">-->
+                                                </td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Payment</th>
+                                                <td>
+                                                    <input disabled name="payment" type="text" class="form-control" th:value="${payment}">
+                                                    <!--                                            <input type="text" class="form-control" th:value="${total}">-->
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div class="col-6" style="margin: 0; padding:0; box-sizing: border-box">
-                                    <table>
-                                        <tr>
-                                            <th scope="row">Coupons</th>
-                                            <td>
-                                                <input type="text" class="form-control">
-                                            </td>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Payment</th>
-                                            <td>
-                                                <input type="text" class="form-control">
-                                                <!--                                            <input type="text" class="form-control" th:value="${total}">-->
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <div style="display: flex; justify-content: right; margin: 0; padding: 0">
+                                    <a th:href="@{/orderController/removeOrder}"
+                                       style=" margin: 5px">
+                                        <button type="button" class="btn btn-danger" fdprocessedid="tkcp7c">Remove
+                                        </button>
+                                    </a>
+                                    <a th:href="@{/orderController/clearCart}"
+                                       style=" margin: 5px">
+                                        <button type="button" class="btn btn-warning" fdprocessedid="tkcp7c">Clear
+                                        </button>
+                                    </a>
+                                    <a style=" margin: 5px">
+                                        <button type="submit" class="btn btn-info" fdprocessedid="tkcp7c">Add Order
+                                        </button>
+                                    </a>
                                 </div>
-                            </div>
-                            <div style="display: flex; justify-content: right; margin: 0; padding: 0">
-                                <a th:href="@{/orderController/removeOrder}"
-                                   style=" margin: 5px">
-                                    <button type="button" class="btn btn-danger" fdprocessedid="tkcp7c">Remove
-                                    </button>
-                                </a>
-                                <a th:href="@{/orderController/clearCart}"
-                                   style=" margin: 5px">
-                                    <button type="button" class="btn btn-warning" fdprocessedid="tkcp7c">Clear
-                                    </button>
-                                </a>
-                                <a th:href="@{/orderController/createOrderDetail}" style=" margin: 5px">
-                                    <button type="button" class="btn btn-info" fdprocessedid="tkcp7c">Add Order
-                                    </button>
-                                </a>
-                            </div>
+                            </form>
                         </div><!--//row-->
                     </div><!--//container-fluid-->
                 </div><!--//app-content-->
@@ -224,41 +245,41 @@
     </div><!--//app-wrapper-->
 
     <!-- Modal -->
-    <!--<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"-->
-    <!--     aria-hidden="true">-->
-    <!--    <div class="modal-dialog">-->
-    <!--        <div class="modal-content">-->
-    <!--            <div class="modal-header">-->
-    <!--                <h5 class="modal-title" id="exampleModalLabel">Choose Size</h5>-->
-    <!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-    <!--            </div>-->
-    <!--&lt;!&ndash;            <form th:action="@{/orderController/delete}" method="post">&ndash;&gt;-->
-    <!--            <form th:action="@{/orderController/addOrderDetail}" method="get">-->
-    <!--                <div class="modal-body">-->
-    <!--                    <input hidden id="idProduct" name="deleteId">-->
-    <!--                    <span>-->
-    <!--                        Choose Size To Product:-->
-    <!--                    </span>-->
-    <!--                    <span id="nameProduct" style=" color: red">-->
-    <!--                    </span>-->
-    <!--                    <select style="border: 0px solid #CCCCCC" name="idSize" id="size">-->
-    <!--                        <option th:each="size :${sizeProductList}"-->
-    <!--                                th:text="${size.size}"-->
-    <!--                                th:value="${size.id}">-->
-    <!--                        </option>-->
-    <!--                    </select>-->
-    <!--&lt;!&ndash;                    <span>&ndash;&gt;-->
-    <!--&lt;!&ndash;                         ?&ndash;&gt;-->
-    <!--&lt;!&ndash;                    </span>&ndash;&gt;-->
-    <!--                </div>-->
-    <!--                <div class="modal-footer">-->
-    <!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>-->
-    <!--                    <button type="submit" class="btn btn-primary">YES</button>-->
-    <!--                </div>-->
-    <!--            </form>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</div>-->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Choose Size</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--            <form th:action="@{/orderController/delete}" method="post">-->
+                <form th:action="@{/orderController/chooseCoupons}" method="get">
+                    <div class="modal-body">
+                        <input hidden id="idProduct" name="deleteId">
+                        <span>
+                            Choose Size To Product:
+                        </span>
+                        <span id="nameProduct" style=" color: red">
+                        </span>
+                        <select style="border: 0px solid #CCCCCC" name="idSize" id="size">
+                            <option th:each="coupons :${couponsList}"
+                                    th:text="${coupons.valuee}"
+                                    th:value="${coupons.id}">
+                            </option>
+                        </select>
+                        <!--                    <span>-->
+                        <!--                         ?-->
+                        <!--                    </span>-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-primary">YES</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!--<script th:inline="javascript">-->
 
@@ -420,9 +441,9 @@
 </body>
 </html>
 <script>
-    function infoAdd(id, name) {
-        document.getElementById("idProduct").value = id;
-        document.getElementById("nameProduct").innerText = name;
+    function infoAdd() {
+        // document.getElementById("idProduct").value = id;
+        // document.getElementById("nameProduct").innerText = name;
     }
 </script>
 

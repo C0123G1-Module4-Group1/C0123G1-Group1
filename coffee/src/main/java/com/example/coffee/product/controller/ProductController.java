@@ -55,9 +55,11 @@ public class ProductController {
 
 //tạo ms sản phẩm
     @PostMapping("/createProduct")
-    public String createProduct(@Validated @ModelAttribute("productDTO") ProductDTO productDTO, BindingResult bindingResult, RedirectAttributes attributes) {
+    public String createProduct(@Validated @ModelAttribute("productDTO") ProductDTO productDTO, BindingResult bindingResult, RedirectAttributes attributes,@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
      new ProductDTO().validate(productDTO,bindingResult);
+
       if (bindingResult.hasErrors()){
+          model.addAttribute("typePage", iTypeService.findAll(page));
           return "product/createProduct";
       }
         Product product = new Product();
@@ -89,8 +91,9 @@ public class ProductController {
 
     //    chỉnh sửa sản phẩm
     @PostMapping("/editProduct")
-    public String editProduct( @Validated @ModelAttribute("productDTO") ProductDTO productDTO,BindingResult bindingResult, RedirectAttributes attributes) {
+    public String editProduct( @Validated @ModelAttribute("productDTO") ProductDTO productDTO,BindingResult bindingResult, RedirectAttributes attributes, @RequestParam(value = "page", defaultValue = "0") Integer page, Model model) {
         if (bindingResult.hasErrors()){
+            model.addAttribute("typePage", iTypeService.findAll(page));
             return "product/updateProduct";
         }
         Product product = new Product();

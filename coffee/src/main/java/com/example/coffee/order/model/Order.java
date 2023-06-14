@@ -40,11 +40,12 @@ public class Order {
     @Column(name = "status_delete")
     private boolean deleteStatus;
 
-    public Order(Staff staff, Customer customer, Coupons coupons, StatusOrder status) {
+    public Order(Staff staff, Customer customer, Coupons coupons, StatusOrder status, String note) {
         this.staff = staff;
         this.customer = customer;
         this.coupons = coupons;
         this.status = status;
+        this.note = note;
     }
 
     public Integer getId() {

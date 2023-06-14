@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 
 public class CouponsDTO implements Validator {
     private Integer id;
-    @NotBlank(message = "Can't be left blank")
+    @NotBlank(message = "cannot be left blank")
     private String codeCoupons;
-    @NotNull(message = "Must not be blank")
+    @NotNull(message = "cannot be left blank")
     @DecimalMin(value = "0.01", message = "Value cannot be 0%")
     @DecimalMax(value ="1.0",message = "Value should not be more than 100%" )
     private Float valuee;
-    @NotNull(message = "Must not be blank")
+    @NotNull(message = "cannot be left blank")
     @DecimalMin(value = "0.01", message = "Value cannot be 0%")
     private Float proviso;
     private LocalDate beginTime;

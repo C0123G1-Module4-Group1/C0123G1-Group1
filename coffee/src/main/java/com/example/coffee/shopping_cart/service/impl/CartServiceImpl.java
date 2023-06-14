@@ -2,23 +2,24 @@ package com.example.coffee.shopping_cart.service.impl;
 
 import com.example.coffee.product.model.Product;
 import com.example.coffee.product.service.IProductService;
-import com.example.coffee.shopping_cart.model.Cart;
+import com.example.coffee.shopping_cart.model.CartOnline;
 import com.example.coffee.shopping_cart.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class CartServiceImpl implements ICartService {
+
     @Autowired
     private IProductService iProductService;
 
-    private boolean checkItemInCart(Integer id, Cart cart) {
-        for (Map.Entry<Integer, Integer> entry : cart.getCart().entrySet()) {
+    private boolean checkItemInCart(Integer id, Map<Integer,CartOnline> cart) {
+        for (Map.Entry<Integer, CartOnline> entry : cart.entrySet()) {
             if (entry.getKey() == id) {
                 return true;
             }
@@ -26,8 +27,8 @@ public class CartServiceImpl implements ICartService {
         return false;
     }
 
-    private Map.Entry<Integer, Integer> selectItemInCart(Integer id, Cart cart) {
-        for (Map.Entry<Integer, Integer> entry : cart.getCart().entrySet()) {
+    private Map.Entry<Integer, CartOnline> selectItemInCart(Integer id, Map<Integer,CartOnline> cart) {
+        for (Map.Entry<Integer, CartOnline> entry : cart.entrySet()) {
             if (entry.getKey() == id) {
                 return entry;
             }
@@ -36,64 +37,71 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public void addProduct(Integer id, Cart cart) {
+    public void addProduct(Integer id, Map<Integer,CartOnline> cart) {
+        Product product = iProductService.findProductById(id);
         if (!checkItemInCart(id, cart)) {
-            cart.getCart().put(id, 1);
+            CartOnline cartOnline = new CartOnline(id, product.getName(),product.getImage(), product.getPrice(), "S", 1f, 1, "");
+            cart.put(id, cartOnline);
         } else {
-            Map.Entry<Integer, Integer> entry = selectItemInCart(id, cart);
-            Integer newQuantity = entry.getValue() + 1;
-            cart.getCart().replace(entry.getKey(), newQuantity);
+            Map.Entry<Integer, CartOnline> entry = selectItemInCart(id, cart);
+            Integer newQuantity = entry.getValue().getQuantity() + 1;
+            Float price = entry.getValue().getPrice() + product.getPrice();
+            CartOnline cartOnline = new CartOnline(id, entry.getValue().getNameProduct(),entry.getValue().getImg(), price, "S", 1f, newQuantity, "");
+            cart.replace(entry.getKey(), cartOnline);
         }
     }
 
     @Override
-    public Integer countProductQuantity(Cart cart) {
+    public Integer countProductQuantity(Map<Integer,CartOnline> cart) {
         Integer productQuantity = 0;
-        for (Map.Entry<Integer, Integer> entry : cart.getCart().entrySet()) {
-            productQuantity += entry.getValue();
+        for (Map.Entry<Integer, CartOnline> entry : cart.entrySet()) {
+            productQuantity += entry.getValue().getQuantity();
         }
         return productQuantity;
     }
 
+
     @Override
-    public Integer countItemQuantity(Cart cart) {
-        return cart.getCart().size();
+    public Integer countItemQuantity(Map<Integer,CartOnline> cart) {
+        return cart.size();
     }
 
     @Override
-    public Long countTotalPayment(Cart cart) {
+    public Long countTotalPayment(Map<Integer,CartOnline> cart) {
         long payment = 0;
-
-        for (Map.Entry<Integer, Integer> entry : cart.getCart().entrySet()) {
-            Product product =iProductService.findById(entry.getKey());
-            payment += product.getPrice() * entry.getValue();
+        for (Map.Entry<Integer, CartOnline> entry : cart.entrySet()) {
+            CartOnline cartOnline = entry.getValue();
+            payment += cartOnline.getPrice() *cartOnline.getQuantity();
         }
         return payment;
     }
 
     @Override
-    public void subProduct(Integer id, Cart cart) {
-        Map.Entry<Integer, Integer> entry = selectItemInCart(id, cart);
-        Integer newQuantity = entry.getValue() - 1;
-        cart.getCart().replace(entry.getKey(), newQuantity);
-    }
-
-    @Override
-    public void deleteItem(Integer id, Cart cart) {
-        Map<Integer, Integer> integerMap = cart.getCart();
-        Map.Entry<Integer, Integer> entry = selectItemInCart(id, cart);
-        integerMap.remove(entry.getKey());
-        cart.setCart(integerMap);
-    }
-
-    @Override
-    public List<Product> findAllProductByCart(Cart cart) {
-        List<Product>productList=new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry : cart.getCart().entrySet()) {
-            Product product =iProductService.findById(entry.getKey());
-            productList.add(product);
+    public void subProduct(Integer id, Map<Integer,CartOnline> cart) {
+        Product product = iProductService.findProductById(id);
+        if (checkItemInCart(id, cart)) {
+            Map.Entry<Integer, CartOnline> entry = selectItemInCart(id, cart);
+            if (entry.getValue().getQuantity() == 0) {
+                cart.remove(id);
+            }
+            Integer newQuantity = entry.getValue().getQuantity() - 1;
+            Float price = entry.getValue().getPrice() - product.getPrice();
+            CartOnline cartOnline = new CartOnline(id, entry.getValue().getNameProduct(),entry.getValue().getImg(), price, entry.getValue().getSizeName(), entry.getValue().getSizeRate(), newQuantity, "");
+            cart.replace(entry.getKey(), cartOnline);
         }
-        return productList;
     }
-}
+        @Override
+        public void deleteItem (Integer id, Map<Integer,CartOnline> cart){
+            cart.remove(id);
+        }
 
+        @Override
+        public List<CartOnline> findAllProductByCart (Map<Integer,CartOnline> cart){
+            List<CartOnline> productList = new ArrayList<>();
+            for (Map.Entry<Integer, CartOnline> entry : cart.entrySet()) {
+                CartOnline cartOnline = entry.getValue();
+                productList.add(cartOnline);
+            }
+            return productList;
+        }
+    }

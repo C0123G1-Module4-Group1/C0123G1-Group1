@@ -1,5 +1,7 @@
 package com.example.coffee.product.model;
 
+import javax.persistence.Entity;
+
 public class Email {
     private String to;
     private String subject;

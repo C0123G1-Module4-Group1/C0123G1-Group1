@@ -18,11 +18,6 @@ import java.util.Map;
 
 @Service
 public class CartService implements ICartService {
-    @Autowired
-    private IProductService productService;
-    @Autowired
-    private ISizeProductService sizeProductService;
-
     //    @Override
     public boolean checkItemInCart(Integer id, Map<Integer, CartItem> cart) {
         for (Map.Entry<Integer, CartItem> e : cart.entrySet()) {
@@ -51,8 +46,6 @@ public class CartService implements ICartService {
         }
         return sum;
     }
-
-    //
     @Override
     public void addQuantity(Integer id, Map<Integer, CartItem> cart, Product product) {
         Integer quantity;
