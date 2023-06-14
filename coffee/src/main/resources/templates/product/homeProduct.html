@@ -5,7 +5,9 @@
 
 </head>
 <!--<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">-->
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.min.css">
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
 <!-- Vendor CSS Files -->
 <link href="/static/assetshome/vendor/aos/aos.css" rel="stylesheet">
 <link href="/static/assetshome/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -106,7 +108,7 @@
             </div>
             <div class=" apointment d-flex" style="margin-top: 1.5%">
                 <a class="btn btn-outline-success "  th:href="@{/home/viewProductType/{id}(id=${product.id})}" style="font-size: 60%;border-radius: 30px;margin-left: 10%">Xem chi tiết</a>
-                <a class="btn btn-outline-success " th:href="@{/shopping_cart/operation/__${product.id}__(action='show')}" style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
+                <a class="btn btn-outline-success " id="btnSuccess" th:href="@{/shopping_cart/operation/__${product.id}__(action='show')}" style="font-size: 60%;margin-left: 12%;border-radius: 30px">Thêm Giỏ
                     Hàng</a>
             </div>
         </div>
@@ -121,8 +123,75 @@
 <script src="/static/assetshome/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 <script src="/static/assetshome/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="/static/assetshome/vendor/php-email-form/validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+<script src="/static/jquery/jquery-3.5.1.min.js"></script>
+<script src="/static/dist/sweetalert.js/sweetalert.min.js"></script>
+<script src="/static/dist/sweetalert.css"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- Template Main JS File -->
 <script src="/static/assetshome/js/main.js"></script>
+<script th:inline="javascript">
+    let cart = /*[[${mess}]]*/ true;
+
+    // thêm mới
+    if (cart != null) {
+        if (cart) {
+            createBlog();
+        } else {
+            createBlog1();
+        }
+    }
+    function createBlog() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Thành công',
+            text: 'Đã thêm vào giỏ hàng!',
+            confirmButtonText: 'Oke',
+            timer: 3000,
+        });
+    }
+    function createBlog1() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Thất bại',
+            text: 'Lỗi rồi!',
+            confirmButtonText: 'Oke',
+            timer: 3000,
+        });
+    }
+</script>
+<script th:inline="javascript">
+    let cart1 = /*[[${message}]]*/ true;
+
+    // thêm mới
+    if (cart1 != null) {
+        if (cart1) {
+            createBlog1();
+        } else {
+            createBlog12();
+        }
+    }
+    function createBlog1() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Thành công',
+            text: 'Gửi Thư Đi Thành Công!',
+            confirmButtonText: 'Oke',
+            timer: 3000,
+        });
+    }
+    function createBlog12() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Thất bại',
+            text: 'Lỗi rồi!',
+            confirmButtonText: 'Oke',
+            timer: 3000,
+        });
+    }
+</script>
+
 </body>
 </html>

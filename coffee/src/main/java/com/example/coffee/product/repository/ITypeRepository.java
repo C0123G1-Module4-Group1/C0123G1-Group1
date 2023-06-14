@@ -13,5 +13,7 @@ import java.util.List;
 public interface ITypeRepository extends JpaRepository<TypeProduct, Integer> {
     @Query(value = " FROM product AS p  WHERE p.typeProduct.id = :id and p.status=false")
     List<Product> findAllByStatusIsFalse(@Param("id")Integer id);
+    @Query(value = " SELECT p FROM type_product AS p  WHERE p.typeName LIKE concat('%',:typeName,'%')")
+    List<TypeProduct> findAllByTypeProduct(@Param("typeName") String name);
 
 }
