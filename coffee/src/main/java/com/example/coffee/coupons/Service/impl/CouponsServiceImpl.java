@@ -39,12 +39,12 @@ public class CouponsServiceImpl implements ICouponsService {
     }
 
     @Override
-    public Float findCouponsByProviso(double total) {
-        Float coupons = iCouponsRepository.findCouponsByProviso(total);
+    public Coupons findCouponsByProviso(double total) {
+        Coupons coupons = iCouponsRepository.findCouponsByProviso(total);
         if(coupons != null){
             return coupons;
         }else {
-            return 0f;
+            return iCouponsRepository.findById(1).get();
         }
 
     }
