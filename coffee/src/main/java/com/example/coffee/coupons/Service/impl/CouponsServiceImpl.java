@@ -39,6 +39,11 @@ public class CouponsServiceImpl implements ICouponsService {
     }
 
     @Override
+    public Coupons findCouponsByProviso(double total) {
+        return iCouponsRepository.findCouponsByProviso(total);
+    }
+
+    @Override
     public Page<Coupons> findAllCoupons(Pageable pageable) {
         return iCouponsRepository.findAllByDeleteStatusIsFalseOrderByIdDesc(pageable);
     }

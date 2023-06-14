@@ -195,23 +195,25 @@
                                     <div class="col-6" style="margin: 0; padding:0; box-sizing: border-box">
                                         <table>
                                             <tr>
-                                                <th type="button" style="padding-top: 10%" scope="row">
+                                                <th scope="row">
 <!--                                                    data-bs-toggle="modal"-->
 <!--                                                    data-bs-target="#addModal" th:attr="onclick=|infoAdd|">-->
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                                        <label class="form-check-label" for="flexCheckDefault">Coupons</label>
-                                                    </div>
+<!--                                                    <div class="form-check">-->
+<!--                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />-->
+<!--                                                        <label class="form-check-label" for="flexCheckDefault">Coupons</label>-->
+<!--                                                    </div>-->
+                                                    Coupons
                                                 </th>
                                                 <td>
-                                                    <input disabled type="text" class="form-control">
+<!--                                                    <input disabled name="coupons" type="text" class="form-control" th:value="${coupons}">-->
+                                                    <input disabled name="coupons" type="text" class="form-control">
                                                 </td>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Payment</th>
                                                 <td>
-                                                    <input disabled type="text" class="form-control">
+                                                    <input disabled type="text" class="form-control" th:value="${total}">
                                                     <!--                                            <input type="text" class="form-control" th:value="${total}">-->
                                                 </td>
                                             </tr>

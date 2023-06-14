@@ -55,7 +55,7 @@ public class OrderController {
         } else {
             Page<Order> orderPage = orderService.findAllByIdContaining(id, page);
             model.addAttribute("orderPage", orderPage);
-            model.addAttribute("idOrder",id);
+            model.addAttribute("idOrder", id);
             httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
             return "/order/listOrder";
         }
@@ -94,7 +94,7 @@ public class OrderController {
         List<Product> productList = productService.getAll();
         model.addAttribute("productList", productList);
         model.addAttribute("cartDTO", cartDTO);
-        String note = "1111";
+        String note = "";
         model.addAttribute("note", note);
         return "/order/createOrder";
     }
@@ -111,10 +111,16 @@ public class OrderController {
         model.addAttribute("cartDTO", cartDTO);
         double total = (double) (Math.round(cartService.countTotalPayment(cartDTO) * 10) / 10) * 1000;
         model.addAttribute("total", total);
-        List<Coupons> couponsList = couponsService.getAll(total);
-        model.addAttribute("couponsList", couponsList);
+//        List<Coupons> couponsList = couponsService.getAll(total);
+//        model.addAttribute("couponsList", couponsList);
         String note = "";
         model.addAttribute("note", note);
+//        Float couponsVlue = 0f;
+//        Coupons coupons = couponsService.findCouponsByProviso(total);
+//        if(coupons != null || coupons.getValuee()>0){
+//            couponsVlue = coupons.getValuee();
+//        }
+//        model.addAttribute("coupons", couponsVlue);
 //        model.addAttribute("orderDTO", order);
 //        model.addAttribute("sizeProductList", sizeProductList);
 //        model.addAttribute("mapOrderDetailDTO", mapOrderDetailDTO);
