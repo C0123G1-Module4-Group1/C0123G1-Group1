@@ -61,10 +61,10 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public Page<Customer> findAllCustomerByNameOrPhoneNumberOrAddress(String nameSearch, String optionSearch, Pageable pageable) {
+    public Page<Customer> findAllCustomerByNameOrPhoneNumberOrAddress(String nameSearch,String optionSearch, Pageable pageable) {
         String nameCustomer = "";
         String phoneNumber = "";
-        String adress = "";
+        String address = "";
         switch (optionSearch) {
             case "nameCustomer":
                 nameCustomer = nameSearch;
@@ -72,10 +72,10 @@ public class CustomerServiceImpl implements ICustomerService {
             case "phoneNumber":
                 phoneNumber = nameSearch;
                 break;
-            case "adress":
-                adress = nameCustomer;
+            case "address":
+                address = nameCustomer;
                 break;
         }
-        return iCustomerRepository.findAllByName('%' + nameCustomer + '%', '%' + phoneNumber + '%', '%' + adress + '%', pageable);
+        return iCustomerRepository.findAllByName('%' + nameCustomer + '%', '%' + phoneNumber + '%', '%' + address + '%', pageable);
     }
 }

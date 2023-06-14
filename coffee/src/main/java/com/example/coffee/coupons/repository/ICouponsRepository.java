@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ICouponsRepository extends JpaRepository<Coupons, Integer> {
-    Page<Coupons> findAllByDeleteStatusIsFalse(Pageable pageable);
+    Page<Coupons> findAllByDeleteStatusIsFalseOrderByIdDesc(Pageable pageable);
 
     Coupons findCouponsByDeleteStatusIsFalseAndId(Integer id);
 

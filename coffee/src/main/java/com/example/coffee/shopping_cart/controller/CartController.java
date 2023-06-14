@@ -1,5 +1,6 @@
 package com.example.coffee.shopping_cart.controller;
 
+import com.example.coffee.customer.dto.CustomerDTO;
 import com.example.coffee.product.model.Product;
 import com.example.coffee.product.service.IProductService;
 import com.example.coffee.shopping_cart.model.Cart;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @Controller
 @RequestMapping("/shopping_cart")
-@SessionAttributes("cart")
+@SessionAttributes("cartOnline")
 public class CartController {
     @Autowired
     private IProductService iProductService;
@@ -20,19 +21,19 @@ public class CartController {
     private ICartService iCartService;
 
     @GetMapping("/list")
-    public String showCart(@SessionAttribute("cart") Cart cart, Model model) {
+    public String showCart(@SessionAttribute("cartOnline") Cart cart, Model model) {
         List<Product>productList=iCartService.findAllProductByCart(cart);
         model.addAttribute("productList", productList);
-        model.addAttribute("countQuantity", iCartService.countItemQuantity(cart));
         model.addAttribute("countProduct", iCartService.countProductQuantity(cart));
         model.addAttribute("totalPayment", iCartService.countTotalPayment(cart));
+        model.addAttribute("customerDTO", new CustomerDTO());
         return "shopping-cart";
     }
 
     @GetMapping("/operation/{id}")
-    public String operationToCart(@PathVariable("id") Integer id, @SessionAttribute("cart") Cart cart, @RequestParam(value = "action", required = false) String action) {
+    public String operationToCart(@PathVariable("id") Integer id, @SessionAttribute("cartOnline") Cart cart, @RequestParam(value = "action", required = false) String action) {
         Product product = iProductService.findProductById(id);
-        if (product!=null) {
+        if (product==null) {
             return "/error";
         }
         if (action == null) {

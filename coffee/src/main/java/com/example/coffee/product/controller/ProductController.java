@@ -57,6 +57,7 @@ public class ProductController {
     @PostMapping("/createProduct")
     public String createProduct(@Validated @ModelAttribute("productDTO") ProductDTO productDTO, BindingResult bindingResult, RedirectAttributes attributes) {
      new ProductDTO().validate(productDTO,bindingResult);
+
       if (bindingResult.hasErrors()){
           return "product/createProduct";
       }

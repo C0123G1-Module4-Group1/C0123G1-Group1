@@ -40,7 +40,7 @@ public class CouponsServiceImpl implements ICouponsService {
 
     @Override
     public Page<Coupons> findAllCoupons(Pageable pageable) {
-        return iCouponsRepository.findAllByDeleteStatusIsFalse(pageable);
+        return iCouponsRepository.findAllByDeleteStatusIsFalseOrderByIdDesc(pageable);
     }
 
     @Override

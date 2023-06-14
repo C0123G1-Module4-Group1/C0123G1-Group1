@@ -55,14 +55,14 @@
                                           class="table-search-form row gx-1 align-items-center" method="get">
                                         <div class="col-auto me-2">
                                             <input type="text" name="nameSearch" th:value="${nameSearch}"
-                                                   class="form-control search-orders" placeholder="Search">
+                                                   class="form-control search-orders" placeholder="Enter the word to search">
                                         </div>
                                         <div class="col-auto me-2">
                                             <select class="form-select w-auto" name="optionSearch"
                                                     th:value="${optionSearch}">
-                                                <option value="nameCustomer">Customer Name</option>
-                                                <option value="phoneNumber">Phone Number</option>
-                                                <option value="adress">Adress</option>
+                                                <option value="nameCustomer">Name</option>
+                                                <option value="phoneNumber">PhoneNumber</option>
+                                                <option value="address">Addresss</option>
                                             </select>
                                         </div>
                                         <div class="col-auto">
@@ -114,7 +114,7 @@
                                             <button class="btn btn-info text-capitalize" type="button"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal1" fdprocessedid="q2sbyt"
-                                                    th:attr="onclick=|showDetailCustomer('${customer.id}')|">Detail
+                                                    th:attr="onclick=|showDetailCustomer('${customer.id}')|">View
                                             </button>
 
                                         </td>
