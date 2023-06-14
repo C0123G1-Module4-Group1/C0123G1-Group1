@@ -3,7 +3,7 @@ package com.example.coffee.shopping_cart.controller;
 import com.example.coffee.customer.dto.CustomerDTO;
 import com.example.coffee.product.model.Product;
 import com.example.coffee.product.service.IProductService;
-import com.example.coffee.shopping_cart.model.Cart;
+import com.example.coffee.shopping_cart.model.CartOnline;
 import com.example.coffee.shopping_cart.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/shopping_cart")
 @SessionAttributes("cartOnline")
@@ -21,17 +23,16 @@ public class CartController {
     private ICartService iCartService;
 
     @GetMapping("/list")
-    public String showCart(@SessionAttribute("cartOnline") Cart cart, Model model) {
-        List<Product>productList=iCartService.findAllProductByCart(cart);
+    public String showCart(@SessionAttribute("cartOnline") Map<Integer,CartOnline> cart, Model model) {
+        List<CartOnline>productList=iCartService.findAllProductByCart(cart);
         model.addAttribute("productList", productList);
-        model.addAttribute("countProduct", iCartService.countProductQuantity(cart));
         model.addAttribute("totalPayment", iCartService.countTotalPayment(cart));
         model.addAttribute("customerDTO", new CustomerDTO());
         return "shopping-cart";
     }
 
     @GetMapping("/operation/{id}")
-    public String operationToCart(@PathVariable("id") Integer id, @SessionAttribute("cartOnline") Cart cart, @RequestParam(value = "action", required = false) String action) {
+    public String operationToCart(@PathVariable("id") Integer id, @SessionAttribute("cartOnline") Map<Integer,CartOnline> cart, @RequestParam(value = "action", required = false) String action) {
         Product product = iProductService.findProductById(id);
         if (product==null) {
             return "/error";
@@ -57,8 +58,8 @@ public class CartController {
     }
 
     @GetMapping("clearAllItem")
-    public String clearShoppingCart(@SessionAttribute("cart") Cart cart) {
-        cart.getCart().clear();
+    public String clearShoppingCart(@SessionAttribute("cart") Map<Integer,CartOnline> cart) {
+        cart.clear();
         return "redirect:/shopping_cart/list";
     }
 }
