@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -83,14 +84,14 @@ public class CustomerController {
     }
 
     @GetMapping("/search")
-    public String searchCustomerByName(@RequestParam(name = "nameSearch",defaultValue = "-1") String nameSearch,@RequestParam("optionSearch") String optionSearch,
+    public String searchCustomerByName(@RequestParam(name = "nameSearch", defaultValue = "-1") String nameSearch, @RequestParam("optionSearch") String optionSearch,
                                        @RequestParam(name = "page", defaultValue = "0") int page, Model model) {
-        Page<Customer> customerPage = iCustomerService.findAllCustomerByNameOrPhoneNumberOrAddress(nameSearch,optionSearch, PageRequest.of(page, 5));
+        Page<Customer> customerPage = iCustomerService.findAllCustomerByNameOrPhoneNumberOrAddress(nameSearch, optionSearch, PageRequest.of(page, 5));
         if (customerPage.isEmpty()) {
             model.addAttribute("searchMess", "There is no data");
         }
-        if (nameSearch.equals("-1")){
-            nameSearch="";
+        if (nameSearch.equals("-1")) {
+            nameSearch = "";
         }
         int size = customerPage.getTotalPages();
         model.addAttribute("size", size);
@@ -99,5 +100,12 @@ public class CustomerController {
         model.addAttribute("optionSearch", optionSearch);
         model.addAttribute("statusSearch", true);
         return "/customer/list";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String viewDetailCustomer(@PathVariable("id") Integer id,Model model) {
+        Customer customer = iCustomerService.findCustomer(id);
+        model.addAttribute("customer",customer);
+        return "customer/vieew";
     }
 }

@@ -111,12 +111,12 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <button class="btn btn-info text-capitalize" type="button"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#deleteModal1" fdprocessedid="q2sbyt"
-                                                    th:attr="onclick=|showDetailCustomer('${customer.id}')|">View
-                                            </button>
-
+                                            <a th:href="@{/customer/detail/{id}(id=${customer.id})}">
+                                                <button class="btn btn-info text-capitalize" type="button"
+                                                        fdprocessedid="q2sbyt"
+                                                >View
+                                                </button>
+                                            </a>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-danger text-capitalize"
@@ -182,29 +182,29 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
 ></script>
 
-<div class="modal" id="deleteModal1" tabindex="-1"
-     aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Coupons detail</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>ID: <span id="customerIdDetail"></span></p>
-                <p>Customer Name: <span id="customerNameDetail"></span></p>
-                <p>Phonenumber: <span id="customerPhoneNumberDetail"></span></p>
-                <p>Address: <span id="customerAddressDetail"></span></p>
-                <p>Email: <span id="customerEmailDetail"></span></p>
-                <p>Create Time: <span id="customerCreateAtDetail"></span></p>
-                <p>Update Time: <span id="customerUpdateAtDetail"></span></p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- MDB -->
+<!--<div class="modal" id="deleteModal1" tabindex="-1"-->
+<!--     aria-labelledby="exampleModalLabel"-->
+<!--     aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel1">Coupons detail</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+<!--                        aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <p>ID: <span id="customerIdDetail"></span></p>-->
+<!--                <p>Customer Name: <span id="customerNameDetail"></span></p>-->
+<!--                <p>Phonenumber: <span id="customerPhoneNumberDetail"></span></p>-->
+<!--                <p>Address: <span id="customerAddressDetail"></span></p>-->
+<!--                <p>Email: <span id="customerEmailDetail"></span></p>-->
+<!--                <p>Create Time: <span id="customerCreateAtDetail"></span></p>-->
+<!--                <p>Update Time: <span id="customerUpdateAtDetail"></span></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--&lt;!&ndash; MDB &ndash;&gt;-->
 <script>
     function deletes(id, name) {
         swal({
