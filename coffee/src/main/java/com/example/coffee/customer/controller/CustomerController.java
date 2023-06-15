@@ -46,16 +46,16 @@ public class CustomerController {
         }
         boolean checkEmail = iCustomerService.checkExistEmail(customerDTO.getEmail());
         boolean checkPhoneNumber = iCustomerService.checkExistPhoneNumber(customerDTO.getPhoneNumber());
-        if (checkEmail==false && checkPhoneNumber==false) {
+        if (checkEmail == false && checkPhoneNumber == false) {
             model.addAttribute("mess2", "Phone number already exists");
             model.addAttribute("mess1", "Email already exists");
             return "/customer/create";
         }
-        if (checkEmail==false) {
+        if (checkEmail == false) {
             model.addAttribute("mess1", "Email already exists");
             return "/customer/create";
         }
-        if (checkPhoneNumber==false) {
+        if (checkPhoneNumber == false) {
             model.addAttribute("mess2", "Phone number already exists");
             return "/customer/create";
         }
@@ -85,9 +85,24 @@ public class CustomerController {
     }
 
     @PostMapping("/update")
-    public String updateCustomer(@Validated @ModelAttribute("customerDTO") CustomerDTO customerDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes,Model model) {
+    public String updateCustomer(@Validated @ModelAttribute("customerDTO") CustomerDTO customerDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         new CustomerDTO().validate(customerDTO, bindingResult);
         if (bindingResult.hasFieldErrors()) {
+            return "/customer/edit";
+        }
+        boolean check1 = iCustomerService.findAllCustomerNotInEmail(customerDTO.getEmail(), customerDTO.getId());
+        boolean check2 = iCustomerService.findAllCustomerNotInPhone(customerDTO.getPhoneNumber(), customerDTO.getId());
+        if (check1 && check2) {
+            model.addAttribute("mess2", "Phone number already exists");
+            model.addAttribute("mess1", "Email already exists");
+            return "/customer/edit";
+        }
+        if (check1) {
+            model.addAttribute("mess1", "Email already exists");
+            return "/customer/edit";
+        }
+        if (check2) {
+            model.addAttribute("mess2", "Phone number already exists");
             return "/customer/edit";
         }
         Customer customer = new Customer();
