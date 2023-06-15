@@ -111,5 +111,6 @@ public class CouponsDTO implements Validator {
     }
     @Override
     public void validate(Object target, Errors errors) {
+
     }
 }

@@ -77,7 +77,7 @@
                    th:field="*{id}"/>
             <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend">
-                    <span class="input-group-text mt-3">Value</span>
+                    <span class="input-group-text mt-3">Value(%)</span>
                 </div>
                 <input type="number" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{valuee}"/>
@@ -85,7 +85,7 @@
             <p style="color: red" th:if="${#fields.hasErrors('valuee')}" th:errors="*{valuee}"></p>
             <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend mt-3">
-                    <span class="input-group-text">Proviso</span>
+                    <span class="input-group-text">Proviso(.000 VND)</span>
                 </div>
                 <input type="number" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{proviso}"/>
