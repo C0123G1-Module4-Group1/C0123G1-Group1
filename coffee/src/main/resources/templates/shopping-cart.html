@@ -60,7 +60,7 @@
                     </td>
                     <td>
 
-                        <div class="fw-600"><p class="m-0 align-content-center text-muted" th:text="${product.price+' VNĐ'}"></p></div>
+                        <div class="fw-600"><p class="m-0 align-content-center text-muted" th:text="${#numbers.formatDecimal(totalPayment, 0, 'POINT', 2, 'POINT')+'VND'}"></p></div>
                     </td>
                     <td>
                         <div class="d-flex justify-content-center align-content-center">
@@ -92,7 +92,7 @@
                     style="margin-left: 5%;border-radius: 30px">
                 Thanh toán
             </button></div>
-            <h3  style="color: red ;margin-left: 50%">Tổng tiền:<span th:text="${totalPayment+'.000 VND'}"></span></h3>
+            <h3  style="color: red ;margin-left: 50%">Tổng tiền: <span th:text="${#numbers.formatDecimal(totalPayment, 0, 'POINT', 2, 'POINT')+'VND'}"></span></h3>
         </div>
     </div>
 </div>

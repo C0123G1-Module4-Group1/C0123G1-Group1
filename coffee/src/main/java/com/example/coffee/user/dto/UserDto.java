@@ -9,10 +9,10 @@ import javax.validation.constraints.Size;
 
 public class UserDto  {
     private Integer id;
-    @NotBlank(message = "Tài khoản ko được để trống")
+    @NotBlank(message = "cannot be left blank")
     private String account;
-    @NotBlank(message = "Tài khoản ko được để trống")
-    @Size(min = 5, max = 100, message = "Mật khẩu không được quá 100 kí tự hoặc dưới 5 kí tự!")
+    @NotBlank(message = "cannot be left blank")
+    @Size(min = 5, max = 100, message = "Password should not be more than 100 characters or less than 5 characters!")
     private String password;
     private Boolean deleteStatus;
     private Role role;

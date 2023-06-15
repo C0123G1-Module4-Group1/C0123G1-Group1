@@ -114,6 +114,9 @@ public class StaffController {
         Page<Staff> staffList = iStaffService.findAllByName(name, pageable);
         model.addAttribute("staffList", staffList);
         model.addAttribute("name", name);
+        if(staffList.getTotalElements()<1){
+            model.addAttribute("message","There is no data for search");
+        }
         return "staff/staffList";
     }
 
