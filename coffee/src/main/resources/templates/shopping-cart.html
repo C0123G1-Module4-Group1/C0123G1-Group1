@@ -22,7 +22,62 @@
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
 <body>
-<div style="margin-top: -70%" th:replace="~{header-footer/header-shopping::headerShopping}"></div>
+<header id="header" class=" d-flex align-items-center" style="position: fixed;top:0;width: 100%">
+    <div class="container" style="max-width: 100%;padding: 0">
+        <div class="header-container d-flex align-items-center justify-content-between" style="height: 62px;">
+            <div class="logo">
+                <h1 class="text-light"><a th:href="@{/home/}"><span>Coffee</span></a></h1>
+            </div>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link text-capitalize   " style="font-weight: bold;font-size: 20px" th:href="@{/home/}">Trang chủ</a></li>
+                    <li><a class="nav-link text-capitalize" style="font-weight: bold;font-size: 20px" th:href="@{/home/homeProduct}">Sản phẩm</a></li>
+                    <li><a class="nav-link  text-capitalize" style="font-weight: bold;font-size: 20px" th:href="@{/home/contact}">Liên hệ</a></li>
+                    <li style="margin-top: 2%;">
+                        <form th:action="@{/home/searchProduct}" method="post" class=""
+                              style="margin-left: -4%;display: flex   ">
+                            <input type="text" name="name" th:value="${name}" placeholder="&ensp;&ensp;Tìm kiếm theo tên "
+                                   style="margin-left: 10%;border-radius: 30px ;border-color: #f2f2f2">
+                            <button type="submit" class=" getstarted scrollto"  style="border-radius: 30px;margin-left:5px;border: none">Search</button>
+                        </form>
+                    </li>
+                    <a class=" " th:href="@{/shopping_cart/list}" style="margin-left: -1%" ><i class="fa-solid fa-cart-shopping fa-lg"></i></a>
+                </ul>
+                <!--                    <i class="bi bi-list mobile-nav-toggle"></i>-->
+            </nav><!-- .navbar -->
+
+        </div><!-- End Header Container -->
+    </div>
+</header><!-- End Header -->
+
+<main id="main">
+
+    <!-- ======= Clients Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+        <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
+            <h1>GIỎ HÀNG</h1>
+            <!--        <a href="#about" class="btn-get-started scrollto">Mua ngay</a>-->
+        </div>
+    </section><!-- End Hero -->
+
+    <section id="clients" class="clients text-center justify-content-center">
+        <div class="container text-center justify-content-center">
+
+            <div class="row  justify-content-between">
+                <div class=" col-md-4 col-6  "
+                     data-aos="zoom-in" data-aos-delay="400" style="font-size: 30px">
+                    <a class="btn-get-started"> THÔNG TIN SẢN PHẨM</a>
+                </div>
+
+                <div class=" col-md-4 col-6  "
+                     data-aos="zoom-in" data-aos-delay="400">
+                    <a th:href="@{/home/homeProduct}" class="btn btn-outline-success" style="border-radius: 30px;">Mua thêm sản phẩm</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 <div class="d-flex align-items-center">
     <div class="container">
         <div th:if="${totalPayment}==0" class="my-5">
@@ -69,7 +124,7 @@
                                 <button class="btn btn-info" type="button">-</button>
                             </a>
                             <div class="ms-2 text-center align-content-center p-0">
-                                <p class="py-0" th:text="${product.quantity}"></p>
+                                <p class="py-0" th:text="${product.quantity}" style="margin-top: 103%;"></p>
                             </div>
                             <a class="ms-2" style="text-decoration: none"
                                th:href="@{/shopping_cart/operation/{id}(id=${product.idProduct},action='increase')}">
