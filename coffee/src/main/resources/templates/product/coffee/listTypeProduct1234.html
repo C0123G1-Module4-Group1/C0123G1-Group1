@@ -95,7 +95,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr th:each="product : ${productByType}">
+                  <tr th:each="product : ${productByType}" class="flex-sm-fill text-sm-center">
                     <th th:text="${product.id}"></th>
                     <th th:text="${product.name}"></th>
                     <th th:text="${product.price}"></th>

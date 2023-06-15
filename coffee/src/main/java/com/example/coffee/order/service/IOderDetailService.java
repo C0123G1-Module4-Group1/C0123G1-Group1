@@ -11,5 +11,5 @@ public interface IOderDetailService {
 
     Long getTotalOrder(Integer id);
 
-    void addOrderDetail(Map<Integer, CartItem> cart, Integer idOrder);
+    boolean addOrderDetail(Map<Integer, CartItem> cart, Integer idOrder);
 }

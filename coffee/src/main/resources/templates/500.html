@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="/static/css/500.css">
+</head>
+<body>
+<nav class="shelf">
+    <a class="book home-page" th:href="@{/home/}" >Home</a>
+    <a class="book about-us"th:href="@{/productCoffee/listAdminProduct}">Product</a>
+    <a class="book contact" th:href="@{/home/contact}">Contact</a>
+    <a class="book faq"th:href="@{/login}">Login</a>
+
+    <span class="book not-found"></span>
+
+    <span class="door left"></span>
+    <span class="door right"></span>
+</nav>
+<h1>Error 500</h1>
+<p>Your data is being transmitted wrong</p>
+
+
+</body>
+</html>

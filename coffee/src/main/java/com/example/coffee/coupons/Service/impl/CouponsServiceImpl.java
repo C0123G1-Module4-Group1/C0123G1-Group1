@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class CouponsServiceImpl implements ICouponsService {
@@ -21,7 +23,7 @@ public class CouponsServiceImpl implements ICouponsService {
     public Boolean updateCoupon(Coupons coupons) {
         try {
             iCouponsRepository.save(coupons);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -29,8 +31,8 @@ public class CouponsServiceImpl implements ICouponsService {
     }
 
     @Override
-    public Page<Coupons> findAllCouponsByCodeCoupons(String codeCoupons,Pageable pageable) {
-        return iCouponsRepository.findAllByDeleteStatusIsFalseAndCodeCoupons(codeCoupons,pageable);
+    public Page<Coupons> findAllCouponsByCodeCoupons(String codeCoupons, Pageable pageable) {
+        return iCouponsRepository.findAllByDeleteStatusIsFalseAndCodeCoupons(codeCoupons, pageable);
     }
 
     @Override
@@ -39,12 +41,12 @@ public class CouponsServiceImpl implements ICouponsService {
     }
 
     @Override
-    public Float findCouponsByProviso(double total) {
-        Float coupons = iCouponsRepository.findCouponsByProviso(total);
+    public Coupons findCouponsByProviso(double total) {
+        Coupons coupons = iCouponsRepository.findCouponsByProviso(total);
         if(coupons != null){
             return coupons;
         }else {
-            return 0f;
+            return iCouponsRepository.findById(1).get();
         }
 
     }
@@ -76,10 +78,35 @@ public class CouponsServiceImpl implements ICouponsService {
             Coupons coupons = findCoupons(id);
             coupons.setDeleteStatus(true);
             iCouponsRepository.save(coupons);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String createCodeName() {
+        String result = "";
+        boolean check = true;
+        do {
+            Integer codeName = ThreadLocalRandom.current().nextInt(1, 99999);
+            if (codeName < 10000) {
+                result = "CP-0" + codeName;
+            } else if (codeName < 1000) {
+                result = "CP-00" + codeName;
+            } else if (codeName < 100) {
+                result = "CP-000" + codeName;
+            } else if (codeName < 10) {
+                result = "CP-0000" + codeName;
+            } else {
+                result = "CP-" + codeName;
+            }
+            Optional<Coupons> coupons = iCouponsRepository.findCouponsByDeleteStatusIsFalseAndCodeCoupons(result);
+            if (coupons.isPresent()) {
+                check = false;
+            }
+        } while (!check);
+        return result;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.coffee.customer.dto;
 
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -7,7 +8,6 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 public class CustomerDTO implements Validator {
-
     private Integer id;
 
     @NotBlank(message = "cannot be left blank")

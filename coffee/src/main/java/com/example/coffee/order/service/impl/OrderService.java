@@ -70,11 +70,11 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Order addOrder(String note, Authentication authentication) {
+    public Order addOrder(String note, Authentication authentication, Integer couponsId) {
         User user = userService.findUserByUserName(authentication.getName());
         Staff staff = staffService.findByUser(user);
         Customer customer = customerService.findCustomer(1);
-        Coupons coupons = couponsService.findCoupons(1);
+        Coupons coupons = couponsService.findCoupons(couponsId);
         StatusOrder statusOrder = statusOrderService.findById(3);
         Order order = new Order(staff,customer,coupons,statusOrder,note);
         this.orderRepository.save(order);

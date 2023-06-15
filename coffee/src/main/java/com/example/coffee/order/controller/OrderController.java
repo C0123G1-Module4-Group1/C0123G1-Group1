@@ -89,46 +89,35 @@ public class OrderController {
     }
 
     @GetMapping("/create")
-    public String createOrder(@ModelAttribute("cart") Map<Integer, CartItem> cartDTO, Model model) {
+    public String createOrder(@ModelAttribute("cart") Map<Integer, CartItem> cartDTO, Model model, HttpServletResponse httpResponse) {
         cartDTO.clear();
         List<Product> productList = productService.getAll();
         model.addAttribute("productList", productList);
         model.addAttribute("cartDTO", cartDTO);
         String note = "";
         model.addAttribute("note", note);
+        Coupons coupons = couponsService.findCoupons(1);
+        model.addAttribute("coupons", coupons);
+        httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         return "/order/createOrder";
     }
 
     @GetMapping("/returnCreateOrder")
     public String returnOrder(@ModelAttribute("cart") Map<Integer, CartItem> cartDTO, Model model) {
-//        Order order = orderService.findById(idOrder);
-//        List<SizeProduct> sizeProductList = sizeProductService.getAll();
         List<Product> productList = productService.getAll();
         model.addAttribute("productList", productList);
-
-//        Map<Product, Integer> mapProduct = cartService.getListProduct(list);
-//        Map<OrderDetailDTO, String> mapOrderDetailDTO = orderDetailDTOService.getListOrderDetailDTO(mapProduct, idOrder, map);
         model.addAttribute("cartDTO", cartDTO);
-        double total = (double) (Math.round(cartService.countTotalPayment(cartDTO) * 10) / 10) * 1000;
+        double total = (double) (Math.round(cartService.countTotalPayment(cartDTO) * 10) / 10 *1000);
         model.addAttribute("total", total);
-//        List<Coupons> couponsList = couponsService.getAll(total);
-//        model.addAttribute("couponsList", couponsList);
         String note = "";
         model.addAttribute("note", note);
-//        Float couponsVlue = 0f;
-        Float coupons = couponsService.findCouponsByProviso(total);
-//        if(coupons > 0){
-//            couponsVlue = coupons;
-//        }
+        Coupons coupons = couponsService.findCouponsByProviso(total/1000);
         model.addAttribute("coupons", coupons);
         double payment = total;
-        if(coupons != 0 || total !=0){
-            payment = (double) (Math.round(total * (1 - (coupons/100)) * 10) / 10) ;
+        if(coupons.getValuee() != 0 || total !=0){
+            payment = (double) (Math.round(total * (1 - (coupons.getValuee()/100)) * 10) / 10) ;
         }
         model.addAttribute("payment",payment);
-//        model.addAttribute("orderDTO", order);
-//        model.addAttribute("sizeProductList", sizeProductList);
-//        model.addAttribute("mapOrderDetailDTO", mapOrderDetailDTO);
         return "/order/createOrder";
     }
 
@@ -195,13 +184,17 @@ public class OrderController {
 //    }
 
     @GetMapping("/createOrderDetail")
-    public String createOrderDetail(@ModelAttribute("cart") Map<Integer, CartItem> cart, @RequestParam("note") String note) {
+    public String createOrderDetail(@ModelAttribute("cart") Map<Integer, CartItem> cart, @RequestParam("note") String note,
+                                    @RequestParam("coupons") Integer coupons, RedirectAttributes redirectAttributes) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        boolean check = orderService.deleteOrder(id);
+//        redirectAttributes.addFlashAttribute("checkDelete", check);
         if (!cart.isEmpty()) {
-            Order orderDTO = orderService.addOrder(note, authentication);
+            Order orderDTO = orderService.addOrder(note, authentication, coupons);
             Integer idOrder = orderDTO.getId();
-            this.oderDetailService.addOrderDetail(cart, idOrder);
+            boolean checkAddOrder = oderDetailService.addOrderDetail(cart, idOrder);
             cart.clear();
+            redirectAttributes.addFlashAttribute("checkAddOrder", checkAddOrder);
         }
         return "redirect:/orderController/create";
     }

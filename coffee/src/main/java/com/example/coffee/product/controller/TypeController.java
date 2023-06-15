@@ -7,6 +7,8 @@ import com.example.coffee.product.service.ITypeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -87,6 +89,16 @@ public class TypeController {
         boolean check= iTypeService.save(typeProduct);
        attributes.addFlashAttribute("flag",check);
        return "redirect:/typeProduct/typeProductList";
+    }
+    @PostMapping("/searchTypeProduct")
+    public String search(@RequestParam("name") String name, Model model) {
+        List<TypeProduct> typeProductList=iTypeService.findAllByTypeProduct(name);
+        if (typeProductList.isEmpty()){
+            model.addAttribute("searchMess","There is no data for search");
+        }
+        model.addAttribute("typeProductList", typeProductList);
+        model.addAttribute("name",name);
+        return "product/listTypeProduct";
     }
 
 

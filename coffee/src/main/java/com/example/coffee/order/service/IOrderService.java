@@ -14,7 +14,7 @@ public interface IOrderService {
 
     Order findById(Integer id);
 
-    Order addOrder(String note, Authentication authentication);
+    Order addOrder(String note, Authentication authentication, Integer coupons);
 
     Page<Order> findAllByIdContaining(Integer id, int page);
 }

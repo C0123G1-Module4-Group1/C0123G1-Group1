@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 public interface ICustomerService {
     Page<Customer> findAllCustomer(Pageable pageable);
 
+    Boolean checkExistEmail(String email);
+    Boolean checkExistPhoneNumber(String phoneNumber);
     Boolean createCustomer(Customer customer);
 
     Boolean deleteCustomer(Integer id);

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Customer list</title>
     <!-- Meta -->
@@ -41,7 +42,8 @@
                         <div class="row ">
                             <div class="d-flex justify-content-between">
                                 <div class="col-auto">
-                                    <a href="/customer/create">
+                                    <a sec:authorize="hasRole('ADMIN')"
+                                            href="/customer/create">
                                         <button type="button" class="btn btn-success text-capitalize"
                                                 fdprocessedid="tkcp7c">Add customer
                                         </button>
@@ -54,7 +56,7 @@
                                     <form th:action="@{/customer/search}"
                                           class="table-search-form row gx-1 align-items-center" method="get">
                                         <div class="col-auto me-2">
-                                            <input type="text" name="nameSearch" th:value="${nameSearch}"
+                                            <input type="text" name="nameSearch" th:value="${nameSearch}"style="height: 40px;"
                                                    class="form-control search-orders" placeholder="Enter the word to search">
                                         </div>
                                         <div class="col-auto me-2">
@@ -63,7 +65,7 @@
                                                 <option value="">Default</option>
                                                 <option value="nameCustomer">Name</option>
                                                 <option value="phoneNumber">PhoneNumber</option>
-                                                <option value="address">Addresss</option>
+                                                <option value="address">Address</option>
                                             </select>
                                         </div>
                                         <div class="col-auto">
@@ -103,7 +105,7 @@
                                         <td th:text="${customer.phoneNumber}"></td>
                                         <td th:text="${customer.email}"></td>
                                         <td th:text="${customer.address}"></td>
-                                        <td>
+                                        <td sec:authorize="hasRole('ADMIN')">
                                             <a th:href="@{/customer/update/{id}(id=${customer.id})}">
                                                 <button type="button" class="btn btn-warning text-capitalize"
                                                         fdprocessedid="xlhea">
@@ -119,8 +121,8 @@
                                                 </button>
                                             </a>
                                         </td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger text-capitalize"
+                                        <td sec:authorize="hasRole('ADMIN')">
+                                            <button type="button" class="btn btn-danger text-capitalize" style="margin-right: 15px;"
                                                     fdprocessedid="tkcp7c"
                                                     th:attr="onclick=|deletes('${customer.id}','${customer.name}')|">
                                                 Delete
@@ -129,7 +131,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <p style="color: red;text-align: center" th:text="${searchMess}" th:if="${size==0}"></p>
+                                <h4 style="color: red;text-align: center" th:text="${searchMess}" th:if="${size==0}"></h4>
                             </div><!--//table-responsive-->
                         </div><!--//app-card-body-->
                     </div><!--//app-card-->
@@ -183,29 +185,6 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
 ></script>
 
-<!--<div class="modal" id="deleteModal1" tabindex="-1"-->
-<!--     aria-labelledby="exampleModalLabel"-->
-<!--     aria-hidden="true">-->
-<!--    <div class="modal-dialog">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <h5 class="modal-title" id="exampleModalLabel1">Coupons detail</h5>-->
-<!--                <button type="button" class="btn-close" data-bs-dismiss="modal"-->
-<!--                        aria-label="Close"></button>-->
-<!--            </div>-->
-<!--            <div class="modal-body">-->
-<!--                <p>ID: <span id="customerIdDetail"></span></p>-->
-<!--                <p>Customer Name: <span id="customerNameDetail"></span></p>-->
-<!--                <p>Phonenumber: <span id="customerPhoneNumberDetail"></span></p>-->
-<!--                <p>Address: <span id="customerAddressDetail"></span></p>-->
-<!--                <p>Email: <span id="customerEmailDetail"></span></p>-->
-<!--                <p>Create Time: <span id="customerCreateAtDetail"></span></p>-->
-<!--                <p>Update Time: <span id="customerUpdateAtDetail"></span></p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--&lt;!&ndash; MDB &ndash;&gt;-->
 <script>
     function deletes(id, name) {
         swal({

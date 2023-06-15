@@ -89,8 +89,9 @@
 
                                     </tr>
                                     </thead>
+
                                     <tbody>
-                                    <tr th:each="product : ${productPage}">
+                                    <tr th:each="product : ${productPage}" class="flex-sm-fill text-sm-center">
                                         <th th:text="${product.id}"></th>
                                         <th th:text="${product.name}"></th>
                                         <th th:text="${product.price}"></th>
@@ -123,6 +124,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <p style="color: red;text-align: center" th:text="${searchMess}" th:if="${size==0}"></p>
                             </div><!--//table-responsive-->
 
                         </div><!--//app-card-body-->
@@ -137,7 +139,7 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center ">
             <li class="page-item ">
-                <a class="page-link" th:href="@{'/productCoffee/listProduct'(page=${productPage.number -1})}"
+                <a class="page-link" th:href="@{/productCoffee/listProduct/(page=${productPage.number -1})}"
                    th:if="${productPage.hasPrevious()}">Previous</a>
             </li>
             <!--                        <li style="border: 1px solid #CCCCCC" class="page-item active" ><a class="page-link active" th:text="${pageNo}" th:href="@{/(page=${pageNo})}"></a></li>-->
@@ -145,7 +147,7 @@
                                          th:text="${productPage.number +1}"></a>
             </li>
             <li class="page-item">
-                <a class="page-link" th:href="@{'/productCoffee/listProduct'(page=${productPage.number +1})}"
+                <a class="page-link" th:href="@{/productCoffee/listProduct/(page=${productPage.number +1})}"
                    th:if="${productPage.hasNext()}">Next</a>
             </li>
         </ul>
