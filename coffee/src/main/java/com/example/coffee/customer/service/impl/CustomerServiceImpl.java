@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -91,5 +92,29 @@ public class CustomerServiceImpl implements ICustomerService {
                 break;
         }
         return iCustomerRepository.findAllByName('%' + nameCustomer + '%', '%' + phoneNumber + '%', '%' + address + '%', pageable);
+    }
+
+    @Override
+    public boolean findAllCustomerNotInEmail(String email,Integer id) {
+        Customer customer=findCustomer(id);
+        List<Customer> customerList=iCustomerRepository.findCustomerByDeleteStatusIsFalseAndEmailAnd(customer.getEmail());
+        for (int i = 0; i < customerList.size(); i++) {
+            if (customerList.get(i).getEmail().equals(email)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean findAllCustomerNotInPhone(String phoneNumber,Integer id) {
+        Customer customer=findCustomer(id);
+        List<Customer> customerList=iCustomerRepository.findCustomerByDeleteStatusIsFalseAndPhoneNumbers(customer.getPhoneNumber());
+        for (int i = 0; i < customerList.size(); i++) {
+            if (customerList.get(i).getPhoneNumber().equals(phoneNumber)){
+                return true;
+            }
+        }
+        return false;
     }
 }

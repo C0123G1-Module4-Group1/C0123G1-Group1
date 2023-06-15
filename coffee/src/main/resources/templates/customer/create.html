@@ -79,7 +79,7 @@
                 <input type="text" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{email}"/>
             </div>
-            <p style="color: red;" th:text="${mess1}"></p>
+            <p style="color: red;" th:text="${mess2}"></p>
             <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
             <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend mt-3">
