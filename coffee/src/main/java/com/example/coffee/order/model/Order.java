@@ -16,6 +16,8 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "code_order", columnDefinition = "VARCHAR(10)")
+    private String codeOrder;
     @ManyToOne
     @JoinColumn(name = "id_employee", referencedColumnName = "id")
     private Staff staff;
@@ -40,12 +42,29 @@ public class Order {
     @Column(name = "status_delete")
     private boolean deleteStatus;
 
+    public Order(String codeOrder, Staff staff, Customer customer, Coupons coupons, StatusOrder status, String note) {
+        this.codeOrder = codeOrder;
+        this.staff = staff;
+        this.customer = customer;
+        this.coupons = coupons;
+        this.status = status;
+        this.note = note;
+    }
+
     public Order(Staff staff, Customer customer, Coupons coupons, StatusOrder status, String note) {
         this.staff = staff;
         this.customer = customer;
         this.coupons = coupons;
         this.status = status;
         this.note = note;
+    }
+
+    public String getCodeOrder() {
+        return codeOrder;
+    }
+
+    public void setCodeOrder(String codeOrder) {
+        this.codeOrder = codeOrder;
     }
 
     public Integer getId() {
