@@ -7,7 +7,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,9 +39,24 @@ public class CustomerController {
     }
 
     @PostMapping("/create-customer")
-    public String createCustomer(@Validated @ModelAttribute("customerDTO") CustomerDTO customerDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String createCustomer(@Validated @ModelAttribute("customerDTO") CustomerDTO customerDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         new CustomerDTO().validate(customerDTO, bindingResult);
         if (bindingResult.hasFieldErrors()) {
+            return "/customer/create";
+        }
+        boolean checkEmail = iCustomerService.checkExistEmail(customerDTO.getEmail());
+        boolean checkPhoneNumber = iCustomerService.checkExistPhoneNumber(customerDTO.getPhoneNumber());
+        if (checkEmail==false && checkPhoneNumber==false) {
+            model.addAttribute("mess2", "Phone number already exists");
+            model.addAttribute("mess1", "Email already exists");
+            return "/customer/create";
+        }
+        if (checkEmail==false) {
+            model.addAttribute("mess1", "Email already exists");
+            return "/customer/create";
+        }
+        if (checkPhoneNumber==false) {
+            model.addAttribute("mess2", "Phone number already exists");
             return "/customer/create";
         }
         Customer customer = new Customer();
@@ -50,6 +64,7 @@ public class CustomerController {
         boolean check = iCustomerService.createCustomer(customer);
         redirectAttributes.addFlashAttribute("check1", check);
         return "redirect:/customer/list";
+
     }
 
     @GetMapping("/delete/{id}")
@@ -71,9 +86,24 @@ public class CustomerController {
     }
 
     @PostMapping("/update")
-    public String updateCustomer(@Validated @ModelAttribute("customerDTO") CustomerDTO customerDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String updateCustomer(@Validated @ModelAttribute("customerDTO") CustomerDTO customerDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes,Model model) {
         new CustomerDTO().validate(customerDTO, bindingResult);
         if (bindingResult.hasFieldErrors()) {
+            return "/customer/edit";
+        }
+        boolean checkEmail = iCustomerService.checkExistEmail(customerDTO.getEmail());
+        boolean checkPhoneNumber = iCustomerService.checkExistPhoneNumber(customerDTO.getPhoneNumber());
+        if (checkEmail==false && checkPhoneNumber==false) {
+            model.addAttribute("mess2", "Phone number already exists");
+            model.addAttribute("mess1", "Email already exists");
+            return "/customer/edit";
+        }
+        if (checkEmail==false) {
+            model.addAttribute("mess1", "Email already exists");
+            return "/customer/edit";
+        }
+        if (checkPhoneNumber==false) {
+            model.addAttribute("mess2", "Phone number already exists");
             return "/customer/edit";
         }
         Customer customer = new Customer();
@@ -88,7 +118,7 @@ public class CustomerController {
                                        @RequestParam(name = "page", defaultValue = "0") int page, Model model) {
         Page<Customer> customerPage = iCustomerService.findAllCustomerByNameOrPhoneNumberOrAddress(nameSearch, optionSearch, PageRequest.of(page, 5));
         if (customerPage.isEmpty()) {
-            model.addAttribute("searchMess", "There is no data");
+            model.addAttribute("searchMess", "There is no data for search");
         }
         if (nameSearch.equals("-1")) {
             nameSearch = "";
@@ -103,9 +133,9 @@ public class CustomerController {
     }
 
     @GetMapping("/detail/{id}")
-    public String viewDetailCustomer(@PathVariable("id") Integer id,Model model) {
+    public String viewDetailCustomer(@PathVariable("id") Integer id, Model model) {
         Customer customer = iCustomerService.findCustomer(id);
-        model.addAttribute("customer",customer);
+        model.addAttribute("customer", customer);
         return "customer/vieew";
     }
 }

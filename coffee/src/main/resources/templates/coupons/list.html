@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Coupons list</title>
     <!-- Meta -->
@@ -41,7 +42,7 @@
                         <div class="row ">
                             <div class="d-flex justify-content-between">
                                 <div class="col-auto">
-                                    <a href="/coupons/create">
+                                    <a sec:authorize="hasRole('ADMIN')" href="/coupons/create">
                                         <button type="button" class="btn btn-success text-capitalize"
                                                 fdprocessedid="tkcp7c">Add coupons
                                         </button>
@@ -54,8 +55,8 @@
                                     <form th:action="@{/coupons/search}"
                                           class="table-search-form row gx-1 align-items-center" method="get">
                                         <div class="col-auto me-2">
-                                            <input type="text" name="codeCoupons" th:value="${codeCoupons}"style="height: 40px"
-                                                   class="form-control search-orders" placeholder="Search">
+                                            <input type="text" name="codeCoupons" th:value="${codeCoupons}"
+                                                   class="form-control search-orders" placeholder="Enter the code coupons">
                                         </div>
                                         <div class="col-auto">
                                             <button type="submit" class="btn btn-outline-info text-capitalize"
@@ -80,11 +81,11 @@
                                     <thead>
                                     <tr class="flex-sm-fill text-sm-center">
                                         <th class="ms-2" style="font-size: 16px; width: 5%;color: black">Id</th>
-                                        <th style="font-size: 16px;width: 20%;color: black">Code Coupons</th>
-                                        <th style="font-size: 16px;width: 15%;color: black">Value(%)</th>
-                                        <th style="font-size: 16px;width: 15%;color: black">Proviso</th>
-                                        <th style="font-size: 16px;width: 20%;color: black">Begin Time</th>
-                                        <th style="font-size: 16px;width: 20%;color: black">End Time</th>
+                                        <th style="font-size: 16px;width: 15%;color: black">Code Coupons</th>
+                                        <th style="font-size: 16px;width: 10%;color: black">Value(%)</th>
+                                        <th style="font-size: 16px;width: 10%;color: black">Proviso(VND)</th>
+                                        <th style="font-size: 16px;width: 15%;color: black">Begin Time</th>
+                                        <th style="font-size: 16px;width: 15%;color: black">End Time</th>
                                         <th colspan="3" style="font-size: 20px;width: 20%; color: black">Action</th>
                                     </tr>
                                     </thead>
@@ -96,7 +97,7 @@
                                         <td th:text="${coupons.proviso}"></td>
                                         <td th:text="${coupons.beginTime}"></td>
                                         <td th:text="${coupons.endTime}"></td>
-                                        <td>
+                                        <td sec:authorize="hasRole('ADMIN')">
                                             <a th:href="@{/coupons/update/{id}(id=${coupons.id})}">
                                                 <button type="button" class="btn btn-warning text-capitalize"
                                                         fdprocessedid="xlhea">
@@ -112,8 +113,8 @@
                                             </button>
 
                                         </td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger text-capitalize"
+                                        <td sec:authorize="hasRole('ADMIN')">
+                                            <button type="button" class="btn btn-danger text-capitalize" style="margin-right: 15px;"
                                                     fdprocessedid="tkcp7c"
                                                     th:attr="onclick=|deletes('${coupons.id}','${coupons.codeCoupons}')|">
                                                 Delete
@@ -122,7 +123,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <p style="color: red;text-align: center" th:text="${searchMess}" th:if="${size==0}"></p>
+                                <h4 style="color: red;text-align: center" th:text="${searchMess}" th:if="${size==0}"></h4>
                             </div><!--//table-responsive-->
                         </div><!--//app-card-body-->
                     </div><!--//app-card-->

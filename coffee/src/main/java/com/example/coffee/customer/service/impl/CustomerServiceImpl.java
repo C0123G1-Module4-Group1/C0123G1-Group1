@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 @Service
@@ -17,8 +18,21 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public Page<Customer> findAllCustomer(Pageable pageable) {
-        return iCustomerRepository.findAllByDeleteStatusIsFalse(pageable);
+        return iCustomerRepository.findAllByDeleteStatusIsFalseOrderByIdDesc(pageable);
     }
+
+    @Override
+    public Boolean checkExistEmail(String email) {
+        List<Customer> customerList = iCustomerRepository.findCustomerByDeleteStatusIsFalseAndEmail(email);
+        return customerList.isEmpty();
+    }
+
+    @Override
+    public Boolean checkExistPhoneNumber(String phoneNumber) {
+        List<Customer> customerList=iCustomerRepository.findCustomerByDeleteStatusIsFalseAndPhoneNumber(phoneNumber);
+        return customerList.isEmpty();
+    }
+
 
     @Override
     public Boolean createCustomer(Customer customer) {
@@ -61,7 +75,7 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public Page<Customer> findAllCustomerByNameOrPhoneNumberOrAddress(String nameSearch,String optionSearch, Pageable pageable) {
+    public Page<Customer> findAllCustomerByNameOrPhoneNumberOrAddress(String nameSearch, String optionSearch, Pageable pageable) {
         String nameCustomer = "";
         String phoneNumber = "";
         String address = "";

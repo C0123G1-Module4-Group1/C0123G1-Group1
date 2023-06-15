@@ -13,10 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDate;
-
 
 @Controller
 @RequestMapping("/coupons")
@@ -47,6 +44,7 @@ public class CouponsController {
         }
         Coupons coupons = new Coupons();
         BeanUtils.copyProperties(couponsDTO, coupons);
+        coupons.setCodeCoupons(iCouponsService.createCodeName());
         boolean check = iCouponsService.createCoupons(coupons);
         redirectAttributes.addFlashAttribute("check1", check);
         return "redirect:/coupons/list";
@@ -60,16 +58,15 @@ public class CouponsController {
     }
 
     @GetMapping("/update/{id}")
-    public String editCoupons(@PathVariable("id") Integer id, Model model,HttpServletResponse response) {
+    public String editCoupons(@PathVariable("id") Integer id, Model model) {
         Coupons coupons = iCouponsService.findCoupons(id);
         CouponsDTO couponsDTO = new CouponsDTO();
         BeanUtils.copyProperties(coupons, couponsDTO);
         model.addAttribute("couponsDTO", couponsDTO);
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         return "/coupons/edit";
     }
 
-    @PostMapping("/update")
+        @PostMapping("/update")
     public String updateCoupons(@Validated @ModelAttribute("couponsDTO") CouponsDTO couponsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         new CouponsDTO().validate(couponsDTO,bindingResult);
         if (bindingResult.hasFieldErrors()){
@@ -87,7 +84,7 @@ public class CouponsController {
                                        @RequestParam(name = "page", defaultValue = "0") int page, Model model) {
         Page<Coupons> couponsPage = iCouponsService.findAllCouponsByCodeCoupons('%'+codeCoupons+'%', PageRequest.of(page, 5));
         if(couponsPage.isEmpty()){
-            model.addAttribute("searchMess","There is no data");
+            model.addAttribute("searchMess","There is no data for search");
         }
         int size = couponsPage.getTotalPages();
         model.addAttribute("size", size);
