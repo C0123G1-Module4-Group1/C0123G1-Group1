@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface IStaffService {
     Page<Staff> findAll(int page);
+    List<Staff> findAll();
 
     boolean saveNew(Staff staff);
     void save(Staff staff);

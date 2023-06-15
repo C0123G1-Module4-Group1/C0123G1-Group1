@@ -30,8 +30,14 @@ public class StaffService implements IStaffService {
     private PasswordEncoder passwordEncoder;
     @Override
     public Page<Staff> findAll(int page) {
-        return iStaffRepository.findAllByDeleteStatusIsFalse(PageRequest.of(page,7, Sort.by("id").descending()));
+        return iStaffRepository.findAllByDeleteStatusIsFalse(PageRequest.of(page,7, Sort.by("id")));
     }
+
+    @Override
+    public List<Staff> findAll() {
+        return iStaffRepository.findAll();
+    }
+
     @Transactional(rollbackOn = Throwable.class)
     @Override
     public boolean saveNew(Staff staff) {
