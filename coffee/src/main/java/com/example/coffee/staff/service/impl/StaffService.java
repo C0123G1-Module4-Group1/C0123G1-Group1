@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class StaffService implements IStaffService {
     private PasswordEncoder passwordEncoder;
     @Override
     public Page<Staff> findAll(int page) {
-        return iStaffRepository.findAllByDeleteStatusIsFalse(PageRequest.of(page,7));
+        return iStaffRepository.findAllByDeleteStatusIsFalse(PageRequest.of(page,7, Sort.by("id").descending()));
     }
     @Transactional(rollbackOn = Throwable.class)
     @Override
