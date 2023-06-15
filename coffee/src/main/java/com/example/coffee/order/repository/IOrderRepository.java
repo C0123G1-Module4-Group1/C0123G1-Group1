@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 public interface IOrderRepository extends JpaRepository<Order, Integer> {
     //@Query(value = "SELECT * FROM orders WHERE status_delete = 0",nativeQuery = true)
@@ -22,9 +23,13 @@ public interface IOrderRepository extends JpaRepository<Order, Integer> {
     @Transactional
     boolean setDeleteStatusToTrue(@Param("id") Integer id);
 
-    @Query(value = "SELECT * FROM orders WHERE id LIKE :id", nativeQuery = true)
-    Page<Order> findAllByIdContainingAndDeleteStatusIsFalse(@Param("id") Integer id, PageRequest id1);
-
+    @Query(value = "SELECT * FROM orders AS O WHERE O.code_order LIKE concat('%', :id, '%') AND status_delete = 0", nativeQuery = true)
+    Page<Order> findAllByIdContainingAndDeleteStatusIsFalse(@Param("id") String id, PageRequest id1);
+//
     @Query(value = "SELECT * FROM orders WHERE id = :id AND status_delete = 1", nativeQuery = true)
     Order findByIdOrder(@Param("id") String id);
+
+//    Optional<Order> findCouponsByDeleteStatusIsFalseAndCodeCoupons(String result);
+
+    Optional<Order> findCouponsByDeleteStatusIsFalseAndCodeOrder(String result);
 }

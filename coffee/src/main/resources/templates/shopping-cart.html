@@ -27,12 +27,14 @@
     <div class="container">
         <div th:if="${totalPayment}==0" class="my-5">
             <h4 style="color: red;text-align: center">Không có sản phẩm nào trong giỏ hàng</h4>
-            <a th:href="@{/home/homeProduct}" class="btn-outline-success btn"style="margin-bottom: 2%;margin-top: 2%;margin-left: 45%;border-radius: 30px">Quay lại</a>
+            <a th:href="@{/home/homeProduct}" class="btn-outline-success btn"
+               style="margin-bottom: 2%;margin-top: 2%;margin-left: 45%;border-radius: 30px">Quay lại</a>
         </div>
-        <div class="table-wrap" style="border: 1px solid #21cf95" th:if="${!productList.isEmpty()||productList.size()!=0}">
+        <div class="table-wrap" style="border: 1px solid #21cf95"
+             th:if="${!productList.isEmpty()||productList.size()!=0}">
 
             <table
-                   class="table table-responsive table-borderless table-hover">
+                    class="table table-responsive table-borderless table-hover">
                 <thead>
                 <tr style="background-color: #21cf95;height: 70%">
                     <th class="text-center">Tên sản phẩm</th>
@@ -55,12 +57,19 @@
                              width="100"
                              th:src="${product.img}">
                     </td>
-                    <td>
-                        <div class="fw-600"><p class="m-0 text-muted" th:text="${product.sizeName}"></p></div>
+                    <td increaseSize>
+                        <div class="fw-600 d-flex">
+                            <a class="" style="text-decoration: none"
+                               th:href="@{/shopping_cart/operation/{id}(id=${product.idProduct},action='reduceSize')}"><</a>
+                            <span class="m-0 text-muted ms-2" th:text="${product.sizeName}"></span>
+                            <a class="ms-2" style="text-decoration: none"
+                               th:href="@{/shopping_cart/operation/{id}(id=${product.idProduct},action='increaseSize')}">></a>
+                        </div>
                     </td>
                     <td>
 
-                        <div class="fw-600"><p class="m-0 align-content-center text-muted" th:text="${#numbers.formatDecimal(totalPayment, 0, 'POINT', 2, 'POINT')+'VND'}"></p></div>
+                        <div class="fw-600"><p class="m-0 align-content-center text-muted"
+                                               th:text="${product.price+' VNĐ'}"></p></div>
                     </td>
                     <td>
                         <div class="d-flex justify-content-center align-content-center">
@@ -68,9 +77,7 @@
                                th:href="@{/shopping_cart/operation/{id}(id=${product.idProduct}, action='reduce')}">
                                 <button class="btn btn-info" type="button">-</button>
                             </a>
-                            <div class="ms-2 text-center align-content-center p-0">
-                                <p class="py-0" th:text="${product.quantity}"></p>
-                            </div>
+                            <span class="ms-2" style="padding-top: 10px;" th:text="${product.quantity}"></span>
                             <a class="ms-2" style="text-decoration: none"
                                th:href="@{/shopping_cart/operation/{id}(id=${product.idProduct},action='increase')}">
                                 <button class="btn btn-info" type="button">+</button>
@@ -78,21 +85,25 @@
                         </div>
                     </td>
                     <td>
-                            <a th:href="@{/shopping_cart/operation/{id}(id=${product.idProduct},action='deleteItem')}">
-    <img style="width: 15%;color: red" src="data:image/png;base64,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"/>
-                            </a>
+                        <a th:href="@{/shopping_cart/operation/{id}(id=${product.idProduct},action='deleteItem')}">
+                            <img style="width: 15%;color: red"
+                                 src="data:image/png;base64,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"/>
+                        </a>
                     </td>
                 </tr>
                 </tbody>
             </table>
             <div style="margin-left:  80%;">
-            <a class="btn btn-outline-danger" style="text-decoration: none;margin-left: 3%;border-radius: 30px" th:href="@{/shopping_cart/clearAllItem}">
-                <span class="ml-1"> <i class="fa-solid fa-trash"></i> Xoá tất cả</span></a>
-            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                    style="margin-left: 5%;border-radius: 30px">
-                Thanh toán
-            </button></div>
-            <h3  style="color: red ;margin-left: 50%">Tổng tiền: <span th:text="${#numbers.formatDecimal(totalPayment, 0, 'POINT', 2, 'POINT')+'VND'}"></span></h3>
+                <a class="btn btn-outline-danger" style="text-decoration: none;margin-left: 3%;border-radius: 30px"
+                   th:href="@{/shopping_cart/clearAllItem}">
+                    <span class="ml-1"> <i class="fa-solid fa-trash"></i> Xoá tất cả</span></a>
+                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        style="margin-left: 5%;border-radius: 30px">
+                    Thanh toán
+                </button>
+            </div>
+            <h3 style="color: red ;margin-left: 50%">Tổng tiền:<span th:text="${totalPayment+'.000 VND'}"></span></h3>
         </div>
     </div>
 </div>
@@ -156,11 +167,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
 
-<button id="btnInfo">Info</button>
-<button id="btnSuccess">Success</button>
-<button id="btnError">Error</button>
-<button id="btnWarning">Warning</button>
-
 <!-- jquery -->
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <!-- toastr -->
@@ -185,7 +191,6 @@
         toastr.options.timeOut = 1500; // 1.5s
         toastr.info('info messages');
     }
-
 
 
     function displayErrorToaster() {

@@ -2,6 +2,7 @@ package com.example.coffee.order.service.impl;
 
 import com.example.coffee.coupons.Service.ICouponsService;
 import com.example.coffee.coupons.model.Coupons;
+import com.example.coffee.coupons.repository.ICouponsRepository;
 import com.example.coffee.customer.model.Customer;
 import com.example.coffee.customer.service.ICustomerService;
 import com.example.coffee.order.model.Order;
@@ -25,6 +26,8 @@ import org.springframework.stereotype.Service;
 import java.net.Authenticator;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class OrderService implements IOrderService {
@@ -40,6 +43,9 @@ public class OrderService implements IOrderService {
     private IStatusOrderService statusOrderService;
     @Autowired
     private IUserService userService;
+    @Autowired
+    private ICouponsRepository couponsRepository;
+
     @Override
     public List<Order> findAll() {
         return orderRepository.findAll();
@@ -53,11 +59,11 @@ public class OrderService implements IOrderService {
 
     @Override
     public boolean deleteOrder(Integer id) {
-        try{
+        try {
             Order order = orderRepository.findById(id).get();
             order.setDeleteStatus(true);
             orderRepository.save(order);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -70,19 +76,44 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Order addOrder(String note, Authentication authentication, Integer couponsId) {
+    public Order addOrder(String codeOrder, String note, Authentication authentication, Integer couponsId) {
         User user = userService.findUserByUserName(authentication.getName());
         Staff staff = staffService.findByUser(user);
         Customer customer = customerService.findCustomer(1);
         Coupons coupons = couponsService.findCoupons(couponsId);
         StatusOrder statusOrder = statusOrderService.findById(3);
-        Order order = new Order(staff,customer,coupons,statusOrder,note);
+        Order order = new Order(codeOrder, staff, customer, coupons, statusOrder, note);
         this.orderRepository.save(order);
         return order;
     }
 
     @Override
-    public Page<Order> findAllByIdContaining(Integer id, int page) {
+    public Page<Order> findAllByIdContaining(String id, int page) {
         return orderRepository.findAllByIdContainingAndDeleteStatusIsFalse(id, PageRequest.of(page, 8, Sort.by("id").descending()));
+    }
+
+    @Override
+    public String getCodeOrder() {
+        String result = "";
+        boolean check = true;
+        do {
+            Integer code = ThreadLocalRandom.current().nextInt(1, 99999);
+            if (code < 10000) {
+                result = "OD-0" + code;
+            } else if (code < 1000) {
+                result = "OD-00" + code;
+            } else if (code < 100) {
+                result = "OD-000" + code;
+            } else if (code < 10) {
+                result = "OD-0000" + code;
+            } else {
+                result = "OD-" + code;
+            }
+            Optional<Order> order = orderRepository.findCouponsByDeleteStatusIsFalseAndCodeOrder(result);
+            if (order.isPresent()) {
+                check = false;
+            }
+        } while (!check);
+        return result;
     }
 }

@@ -49,11 +49,12 @@ public class OrderController {
     }
 
     @PostMapping("/searchOrder")
-    public String searchOrderById(@RequestParam(value = "id", defaultValue = "0") Integer id, Model model, @RequestParam(value = "page", defaultValue = "0") int page, HttpServletResponse httpResponse) {
-        if (id == 0) {
+    public String searchOrderById(@RequestParam(value = "id", defaultValue = "") String id, Model model, @RequestParam(value = "page", defaultValue = "0") int page, HttpServletResponse httpResponse) {
+        if (id == "") {
             return "redirect:/orderController/";
         } else {
-            Page<Order> orderPage = orderService.findAllByIdContaining(id, page);
+            String codeOrder = id.toUpperCase();
+            Page<Order> orderPage = orderService.findAllByIdContaining(codeOrder, page);
             model.addAttribute("orderPage", orderPage);
             model.addAttribute("idOrder", id);
             httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
@@ -190,7 +191,8 @@ public class OrderController {
 //        boolean check = orderService.deleteOrder(id);
 //        redirectAttributes.addFlashAttribute("checkDelete", check);
         if (!cart.isEmpty()) {
-            Order orderDTO = orderService.addOrder(note, authentication, coupons);
+            String codeOrder = orderService.getCodeOrder();
+            Order orderDTO = orderService.addOrder(codeOrder, note, authentication, coupons);
             Integer idOrder = orderDTO.getId();
             boolean checkAddOrder = oderDetailService.addOrderDetail(cart, idOrder);
             cart.clear();

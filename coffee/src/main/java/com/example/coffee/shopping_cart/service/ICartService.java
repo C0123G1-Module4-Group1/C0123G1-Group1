@@ -18,7 +18,11 @@ public interface ICartService {
 
     void subProduct(Integer id,Map<Integer,CartOnline> cart);
 
+    void addSize(Integer id,Map<Integer,CartOnline> cart);
+
+    void subSize(Integer id,Map<Integer,CartOnline> cart);
     void deleteItem(Integer id, Map<Integer,CartOnline> cart);
 
     List<CartOnline> findAllProductByCart(Map<Integer,CartOnline> cart);
+
 }
