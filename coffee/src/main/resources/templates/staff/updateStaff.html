@@ -42,6 +42,7 @@
         background-color: white;
         border-radius: 20px;
     }
+
     .boxed:before {
         content: "";
         position: absolute;
@@ -51,7 +52,8 @@
         background-image: linear-gradient(to right top, #2979ff, #07a787);
         border-radius: inherit;
     }
-    .mg{
+
+    .mg {
         margin-top: 35px;
     }
 </style>
@@ -102,7 +104,7 @@
                        th:field="*{email}"/>
             </div>
             <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-
+            <p style="color: red" th:text="${message}"></p>
             <button type="submit" class="btn btn-success mg" style="margin-left: 45%">Save</button>
         </form>
 

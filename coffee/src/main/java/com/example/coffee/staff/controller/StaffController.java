@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.soap.MimeHeaders;
+import java.util.List;
 
 @Controller
 @RequestMapping("/staff")
@@ -80,9 +81,16 @@ public class StaffController {
     }
 
     @PostMapping("/update")
-    public String saveStaffUpdate(@Validated @ModelAttribute("staff") StaffDto staffDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String saveStaffUpdate(@Validated @ModelAttribute("staff") StaffDto staffDto, BindingResult bindingResult,Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "staff/updateStaff";
+        }
+        List<Staff> staffList=iStaffService.findAll();
+        for (int i = 0; i < staffList.size(); i++) {
+            if ((staffList.get(i).getEmail().equals(staffDto.getEmail()) || staffList.get(i).getPhoneNumber().equals(staffDto.getPhoneNumber())) && staffList.get(i).getId()!=staffDto.getId()){
+                model.addAttribute("message","Duplicate email or phone number");
+                return "staff/updateStaff";
+            }
         }
         Staff staff = new Staff();
         BeanUtils.copyProperties(staffDto, staff);
