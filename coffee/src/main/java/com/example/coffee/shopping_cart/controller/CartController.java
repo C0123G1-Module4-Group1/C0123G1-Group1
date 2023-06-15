@@ -51,6 +51,12 @@ public class CartController {
             case "deleteItem":
                 iCartService.deleteItem(product.getId(), cart);
                 break;
+            case "increaseSize":
+                iCartService.addSize(product.getId(), cart);
+                break;
+            case "reduceSize":
+                iCartService.subSize(product.getId(), cart);
+                break;
             default:
                 iCartService.addProduct(product.getId(), cart);
                 redirectAttributes.addFlashAttribute("mess", true);

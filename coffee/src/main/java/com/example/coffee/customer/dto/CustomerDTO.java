@@ -104,7 +104,7 @@ public class CustomerDTO implements Validator {
         String regexPhoneNumberCustomer = "^((\\+84)|0)[0-9]{9,10}$";
         CustomerDTO customerDTO =(CustomerDTO) target;
         if (!customerDTO.name.matches(regexNameCustomer)){
-            errors.rejectValue("name", "", "Can't be less than 0 and contain only uppercase letters and numbers");
+            errors.rejectValue("name", "", "can't be number format and capitalize first character");
         }
         if (!customerDTO.email.matches(regexEmailCustomer)){
             errors.rejectValue("email", "", "Email must be at least 6 characters and .com,@");

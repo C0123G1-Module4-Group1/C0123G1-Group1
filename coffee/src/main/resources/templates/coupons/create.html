@@ -60,21 +60,12 @@
 <div th:replace="~{header-footer/headerAdmin::header}"></div>
 <div class="container boxed" style="margin-top: 100px;width: 800px;">
     <h2 style="text-align: center;margin-top: 20px">Add new coupons</h2>
-
     <div id="form" class="form" style="margin-left: 15%;margin-right: 15%">
         <form th:action="@{/coupons/create_coupons}" th:object="${couponsDTO}" method="post"
               novalidate="novalidate">
-<!--            <div class="input-group input-group-sm mg" style="margin-top: 30px">-->
-<!--                <div class="input-group-prepend">-->
-<!--                    <span class="input-group-text">Code Discount</span>-->
-<!--                </div>-->
-<!--                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"-->
-<!--                       th:field="*{codeCoupons}"/>-->
-<!--            </div>-->
-<!--            <p style="color: red;" th:if="${#fields.hasErrors('codeCoupons')}" th:errors="*{codeCoupons}"></p>-->
             <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend">
-                    <span class="input-group-text mt-3">Value</span>
+                    <span class="input-group-text mt-3">Value(%)</span>
                 </div>
                 <input type="number" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{valuee}"/>
@@ -82,7 +73,7 @@
             <p style="color: red" th:if="${#fields.hasErrors('valuee')}" th:errors="*{valuee}"></p>
             <div class="input-group input-group-sm mg">
                 <div class="input-group-prepend mt-3">
-                    <span class="input-group-text">Proviso</span>
+                    <span class="input-group-text">Proviso(.000 VND)</span>
                 </div>
                 <input type="number" class="form-control mt-3" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                        th:field="*{proviso}"/>
